@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.header, .section {
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 14px;
+    color: #555;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+}
+
+.job-title {
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.date {
+    font-size: 14px;
+    color: #555;
+    float: right;
+}
+
+.job-details {
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.job-details ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.job-details ul ul {
+    list-style-type: circle;
+    margin-left: 20px;
+}
+
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.education, .certifications, .projects, .skills {
+    margin-top: 15px;
+}
+
+.section-content p {
+    margin-bottom: 8px;
+}
+
+.education p, .certifications p, .projects p, .skills p {
+    font-size: 14px;
+}
+
+.skills ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.skills ul li {
+    background-color: #e7e7e7;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
