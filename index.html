@@ -3,155 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antonino Cilione - CV</title>
+    <title>Antonino Cilione - Home</title>
+    <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="navbar.js" defer></script>
 </head>
 <body>
+    
+    <div id="navbar-container"></div>
 
-<div class="container">
-    <div class="header">
-        <h1>Antonino Cilione</h1>
-        <p>Reggio Calabria (RC), Italy</p>
-        <p>Phone: +393472527757 | Email: <a href="mailto:antoninocilione96@gmail.com">antoninocilione96@gmail.com</a></p>
-        <p><a href="https://www.linkedin.com/in/antonino-cilione-1258291a6/?locale=en_US" target="_blank">LinkedIn</a> | <a href="https://github.com/acilione/" target="_blank">GitHub</a></p>
-    </div>
-
-    <div class="section">
-        <div class="section-title">Professional Experience</div>
-        <p class="job-title">Data Engineer - Enel <span class="date">July 2022 - Present</span></p>
-        <div class="job-details">
-            <ul>
-                <li>Migration of internal framework from CDH to CDP (Cloudera Platform)</li>
-                    <ul>
-                        <li>Development of Apache Nifi data pipelines</li>
-                        <li>Configurations handling</li>
-                    </ul>
-            </ul>
-            <ul>
-                <li>ETL data pipelines development and maintenance (Spark, Kafka)
-                    <ul>
-                        <li>Development of an ETL pipeline handling 10k messages per second with very limited resources</li>
-                        <li>Huge codebase refactoring, removing technical debt</li>
-                    </ul>
-                </li>
-                <li>Database management (MongoDB Atlas)
-                    <ul>
-                        <li>Indexes, memory and autoscale monitoring to optimize performances and costs</li>
-                        <li>Data Federation POC for storing Mongo collection data into S3 bucket</li>
-                    </ul>
-                </li>
-                <li>Java/Kotlin microservices (Spring)
-                    <ul>
-                        <li>Development of Spring APIs for exposing data stored on MongoDB</li>
-                    </ul>
-                </li>
-                <li>Python scripts development
-                    <ul>
-                        <li>Tool for merging multiple parquet files stored into S3 bucket into a single one. It includes also the following features: data deduplication, backup, update, delete, restore</li>
-                        <li>Other utilities scripts</li>
-                    </ul>
-                </li>
-                <li>Bash scripts:
-                    <ul>
-                        <li>Automated kafka brokers and topics state check, saving the resulting logs</li>
-                        <li>Automated S3 buckets status check, saving the resulting logs</li>
-                        <li>Other utilities scripts</li>
-                    </ul>
-                </li>
-                <li>Redis cache setup and usage using Redisson client in a Spark application.</li>
-                <li>SQL procedures development for data analysis</li>
-            </ul>
-            <p>Other technologies used: Kubernetes, Docker, Git, Dremio</p>
+    <main class="content">
+        <div>
+            <h1>Hello there!</h1>
+            <p id="presentation">I am Antonino</p>
+            <div class="button-container">
+                <a href="cv.html" class="button">My CV</a>
+                <a href="mailto:antoninocilione96@gmail.com" class="button">Contact me</a>
+            </div>
         </div>
-        <p class="job-title">Android Developer - Iriscube Reply <span class="date">February 2022 - July 2022</span></p>
-        <div class="job-details">
-            <ul>
-                <li>Development and maintenance of an Android banking app
-                    <ul>
-                        <li>Migration of Java codebase to Kotlin</li>
-                        <li>Addition of new requested features</li>
-                        <li>Bug fixing</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-title">Education</div>
-        <div class="education">
-            <p class="job-title">University of Catania <span class="date">October 2018-March 2022</span></p>
-            <p>Bachelor’s degree in Computer Engineering</p>
-            <p>Final score: 99/110</p>
-            <p>Thesis title: Implementation of learning algorithms on microcontrollers: methodologies and applications</p>
-            <ul>
-                <li>Implementation of an HAR model on STM microcontroller using TFLite, with different neural network architectures and performances comparison</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-title">Personal Projects</div>
-        <div class="projects">
-            <ul>
-                <li>Survey Android app: Survey creation, survey answering, interaction with nearby devices</li>
-                <li>C standard library reimplementation</li>
-                <li>Computer Vision: Android app for 3D model manipulation using hand gestures</li>
-                <li>Fullstack website: Laravel + JS Vanilla (Academic project)
-                    <ul>
-                        <li>Design and development of a SQL database</li>
-                        <li>Implementation of the following features: login with different kinds of profile roles with different permissions: student, secretary, teacher, principal; addition and visualization of circulars, grades, attendances; visualization of school timetables; API interactions (SendGrid for sending emails, MathJs for equation solving, Harvard Art Museum for accessing galleries)</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-title">Awards</div>
-        <p>University Game Jam winner (University of Catania)</p>
-        <ul>
-            <li>Unity platform videogame, developed with a team of four members
-                <ul>
-                    <li>Design of videogame main features, sizing it based on the little time available</li>
-                    <li>Core features implementation: character, enemies and platforms movements, hitboxes, timer</li>
-                    <li>Additional features implementation: hidden platforms, character interaction with environment</li>
-                    <li>Addition of some easter eggs</li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <div class="section-title">Skills</div>
-        <ul class="skills">
-            <li>Apache Spark</li>
-            <li>Spring</li>
-            <li>Apache Kafka</li>
-            <li>Mongo Atlas</li>
-            <li>Kubernetes + Docker</li>
-            <li>AWS</li>
-            <li>Android development</li>
-            <li>Git</li>
-            <li>Machine Learning (academic)</li>
-            <li>IoT and embedded development (academic)</li>
-            <li>Unity (academic)</li>
-            <li>Java, Scala, Python, Kotlin, C, SQL</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <div class="section-title">Certifications</div>
-        <ul>
-            <li>Cambridge English: First (FCE)</li>
-            <li>Coursera - Algorithm Toolbox - University of California San Diego</li>
-            <li>Coursera - Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization - DeepLearning.AI</li>
-            <li>Coursera - Getting and Cleaning Data - Johns Hopkins University</li>
-            <li>Coursera - R programming - Johns Hopkins University</li>
-            <li>Coursera - The data scientist’s toolbox - Johns Hopkins University</li>
-        </ul>
-    </div>
-</div>
-
+    </main>
 </body>
 </html>
