@@ -1,0 +1,76 @@
+/* --- General and Mobile-First CV Content Styling (styles/styles.css) --- */
+
+/* Main CV Content Container */
+#cv-content {
+  /*
+   * 1. Defines a maximum width for readability on large screens.
+   * 2. 'width: 100%' ensures it fills the entire viewport width on small screens.
+   * (This is crucial for mobile responsiveness.)
+   */
+  max-width: 900px; 
+  width: 100%;
+
+  /* Center the content on the page */
+  margin-left: auto;
+  margin-right: auto;
+
+  /*
+   * Add padding to prevent content from touching the screen edges.
+   * 1.5rem horizontal padding is good for mobile readability.
+   */
+  padding: 1rem 1.5rem; 
+
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  /*
+   * CRITICAL FOR MOBILE OVERFLOW:
+   * Ensures padding and borders are included within the specified width,
+   * preventing the element from exceeding 'width: 100%'.
+   */
+  box-sizing: border-box; 
+  
+  /* Hides any residual horizontal scrollbar if elements are slightly miscalculated */
+  overflow-x: hidden; 
+}
+
+/* --- TEXT WRAPPING FIX FOR MOBILE OVERFLOW --- */
+
+/*
+ * This is the ultimate fix for long words, email addresses, or unbreakable
+ * text strings that cause horizontal scrolling on mobile devices.
+ * It forces the text to break onto the next line.
+ */
+#cv-content p,
+#cv-content li,
+#cv-content strong {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* --- General Content Structure Styling --- */
+
+#cv-content h2 {
+  color: #333;
+  border-bottom: 2px solid #ff9900; 
+  padding-bottom: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+#cv-content ul {
+  padding-left: 20px;
+}
+
+#cv-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Optional: Adjust margins/paddings on smaller screens if needed, 
+   though the mobile-first approach above usually handles it well. */
+@media (max-width: 600px) {
+  #cv-content {
+    /* Slightly less margin on the top/bottom on very small screens */
+    margin: 10px auto; 
+    /* The 1.5rem padding is already good, no change needed here typically */
+  }
+}

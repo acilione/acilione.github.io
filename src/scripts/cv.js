@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV</title>
-  <link rel="stylesheet" href="navbar.css">
-  <link rel="stylesheet" href="styles.css">
-  <script src="navbar.js" defer></script> 
-  <script src="https://cdn.rawgit.com/oscarmorrison/md-page/c72eb9e9/md-page.js"></script><noscript>
-  </head>
-<body>
+import { marked } from "marked";
 
-<div id="navbar-container"></div>
-
-## Work History
+let cvMd = `## Work History
 
 **Big Data Engineer** | Enel | Jul 2022 - Present
 * Led framework migration from **CDH to CDP (Cloudera Platform)**.
@@ -70,6 +57,6 @@ University of Catania | Catania, Italy
 * Coursera: Getting and Cleaning Data - Johns Hopkins University
 * Coursera: R Programming - Johns Hopkins University
 * Coursera: The Data Scientist’s Toolbox - Johns Hopkins University  
-
-</body>
-</html>
+`
+document.getElementById("cv-content").innerHTML = 
+    marked.parse(cvMd)

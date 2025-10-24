@@ -1,0 +1,48 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#scene-container {
+  width: 100vw;
+  height: 100vh; 
+}
+
+canvas {
+  display: block;
+}
+.info-panel {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-family: monospace;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  /* Adjust the default position and appearance of the GUI for better mobile usability */
+  .lil-gui {
+    width: 90% !important; /* Make GUI wider on mobile */
+    max-height: 50vh; /* Limit height to prevent it from covering the whole screen */
+    overflow-y: auto; /* Allow scrolling within the GUI */
+    top: 5px !important; 
+    right: 5% !important; 
+    left: 50% !important; 
+    transform: translateX(-50%); /* Center the GUI */
+  }
+
+  /* Make sure the text groups are visible and don't overlap too much */
+  div.text-overlay div {
+      font-size: 16px !important;
+  }
+}
+
+/* Media query for screens specifically in portrait mode, suggesting landscape */
+@media (max-aspect-ratio: 1/1) and (max-width: 600px) {
+  /* You can add visual cues here if needed, but the JS handles orientation lock */
+}

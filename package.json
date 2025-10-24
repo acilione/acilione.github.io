@@ -1,0 +1,29 @@
+{
+  "name": "acilione.github.io",
+  "version": "1.0.0",
+  "description": "My personal website",
+  "homepage": "https://github.com/acilione/acilione.github.io#readme",
+  "bugs": {
+    "url": "https://github.com/acilione/acilione.github.io/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acilione/acilione.github.io.git"
+  },
+  "license": "ISC",
+  "author": "Antonino Cilione",
+  "type": "module",
+  "scripts": {
+    "start": "parcel src/index.html --port 1234",
+    "build": "parcel build src/index.html src/cv.html src/bubble_simulation.html --dist-dir dist --public-url ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "lil-gui": "^0.21.0",
+    "marked": "^16.4.1",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.0"
+  }
+}
