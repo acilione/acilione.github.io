@@ -21,9 +21,8 @@
    * 1.5rem horizontal padding is good for mobile readability.
    */
   padding: 1rem 1.5rem; 
-
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
 
   /*
    * CRITICAL FOR MOBILE OVERFLOW:
@@ -53,7 +52,7 @@
 /* --- General Content Structure Styling --- */
 
 #cv-content h2 {
-  color: #333;
+  color: var(--text);
   border-bottom: 2px solid #ff9900; 
   padding-bottom: 0.5rem;
   margin-top: 1.5rem;

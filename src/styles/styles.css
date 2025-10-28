@@ -9,12 +9,34 @@ html, body {
     height: 100%;
 }
 
+:root{
+    /* light theme defaults */
+    --bg: #f4f7f9;
+    --card-bg: #ffffff;
+    --text: #1f2a37;
+    --muted: #555;
+    --accent: #0056b3;
+    --muted-border: #e9ecef;
+    --shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+/* Dark theme - opt-in via: document.documentElement.setAttribute('data-theme','dark') */
+[data-theme="dark"]{
+    --bg: #0b0f14;
+    --card-bg: #0f1418;
+    --text: #e6eef9;
+    --muted: #9aa6b2;
+    --accent: #4da3ff;
+    --muted-border: rgba(255,255,255,0.06);
+    --shadow: 0 2px 12px rgba(0,0,0,0.6);
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     margin: 0;
-    background-color: #f4f7f9;
-    color: #333;
+    background-color: var(--bg);
+    color: var(--text);
     box-sizing: border-box;
     overflow-y: auto;
 }
@@ -51,7 +73,7 @@ h1 {
     /* Slightly lighter weight for refinement */
     font-weight: 600; 
     /* Dark, desaturated color for sophistication (e.g., a dark slate) */
-    color: #1f2a37; 
+    color: var(--text);; 
     /* Adjust spacing between characters for a polished, typeset appearance */
     letter-spacing: -0.015em;
     margin: 0 0 0.5em 0;
@@ -61,6 +83,7 @@ h1 {
 }
 
 h2 {
+    color: var(--text);
     font-size: 1.5em;
     font-weight: 600;
     margin-top: 1.5em;
@@ -68,6 +91,7 @@ h2 {
 }
 
 h3 {
+    color: var(--text);
     font-size: 1.1em;
     margin: 1.25em 0 0.5em 0;
 }

@@ -32,9 +32,9 @@
 }
 
 #main-navbar {
-    background-color: #ffffff;
+    background-color: var(--card-bg);
     padding: 0 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -50,7 +50,7 @@
 #main-navbar .logo {
     font-size: 1.4rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text);
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
     margin-right: 20px;
@@ -73,7 +73,7 @@
 
 #main-navbar .nav-links a {
     text-decoration: none;
-    color: #555;
+    color: var(--muted);
     font-weight: 400;
     padding: 18px 0;
     display: block;
@@ -100,17 +100,17 @@
 
 /* Active and Hover States */
 #main-navbar .nav-links a.active {
-    color: #0056b3;
+    color: var(--accent);
     font-weight: 600;
 }
 
 #main-navbar .nav-links a.active::after {
-    background-color: #0056b3;
+    background-color: var(--accent);
     transform: scaleX(1);
 }
 
 #main-navbar .nav-links a:hover {
-    color: #007bff;
+    color: var(--accent);
 }
 
 /* Menu toggle */
@@ -130,7 +130,7 @@
 #main-navbar .menu-toggle .line {
     width: 100%;
     height: 3px;
-    background-color: #333;
+    background-color: var(--text);
     transition: all 0.3s linear;
     transform-origin: left center;
 }
@@ -155,8 +155,8 @@
     top: 60px;
     left: 0;
     width: 100%;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow);
     height: 0;
     overflow: hidden;
     transition: height 0.3s ease-in-out;
@@ -180,7 +180,7 @@
 
 #main-navbar .mobile-nav .nav-links a {
     padding: 15px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--muted-border);
 }
 
 #main-navbar .mobile-nav .nav-links a:last-child {
@@ -196,6 +196,32 @@
     #main-navbar .menu-toggle {
         display: flex;
     }
+}
+
+/* Theme toggle button in navbar */
+#main-navbar .theme-toggle {
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.06);
+    color: inherit;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+[data-theme="dark"] #main-navbar .theme-toggle {
+    border-color: rgba(255,255,255,0.08);
+}
+
+#main-navbar .theme-toggle .theme-icon { width: 16px; height: 16px; display:inline-block }
+
+/* mobile placement: full-width button inside mobile menu */
+#main-navbar .mobile-nav .theme-toggle {
+    width: calc(100% - 2rem);
+    margin: 0.5rem 1rem;
 }
 
 #main-navbar { z-index: 9999; }
