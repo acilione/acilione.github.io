@@ -104,7 +104,7 @@ function initThemeToggle(){
     const moon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     icon.innerHTML = theme==='dark'? moon : sun;
     const label = document.createElement('span'); label.className='theme-label';
-    label.textContent = theme==='dark' ? 'Dark' : 'Light';
+    label.textContent = theme ==='dark' ? 'Light' : 'Dark';
     btn.appendChild(icon); btn.appendChild(label);
     btn.addEventListener('click', ()=>{
       const now = root.getAttribute('data-theme')==='dark' ? 'dark' : 'light';
@@ -114,7 +114,7 @@ function initThemeToggle(){
       // update all buttons
       document.querySelectorAll('#main-navbar .theme-toggle').forEach(b=>{
         b.querySelector('.theme-icon').innerHTML = next==='dark'? moon : sun;
-        b.querySelector('.theme-label').textContent = next==='dark'? 'Dark' : 'Light';
+        b.querySelector('.theme-label').textContent = next==='dark'? 'Light' : 'Dark';
         b.setAttribute('aria-pressed', next==='dark'?'true':'false');
       });
     });
