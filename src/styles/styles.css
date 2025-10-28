@@ -1,46 +1,81 @@
-/* General Body and Layout */
+/* ===== Common / Base Styles (shared across pages) ===== */
+/* Moved common layout & typographic rules here so each page
+     inherits a consistent baseline. Project-specific styles
+     remain in their own file (`projects.css`). */
+
+/* Ensure the html/body take the full height and avoid unexpected
+     vertical scroll caused by fractional pixels or body padding. */
+html, body {
+    height: 100%;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f4f9;
+    background-color: #f4f7f9;
+    color: #333;
+    box-sizing: border-box;
+    overflow-y: auto;
 }
 
 #presentation {
     text-align: center;
 }
 
+/* Page-level content container; pages may use either
+     `.content` or `main.content` depending on layout. */
+.content,
+main.content {
+    /* header height used to offset fixed navbar; can be overridden
+       dynamically if needed. Default padding keeps page content
+       spaced but we don't force extra top padding to avoid double-
+       counting when a full-height hero is used. */
+    --site-header-height: 80px;
+    padding: var(--site-header-height) 20px 20px 20px;
+    margin: 0;
+}
+
+/* Pages that use a full-height hero (index) can opt out of the
+     default top padding by adding the hero-page class to the main
+     content element: <main class="content hero-page"> */
+.content.hero-page {
+    /* FIX: Set padding-top to 0 to prevent the .content container's
+       top padding from offsetting the hero's vertical centering on all screens. */
+    padding-top: 0;
+}
+
 h1 {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin-bottom: 0.2em;
+    /* Use clamp for responsive, elegant scaling */
+    font-size: clamp(2.5em, 5vw, 3.2em); 
+    /* Slightly lighter weight for refinement */
+    font-weight: 600; 
+    /* Dark, desaturated color for sophistication (e.g., a dark slate) */
+    color: #1f2a37; 
+    /* Adjust spacing between characters for a polished, typeset appearance */
+    letter-spacing: -0.015em;
+    margin: 0 0 0.5em 0;
+    font-family: 'Montserrat', sans-serif;
+    /* Optional: Slight opacity for a subtle 'wash' effect, less harsh than pure solid */
+    opacity: 0.95; 
 }
 
 h2 {
     font-size: 1.5em;
-    font-weight: bold;
-    border-bottom: 2px solid #000;
-    padding-bottom: 0.2em;
-    margin-top: 2em;
-    margin-bottom: 1em;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
 }
 
 h3 {
     font-size: 1.1em;
-    margin: 1.5em 0 0.5em 0;
-}
-
-h3 strong {
-    font-weight: bold;
+    margin: 1.25em 0 0.5em 0;
 }
 
 ul {
     list-style-type: disc;
     padding-left: 20px;
-    margin: 0;
+    margin: 0 0 1em 0;
 }
 
 ul li {
@@ -48,17 +83,12 @@ ul li {
     margin-bottom: 0.5em;
 }
 
-.content {
-    margin-top: 10%;
-    padding: 0 20px;
-}
-
-/* Button styles */
+/* Button utility styles used across pages */
 .button-container {
     display: flex;
     gap: 20px;
     margin-top: 20px;
-    justify-content: center; /* Center the button container */
+    justify-content: center;
 }
 
 .button {
@@ -75,4 +105,46 @@ ul li {
 .button:hover {
     background-color: #333;
     color: #fff;
+}
+
+/* Hero helper for pages that need a vertically-centered hero block */
+.hero {
+    /* Use an exact height so the hero fills the visible area below
+       the fixed header without causing overflow from extra padding. */
+    height: calc(100vh - var(--site-header-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0 10px; /* small horizontal padding for very narrow screens */
+}
+
+/* Tweak for small screens to ensure hero centers nicely under the
+     fixed navbar — reduce header offset slightly on mobile. */
+@media (max-width: 600px) {
+    .content, main.content {
+        --site-header-height: 64px;
+        /* The padding property uses this new height variable */
+    }
+    
+    /* Re-enforce the padding-top removal specifically for mobile
+       to ensure the hero remains centered after the site-header-height
+       is updated in the previous rule. */
+    .content.hero-page {
+        padding-top: 0;
+    }
+
+    .hero {
+        height: 70vh;
+    }
+
+    .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: center;
+}
 }

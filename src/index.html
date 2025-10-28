@@ -4,22 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Antonino Cilione - Home</title>
-    <link rel="stylesheet" href="styles/navbar.css" />
+    <!-- Use Montserrat for headings and navbar -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+    <!-- page CSS (none for index) could go here -->
     <script type="module" src="scripts/navbar.js" defer></script>
   </head>
   <body>
     <div id="navbar-container"></div>
 
-    <main class="content">
-      <div>
-        <h1>Hello there!</h1>
+    <main class="content hero-page">
+      <div class="hero">
+        <h1>Hello There</h1>
         <p id="presentation">I am Antonino</p>
-        <div class="button-container">
+        <div class="button-container" style="margin-top:18px;">
           <a href="cv.html" class="button">My CV</a>
-          <a href="mailto:antoninocilione96@gmail.com" class="button"
-            >Contact me</a
-          >
+          <a href="mailto:antoninocilione96@gmail.com" class="button">Contact me</a>
+          <a href="projects.html" class="button">Projects</a>
         </div>
       </div>
     </main>

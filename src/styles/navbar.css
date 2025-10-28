@@ -1,4 +1,37 @@
-.main-header {
+/* ===== isolation / override section =====
+   Prevent other stylesheets (e.g. projects.css) from leaking
+   into the navbar. Rules are scoped to #main-navbar and use
+   explicit reset values so the navbar looks the same across pages.
+*/
+#main-navbar,
+#main-navbar * {
+  box-sizing: border-box;
+}
+
+/* Reset/normalise elements inside the navbar so external rules
+   (fonts, margins, list styles, link decorations) cannot leak in */
+#main-navbar ul {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+#main-navbar li {
+    /* keep padding reset but allow margin-based spacing to be applied
+         via more specific rules (we avoid forcing margin:0 !important on li) */
+    padding: 0 !important;
+}
+
+#main-navbar a {
+  text-decoration: none !important;
+  color: inherit !important;
+  background: none !important;
+  border: none !important;
+  font: inherit !important;
+  line-height: normal !important;
+}
+
+#main-navbar {
     background-color: #ffffff;
     padding: 0 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -12,40 +45,76 @@
     z-index: 20;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
+/* Logo and links: use the same font so logo and navigation
+   items look consistent. Spacing tuned for balance. */
+#main-navbar .logo {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a1a1a;
     text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    margin-right: 20px;
+    letter-spacing: 0.04em;
 }
 
-.nav-links {
-    list-style: none;
+/* Navigation Links */
+#main-navbar .nav-links {
     margin: 0;
     padding: 0;
     display: flex;
+    align-items: center;
+    gap: 20px; /* robust spacing between nav items */
+    font-family: 'Montserrat', sans-serif;
 }
 
-.nav-links li {
+#main-navbar .nav-links li {
     margin-left: 20px;
 }
 
-.nav-links a {
+#main-navbar .nav-links a {
     text-decoration: none;
     color: #555;
-    font-weight: 500;
+    font-weight: 400;
     padding: 18px 0;
     display: block;
-    position: relative;
-    transition: color 0.3s ease;
+    position: relative; /* for the pseudo-element underline */
+    transition: color 0.2s ease, font-weight 0.2s ease;
+    text-transform: uppercase;
+    font-size: 0.95em;
+    letter-spacing: 0.03em;
 }
 
-.nav-links a:hover, .nav-links a.active {
+/* Underline indicator implemented with ::after so it doesn't shift layout */
+#main-navbar .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: transparent;
+    bottom: 8px; /* place the underline slightly above the bottom of the nav link area */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+/* Active and Hover States */
+#main-navbar .nav-links a.active {
+    color: #0056b3;
+    font-weight: 600;
+}
+
+#main-navbar .nav-links a.active::after {
+    background-color: #0056b3;
+    transform: scaleX(1);
+}
+
+#main-navbar .nav-links a:hover {
     color: #007bff;
 }
 
-/* Mobile Menu Icon (CSS Only) */
-.menu-toggle {
+/* Menu toggle */
+#main-navbar .menu-toggle {
     display: none;
     flex-direction: column;
     justify-content: space-around;
@@ -55,10 +124,10 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 20; /* Above the mobile-nav */
+    z-index: 20;
 }
 
-.menu-toggle .line {
+#main-navbar .menu-toggle .line {
     width: 100%;
     height: 3px;
     background-color: #333;
@@ -66,65 +135,67 @@
     transform-origin: left center;
 }
 
-/* Menu toggle animation */
-.menu-toggle.open .line:nth-child(1) {
+#main-navbar .menu-toggle.open .line:nth-child(1) {
     transform: rotate(45deg);
     width: 120%;
 }
-.menu-toggle.open .line:nth-child(2) {
+#main-navbar .menu-toggle.open .line:nth-child(2) {
     opacity: 0;
     transform: translateX(20px);
 }
-.menu-toggle.open .line:nth-child(3) {
+#main-navbar .menu-toggle.open .line:nth-child(3) {
     transform: rotate(-45deg);
     width: 120%;
 }
 
 /* Mobile Navigation Menu */
-.mobile-nav {
-    display: block; /* Change from none to block */
+#main-navbar .mobile-nav {
+    display: block;
     position: absolute;
     top: 60px;
     left: 0;
     width: 100%;
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    height: 0; /* Initial state, no height */
-    overflow: hidden; /* Hide overflow */
-    transition: height 0.3s ease-in-out; /* Transition for height */
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
     z-index: 10;
 }
 
-.mobile-nav.open {
-    height: auto; /* Adjust this value based on your content height */
+#main-navbar .mobile-nav.open {
+    height: auto;
 }
 
-.mobile-nav .nav-links {
+#main-navbar .mobile-nav .nav-links {
     flex-direction: column;
     text-align: center;
     padding: 10px 0;
+    gap: 8px;
 }
 
-.mobile-nav .nav-links li {
+#main-navbar .mobile-nav .nav-links li {
     margin: 0;
 }
 
-.mobile-nav .nav-links a {
+#main-navbar .mobile-nav .nav-links a {
     padding: 15px;
     border-bottom: 1px solid #eee;
 }
 
-.mobile-nav .nav-links a:last-child {
+#main-navbar .mobile-nav .nav-links a:last-child {
     border-bottom: none;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .desktop-nav {
+    #main-navbar .desktop-nav {
         display: none;
     }
     
-    .menu-toggle {
+    #main-navbar .menu-toggle {
         display: flex;
     }
 }
+
+#main-navbar { z-index: 9999; }

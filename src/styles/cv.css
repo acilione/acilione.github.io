@@ -1,6 +1,7 @@
 /* --- General and Mobile-First CV Content Styling (styles/styles.css) --- */
 
 /* Main CV Content Container */
+
 #cv-content {
   /*
    * 1. Defines a maximum width for readability on large screens.
@@ -11,6 +12,7 @@
   width: 100%;
 
   /* Center the content on the page */
+  margin-top: 60px;
   margin-left: auto;
   margin-right: auto;
 

@@ -516,9 +516,10 @@ class DeflatingBubbleScene {
 
     this.gui = gui;
     this.container.appendChild(gui.domElement);
-    gui.domElement.style.position = "absolute";
-    gui.domElement.style.top = "10px";
-    gui.domElement.style.right = "10px";
+    gui.domElement.style.position = "fixed";
+    gui.domElement.style.zIndex = "19";
+    gui.domElement.style.top = "10%";
+    gui.domElement.style.right = "10%";
 
     this.guiControllers = [];
 

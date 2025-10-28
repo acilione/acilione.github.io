@@ -43,7 +43,6 @@ University of Catania | Catania, Italy
 
 ## Personal Projects
 
-* Reviews website with backend built in Go and frontend built in TS.
 * Survey Android App: Survey creation, answering, nearby device interaction.
 * Computer Vision Android App: 3D model manipulation using hand gestures.
 * Fullstack Website (Acad.): Laravel + JS Vanilla. SQL DB design. Features: multi-role login, circulars, grades, attendances, timetables, API integrations.

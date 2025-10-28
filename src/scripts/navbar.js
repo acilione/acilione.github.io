@@ -1,12 +1,12 @@
 // Parcel-friendly navbar loader
 // Embedded navbar HTML (inlined to avoid bundler resolution issues)
-const NAVBAR_HTML = `<header class="main-header">
+const NAVBAR_HTML = `<header id="main-navbar">
   <a href="index.html" class="logo">Antonino Cilione</a>
   <nav class="desktop-nav">
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="cv.html">CV</a></li>
-      <li><a href="bubble_simulation.html">Bubble simulation</a></li>
+      <li><a href="projects.html">Projects</a></li>
     </ul>
   </nav>
   <button class="menu-toggle" aria-label="Toggle navigation menu">
@@ -19,7 +19,7 @@ const NAVBAR_HTML = `<header class="main-header">
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="cv.html">CV</a></li>
-      <li><a href="bubble_simulation.html">Bubble simulation</a></li>
+      <li><a href="projects.html">Projects</a></li>
     </ul>
   </nav>
 </header>`;

@@ -1,0 +1,256 @@
+/* Global/base styles (body, content container, headings) were
+   moved into `styles.css` to create a single source of truth for
+   the site's base typography and layout. Page-specific styles
+   follow below. */
+
+/* --- H2: Category Heading --- */
+.category-heading {
+  font-size: 1.6em;
+  font-weight: 500;
+  color: #444;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #e9ecef; /* Subtle separator */
+}
+
+/* Projects content container — mirror CV content layout for consistency */
+#projects-content {
+  max-width: 900px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 1.5rem;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Keep modest vertical spacing between the hero area and the content.
+   Reduce top padding so the white cards sit closer to the heading. */
+#projects-content {
+  margin-top: 6px;
+  padding-top: 0.5rem;
+}
+
+/* Make the hero area on the projects page slightly closer to the navbar
+   while still vertically centering the title within a capped vertical space */
+.content.hero-page .hero {
+  /* Reduced vertical band so the title sits closer to the navbar */
+  height: calc(48vh - var(--site-header-height));
+  padding-top: 6px;
+}
+
+/* Mobile adjustments: bring the title much closer to the navbar and
+   reduce the gap before the projects content so things feel tighter
+   on small screens. */
+@media (max-width: 600px) {
+  .content.hero-page .hero {
+    /* smaller vertical band on phones */
+    height: calc(30vh - var(--site-header-height));
+    padding-top: 4px;
+  }
+
+  #projects-content {
+    margin-top: 4px;
+    padding-top: 0.5rem;
+  }
+}
+
+/* --- Project Item Container --- */
+.project-item {
+  border: 1px solid #e9ecef; /* Subtle border */
+  padding: 20px;
+  margin-bottom: 25px;
+  background-color: #fff; /* White card background */
+  border-radius: 8px; /* Soft, modern corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for lift */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Project Title --- */
+.project-title {
+  font-size: 1.5em; /* Larger, more prominent title */
+  font-weight: 600;
+  color: #0056b3; /* Use the accent color for titles */
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+/* --- Project Actions (Links) --- */
+.project-actions {
+  margin-bottom: 15px;
+}
+
+.action-link {
+  display: inline-flex; /* Align icon and text */
+  align-items: center;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #495057; /* Darker gray for strong link text */
+  text-decoration: none;
+  padding: 5px 10px;
+  margin-right: 15px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.action-link:hover {
+  background-color: #e9ecef;
+  color: #0056b3; /* Hover effect with accent color */
+  border-color: #0056b3;
+}
+
+.action-link i {
+  margin-right: 6px; /* Space between icon and text */
+}
+
+/* --- Project Description --- */
+.project-description {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.05em;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* --- Project Details (Tags) --- */
+.project-details {
+  margin-top: 10px;
+  border-top: 1px dashed #e9ecef;
+  padding-top: 10px;
+}
+
+.detail-tag {
+  display: inline-block;
+  margin-right: 12px;
+  padding: 4px 10px;
+  border-radius: 4px; /* Squared tags look more professional */
+  font-weight: 500;
+  font-size: 0.85em;
+  text-transform: uppercase;
+}
+
+.language-tag {
+  background-color: #e6f7ff; /* Very light blue */
+  color: #007bff;
+}
+
+.library-tag {
+  background-color: #e6ffe6; /* Very light green */
+  color: #28a745;
+}
+
+.paper-ref {
+  background-color: #fff3e6; /* Light orange for references */
+  color: #fd7e14;
+}
+
+/* --- Work In Progress Note --- */
+.wip-note {
+  font-style: normal; /* Non-italic for a cleaner look */
+  color: #e49a00; /* Darker, less distracting yellow/orange */
+  background-color: #fffbe6;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.8em;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* --- References Section --- */
+.project-references {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f0f3f5; /* Lightly shaded background */
+  border-radius: 8px;
+  border-left: 5px solid #0056b3;
+}
+
+.project-references h4 {
+  font-size: 1.2em;
+  color: #1a1a1a;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.project-references p {
+  margin-bottom: 5px;
+  font-size: 0.95em;
+  color: #555;
+}
+
+.project-group {
+    /* Use the same styling as project-item for a unified appearance */
+    border: 1px solid #e9ecef;
+    padding: 20px;
+    margin-bottom: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Remove margins and shadows from individual items when inside the group */
+.project-group .project-item {
+    border: none;
+    padding: 0;
+    margin-bottom: 20px; /* Space between the two projects */
+    background-color: transparent;
+    box-shadow: none;
+    transition: none;
+}
+
+/* Add a subtle separator between the grouped projects */
+.project-group .project-item:first-child {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #ced4da;
+}
+
+/* Remove the hover effect for individual items inside the group to keep the group intact */
+.project-group .project-item:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Adjustments for the References block inside the group */
+.project-references.grouped-reference {
+    margin-top: 20px; /* Space above the reference block */
+    padding: 15px; /* Slightly smaller padding inside the group */
+    background-color: #f8f9fa; /* Lighter shade inside the card */
+    border-left: 4px solid #0056b3; /* Maintain the accent line */
+    border-radius: 6px;
+    box-shadow: none;
+}
+/* Ensure the original project-references margin is overridden for the grouped version */
+.project-references.grouped-reference {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+/* --- Project Item Container (Original, now applies to non-grouped items) --- */
+/* The original .project-item styles below remain for non-grouped projects: */
+.project-item {
+  border: 1px solid #e9ecef;
+  padding: 20px;
+  margin-bottom: 25px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
