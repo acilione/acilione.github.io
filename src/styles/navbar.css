@@ -63,12 +63,20 @@
     padding: 0;
     display: flex;
     align-items: center;
-    gap: 20px; /* robust spacing between nav items */
+    gap: 14px; /* tighter spacing so links sit adjacent to the theme toggle */
     font-family: 'Montserrat', sans-serif;
 }
 
+/* remove extra left margin on list items so nav can be pushed to the right */
 #main-navbar .nav-links li {
-    margin-left: 20px;
+    margin-left: 0;
+}
+
+/* push the desktop navigation to the right (next to .nav-actions) */
+#main-navbar .desktop-nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
 }
 
 #main-navbar .nav-links a {
@@ -201,7 +209,7 @@
 /* Theme toggle button in navbar */
 #main-navbar .theme-toggle {
     background: transparent;
-    border: 1px solid rgba(0,0,0,0.06);
+    border: 1px solid var(--muted-border);
     color: inherit;
     padding: 6px 8px;
     border-radius: 6px;
@@ -209,11 +217,8 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    margin-left: 3vw;
     font-size: 0.9rem;
-}
-
-[data-theme="dark"] #main-navbar .theme-toggle {
-    border-color: rgba(255,255,255,0.08);
 }
 
 #main-navbar .theme-toggle .theme-icon { width: 16px; height: 16px; display:inline-block }
