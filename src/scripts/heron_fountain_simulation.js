@@ -290,7 +290,6 @@ class HeronFountainScene {
   }
 
   initThree() {
-    // --- *** MODIFIED *** ---
     // Set initial background color based on theme
     this.updateSceneTheme();
 
@@ -345,7 +344,7 @@ class HeronFountainScene {
       }
     });
 
-    // --- *** NEW ***: Start listening for theme changes ---
+    // Start listening for theme changes
     this.setupThemeObserver();
   }
 

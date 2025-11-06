@@ -171,9 +171,50 @@ class DeflatingBubbleScene {
     this.animate();
   }
 
+  /**
+   * Gets the current theme from the HTML data attribute.
+   * Defaults to 'light'.
+   */
+  getCurrentTheme() {
+    return document.documentElement.getAttribute("data-theme") === "dark"
+      ? "dark"
+      : "light";
+  }
+
+  /**
+   * Updates the scene's background color based on the current theme.
+   */
+  updateSceneTheme() {
+    const theme = this.getCurrentTheme();
+    if (this.scene) {
+      this.scene.background = new THREE.Color(
+        theme === "dark" ? 0x0d1117 : 0xffffff // Originale dark, bianco per light
+      );
+    }
+  }
+
+  /**
+   * Sets up a MutationObserver to watch for changes to the
+   * `data-theme` attribute on the <html> tag.
+   */
+  setupThemeObserver() {
+    this.themeObserver = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "data-theme"
+        ) {
+          this.updateSceneTheme();
+        }
+      }
+    });
+
+    this.themeObserver.observe(document.documentElement, { attributes: true });
+  }
+
   initThree() {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x0d1117); // Dark background
+    this.updateSceneTheme()
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setSize(
@@ -184,14 +225,20 @@ class DeflatingBubbleScene {
 
     // --- DUAL CAMERA SETUP ---
     const aspect = this.container.clientWidth / this.container.clientHeight;
-    const viewSize = 12;
 
-    // 2D Camera (Orthographic, fixed view)
+    let horizontalHalfWidth = 0;
+    if (this.container.clientWidth > 1280) {
+      horizontalHalfWidth = 28;
+    } else {
+      horizontalHalfWidth = 14;
+    }
+    const verticalHalfHeight = horizontalHalfWidth / aspect;
+
     this.camera2D = new THREE.OrthographicCamera(
-      -viewSize * aspect,
-      viewSize * aspect,
-      viewSize,
-      -viewSize,
+      -horizontalHalfWidth, 
+      horizontalHalfWidth, 
+      verticalHalfHeight, 
+      -verticalHalfHeight, 
       0.1,
       100
     );
@@ -217,17 +264,23 @@ class DeflatingBubbleScene {
 
     this.straws = [];
     this.staticCircles = [];
+
+    this.setupThemeObserver();
   }
 
   onWindowResize() {
     const aspect = this.container.clientWidth / this.container.clientHeight;
-    const viewSize = 12;
-
-    // Update 2D Camera
-    this.camera2D.left = -viewSize * aspect;
-    this.camera2D.right = viewSize * aspect;
-    this.camera2D.top = viewSize;
-    this.camera2D.bottom = -viewSize;
+      let horizontalHalfWidth = 0;
+    if (this.container.clientWidth > 1280) {
+      horizontalHalfWidth = 28;
+    } else {
+      horizontalHalfWidth = 14;
+    }
+    const verticalHalfHeight = horizontalHalfWidth / aspect;
+    this.camera2D.left = -horizontalHalfWidth;
+    this.camera2D.right = horizontalHalfWidth;
+    this.camera2D.top = verticalHalfHeight;
+    this.camera2D.bottom = -verticalHalfHeight;
     this.camera2D.updateProjectionMatrix();
 
     // Update 3D Camera
@@ -446,11 +499,8 @@ class DeflatingBubbleScene {
     if (this.textOverlay) this.textOverlay.remove();
 
     this.textOverlay = document.createElement("div");
-    this.textOverlay.style.cssText = `
-                    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-                    pointer-events: none; font-family: monospace; color: white;
-                    padding: 10px;
-                `;
+    this.textOverlay.className = "text-label-overlay";
+
     this.container.appendChild(this.textOverlay);
 
     this.textGroups = [];
@@ -458,14 +508,7 @@ class DeflatingBubbleScene {
 
     this.Ls.forEach((L, i) => {
       const groupDiv = document.createElement("div");
-      groupDiv.style.cssText = `
-                        position: absolute; display: flex; flex-direction: column;
-                        align-items: flex-start; font-size: 18px; line-height: 1.4;
-                        text-shadow: 1px 1px 2px black;
-                        transform: translate(-50%, 0);
-                        /* Initial position is arbitrary, animate() will fix it */
-                        left: 0px; top: 0px; 
-                    `;
+      groupDiv.className = "label-group";
 
       const L_text = document.createElement("div");
       L_text.textContent = `L: ${(L * 100).toFixed(2)} cm`;

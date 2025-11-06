@@ -19,26 +19,74 @@ canvas {
   position: absolute;
   top: 10px;
   left: 10px;
-  color: white;
   font-family: monospace;
   z-index: 10;
+}
+
+.text-label-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  font-family: monospace;
+  padding: 10px;
+}
+
+.label-group {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 18px;
+  line-height: 1.4;
+  text-shadow: 1px 1px 2px black;
+  transform: translate(-50%, 0);
+  /* Initial position is arbitrary, animate() will fix it */
+  left: 0px;
+  top: 0px;
+}
+
+/* Dark Mode */
+:root[data-theme="dark"] .info-panel,
+:root[data-theme="dark"] .text-label-overlay {
+  color: white;
+}
+
+:root[data-theme="dark"] .label-group {
+  text-shadow: 1px 1px 2px black;
+}
+
+/* Light Mode */
+:root[data-theme="light"] .info-panel,
+:root[data-theme="light"] .text-label-overlay {
+  color: black;
+}
+
+:root[data-theme="light"] .label-group {
+  text-shadow: none;
 }
 
 @media (max-width: 768px) {
   /* Adjust the default position and appearance of the GUI for better mobile usability */
   .lil-gui {
-    width: 90% !important; /* Make GUI wider on mobile */
+    width: 100% !important; /* Make GUI wider on mobile */
     max-height: 50vh; /* Limit height to prevent it from covering the whole screen */
-    overflow-y: auto; /* Allow scrolling within the GUI */
-    top: 5px !important; 
-    right: 5% !important; 
-    left: 50% !important; 
+    top: 5px !important;
+    /* right: 5% !important; */
+    left: 50% !important;
     transform: translateX(-50%); /* Center the GUI */
   }
 
+  .lil-gui .children {
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
   /* Make sure the text groups are visible and don't overlap too much */
-  div.text-overlay div {
-      font-size: 16px !important;
+  .text-label-overlay .label-group {
+    font-size: 16px !important;
   }
 }
 
