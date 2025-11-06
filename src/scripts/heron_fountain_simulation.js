@@ -622,11 +622,10 @@ class HeronFountainScene {
     this.scene.add(this.waterCascade);
   }
 
-  // --- *** REVERTED ***: setupGUI
   setupGUI() {
     let gui;
     try {
-      gui = new GUI({ autoPlace: true, title: "Bubble Controls" });
+      gui = new GUI({ autoPlace: true, title: "Heron's Fountain Controls" });
     } catch (e) {
       gui = {
         domElement: document.createElement("div"),
@@ -1153,7 +1152,8 @@ class HeronFountainScene {
                 `;
 
     this.textGroups.Time.style.left = `50%`;
-    this.textGroups.Time.style.top = `20px`;
+    this.textGroups.Time.style.top = `100px`;
+
     const status = this.physics.isStable
       ? "STABLE (B empty)"
       : this.guiParams.isRunning
@@ -1163,7 +1163,6 @@ class HeronFountainScene {
                 <div>Time: ${this.physics.t.toFixed(2)} s</div>
                 <div>State: ${status}</div>
                 `;
-    this.textGroups.Time.style.top = "100px"; // Center top
   }
 
   onWindowResize() {
