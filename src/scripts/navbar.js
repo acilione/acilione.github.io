@@ -7,6 +7,7 @@ const NAVBAR_HTML = `<header id="main-navbar">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="cv.html">CV</a></li>
       <li><a href="projects.html">Projects</a></li>
+      <li><a href="provenzano_simulation.html">Boyle's Flask</a></li>
     </ul>
   </nav>
   <div class="nav-actions" aria-hidden="true"></div>
@@ -21,6 +22,7 @@ const NAVBAR_HTML = `<header id="main-navbar">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="cv.html">CV</a></li>
       <li><a href="projects.html">Projects</a></li>
+      <li><a href="provenzano_simulation.html">Boyle's Flask</a></li>
     </ul>
   </nav>
 </header>`;
@@ -30,8 +32,8 @@ async function loadNavbar() {
   if (!container) return;
 
   try {
-  // Inject navbar HTML bundled by Parcel (imported as raw text)
-  container.innerHTML = NAVBAR_HTML;
+    // Inject navbar HTML bundled by Parcel (imported as raw text)
+    container.innerHTML = NAVBAR_HTML;
 
     // wire menu toggle
     const menuToggle = container.querySelector('.menu-toggle');
@@ -83,39 +85,39 @@ if (document.readyState === 'loading') {
 }
 
 /* Theme toggle implementation ------------------------------------------------ */
-function initThemeToggle(){
+function initThemeToggle() {
   const root = document.documentElement;
   const stored = localStorage.getItem('theme'); // 'light'|'dark' or null
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const apply = (t)=>{
-    if(t==='dark') root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme');
+  const apply = (t) => {
+    if (t === 'dark') root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
   };
-  const initial = stored || (prefersDark? 'dark':'light');
+  const initial = stored || (prefersDark ? 'dark' : 'light');
   apply(initial);
 
-  function makeButton(theme){
+  function makeButton(theme) {
     const btn = document.createElement('button');
-    btn.type='button';
-    btn.className='theme-toggle';
-    btn.setAttribute('aria-pressed', theme==='dark'?'true':'false');
-    const icon = document.createElement('span'); icon.className='theme-icon';
+    btn.type = 'button';
+    btn.className = 'theme-toggle';
+    btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+    const icon = document.createElement('span'); icon.className = 'theme-icon';
     // simple SVG icons
     const sun = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
     const moon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    icon.innerHTML = theme==='dark'? moon : sun;
-    const label = document.createElement('span'); label.className='theme-label';
-    label.textContent = theme ==='dark' ? 'Light' : 'Dark';
+    icon.innerHTML = theme === 'dark' ? moon : sun;
+    const label = document.createElement('span'); label.className = 'theme-label';
+    label.textContent = theme === 'dark' ? 'Light' : 'Dark';
     btn.appendChild(icon); btn.appendChild(label);
-    btn.addEventListener('click', ()=>{
-      const now = root.getAttribute('data-theme')==='dark' ? 'dark' : 'light';
-      const next = now==='dark' ? 'light' : 'dark';
+    btn.addEventListener('click', () => {
+      const now = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const next = now === 'dark' ? 'light' : 'dark';
       apply(next);
       localStorage.setItem('theme', next);
       // update all buttons
-      document.querySelectorAll('#main-navbar .theme-toggle').forEach(b=>{
-        b.querySelector('.theme-icon').innerHTML = next==='dark'? moon : sun;
-        b.querySelector('.theme-label').textContent = next==='dark'? 'Light' : 'Dark';
-        b.setAttribute('aria-pressed', next==='dark'?'true':'false');
+      document.querySelectorAll('#main-navbar .theme-toggle').forEach(b => {
+        b.querySelector('.theme-icon').innerHTML = next === 'dark' ? moon : sun;
+        b.querySelector('.theme-label').textContent = next === 'dark' ? 'Light' : 'Dark';
+        b.setAttribute('aria-pressed', next === 'dark' ? 'true' : 'false');
       });
     });
     return btn;
@@ -123,37 +125,37 @@ function initThemeToggle(){
 
   // find navbar
   const navbar = document.getElementById('main-navbar');
-  if(!navbar) return;
+  if (!navbar) return;
   const desktopList = navbar.querySelector('.desktop-nav .nav-links') || navbar.querySelector('.nav-links');
   const mobileList = navbar.querySelector('.mobile-nav .nav-links');
 
   const btnDesktop = makeButton(initial);
   const actionsContainer = navbar.querySelector('.nav-actions');
-  if(actionsContainer){
+  if (actionsContainer) {
     actionsContainer.appendChild(btnDesktop);
-  } else if(desktopList){
-    const li = document.createElement('li'); li.className='theme-wrap'; li.appendChild(btnDesktop);
+  } else if (desktopList) {
+    const li = document.createElement('li'); li.className = 'theme-wrap'; li.appendChild(btnDesktop);
     desktopList.appendChild(li);
   }
 
-  if(mobileList){
+  if (mobileList) {
     const btnMobile = makeButton(initial);
-    const li2 = document.createElement('li'); li2.className='theme-wrap'; li2.appendChild(btnMobile);
+    const li2 = document.createElement('li'); li2.className = 'theme-wrap'; li2.appendChild(btnMobile);
     mobileList.insertBefore(li2, mobileList.firstChild);
   }
 
   // listen to system preference changes only if user hasn't stored a choice
-  try{
+  try {
     const mql = window.matchMedia('(prefers-color-scheme: dark)');
-    mql.addEventListener && mql.addEventListener('change', (e)=>{
-      if(!localStorage.getItem('theme')){
-        apply(e.matches? 'dark' : 'light');
-        document.querySelectorAll('#main-navbar .theme-toggle').forEach(b=>{
-          b.querySelector('.theme-icon').innerHTML = e.matches? '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
-          b.querySelector('.theme-label').textContent = e.matches? 'Dark' : 'Light';
-          b.setAttribute('aria-pressed', e.matches? 'true' : 'false');
+    mql.addEventListener && mql.addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        apply(e.matches ? 'dark' : 'light');
+        document.querySelectorAll('#main-navbar .theme-toggle').forEach(b => {
+          b.querySelector('.theme-icon').innerHTML = e.matches ? '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+          b.querySelector('.theme-label').textContent = e.matches ? 'Dark' : 'Light';
+          b.setAttribute('aria-pressed', e.matches ? 'true' : 'false');
         });
       }
     });
-  }catch(e){}
+  } catch (e) { }
 }
