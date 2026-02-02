@@ -5,7 +5,7 @@
 */
 #main-navbar,
 #main-navbar * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /* Reset/normalise elements inside the navbar so external rules
@@ -23,12 +23,12 @@
 }
 
 #main-navbar a {
-  text-decoration: none !important;
-  color: inherit !important;
-  background: none !important;
-  border: none !important;
-  font: inherit !important;
-  line-height: normal !important;
+    text-decoration: none !important;
+    color: inherit !important;
+    background: none !important;
+    border: none !important;
+    font: inherit !important;
+    line-height: normal !important;
 }
 
 #main-navbar {
@@ -63,7 +63,8 @@
     padding: 0;
     display: flex;
     align-items: center;
-    gap: 14px; /* tighter spacing so links sit adjacent to the theme toggle */
+    gap: 14px;
+    /* tighter spacing so links sit adjacent to the theme toggle */
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -85,7 +86,8 @@
     font-weight: 400;
     padding: 18px 0;
     display: block;
-    position: relative; /* for the pseudo-element underline */
+    position: relative;
+    /* for the pseudo-element underline */
     transition: color 0.2s ease, font-weight 0.2s ease;
     text-transform: uppercase;
     font-size: 0.95em;
@@ -100,7 +102,8 @@
     right: 0;
     height: 3px;
     background-color: transparent;
-    bottom: 8px; /* place the underline slightly above the bottom of the nav link area */
+    bottom: 8px;
+    /* place the underline slightly above the bottom of the nav link area */
     transition: background-color 0.2s ease, transform 0.2s ease;
     transform: scaleX(0);
     transform-origin: left center;
@@ -147,10 +150,12 @@
     transform: rotate(45deg);
     width: 120%;
 }
+
 #main-navbar .menu-toggle.open .line:nth-child(2) {
     opacity: 0;
     transform: translateX(20px);
 }
+
 #main-navbar .menu-toggle.open .line:nth-child(3) {
     transform: rotate(-45deg);
     width: 120%;
@@ -200,7 +205,7 @@
     #main-navbar .desktop-nav {
         display: none;
     }
-    
+
     #main-navbar .menu-toggle {
         display: flex;
     }
@@ -221,7 +226,11 @@
     font-size: 0.9rem;
 }
 
-#main-navbar .theme-toggle .theme-icon { width: 16px; height: 16px; display:inline-block }
+#main-navbar .theme-toggle .theme-icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block
+}
 
 /* mobile placement: full-width button inside mobile menu */
 #main-navbar .mobile-nav .theme-toggle {
@@ -229,4 +238,6 @@
     margin: 0.5rem 1rem;
 }
 
-#main-navbar { z-index: 9999; }
+#main-navbar {
+    z-index: 9999;
+}

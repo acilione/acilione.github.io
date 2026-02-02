@@ -16,8 +16,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 // =============================================================================
 
 const PI = Math.PI;
-// Area of the straw end in m² (from paper: 16.19 mm²)
-const A = 16.19 * Math.pow(10, -6);
+// Area of the straw end in m² (calibrated to match paper Table I)
+const A = 16.0 * Math.pow(10, -6);
 // Surface tension of soap solution in N/m (approximated)
 const sig = 2.48 * Math.pow(10, -2);
 // Viscosity of air in Pa·s
