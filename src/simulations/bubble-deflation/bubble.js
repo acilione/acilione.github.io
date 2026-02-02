@@ -3,12 +3,21 @@ import GUI from "lil-gui";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 // =============================================================================
+// SOAP BUBBLE DEFLATION SIMULATION
+// Based on: "Unblowing bubbles" - Provenzano & Stefanini (Am. J. Phys. 93, 2025)
+// =============================================================================
+// This is a standalone module. Export: DeflatingBubbleScene class
+// Usage: import { DeflatingBubbleScene } from './bubble.js';
+//        new DeflatingBubbleScene('container-id');
+// =============================================================================
+
+// =============================================================================
 // NUMERICAL UTILITY FUNCTIONS
 // =============================================================================
 
 const PI = Math.PI;
-// Area of the straw end in m²
-const A = 16.0 * Math.pow(10, -6);
+// Area of the straw end in m² (from paper: 16.19 mm²)
+const A = 16.19 * Math.pow(10, -6);
 // Surface tension of soap solution in N/m (approximated)
 const sig = 2.48 * Math.pow(10, -2);
 // Viscosity of air in Pa·s
@@ -148,7 +157,8 @@ class DeflatingBubbleScene {
       isRunning: false,
       scale_factor: 40,
       viewMode: "2D",
-      showDashedLines: true, // 💡 NEW: Dashed line toggle state
+      showDashedLines: true,
+      soapEffect: true, // Toggle soap bubble visual effect (iridescence)
       playPause: () => {
         this.guiParams.isRunning = !this.guiParams.isRunning;
         this.handlePlayPause();
@@ -235,10 +245,10 @@ class DeflatingBubbleScene {
     const verticalHalfHeight = horizontalHalfWidth / aspect;
 
     this.camera2D = new THREE.OrthographicCamera(
-      -horizontalHalfWidth, 
-      horizontalHalfWidth, 
-      verticalHalfHeight, 
-      -verticalHalfHeight, 
+      -horizontalHalfWidth,
+      horizontalHalfWidth,
+      verticalHalfHeight,
+      -verticalHalfHeight,
       0.1,
       100
     );
@@ -270,7 +280,7 @@ class DeflatingBubbleScene {
 
   onWindowResize() {
     const aspect = this.container.clientWidth / this.container.clientHeight;
-      let horizontalHalfWidth = 0;
+    let horizontalHalfWidth = 0;
     if (this.container.clientWidth > 1280) {
       horizontalHalfWidth = 28;
     } else {
@@ -448,13 +458,15 @@ class DeflatingBubbleScene {
       this.scene.add(static_circle);
       this.staticCircles.push(static_circle);
 
-      // DYNAMIC BUBBLE (SPHERE)
-      const circleMaterial = new THREE.MeshBasicMaterial({
-        color: 0x00bfff,
-        transparent: true,
-        opacity: 0.5,
-        side: THREE.DoubleSide,
-      });
+      // DYNAMIC BUBBLE (SPHERE) with soap effect material
+      const circleMaterial = this.guiParams.soapEffect
+        ? this.createSoapBubbleMaterial()
+        : new THREE.MeshBasicMaterial({
+          color: 0x00bfff,
+          transparent: true,
+          opacity: 0.5,
+          side: THREE.DoubleSide,
+        });
       const circle = new THREE.Mesh(circleGeometry, circleMaterial);
       circle.position.set(pos.x, initialBubbleCenterY, pos.z);
       circle.scale.setScalar(scaledR0);
@@ -493,6 +505,120 @@ class DeflatingBubbleScene {
     line.computeLineDistances();
     line.position.copy(position);
     return line;
+  }
+
+  /**
+   * Creates a soap bubble material with thin-film interference (iridescence).
+   * Based on the physics of light interference in thin films.
+   * @returns {THREE.ShaderMaterial} The soap bubble shader material
+   */
+  createSoapBubbleMaterial() {
+    const vertexShader = `
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+      varying vec3 vWorldPosition;
+      varying vec2 vUv;
+      
+      void main() {
+        vNormal = normalize(normalMatrix * normal);
+        vPosition = position;
+        vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `;
+
+    const fragmentShader = `
+      uniform float uTime;
+      uniform float uThickness;
+      uniform vec3 uCameraPosition;
+      
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+      varying vec3 vWorldPosition;
+      varying vec2 vUv;
+      
+      // Attempt to simulate thin-film interference colors
+      // Based on wavelength-dependent phase shift in thin films
+      vec3 thinFilmInterference(float thickness, float cosAngle) {
+        // Refractive index of soap film (approximately 1.33 like water)
+        float n = 1.33;
+        
+        // Optical path difference for different wavelengths (nm)
+        // Red: 700nm, Green: 530nm, Blue: 470nm
+        float pathDiff = 2.0 * n * thickness * cosAngle;
+        
+        // Calculate phase for each color channel
+        // Higher frequencies (shorter wavelengths) shift faster
+        float phaseR = pathDiff / 700.0;
+        float phaseG = pathDiff / 530.0;
+        float phaseB = pathDiff / 470.0;
+        
+        // Interference pattern (constructive/destructive)
+        vec3 color;
+        color.r = 0.5 + 0.5 * cos(phaseR * 3.14159 * 2.0);
+        color.g = 0.5 + 0.5 * cos(phaseG * 3.14159 * 2.0);
+        color.b = 0.5 + 0.5 * cos(phaseB * 3.14159 * 2.0);
+        
+        return color;
+      }
+      
+      void main() {
+        // Calculate view direction
+        vec3 viewDir = normalize(uCameraPosition - vWorldPosition);
+        
+        // Fresnel effect - stronger reflection at grazing angles
+        float fresnel = 1.0 - max(dot(viewDir, vNormal), 0.0);
+        fresnel = pow(fresnel, 3.0); // Higher power = more subtle edge effect
+        
+        // Film thickness varies based on position and time (slower, subtler flow)
+        float thickness = uThickness * (1.0 + 0.15 * sin(vUv.x * 6.0 + uTime * 0.3) 
+                                              + 0.1 * sin(vUv.y * 5.0 - uTime * 0.2)
+                                              + 0.08 * sin(vPosition.x * 3.0 + vPosition.y * 2.0 + uTime * 0.15));
+        
+        // Thin-film interference color
+        float cosAngle = abs(dot(viewDir, vNormal));
+        vec3 interferenceColor = thinFilmInterference(thickness, cosAngle);
+        
+        // Base soap color (soft, slightly iridescent white-blue)
+        vec3 baseColor = vec3(0.92, 0.95, 1.0);
+        
+        // Mix interference with base color - much more subtle blend
+        vec3 finalColor = mix(baseColor, interferenceColor, 0.25 + 0.15 * fresnel);
+        
+        // Subtle rainbow tint at edges only
+        vec3 rainbowEdge = vec3(
+          0.5 + 0.5 * sin(fresnel * 4.0 + 0.0),
+          0.5 + 0.5 * sin(fresnel * 4.0 + 2.09),
+          0.5 + 0.5 * sin(fresnel * 4.0 + 4.18)
+        );
+        finalColor = mix(finalColor, rainbowEdge, fresnel * 0.15); // Much subtler edge rainbow
+        
+        // Add soft highlight for reflection simulation
+        float highlight = pow(max(dot(reflect(-viewDir, vNormal), vec3(0.5, 1.0, 0.5)), 0.0), 48.0);
+        finalColor += vec3(1.0) * highlight * 0.4;
+        
+        // Transparency: more transparent overall, subtle edge opacity
+        float alpha = 0.2 + fresnel * 0.35;
+        
+        gl_FragColor = vec4(finalColor, alpha);
+      }
+    `;
+
+    const material = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      uniforms: {
+        uTime: { value: 0.0 },
+        uThickness: { value: 400.0 }, // Film thickness in nm (typical soap film: 100-500nm)
+        uCameraPosition: { value: new THREE.Vector3() },
+      },
+      transparent: true,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+
+    return material;
   }
 
   addTextLabels() {
@@ -591,6 +717,18 @@ class DeflatingBubbleScene {
         });
       });
     this.guiControllers.push(dashedCtrl);
+
+    // Soap effect toggle (iridescent visual effect)
+    const soapCtrl = gui
+      .add(this.guiParams, "soapEffect")
+      .name("🫧 Soap Effect")
+      .onChange(() => {
+        // Rebuild the scene with new materials
+        this.setupPhysicsAndAnimation();
+        this.addTextLabels();
+        for (let i = 0; i < 3; i++) this.resetAnimation(i);
+      });
+    this.guiControllers.push(soapCtrl);
 
     const R0_MIN = 0.1 * 1e-2;
     const R0_MAX = 10.0 * 1e-2;
@@ -710,6 +848,19 @@ class DeflatingBubbleScene {
       });
     }
 
+    // Update soap bubble shader uniforms
+    if (this.guiParams.soapEffect && this.circles) {
+      const elapsedTime = performance.now() * 0.001; // Convert to seconds
+      this.circles.forEach((circle) => {
+        if (circle.material.uniforms) {
+          circle.material.uniforms.uTime.value = elapsedTime;
+          circle.material.uniforms.uCameraPosition.value.copy(
+            this.camera.position
+          );
+        }
+      });
+    }
+
     this.renderer.render(this.scene, this.camera);
 
     if (!this.guiParams.isRunning) {
@@ -761,11 +912,19 @@ class DeflatingBubbleScene {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  try {
-    // Ensure the container is ready before initializing the scene
-    new DeflatingBubbleScene("scene-container");
-  } catch (e) {
-    console.error("Failed to initialize DeflatingBubbleScene:", e);
-  }
-});
+// =============================================================================
+// EXPORTS
+// =============================================================================
+
+/**
+ * Initialize the bubble simulation in a container.
+ * @param {string} containerId - The ID of the container element
+ * @returns {DeflatingBubbleScene} The simulation instance
+ */
+export function init(containerId = "scene-container") {
+  return new DeflatingBubbleScene(containerId);
+}
+
+export { DeflatingBubbleScene };
+export default DeflatingBubbleScene;
+

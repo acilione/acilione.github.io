@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heron's Fountain Simulation</title>
+
+    <link rel="stylesheet" href="heron.css" />
+
+    <style>
+        /* Minimal page styles for standalone demo */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: sans-serif;
+            background: #1a1a2e;
+        }
+
+        #scene-container {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="scene-container" class="heron-simulation-container"></div>
+
+    <script type="module">
+        import { init } from './heron.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const simulation = init('scene-container');
+                console.log('Heron Fountain simulation initialized:', simulation);
+            } catch (e) {
+                console.error('Failed to initialize simulation:', e);
+            }
+        });
+    </script>
+</body>
+
+</html>

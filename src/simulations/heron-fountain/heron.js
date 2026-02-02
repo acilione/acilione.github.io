@@ -3,6 +3,14 @@ import GUI from "lil-gui";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 // =============================================================================
+// HERON'S FOUNTAIN SIMULATION
+// =============================================================================
+// This is a standalone module. Export: HeronFountainScene class
+// Usage: import { HeronFountainScene } from './heron.js';
+//        new HeronFountainScene('container-id');
+// =============================================================================
+
+// =============================================================================
 // PHYSICS IMPLEMENTATION (Revised)
 // =============================================================================
 
@@ -1156,8 +1164,8 @@ class HeronFountainScene {
     const status = this.physics.isStable
       ? "STABLE (B empty)"
       : this.guiParams.isRunning
-      ? "RUNNING"
-      : "PAUSED";
+        ? "RUNNING"
+        : "PAUSED";
     this.textGroups.Time.innerHTML = `
                 <div>Time: ${this.physics.t.toFixed(2)} s</div>
                 <div>State: ${status}</div>
@@ -1221,15 +1229,19 @@ class HeronFountainScene {
   }
 }
 
-// Initialize when DOM ready
-document.addEventListener("DOMContentLoaded", () => {
-  try {
-    new HeronFountainScene("scene-container");
-  } catch (e) {
-    console.error("Impossibile inizializzare la scena:", e);
-    document.GetElementById("scene-container").innerHTML =
-      "<h3>Errore durante l'inizializzazione della simulazione.</h3><pre>" +
-      e.stack +
-      "</pre>";
-  }
-});
+// =============================================================================
+// EXPORTS
+// =============================================================================
+
+/**
+ * Initialize the Heron's Fountain simulation in a container.
+ * @param {string} containerId - The ID of the container element
+ * @returns {HeronFountainScene} The simulation instance
+ */
+export function init(containerId = "scene-container") {
+  return new HeronFountainScene(containerId);
+}
+
+export { HeronFountainScene, HeronPhysics };
+export default HeronFountainScene;
+

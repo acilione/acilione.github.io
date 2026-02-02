@@ -1,0 +1,1631 @@
+<!DOCTYPE html><html lang="en"><head><script src="/bubble_simulation.a6d88a68.js"></script>
+  <title>Heron's Fountain Simulation</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <script src="/bubble_simulation.679bdca2.js"></script>
+
+  <link rel="stylesheet" href="/acilione.github.io.3b8f328d.css">
+  <link rel="stylesheet" href="/acilione.github.io.13ccf6ed.css">
+  <link rel="stylesheet" href="/heron_fountain_simulation.c07971c9.css">
+  <script type="module" src="/acilione.github.io.8dd12b87.js" defer=""></script>
+</head>
+
+<body>
+  <!-- Navbar injected by website - not part of simulation -->
+  <div id="navbar-container"></div>
+
+  <div id="info-panel" class="info-panel"></div>
+  <div id="scene-container"></div>
+
+  <!-- Import and initialize the standalone simulation module -->
+  <script>// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+
+(function (
+  modules,
+  entry,
+  mainEntry,
+  parcelRequireName,
+  externals,
+  distDir,
+  publicUrl,
+  devServer
+) {
+  /* eslint-disable no-undef */
+  var globalObject =
+    typeof globalThis !== 'undefined'
+      ? globalThis
+      : typeof self !== 'undefined'
+      ? self
+      : typeof window !== 'undefined'
+      ? window
+      : typeof global !== 'undefined'
+      ? global
+      : {};
+  /* eslint-enable no-undef */
+
+  // Save the require from previous bundle to this closure if any
+  var previousRequire =
+    typeof globalObject[parcelRequireName] === 'function' &&
+    globalObject[parcelRequireName];
+
+  var importMap = previousRequire.i || {};
+  var cache = previousRequire.cache || {};
+  // Do not use `require` to prevent Webpack from trying to bundle this call
+  var nodeRequire =
+    typeof module !== 'undefined' &&
+    typeof module.require === 'function' &&
+    module.require.bind(module);
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        if (externals[name]) {
+          return externals[name];
+        }
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire =
+          typeof globalObject[parcelRequireName] === 'function' &&
+          globalObject[parcelRequireName];
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
+        var err = new Error("Cannot find module '" + name + "'");
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+
+      localRequire.resolve = resolve;
+      localRequire.cache = {};
+
+      var module = (cache[name] = new newRequire.Module(name));
+
+      modules[name][0].call(
+        module.exports,
+        localRequire,
+        module,
+        module.exports,
+        globalObject
+      );
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x) {
+      var res = localRequire.resolve(x);
+      if (res === false) {
+        return {};
+      }
+      // Synthesize a module to follow re-exports.
+      if (Array.isArray(res)) {
+        var m = {__esModule: true};
+        res.forEach(function (v) {
+          var key = v[0];
+          var id = v[1];
+          var exp = v[2] || v[0];
+          var x = newRequire(id);
+          if (key === '*') {
+            Object.keys(x).forEach(function (key) {
+              if (
+                key === 'default' ||
+                key === '__esModule' ||
+                Object.prototype.hasOwnProperty.call(m, key)
+              ) {
+                return;
+              }
+
+              Object.defineProperty(m, key, {
+                enumerable: true,
+                get: function () {
+                  return x[key];
+                },
+              });
+            });
+          } else if (exp === '*') {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              value: x,
+            });
+          } else {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              get: function () {
+                if (exp === 'default') {
+                  return x.__esModule ? x.default : x;
+                }
+                return x[exp];
+              },
+            });
+          }
+        });
+        return m;
+      }
+      return newRequire(res);
+    }
+
+    function resolve(x) {
+      var id = modules[name][1][x];
+      return id != null ? id : x;
+    }
+  }
+
+  function Module(moduleName) {
+    this.id = moduleName;
+    this.bundle = newRequire;
+    this.require = nodeRequire;
+    this.exports = {};
+  }
+
+  newRequire.isParcelRequire = true;
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+  newRequire.distDir = distDir;
+  newRequire.publicUrl = publicUrl;
+  newRequire.devServer = devServer;
+  newRequire.i = importMap;
+  newRequire.register = function (id, exports) {
+    modules[id] = [
+      function (require, module) {
+        module.exports = exports;
+      },
+      {},
+    ];
+  };
+
+  // Only insert newRequire.load when it is actually used.
+  // The code in this file is linted against ES5, so dynamic import is not allowed.
+  // INSERT_LOAD_HERE
+
+  Object.defineProperty(newRequire, 'root', {
+    get: function () {
+      return globalObject[parcelRequireName];
+    },
+  });
+
+  globalObject[parcelRequireName] = newRequire;
+
+  for (var i = 0; i < entry.length; i++) {
+    newRequire(entry[i]);
+  }
+
+  if (mainEntry) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(mainEntry);
+
+    // CommonJS
+    if (typeof exports === 'object' && typeof module !== 'undefined') {
+      module.exports = mainExports;
+
+      // RequireJS
+    } else if (typeof define === 'function' && define.amd) {
+      define(function () {
+        return mainExports;
+      });
+    }
+  }
+})({"6n84m":[function(require,module,exports,__globalThis) {
+var global = arguments[3];
+var HMR_HOST = null;
+var HMR_PORT = null;
+var HMR_SERVER_PORT = 1234;
+var HMR_SECURE = false;
+var HMR_ENV_HASH = "d6ea1d42532a7575";
+var HMR_USE_SSE = false;
+module.bundle.HMR_BUNDLE_ID = "52a431abe71986a6";
+"use strict";
+/* global HMR_HOST, HMR_PORT, HMR_SERVER_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
+import type {
+  HMRAsset,
+  HMRMessage,
+} from '@parcel/reporter-dev-server/src/HMRServer.js';
+interface ParcelRequire {
+  (string): mixed;
+  cache: {|[string]: ParcelModule|};
+  hotData: {|[string]: mixed|};
+  Module: any;
+  parent: ?ParcelRequire;
+  isParcelRequire: true;
+  modules: {|[string]: [Function, {|[string]: string|}]|};
+  HMR_BUNDLE_ID: string;
+  root: ParcelRequire;
+}
+interface ParcelModule {
+  hot: {|
+    data: mixed,
+    accept(cb: (Function) => void): void,
+    dispose(cb: (mixed) => void): void,
+    // accept(deps: Array<string> | string, cb: (Function) => void): void,
+    // decline(): void,
+    _acceptCallbacks: Array<(Function) => void>,
+    _disposeCallbacks: Array<(mixed) => void>,
+  |};
+}
+interface ExtensionContext {
+  runtime: {|
+    reload(): void,
+    getURL(url: string): string;
+    getManifest(): {manifest_version: number, ...};
+  |};
+}
+declare var module: {bundle: ParcelRequire, ...};
+declare var HMR_HOST: string;
+declare var HMR_PORT: string;
+declare var HMR_SERVER_PORT: string;
+declare var HMR_ENV_HASH: string;
+declare var HMR_SECURE: boolean;
+declare var HMR_USE_SSE: boolean;
+declare var chrome: ExtensionContext;
+declare var browser: ExtensionContext;
+declare var __parcel__import__: (string) => Promise<void>;
+declare var __parcel__importScripts__: (string) => Promise<void>;
+declare var globalThis: typeof self;
+declare var ServiceWorkerGlobalScope: Object;
+*/ var OVERLAY_ID = '__parcel__error__overlay__';
+var OldModule = module.bundle.Module;
+function Module(moduleName) {
+    OldModule.call(this, moduleName);
+    this.hot = {
+        data: module.bundle.hotData[moduleName],
+        _acceptCallbacks: [],
+        _disposeCallbacks: [],
+        accept: function(fn) {
+            this._acceptCallbacks.push(fn || function() {});
+        },
+        dispose: function(fn) {
+            this._disposeCallbacks.push(fn);
+        }
+    };
+    module.bundle.hotData[moduleName] = undefined;
+}
+module.bundle.Module = Module;
+module.bundle.hotData = {};
+var checkedAssets /*: {|[string]: boolean|} */ , disposedAssets /*: {|[string]: boolean|} */ , assetsToDispose /*: Array<[ParcelRequire, string]> */ , assetsToAccept /*: Array<[ParcelRequire, string]> */ , bundleNotFound = false;
+function getHostname() {
+    return HMR_HOST || (typeof location !== 'undefined' && location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
+}
+function getPort() {
+    return HMR_PORT || (typeof location !== 'undefined' ? location.port : HMR_SERVER_PORT);
+}
+// eslint-disable-next-line no-redeclare
+let WebSocket = globalThis.WebSocket;
+if (!WebSocket && typeof module.bundle.root === 'function') try {
+    // eslint-disable-next-line no-global-assign
+    WebSocket = module.bundle.root('ws');
+} catch  {
+// ignore.
+}
+var hostname = getHostname();
+var port = getPort();
+var protocol = HMR_SECURE || typeof location !== 'undefined' && location.protocol === 'https:' && ![
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0'
+].includes(hostname) ? 'wss' : 'ws';
+// eslint-disable-next-line no-redeclare
+var parent = module.bundle.parent;
+if (!parent || !parent.isParcelRequire) {
+    // Web extension context
+    var extCtx = typeof browser === 'undefined' ? typeof chrome === 'undefined' ? null : chrome : browser;
+    // Safari doesn't support sourceURL in error stacks.
+    // eval may also be disabled via CSP, so do a quick check.
+    var supportsSourceURL = false;
+    try {
+        (0, eval)('throw new Error("test"); //# sourceURL=test.js');
+    } catch (err) {
+        supportsSourceURL = err.stack.includes('test.js');
+    }
+    var ws;
+    if (HMR_USE_SSE) ws = new EventSource('/__parcel_hmr');
+    else try {
+        // If we're running in the dev server's node runner, listen for messages on the parent port.
+        let { workerData, parentPort } = module.bundle.root('node:worker_threads') /*: any*/ ;
+        if (workerData !== null && workerData !== void 0 && workerData.__parcel) {
+            parentPort.on('message', async (message)=>{
+                try {
+                    await handleMessage(message);
+                    parentPort.postMessage('updated');
+                } catch  {
+                    parentPort.postMessage('restart');
+                }
+            });
+            // After the bundle has finished running, notify the dev server that the HMR update is complete.
+            queueMicrotask(()=>parentPort.postMessage('ready'));
+        }
+    } catch  {
+        if (typeof WebSocket !== 'undefined') try {
+            ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/');
+        } catch (err) {
+            // Ignore cloudflare workers error.
+            if (err.message && !err.message.includes('Disallowed operation called within global scope')) console.error(err.message);
+        }
+    }
+    if (ws) {
+        // $FlowFixMe
+        ws.onmessage = async function(event /*: {data: string, ...} */ ) {
+            var data /*: HMRMessage */  = JSON.parse(event.data);
+            await handleMessage(data);
+        };
+        if (ws instanceof WebSocket) {
+            ws.onerror = function(e) {
+                if (e.message) console.error(e.message);
+            };
+            ws.onclose = function() {
+                console.warn("[parcel] \uD83D\uDEA8 Connection to the HMR server was lost");
+            };
+        }
+    }
+}
+async function handleMessage(data /*: HMRMessage */ ) {
+    checkedAssets = {} /*: {|[string]: boolean|} */ ;
+    disposedAssets = {} /*: {|[string]: boolean|} */ ;
+    assetsToAccept = [];
+    assetsToDispose = [];
+    bundleNotFound = false;
+    if (data.type === 'reload') fullReload();
+    else if (data.type === 'update') {
+        // Remove error overlay if there is one
+        if (typeof document !== 'undefined') removeErrorOverlay();
+        let assets = data.assets;
+        // Handle HMR Update
+        let handled = assets.every((asset)=>{
+            return asset.type === 'css' || asset.type === 'js' && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
+        });
+        // Dispatch a custom event in case a bundle was not found. This might mean
+        // an asset on the server changed and we should reload the page. This event
+        // gives the client an opportunity to refresh without losing state
+        // (e.g. via React Server Components). If e.preventDefault() is not called,
+        // we will trigger a full page reload.
+        if (handled && bundleNotFound && assets.some((a)=>a.envHash !== HMR_ENV_HASH) && typeof window !== 'undefined' && typeof CustomEvent !== 'undefined') handled = !window.dispatchEvent(new CustomEvent('parcelhmrreload', {
+            cancelable: true
+        }));
+        if (handled) {
+            console.clear();
+            // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
+            if (typeof window !== 'undefined' && typeof CustomEvent !== 'undefined') window.dispatchEvent(new CustomEvent('parcelhmraccept'));
+            await hmrApplyUpdates(assets);
+            hmrDisposeQueue();
+            // Run accept callbacks. This will also re-execute other disposed assets in topological order.
+            let processedAssets = {};
+            for(let i = 0; i < assetsToAccept.length; i++){
+                let id = assetsToAccept[i][1];
+                if (!processedAssets[id]) {
+                    hmrAccept(assetsToAccept[i][0], id);
+                    processedAssets[id] = true;
+                }
+            }
+        } else fullReload();
+    }
+    if (data.type === 'error') {
+        // Log parcel errors to console
+        for (let ansiDiagnostic of data.diagnostics.ansi){
+            let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
+            console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + '\n' + stack + '\n\n' + ansiDiagnostic.hints.join('\n'));
+        }
+        if (typeof document !== 'undefined') {
+            // Render the fancy html overlay
+            removeErrorOverlay();
+            var overlay = createErrorOverlay(data.diagnostics.html);
+            // $FlowFixMe
+            document.body.appendChild(overlay);
+        }
+    }
+}
+function removeErrorOverlay() {
+    var overlay = document.getElementById(OVERLAY_ID);
+    if (overlay) {
+        overlay.remove();
+        console.log("[parcel] \u2728 Error resolved");
+    }
+}
+function createErrorOverlay(diagnostics) {
+    var overlay = document.createElement('div');
+    overlay.id = OVERLAY_ID;
+    let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
+    for (let diagnostic of diagnostics){
+        let stack = diagnostic.frames.length ? diagnostic.frames.reduce((p, frame)=>{
+            return `${p}
+<a href="${protocol === 'wss' ? 'https' : 'http'}://${hostname}:${port}/__parcel_launch_editor?file=${encodeURIComponent(frame.location)}" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">${frame.location}</a>
+${frame.code}`;
+        }, '') : diagnostic.stack;
+        errorHTML += `
+      <div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
+          \u{1F6A8} ${diagnostic.message}
+        </div>
+        <pre>${stack}</pre>
+        <div>
+          ${diagnostic.hints.map((hint)=>"<div>\uD83D\uDCA1 " + hint + '</div>').join('')}
+        </div>
+        ${diagnostic.documentation ? `<div>\u{1F4DD} <a style="color: violet" href="${diagnostic.documentation}" target="_blank">Learn more</a></div>` : ''}
+      </div>
+    `;
+    }
+    errorHTML += '</div>';
+    overlay.innerHTML = errorHTML;
+    return overlay;
+}
+function fullReload() {
+    if (typeof location !== 'undefined' && 'reload' in location) location.reload();
+    else if (typeof extCtx !== 'undefined' && extCtx && extCtx.runtime && extCtx.runtime.reload) extCtx.runtime.reload();
+    else try {
+        let { workerData, parentPort } = module.bundle.root('node:worker_threads') /*: any*/ ;
+        if (workerData !== null && workerData !== void 0 && workerData.__parcel) parentPort.postMessage('restart');
+    } catch (err) {
+        console.error("[parcel] \u26A0\uFE0F An HMR update was not accepted. Please restart the process.");
+    }
+}
+function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
+    var modules = bundle.modules;
+    if (!modules) return [];
+    var parents = [];
+    var k, d, dep;
+    for(k in modules)for(d in modules[k][1]){
+        dep = modules[k][1][d];
+        if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) parents.push([
+            bundle,
+            k
+        ]);
+    }
+    if (bundle.parent) parents = parents.concat(getParents(bundle.parent, id));
+    return parents;
+}
+function updateLink(link) {
+    var href = link.getAttribute('href');
+    if (!href) return;
+    var newLink = link.cloneNode();
+    newLink.onload = function() {
+        if (link.parentNode !== null) // $FlowFixMe
+        link.parentNode.removeChild(link);
+    };
+    newLink.setAttribute('href', // $FlowFixMe
+    href.split('?')[0] + '?' + Date.now());
+    // $FlowFixMe
+    link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+    if (cssTimeout || typeof document === 'undefined') return;
+    cssTimeout = setTimeout(function() {
+        var links = document.querySelectorAll('link[rel="stylesheet"]');
+        for(var i = 0; i < links.length; i++){
+            // $FlowFixMe[incompatible-type]
+            var href /*: string */  = links[i].getAttribute('href');
+            var hostname = getHostname();
+            var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
+            var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
+            if (!absolute) updateLink(links[i]);
+        }
+        cssTimeout = null;
+    }, 50);
+}
+function hmrDownload(asset) {
+    if (asset.type === 'js') {
+        if (typeof document !== 'undefined') {
+            let script = document.createElement('script');
+            script.src = asset.url + '?t=' + Date.now();
+            if (asset.outputFormat === 'esmodule') script.type = 'module';
+            return new Promise((resolve, reject)=>{
+                var _document$head;
+                script.onload = ()=>resolve(script);
+                script.onerror = reject;
+                (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
+            });
+        } else if (typeof importScripts === 'function') {
+            // Worker scripts
+            if (asset.outputFormat === 'esmodule') return import(asset.url + '?t=' + Date.now());
+            else return new Promise((resolve, reject)=>{
+                try {
+                    importScripts(asset.url + '?t=' + Date.now());
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+    }
+}
+async function hmrApplyUpdates(assets) {
+    global.parcelHotUpdate = Object.create(null);
+    let scriptsToRemove;
+    try {
+        // If sourceURL comments aren't supported in eval, we need to load
+        // the update from the dev server over HTTP so that stack traces
+        // are correct in errors/logs. This is much slower than eval, so
+        // we only do it if needed (currently just Safari).
+        // https://bugs.webkit.org/show_bug.cgi?id=137297
+        // This path is also taken if a CSP disallows eval.
+        if (!supportsSourceURL) {
+            let promises = assets.map((asset)=>{
+                var _hmrDownload;
+                return (_hmrDownload = hmrDownload(asset)) === null || _hmrDownload === void 0 ? void 0 : _hmrDownload.catch((err)=>{
+                    // Web extension fix
+                    if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3 && typeof ServiceWorkerGlobalScope != 'undefined' && global instanceof ServiceWorkerGlobalScope) {
+                        extCtx.runtime.reload();
+                        return;
+                    }
+                    throw err;
+                });
+            });
+            scriptsToRemove = await Promise.all(promises);
+        }
+        assets.forEach(function(asset) {
+            hmrApply(module.bundle.root, asset);
+        });
+    } finally{
+        delete global.parcelHotUpdate;
+        if (scriptsToRemove) scriptsToRemove.forEach((script)=>{
+            if (script) {
+                var _document$head2;
+                (_document$head2 = document.head) === null || _document$head2 === void 0 || _document$head2.removeChild(script);
+            }
+        });
+    }
+}
+function hmrApply(bundle /*: ParcelRequire */ , asset /*:  HMRAsset */ ) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (asset.type === 'css') reloadCSS();
+    else if (asset.type === 'js') {
+        let deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
+        if (deps) {
+            if (modules[asset.id]) {
+                // Remove dependencies that are removed and will become orphaned.
+                // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
+                let oldDeps = modules[asset.id][1];
+                for(let dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
+                    let id = oldDeps[dep];
+                    let parents = getParents(module.bundle.root, id);
+                    if (parents.length === 1) hmrDelete(module.bundle.root, id);
+                }
+            }
+            if (supportsSourceURL) // Global eval. We would use `new Function` here but browser
+            // support for source maps is better with eval.
+            (0, eval)(asset.output);
+            // $FlowFixMe
+            let fn = global.parcelHotUpdate[asset.id];
+            modules[asset.id] = [
+                fn,
+                deps
+            ];
+        }
+        // Always traverse to the parent bundle, even if we already replaced the asset in this bundle.
+        // This is required in case modules are duplicated. We need to ensure all instances have the updated code.
+        if (bundle.parent) hmrApply(bundle.parent, asset);
+    }
+}
+function hmrDelete(bundle, id) {
+    let modules = bundle.modules;
+    if (!modules) return;
+    if (modules[id]) {
+        // Collect dependencies that will become orphaned when this module is deleted.
+        let deps = modules[id][1];
+        let orphans = [];
+        for(let dep in deps){
+            let parents = getParents(module.bundle.root, deps[dep]);
+            if (parents.length === 1) orphans.push(deps[dep]);
+        }
+        // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
+        delete modules[id];
+        delete bundle.cache[id];
+        // Now delete the orphans.
+        orphans.forEach((id)=>{
+            hmrDelete(module.bundle.root, id);
+        });
+    } else if (bundle.parent) hmrDelete(bundle.parent, id);
+}
+function hmrAcceptCheck(bundle /*: ParcelRequire */ , id /*: string */ , depsByBundle /*: ?{ [string]: { [string]: string } }*/ ) {
+    checkedAssets = {};
+    if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
+    // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
+    let parents = getParents(module.bundle.root, id);
+    let accepted = false;
+    while(parents.length > 0){
+        let v = parents.shift();
+        let a = hmrAcceptCheckOne(v[0], v[1], null);
+        if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
+        accepted = true;
+        else if (a !== null) {
+            // Otherwise, queue the parents in the next level upward.
+            let p = getParents(module.bundle.root, v[1]);
+            if (p.length === 0) {
+                // If there are no parents, then we've reached an entry without accepting. Reload.
+                accepted = false;
+                break;
+            }
+            parents.push(...p);
+        }
+    }
+    return accepted;
+}
+function hmrAcceptCheckOne(bundle /*: ParcelRequire */ , id /*: string */ , depsByBundle /*: ?{ [string]: { [string]: string } }*/ ) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (depsByBundle && !depsByBundle[bundle.HMR_BUNDLE_ID]) {
+        // If we reached the root bundle without finding where the asset should go,
+        // there's nothing to do. Mark as "accepted" so we don't reload the page.
+        if (!bundle.parent) {
+            bundleNotFound = true;
+            return true;
+        }
+        return hmrAcceptCheckOne(bundle.parent, id, depsByBundle);
+    }
+    if (checkedAssets[id]) return null;
+    checkedAssets[id] = true;
+    var cached = bundle.cache[id];
+    if (!cached) return true;
+    assetsToDispose.push([
+        bundle,
+        id
+    ]);
+    if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+        assetsToAccept.push([
+            bundle,
+            id
+        ]);
+        return true;
+    }
+    return false;
+}
+function hmrDisposeQueue() {
+    // Dispose all old assets.
+    for(let i = 0; i < assetsToDispose.length; i++){
+        let id = assetsToDispose[i][1];
+        if (!disposedAssets[id]) {
+            hmrDispose(assetsToDispose[i][0], id);
+            disposedAssets[id] = true;
+        }
+    }
+    assetsToDispose = [];
+}
+function hmrDispose(bundle /*: ParcelRequire */ , id /*: string */ ) {
+    var cached = bundle.cache[id];
+    bundle.hotData[id] = {};
+    if (cached && cached.hot) cached.hot.data = bundle.hotData[id];
+    if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
+        cb(bundle.hotData[id]);
+    });
+    delete bundle.cache[id];
+}
+function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
+    // Execute the module.
+    bundle(id);
+    // Run the accept callbacks in the new version of the module.
+    var cached = bundle.cache[id];
+    if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+        let assetsToAlsoAccept = [];
+        cached.hot._acceptCallbacks.forEach(function(cb) {
+            let additionalAssets = cb(function() {
+                return getParents(module.bundle.root, id);
+            });
+            if (Array.isArray(additionalAssets) && additionalAssets.length) assetsToAlsoAccept.push(...additionalAssets);
+        });
+        if (assetsToAlsoAccept.length) {
+            let handled = assetsToAlsoAccept.every(function(a) {
+                return hmrAcceptCheck(a[0], a[1]);
+            });
+            if (!handled) return fullReload();
+            hmrDisposeQueue();
+        }
+    }
+}
+
+},{}],"3z6us":[function(require,module,exports,__globalThis) {
+var _heronJs = require("./simulations/heron-fountain/heron.js");
+document.addEventListener('DOMContentLoaded', ()=>{
+    try {
+        (0, _heronJs.init)('scene-container');
+    } catch (e) {
+        console.error('Failed to initialize HeronFountainScene:', e);
+    }
+});
+
+},{"./simulations/heron-fountain/heron.js":"hVcvj"}],"hVcvj":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+// =============================================================================
+// EXPORTS
+// =============================================================================
+/**
+ * Initialize the Heron's Fountain simulation in a container.
+ * @param {string} containerId - The ID of the container element
+ * @returns {HeronFountainScene} The simulation instance
+ */ parcelHelpers.export(exports, "init", ()=>init);
+parcelHelpers.export(exports, "HeronFountainScene", ()=>HeronFountainScene);
+parcelHelpers.export(exports, "HeronPhysics", ()=>HeronPhysics);
+var _three = require("three");
+var _lilGui = require("lil-gui");
+var _lilGuiDefault = parcelHelpers.interopDefault(_lilGui);
+var _orbitControlsJs = require("three/examples/jsm/controls/OrbitControls.js");
+// =============================================================================
+// HERON'S FOUNTAIN SIMULATION
+// =============================================================================
+// This is a standalone module. Export: HeronFountainScene class
+// Usage: import { HeronFountainScene } from './heron.js';
+//        new HeronFountainScene('container-id');
+// =============================================================================
+// =============================================================================
+// PHYSICS IMPLEMENTATION (Revised)
+// =============================================================================
+class HeronPhysics {
+    constructor(){
+        // --- Costanti del Modello Fisico (Constants of the Physical Model) ---
+        this.alpha = 1 / 1024; // Unitless ratio
+        this.beta = 1 / 502; // Unitless ratio
+        this.gamma = 1 / 502; // Unitless ratio
+        // Costanti Fisiche (Physical Constants)
+        this.rho = 1000.0; // Density of water [kg/m³]
+        this.g = 9.8; // Acceleration due to gravity [m/s²]
+        this.p_atm = 101325.0; // Atmospheric pressure [Pa]
+        this.wallThickness = 0.2; // Thickness of basin walls [m]
+        // Parametri Geometrici del Sistema (Geometric Parameters of the System)
+        this.S_B = 0.0142; // Cross-sectional area of water surface in Basin B [m²]
+        this.S_C = 0.0142; // Cross-sectional area of water surface in Basin C [m²]
+        // *** BUG 2 FIX ***
+        // The area of A is the sum of B and C
+        this.S_A = this.S_B + this.S_C;
+        this.V_D0 = 0.00355; // Initial volume of air in the air chamber (connecting B and C) [m³]
+        // Livelli di Riferimento Iniziali (Initial Reference Levels)
+        this.h_B0_ref = 0.04; // Initial water height in Basin B [m]
+        this.h_C0_ref = 0.21; // Initial water height in Basin C [m]
+        // Altezze Verticali Fisse (Fixed Vertical Heights)
+        this.h_6 = 0.33; // Height of the nozzle above the bottom reference [m]
+        this.H = 0.25; // Height difference between the surface of Basin A and the top surface of B/C volume [m]
+        // Perdite viscose (Poiseuille) (Viscous Losses)
+        this.eta = 0.001; // Dynamic viscosity of water [Pa·s] or [kg/(m·s)]
+        this.S = 0.0000285; // Cross-sectional area of the narrow internal pipes [m²]
+        this.L1 = 0.22; // Length of the pipe segment (related to flow Q_AB/v2) [m]
+        this.L2 = 0.31; // Length of the pipe segment (related to flow Q_C4/v4) [m]
+        // Viscous resistance coefficient [kg/(m·s)]
+        this.B1 = 8 * Math.PI * this.eta * this.L1 / this.S;
+        this.B2 = 8 * Math.PI * this.eta * this.L2 / this.S;
+        // Initial heights (h_A, h_B, h_C) [m]
+        this.y0 = [
+            0.06,
+            0.04,
+            0.2
+        ];
+        // Tolerance and Guard Parameters
+        this.EPS_DHB = 1e-4; // Epsilon for checking if dhB/dt is near zero [m/s]
+        this.H_EPSILON = 1e-5; // Small tolerance for height check [m]
+        this.T_GUARD = 10.0; // Time guard for stability check [s]
+        // State Variables (Initialised in reset)
+        this.t = 0.0; // Elapsed time [s]
+        this.h_A = 0.0; // Water height in Basin A [m]
+        this.h_B = 0.0; // Water height in Basin B [m]
+        this.h_C = 0.0; // Water height in Basin C [m]
+        this.v2 = 0.0; // Velocity in pipe (A->B) [m/s]
+        this.v4 = 0.0; // Velocity of the water jet (at nozzle 4) [m/s]
+        this.isStable = false; // System stability flag (unitless)
+        // *** NEW ***: Expose p_D for visualizer
+        this.p_D = this.p_atm; // Initial air pressure
+        this.reset();
+    }
+    reset() {
+        [this.h_A, this.h_B, this.h_C] = this.y0;
+        this.t = 0.0;
+        this.v2 = 0.0;
+        this.v4 = 0.0;
+        this.isStable = false;
+        // *** NEW ***: Calculate initial p_D for the visualizer
+        const delta_V_reset = (this.h_B0_ref - this.y0[1]) * this.S_B + (this.h_C0_ref - this.y0[2]) * this.S_C;
+        const V_D = this.V_D0 + delta_V_reset;
+        this.p_D = this.p_atm * this.V_D0 / V_D;
+    }
+    system(h_A, h_B, h_C) {
+        // Change in total air/water volume in B and C relative to initial state [m³]
+        const delta_V = (this.h_B0_ref - h_B) * this.S_B + (this.h_C0_ref - h_C) * this.S_C;
+        // Current volume of air in the air chamber D [m³]
+        const V_D = this.V_D0 + delta_V;
+        // Current pressure in the air chamber D (Boyle's Law: P*V = constant) [Pa]
+        // *** MODIFIED ***: Update class property
+        this.p_D = this.p_atm * this.V_D0 / V_D;
+        // Total pressure head driving flow v2 (A to B) [Pa]
+        const deltaP_AB = this.p_atm - this.p_D + this.rho * this.g * (h_A + this.H - h_B);
+        // Total pressure head driving flow v4 (C to jet) [Pa]
+        const deltaP_C4 = this.p_D - this.p_atm + this.rho * this.g * (h_C - this.h_6);
+        // Velocity v2 (from A to B) - derived from modified Bernoulli/Torricelli with viscous term B1 [m/s]
+        const v2 = (-this.B1 + Math.sqrt(this.B1 ** 2 + 2 * this.rho * Math.max(deltaP_AB, 0.0))) / this.rho;
+        // Velocity v4 (of the jet) - derived from modified Bernoulli/Torricelli with viscous term B2 [m/s]
+        const v4 = (-this.B2 + Math.sqrt(this.B2 ** 2 + 2 * this.rho * Math.max(deltaP_C4, 0.0))) / this.rho;
+        this.v2 = v2;
+        this.v4 = v4;
+        // Change in height over time (Flow rate / Area) [m/s]
+        const dhA_dt = -this.alpha * v2 + this.alpha * v4; // Change in h_A [m/s]
+        const dhB_dt = this.beta * v2; // Change in h_B [m/s]
+        const dhC_dt = -this.gamma * v4; // Change in h_C [m/s]
+        return [
+            dhA_dt,
+            dhB_dt,
+            dhC_dt
+        ];
+    }
+    step(dt) {
+        if (this.isStable) return;
+        // Check if Basin B is empty
+        if (this.h_B < this.H_EPSILON) {
+            this.h_B = 0; // Snap to zero
+            this.isStable = true;
+            this.v2 = 0;
+            this.v4 = 0;
+            return;
+        }
+        const [dhA_dt, dhB_dt, dhC_dt] = this.system(this.h_A, this.h_B, this.h_C);
+        // Check for stability (e.g., flow is near zero)
+        if (this.t > this.T_GUARD && Math.abs(dhB_dt) < this.EPS_DHB) {
+            this.isStable = true;
+            this.v2 = 0;
+            this.v4 = 0;
+            return;
+        }
+        this.h_A += dhA_dt * dt;
+        this.h_B = Math.max(0, this.h_B + dhB_dt * dt);
+        this.h_C += dhC_dt * dt;
+        this.t += dt;
+        this.h_A = Math.max(0, this.h_A);
+        this.h_C = Math.max(0, this.h_C);
+    }
+}
+// =============================================================================
+// THREE.JS SCENE IMPLEMENTATION (MODIFIED)
+// =============================================================================
+class HeronFountainScene {
+    constructor(containerId = "scene-container"){
+        this.container = document.getElementById(containerId);
+        if (!this.container) throw new Error(`Container element with id '${containerId}' not found.`);
+        // --- *** REVERTED ***: guiParams
+        this.guiParams = {
+            isRunning: false,
+            timeScale: 1.0,
+            viewMode: "3D",
+            playPause: ()=>{
+                this.guiParams.isRunning = !this.guiParams.isRunning;
+                this.handlePlayPause();
+            },
+            reset: ()=>{
+                this.resetAll();
+            }
+        };
+        // --- Setup di base ---
+        this.clock = new _three.Clock(false);
+        this.elapsedTime = 0.0;
+        // --- *** REMOVED ***: this.accumulator
+        this.scene = new _three.Scene();
+        this.renderer = new _three.WebGLRenderer({
+            antialias: true
+        });
+        this.controls = null;
+        this.camera2D = null;
+        this.camera3D = null;
+        this.camera = null;
+        this.h_jet = 0.0;
+        this.currentColors = null; // Initialize the currentColors property
+        // --- *** NEW ***: Theme observer ---
+        this.themeObserver = null;
+        // --- Oggetti di scena ---
+        this.scale = 20; // 1 meter = 20 units in three.js
+        this.physics = new HeronPhysics();
+        this.waterA = null;
+        this.waterB = null;
+        this.waterC = null;
+        this.waterCascade = null; // Tube mesh
+        this.waterPipe14 = null; // Water mesh inside pipe (A->B)
+        this.waterPipe56 = null; // Water mesh inside pipe (C->Jet)
+        this.pipe56 = null; // Reference to the glass pipe
+        this.cascadeCurve = null; // Curve object
+        this.textOverlay = null;
+        this.textGroups = {};
+        // We will track the mass of each dye (R, G, B) in each basin.
+        this.dyeMassA = {
+            r: 0,
+            g: 0,
+            b: 0
+        };
+        this.dyeMassB = {
+            r: 0,
+            g: 0,
+            b: 0
+        };
+        this.dyeMassC = {
+            r: 0,
+            g: 0,
+            b: 0
+        };
+        // We assume an initial concentration of 1.0 mass unit per volume unit.
+        this.initialConcentration = 1.0;
+        // --- Layout constants (scaled) ---
+        this.H_scaled = this.physics.H * this.scale;
+        this.h6_scaled = this.physics.h_6 * this.scale;
+        // Layout sizes
+        this.worldWidth = 0.3 * this.scale;
+        this.worldDepth = 0.1 * this.scale;
+        this.internalWallBCH = 0.22 * this.scale;
+        this.topBasinY = this.H_scaled;
+        this.topBasinHeight = 3;
+        // --- Pipe & Jet Radius (Unscaled) ---
+        // Calculate inner radius based on the physics area 'S'
+        this.pipeInnerRadius = Math.sqrt(this.physics.S / Math.PI); // approx 0.00301m (3.01mm)
+        // Add a 1mm wall thickness
+        this.pipeOuterRadius = this.pipeInnerRadius + 0.001; // approx 0.00401m (4.01mm)
+        // The jet's radius is the *inner* radius of the pipe
+        this.jetRadius = this.pipeInnerRadius;
+        this.initThree();
+        this.setupSceneGeometry();
+        this.setupGUI();
+        this.addTextLabels();
+        this.resetAll(); // resetAll() will now call resetColors()
+        this.animate = this.animate.bind(this);
+        this.animate();
+    }
+    // --- *** THEME FUNCTIONS *** ---
+    /**
+   * Gets the current theme from the HTML data attribute.
+   * Defaults to 'light'.
+   */ getCurrentTheme() {
+        return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+    }
+    /**
+   * Updates the scene's background color based on the current theme.
+   */ updateSceneTheme() {
+        const theme = this.getCurrentTheme();
+        if (this.scene) this.scene.background = new _three.Color(theme === "dark" ? 0x202020 : 0xffffff);
+    }
+    /**
+   * Sets up a MutationObserver to watch for changes to the
+   * `data-theme` attribute on the <html> tag.
+   */ setupThemeObserver() {
+        this.themeObserver = new MutationObserver((mutationsList)=>{
+            for (const mutation of mutationsList)if (mutation.type === "attributes" && mutation.attributeName === "data-theme") this.updateSceneTheme();
+        });
+        this.themeObserver.observe(document.documentElement, {
+            attributes: true
+        });
+    }
+    initThree() {
+        // Set initial background color based on theme
+        this.updateSceneTheme();
+        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        this.renderer.shadowMap.enabled = true;
+        this.container.appendChild(this.renderer.domElement);
+        const aspect = this.container.clientWidth / this.container.clientHeight;
+        const viewSize = 15;
+        this.camera2D = new _three.OrthographicCamera(-viewSize * aspect, viewSize * aspect, viewSize, -viewSize, 0.1, 100);
+        this.camera2D.position.set(0, 0, 50);
+        this.camera2D.lookAt(0, this.H_scaled, 0);
+        this.camera3D = new _three.PerspectiveCamera(50, aspect, 0.1, 200);
+        this.camera3D.position.set(15, 12, 25);
+        this.camera3D.lookAt(0, this.H_scaled, 0);
+        this.camera = this.camera3D;
+        this.controls = new (0, _orbitControlsJs.OrbitControls)(this.camera3D, this.renderer.domElement);
+        this.controls.enableDamping = true;
+        this.controls.dampingFactor = 0.05;
+        this.controls.target.set(0, this.H_scaled, 0);
+        this.controls.enabled = this.guiParams.viewMode === "3D";
+        const ambientLight = new _three.AmbientLight(0xffffff, 0.7);
+        this.scene.add(ambientLight);
+        const directionalLight = new _three.DirectionalLight(0xffffff, 1.0);
+        directionalLight.position.set(10, 20, 15);
+        directionalLight.castShadow = true;
+        this.scene.add(directionalLight);
+        window.addEventListener("resize", this.onWindowResize.bind(this));
+        // --- Auto-pause to prevent "time bomb" ---
+        window.addEventListener("blur", ()=>{
+            if (this.guiParams.isRunning) this.guiParams.playPause(); // This toggles isRunning and stops the clock
+        });
+        // Start listening for theme changes
+        this.setupThemeObserver();
+    }
+    setupSceneGeometry() {
+        const waterMaterial = new _three.MeshPhysicalMaterial({
+            transmission: 1.0,
+            roughness: 0.05,
+            metalness: 0.0,
+            ior: 1.33,
+            thickness: 1.5 * this.scale,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.0,
+            transparent: true,
+            opacity: 0.7,
+            side: _three.DoubleSide,
+            depthWrite: true
+        });
+        const glassMaterial = new _three.MeshPhysicalMaterial({
+            color: 0xffffff,
+            transmission: 0.95,
+            thickness: 0.5,
+            roughness: 0.05,
+            ior: 1.52,
+            transparent: true,
+            opacity: 0.6,
+            side: _three.DoubleSide,
+            depthWrite: false
+        });
+        const pipeGlassMaterial = new _three.MeshPhysicalMaterial({
+            ...glassMaterial,
+            color: 0xffa500
+        });
+        const basinWidth = this.worldWidth / 2;
+        const basinDepth = this.worldDepth;
+        const waterAMaterial = new _three.MeshPhysicalMaterial({
+            ...waterMaterial
+        });
+        const waterBMaterial = new _three.MeshPhysicalMaterial({
+            ...waterMaterial
+        });
+        const waterCMaterial = new _three.MeshPhysicalMaterial({
+            ...waterMaterial
+        });
+        // Water boxes
+        const waterGeom = new _three.BoxGeometry(1, 1, 1);
+        this.waterA = new _three.Mesh(waterGeom, waterAMaterial);
+        this.waterA.scale.set(this.worldWidth, 1, basinDepth);
+        this.waterA.renderOrder = 2;
+        this.scene.add(this.waterA);
+        this.waterB = new _three.Mesh(waterGeom, waterBMaterial);
+        this.waterB.scale.set(basinWidth, 1, basinDepth);
+        this.waterB.position.x = -basinWidth / 2;
+        this.waterB.renderOrder = 2;
+        this.scene.add(this.waterB);
+        this.waterC = new _three.Mesh(waterGeom, waterCMaterial);
+        this.waterC.scale.set(basinWidth, 1, basinDepth);
+        this.waterC.position.x = basinWidth / 2;
+        this.waterC.renderOrder = 2;
+        this.scene.add(this.waterC);
+        // Walls (glass)
+        const wallThickness = this.physics.wallThickness;
+        const createWall = (w, h, d, x, y, z)=>{
+            const geom = new _three.BoxGeometry(w, h, d);
+            const mesh = new _three.Mesh(geom, glassMaterial.clone()); // Use clone
+            mesh.position.set(x, y, z);
+            mesh.renderOrder = 1;
+            this.scene.add(mesh);
+            return mesh;
+        };
+        createWall(this.worldWidth + wallThickness * 2, wallThickness, basinDepth + wallThickness * 2, 0, -wallThickness / 2, 0);
+        createWall(this.worldWidth + wallThickness * 2, wallThickness, basinDepth + wallThickness * 2, 0, this.H_scaled, 0);
+        createWall(this.worldWidth + wallThickness * 2, wallThickness, basinDepth + wallThickness * 2, 0, this.topBasinY + this.topBasinHeight, 0);
+        const totalHeight = this.topBasinY + this.topBasinHeight;
+        createWall(wallThickness, totalHeight, basinDepth + wallThickness, -this.worldWidth / 2 - wallThickness / 2, totalHeight / 2 - wallThickness / 2, 0);
+        createWall(wallThickness, totalHeight, basinDepth + wallThickness, this.worldWidth / 2 + wallThickness / 2, totalHeight / 2 - wallThickness / 2, 0);
+        createWall(this.worldWidth + wallThickness * 2, totalHeight, wallThickness, 0, totalHeight / 2 - wallThickness / 2, -basinDepth / 2 - wallThickness / 2);
+        createWall(this.worldWidth + wallThickness * 2, totalHeight, wallThickness, 0, totalHeight / 2 - wallThickness / 2, basinDepth / 2 + wallThickness / 2);
+        // Internal divider
+        createWall(wallThickness, this.internalWallBCH, basinDepth, 0, this.internalWallBCH / 2, 0);
+        // Pipes (MODIFIED for hollow appearance)
+        const s = this.scale;
+        const innerR_scaled = this.pipeInnerRadius * s;
+        const outerR_scaled = this.pipeOuterRadius * s;
+        /**
+     * Helper function to create a thick-walled hollow pipe
+     * using THREE.ExtrudeGeometry.
+     */ const createHollowPipe = (outerR, innerR, height, x, y_center, z)=>{
+            // 1. Create the Annulus (ring) shape
+            const shape = new _three.Shape();
+            shape.absarc(0, 0, outerR, 0, Math.PI * 2, false); // Outer circle
+            const hole = new _three.Path();
+            hole.absarc(0, 0, innerR, 0, Math.PI * 2, true); // Inner circle (hole)
+            shape.holes.push(hole);
+            // 2. Define extrusion settings
+            const extrudeSettings = {
+                depth: height,
+                bevelEnabled: false
+            };
+            // 3. Create the geometry
+            const geom = new _three.ExtrudeGeometry(shape, extrudeSettings);
+            // 4. Create the mesh
+            const mesh = new _three.Mesh(geom, pipeGlassMaterial.clone()); // Use transparent glass
+            // 5. Orient and position the mesh
+            // ExtrudeGeometry builds along the Z-axis. We rotate it to stand along the Y-axis.
+            mesh.rotation.x = Math.PI / 2;
+            // The CylinderGeometry's position 'y' was its center.
+            // The Extruded geometry (after rotation) runs from y=0 to y=height.
+            // We set its position so its center matches the original y_center.
+            mesh.position.set(x, y_center + height / 2, z);
+            mesh.renderOrder = 1;
+            this.scene.add(mesh);
+            return mesh;
+        };
+        // Tubo 1-4 (A -> B)
+        createHollowPipe(outerR_scaled, innerR_scaled, this.H_scaled, -basinWidth / 2, this.H_scaled / 2, 0 // z
+        );
+        // Tubo 5-6 (C -> A -> Jet)
+        this.pipe56 = createHollowPipe(outerR_scaled, innerR_scaled, this.h6_scaled, basinWidth / 2, this.h6_scaled / 2, 0 // z
+        );
+        // --- Water inside the pipes ---
+        // Water for Tube 1-4 (A -> B)
+        const waterPipeGeom1 = new _three.CylinderGeometry(innerR_scaled, innerR_scaled, this.H_scaled, 16);
+        this.waterPipe14 = new _three.Mesh(waterPipeGeom1, waterMaterial.clone());
+        this.waterPipe14.position.set(-basinWidth / 2, this.H_scaled / 2, 0);
+        this.waterPipe14.visible = false;
+        this.waterPipe14.renderOrder = 2;
+        this.scene.add(this.waterPipe14);
+        // Water for Tube 5-6 (C -> Jet)
+        const waterPipeGeom2 = new _three.CylinderGeometry(innerR_scaled, innerR_scaled, this.h6_scaled, 16);
+        this.waterPipe56 = new _three.Mesh(waterPipeGeom2, waterMaterial.clone());
+        this.waterPipe56.position.set(basinWidth / 2, this.h6_scaled / 2, 0);
+        this.waterPipe56.visible = false;
+        this.waterPipe56.renderOrder = 2;
+        this.scene.add(this.waterPipe56);
+        // --- Curved water jet using TubeGeometry ---
+        const cascadeMaterial = new _three.MeshPhysicalMaterial({
+            color: 0x40a0ff,
+            transmission: 0.7,
+            thickness: 0.1 * this.scale,
+            roughness: 0.3,
+            ior: 1.33,
+            transparent: true,
+            opacity: 1,
+            side: _three.DoubleSide,
+            depthWrite: false
+        });
+        // Initialize with a dummy curve
+        // this.jetRadius is now unscaled inner radius. We scale it for the geometry.
+        const path = new _three.LineCurve3(new _three.Vector3(0, 0, 0), new _three.Vector3(1, 1, 1));
+        const tubeGeometry = new _three.TubeGeometry(path, 20, this.jetRadius * s, 8, false);
+        this.waterCascade = new _three.Mesh(tubeGeometry, cascadeMaterial);
+        this.waterCascade.visible = false; // Initially hidden
+        this.waterCascade.renderOrder = 3;
+        this.scene.add(this.waterCascade);
+    }
+    setupGUI() {
+        let gui;
+        try {
+            gui = new (0, _lilGuiDefault.default)({
+                autoPlace: true,
+                title: "Heron's Fountain Controls"
+            });
+        } catch (e) {
+            gui = {
+                domElement: document.createElement("div"),
+                add: ()=>({
+                        step: ()=>({
+                                onChange: ()=>({
+                                        name: ()=>null
+                                    })
+                            }),
+                        name: ()=>null,
+                        onChange: ()=>null
+                    })
+            };
+        }
+        this.gui = gui;
+        this.container.appendChild(gui.domElement);
+        gui.domElement.style.position = "fixed";
+        gui.domElement.style.zIndex = "19";
+        gui.domElement.style.top = "10%";
+        gui.domElement.style.right = "10%";
+        // const guiContainer = document.getElementById("info-panel");
+        // if (guiContainer) {
+        //   guiContainer.appendChild(gui.domElement);
+        // }
+        gui.add(this.guiParams, "playPause").name("\u25B6\uFE0F / \u23F8\uFE0F Start/Pause");
+        gui.add(this.guiParams, "reset").name("\uD83D\uDD04 Reset All");
+        gui.add(this.guiParams, "timeScale", 0.1, 5.0, 0.1).name("Time Scale");
+        gui.add(this.guiParams, "viewMode", [
+            "2D",
+            "3D"
+        ]).name("View Mode").onChange((value)=>{
+            this.camera = value === "2D" ? this.camera2D : this.camera3D;
+            this.controls.enabled = value === "3D";
+            this.onWindowResize();
+        });
+    }
+    // --- *** REVERTED ***: resetColors
+    resetColors() {
+        // Get initial volumes from the physics model
+        const volA0 = this.physics.y0[0] * this.physics.S_A; // h_A * S_A
+        const volB0 = this.physics.y0[1] * this.physics.S_B; // h_B * S_B
+        const volC0 = this.physics.y0[2] * this.physics.S_C; // h_C * S_C
+        // Set initial dye mass based on volume and concentration
+        this.dyeMassA = {
+            r: volA0 * this.initialConcentration,
+            g: 0,
+            b: 0
+        };
+        this.dyeMassB = {
+            r: 0,
+            g: volB0 * this.initialConcentration,
+            b: 0
+        };
+        this.dyeMassC = {
+            r: 0,
+            g: 0,
+            b: volC0 * this.initialConcentration
+        };
+        // Apply the initial visual colors (for frame 0)
+        // We use a subtractive (pigment) model: 1.0 - (other colors)
+        if (this.waterA) this.waterA.material.color.setRGB(1, 0, 0); // Red
+        if (this.waterB) this.waterB.material.color.setRGB(0, 1, 0); // Green
+        if (this.waterC) this.waterC.material.color.setRGB(0, 0, 1); // Blue
+        if (this.waterCascade) this.waterCascade.material.color.setRGB(0, 0, 1);
+    }
+    // --- *** REVERTED ***: resetAll
+    resetAll() {
+        this.guiParams.isRunning = false;
+        this.clock.stop();
+        this.elapsedTime = 0.0;
+        // --- *** REMOVED ***: this.accumulator
+        this.physics.reset(); // This now uses the default y0 values
+        this.h_jet = 0.0;
+        this.resetColors(); // This now uses the default y0 values
+        this.updateWaterMeshes();
+        // Reset the water cascade
+        this.waterCascade.visible = false;
+        // Hide water in pipes (will be set by updatePipeWaterLevels)
+        if (this.waterPipe14) this.waterPipe14.visible = false;
+        if (this.waterPipe56) this.waterPipe56.visible = false;
+        this.updateTextLabels();
+        // --- Manually update colors one last time after reset ---
+        this.updateWaterColors(0.0);
+    }
+    handlePlayPause() {
+        if (this.guiParams.isRunning) {
+            if (this.physics.isStable) this.resetAll();
+            this.guiParams.isRunning = true;
+            this.clock.start();
+        } else this.clock.stop();
+    }
+    updateWaterMeshes() {
+        const { h_A, h_B, h_C } = this.physics;
+        const s = this.scale;
+        const hA_s = Math.max(0.01, h_A * s);
+        const hB_s = Math.max(0.01, h_B * s);
+        this.waterB.visible = h_B > 0; // Hide mesh if empty
+        const hC_s = Math.max(0.01, h_C * s);
+        this.waterA.scale.y = hA_s;
+        this.waterA.position.y = this.H_scaled + hA_s / 2;
+        this.waterB.scale.y = hB_s;
+        this.waterB.position.y = hB_s / 2;
+        this.waterC.scale.y = hC_s;
+        this.waterC.position.y = hC_s / 2;
+    }
+    /**
+   * Vertical jet
+   */ updateCascade(dt) {
+        // Hide immediately if stable
+        if (this.physics.isStable) {
+            this.waterCascade.visible = false;
+            return;
+        }
+        // We use the actual unscaled velocity (m/s) for calculating the trajectory
+        const v4 = Math.max(0, this.physics.v4);
+        // Set a minimum threshold for visibility
+        if (v4 < 0.1 || !this.guiParams.isRunning) {
+            this.waterCascade.visible = false;
+            return;
+        }
+        this.waterCascade.visible = true;
+        // --- Scaled Position Constants ---
+        const s = this.scale;
+        const G = this.physics.g; // Unscaled gravity
+        // The ExtrudeGeometry's X/Z position is correct
+        const nozzleX = this.pipe56.position.x;
+        const nozzleZ = this.pipe56.position.z;
+        // The nozzle Y is the top of the pipe
+        const nozzleY = this.h6_scaled;
+        const waterATopY = this.waterA.position.y + this.waterA.scale.y / 2;
+        // --- Trajectory Parameters ---
+        // Set angle to be almost vertical (e.g., 85 degrees) to match image
+        const angleRad = Math.PI * 85 / 180;
+        // Unscaled velocity components
+        const v_y0 = v4 * Math.sin(angleRad); // High vertical velocity
+        const v_x0 = v4 * Math.cos(angleRad); // Low horizontal velocity
+        // --- Calculate Time of Flight (T) and Landing Position ---
+        // Target landing Y is the water surface in Basin A
+        const finalY_target = waterATopY - 0.5 * this.jetRadius * s;
+        // Quadratic equation coefficients (scaled)
+        const a = 0.5 * G * s;
+        const b = -v_y0 * s;
+        const c = finalY_target - nozzleY;
+        const discriminant = b * b - 4 * a * c;
+        let timeToFall = 0;
+        if (discriminant >= 0) timeToFall = (-b + Math.sqrt(discriminant)) / (2 * a);
+        timeToFall = isNaN(timeToFall) ? 0.2 : Math.max(0.1, timeToFall);
+        // Calculate final position (scaled coordinates)
+        const horizontalOffset = -v_x0 * timeToFall * s;
+        const endX = nozzleX + horizontalOffset;
+        const endY = finalY_target;
+        const endZ = nozzleZ;
+        // --- Define the Curved Path (Cubic Bezier Curve) ---
+        const p0 = new _three.Vector3(nozzleX, nozzleY, nozzleZ);
+        const p3 = new _three.Vector3(endX, endY, endZ);
+        // 1. Calculate Apex Position (Scaled)
+        const t_apex = v_y0 / G; // Time to reach max height (unscaled)
+        const apexY = nozzleY + v_y0 * t_apex * s - 0.5 * G * t_apex * t_apex * s;
+        const apexX = nozzleX + horizontalOffset / 2.0;
+        const actualApexY = Math.max(apexY, nozzleY);
+        // 2. Control Point 1 (P1):
+        const p1 = new _three.Vector3(p0.x + (p3.x - p0.x) * (1 / 3), actualApexY, p0.z);
+        // 3. Control Point 2 (P2):
+        const p2 = new _three.Vector3(p0.x + (p3.x - p0.x) * (2 / 3), actualApexY, p3.z);
+        // Create the new curve
+        this.cascadeCurve = new _three.CubicBezierCurve3(p0, p1, p2, p3);
+        // --- Update Tube Geometry ---
+        if (this.waterCascade.geometry) this.waterCascade.geometry.dispose();
+        const segments = 30;
+        // Create new Tube Geometry
+        this.waterCascade.geometry = new _three.TubeGeometry(this.cascadeCurve, segments, this.jetRadius * s, 8, false);
+        // Update h_jet for the display
+        const jetHeightMeters = v_y0 * v_y0 / (2 * G);
+        this.h_jet = jetHeightMeters;
+    }
+    updateWaterColors(dt) {
+        if (dt <= 0) return; // Do not run if time is not advancing
+        const epsilon = 1e-6; // Prevent division by zero
+        // --- 1. Get current volumes from physics ---
+        const volA = this.physics.h_A * this.physics.S_A + epsilon;
+        const volB = this.physics.h_B * this.physics.S_B + epsilon;
+        const volC = this.physics.h_C * this.physics.S_C + epsilon;
+        // --- 2. Get volumetric flow rates (m³/s) and flow volumes (m³) ---
+        // Q_C4 = (dhC/dt) * S_C = (gamma * v4) * S_C
+        const flowVolume_CA = this.physics.gamma * this.physics.v4 * this.physics.S_C * dt;
+        // Q_AB = (dhB/dt) * S_B = (beta * v2) * S_B
+        const flowVolume_AB = this.physics.beta * this.physics.v2 * this.physics.S_B * dt;
+        // --- 3. Mass Transfer: C -> A (Jet) ---
+        if (flowVolume_CA > 0 && this.physics.v4 > 0.01) {
+            // Find concentration (mass/volume) in C
+            const concR_C = this.dyeMassC.r / volC;
+            const concG_C = this.dyeMassC.g / volC;
+            const concB_C = this.dyeMassC.b / volC;
+            // Find mass transferred (concentration * flow_volume)
+            const massR_flow = concR_C * flowVolume_CA;
+            const massG_flow = concG_C * flowVolume_CA;
+            const massB_flow = concB_C * flowVolume_CA;
+            // Update masses in A and C
+            this.dyeMassA.r += massR_flow;
+            this.dyeMassA.g += massG_flow;
+            this.dyeMassA.b += massB_flow;
+            this.dyeMassC.r = Math.max(0, this.dyeMassC.r - massR_flow);
+            this.dyeMassC.g = Math.max(0, this.dyeMassC.g - massG_flow);
+            this.dyeMassC.b = Math.max(0, this.dyeMassC.b - massB_flow);
+        }
+        // --- 4. Mass Transfer: A -> B (Pipe) ---
+        if (flowVolume_AB > 0 && this.physics.v2 > 0.01) {
+            // Find concentration (mass/volume) in A
+            const concR_A = this.dyeMassA.r / volA;
+            const concG_A = this.dyeMassA.g / volA;
+            const concB_A = this.dyeMassA.b / volA;
+            // Find mass transferred (concentration * flow_volume)
+            const massR_flow = concR_A * flowVolume_AB;
+            const massG_flow = concG_A * flowVolume_AB;
+            const massB_flow = concB_A * flowVolume_AB;
+            // Update masses in B and A
+            this.dyeMassB.r += massR_flow;
+            this.dyeMassB.g += massG_flow;
+            this.dyeMassB.b += massB_flow;
+            this.dyeMassA.r = Math.max(0, this.dyeMassA.r - massR_flow);
+            this.dyeMassA.g = Math.max(0, this.dyeMassA.g - massG_flow);
+            this.dyeMassA.b = Math.max(0, this.dyeMassA.b - massB_flow);
+        }
+        // --- 5. Apply Visual Colors (Subtractive Pigment Model) ---
+        // This model correctly mixes R+B=Purple and R+G+B=Brown/Black.
+        // Clamp concentration (0.0 to 1.0) for the color model
+        const clamp = (val)=>Math.max(0, Math.min(val, 1.0));
+        // Calculate concentrations in A
+        const cR_A = clamp(this.dyeMassA.r / volA / this.initialConcentration);
+        const cG_A = clamp(this.dyeMassA.g / volA / this.initialConcentration);
+        const cB_A = clamp(this.dyeMassA.b / volA / this.initialConcentration);
+        // Calculate concentrations in B
+        const cR_B = clamp(this.dyeMassB.r / volB / this.initialConcentration);
+        const cG_B = clamp(this.dyeMassB.g / volB / this.initialConcentration);
+        const cB_B = clamp(this.dyeMassB.b / volB / this.initialConcentration);
+        // Calculate concentrations in C
+        const cR_C = clamp(this.dyeMassC.r / volC / this.initialConcentration);
+        const cG_C = clamp(this.dyeMassC.g / volC / this.initialConcentration);
+        const cB_C = clamp(this.dyeMassC.b / volC / this.initialConcentration);
+        // Apply subtractive mixing: Color = 1.0 - (other pigments)
+        this.waterA.material.color.setRGB(clamp(1.0 - cG_A - cB_A), clamp(1.0 - cR_A - cB_A), clamp(1.0 - cR_A - cG_A));
+        this.waterB.material.color.setRGB(clamp(1.0 - cG_B - cB_B), clamp(1.0 - cR_B - cB_B), clamp(1.0 - cR_B - cG_B));
+        this.waterC.material.color.setRGB(clamp(1.0 - cG_C - cB_C), clamp(1.0 - cR_C - cB_C), clamp(1.0 - cR_C - cG_C));
+        // Jet, Pipe 1-4, and Pipe 5-6 take the color of their source basin
+        this.waterCascade.material.color.copy(this.waterC.material.color);
+        this.waterPipe56.material.color.copy(this.waterC.material.color);
+        this.waterPipe14.material.color.copy(this.waterA.material.color);
+    }
+    /**
+   * *** NEW METHOD ***
+   * Updates the visual water level inside the pipes based on physics.
+   */ updatePipeWaterLevels() {
+        const s = this.scale;
+        // Only show pipe water if running and not stable
+        const isRunning = this.guiParams.isRunning && !this.physics.isStable;
+        const h_min_scaled = 0.01 * s; // Minimum visible height
+        // --- Pipe 1-4 (A -> B) ---
+        // This pipe represents water falling from Basin A (at y=H) down to the
+        // water level of Basin B (at y=h_B).
+        const h_A_unscaled = this.physics.h_A;
+        const h_B_unscaled = this.physics.h_B;
+        const H_unscaled = this.physics.H; // Top of pipe
+        // The water column in the pipe exists between the top of the pipe (H)
+        // and the water level in Basin B (h_B).
+        let waterHeight_unscaled = Math.max(0, H_unscaled - h_B_unscaled);
+        let waterHeight_scaled = waterHeight_unscaled * s;
+        // The Y-position of the *bottom* of this water column is h_B
+        let waterBottom_scaled = h_B_unscaled * s;
+        // The Y-position of the *center* of this water column
+        let waterCenter_scaled = waterBottom_scaled + waterHeight_scaled / 2;
+        // We only show this water if:
+        // 1. The simulation is running.
+        // 2. There is actually water falling (v2 > 0.01).
+        // 3. There is water in Basin A to fall from (h_A > 0).
+        // 4. The pipe isn't 'full' (h_B < H).
+        if (isRunning && this.physics.v2 > 0.01 && h_A_unscaled > 0 && waterHeight_scaled > h_min_scaled) {
+            this.waterPipe14.visible = true;
+            // The original geometry was H_scaled tall.
+            // We must scale its Y-axis to match the new calculated height.
+            // (new_height / original_height)
+            this.waterPipe14.scale.y = Math.max(0.001, waterHeight_scaled / this.H_scaled);
+            // We must also move its position to the new center.
+            this.waterPipe14.position.y = waterCenter_scaled;
+        } else this.waterPipe14.visible = false;
+        // --- Pipe 5-6 (C -> Jet) ---
+        // This pipe's water level rises based on air pressure p_D.
+        const { p_D, rho, g, h_C, h_6, p_atm } = this.physics;
+        // Calculate the static height the water *would* reach in the pipe (unscaled)
+        // h_pipe = (Pressure_Diff / (rho*g)) + source_height
+        let h_pipe_unscaled = (p_D - p_atm) / (rho * g) + h_C;
+        // Clamp 1: Water level in pipe can't be *lower* than the source (Basin C)
+        h_pipe_unscaled = Math.max(h_C, h_pipe_unscaled);
+        // Clamp 2: Water level can't be *higher* than the physical pipe's end (nozzle)
+        h_pipe_unscaled = Math.min(h_pipe_unscaled, h_6);
+        // Clamp 3: Water level can't be negative
+        h_pipe_unscaled = Math.max(0, h_pipe_unscaled);
+        const h_pipe_scaled = h_pipe_unscaled * s;
+        if (h_pipe_scaled > h_min_scaled && isRunning) {
+            this.waterPipe56.visible = true;
+            // The geometry for waterPipe56 was created with height h6_scaled
+            // We must scale its Y-axis to match the new calculated height
+            this.waterPipe56.scale.y = Math.max(0.001, h_pipe_scaled / this.h6_scaled);
+            // We must also move its position, as the center of the
+            // cylinder is now at (h_pipe_scaled / 2)
+            this.waterPipe56.position.y = h_pipe_scaled / 2;
+        } else this.waterPipe56.visible = false;
+    }
+    // --- UI & helpers (Unchanged) ---
+    addTextLabels() {
+        if (this.textOverlay) this.textOverlay.remove();
+        this.textOverlay = document.createElement("div");
+        this.textOverlay.className = "text-label-overlay";
+        this.container.appendChild(this.textOverlay);
+        const createLabel = (id)=>{
+            const div = document.createElement("div");
+            div.className = "label-group";
+            div.id = id;
+            this.textOverlay.appendChild(div);
+            return div;
+        };
+        this.textGroups.A = createLabel("label-A");
+        this.textGroups.B = createLabel("label-B");
+        this.textGroups.C = createLabel("label-C");
+        this.textGroups.Time = createLabel("label-Time");
+        this.textGroups.Jet = createLabel("label-Jet");
+    }
+    toScreenPosition(vector3, camera, canvas) {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const vector = vector3.clone().project(camera);
+        vector.x = (vector.x + 1) / 2 * width;
+        vector.y = -(vector.y - 1) / 2 * height;
+        return {
+            x: vector.x,
+            y: vector.y
+        };
+    }
+    updateTextLabels() {
+        if (!this.textGroups.A) return;
+        const s = this.scale;
+        const canvas = this.renderer.domElement;
+        const posA = new _three.Vector3(0, this.H_scaled + this.topBasinHeight - 1, 0);
+        const posB = new _three.Vector3(-this.worldWidth / 4, this.H_scaled - 1, 0);
+        const posC = new _three.Vector3(this.worldWidth / 4, this.H_scaled - 1, 0);
+        const posJet = new _three.Vector3(this.worldWidth / 8, this.h6_scaled + 2, 0);
+        const screenPosA = this.toScreenPosition(posA, this.camera, canvas);
+        this.textGroups.A.style.left = `${screenPosA.x}px`;
+        this.textGroups.A.style.top = `${screenPosA.y}px`;
+        this.textGroups.A.innerHTML = `
+                <div>Basin A</div>
+                <div>h_A: ${(this.physics.h_A * 100).toFixed(1)} cm</div>
+                `;
+        const screenPosB = this.toScreenPosition(posB, this.camera, canvas);
+        this.textGroups.B.style.left = `${screenPosB.x}px`;
+        this.textGroups.B.style.top = `${screenPosB.y}px`;
+        this.textGroups.B.innerHTML = `
+                <div>Basin B</div>
+                <div>h_B: ${(this.physics.h_B * 100).toFixed(1)} cm</div>
+                `;
+        const screenPosC = this.toScreenPosition(posC, this.camera, canvas);
+        this.textGroups.C.style.left = `${screenPosC.x}px`;
+        this.textGroups.C.style.top = `${screenPosC.y}px`;
+        this.textGroups.C.innerHTML = `
+                <div>Basin C</div>
+                <div>h_C: ${(this.physics.h_C * 100).toFixed(1)} cm</div>
+                `;
+        const screenPosJet = this.toScreenPosition(posJet, this.camera, canvas);
+        this.textGroups.Jet.style.left = `${screenPosJet.x}px`;
+        this.textGroups.Jet.style.top = `${screenPosJet.y}px`;
+        this.textGroups.Jet.innerHTML = `
+                <div>Jet</div>
+                <div>v_4: ${this.physics.v4.toFixed(2)} m/s</div>
+                <div>h_jet: ${(this.h_jet * 100).toFixed(1)} cm</div>
+                `;
+        this.textGroups.Time.style.left = `50%`;
+        this.textGroups.Time.style.top = `100px`;
+        const status = this.physics.isStable ? "STABLE (B empty)" : this.guiParams.isRunning ? "RUNNING" : "PAUSED";
+        this.textGroups.Time.innerHTML = `
+                <div>Time: ${this.physics.t.toFixed(2)} s</div>
+                <div>State: ${status}</div>
+                `;
+    }
+    onWindowResize() {
+        const aspect = this.container.clientWidth / this.container.clientHeight;
+        const viewSize = 8;
+        this.camera2D.left = -viewSize * aspect;
+        this.camera2D.right = viewSize * aspect;
+        this.camera2D.top = viewSize;
+        this.camera2D.bottom = -viewSize;
+        this.camera2D.updateProjectionMatrix();
+        this.camera3D.aspect = aspect;
+        this.camera3D.updateProjectionMatrix();
+        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+    }
+    // --- *** REVERTED ***: animate()
+    animate() {
+        requestAnimationFrame(this.animate);
+        if (this.guiParams.viewMode === "3D") this.controls.update();
+        if (this.guiParams.isRunning) {
+            // Get the real time delta, uncapped
+            const delta = this.clock.getDelta() * this.guiParams.timeScale;
+            this.elapsedTime += delta;
+            if (!this.physics.isStable) {
+                this.physics.step(delta);
+                this.updateWaterMeshes();
+                this.updateWaterColors(delta);
+            } else {
+                // If stable, stop running the simulation automatically
+                this.guiParams.isRunning = false;
+                this.clock.stop();
+            }
+            this.updateCascade(delta); // Use the new curve update
+        } else // Even when paused, allow the cascade to hide
+        this.updateCascade(0.0);
+        // *** NEW ***: Call this every frame
+        this.updatePipeWaterLevels();
+        this.updateTextLabels();
+        this.renderer.render(this.scene, this.camera);
+    }
+}
+function init(containerId = "scene-container") {
+    return new HeronFountainScene(containerId);
+}
+exports.default = HeronFountainScene;
+
+},{"three":"ktPTu","lil-gui":"fkEfG","three/examples/jsm/controls/OrbitControls.js":"7mqRv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["6n84m","3z6us"], "3z6us", "parcelRequire0087", {})
+
+</script>
+
+
+</body></html>

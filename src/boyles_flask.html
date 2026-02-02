@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boyle's Self-Flowing Flask - Realistic Materials</title>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/examples/jsm/controls/OrbitControls.js": "https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js",
+                "lil-gui": "https://unpkg.com/lil-gui@0.19.1/dist/lil-gui.esm.min.js"
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            transition: background 0.3s;
+        }
+
+        :root[data-theme="light"] {
+            --bg-color: #f0f0f0;
+            --panel-bg: rgba(255, 255, 255, 0.9);
+            --text-color: #111;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --panel-bg: rgba(30, 30, 30, 0.9);
+            --text-color: #eee;
+        }
+
+        #scene-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 300px;
+            padding: 20px;
+            background: var(--panel-bg);
+            color: var(--text-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            user-select: none;
+            backdrop-filter: blur(5px);
+        }
+
+        .controls-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+        }
+
+        button.theme-toggle {
+            background: var(--panel-bg);
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        #status-readout {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(128, 128, 128, 0.3);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="controls-container">
+        <button class="theme-toggle" id="theme-btn">Toggle Dark Mode</button>
+    </div>
+
+    <div class="info-panel">
+        <h3 style="margin:0 0 5px 0;">Debunking Perpetual Motion</h3>
+        <span style="font-size:0.9rem; opacity:0.8;">Boyle's Self-Flowing Flask</span>
+        <div id="status-readout">Initializing...</div>
+    </div>
+
+    <div id="scene-container"></div>
+
+    <script type="module">
+        import * as THREE from "three";
+        import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+        import GUI from "lil-gui";
+
+        // ==========================================
+        // PHYSICS (Provenzano 2025)
+        // ==========================================
+        const PHYS = { RHO: 1000, MU: 0.001, G: 9.81 };
+
+        function calculateDerivative(v, p) {
+            const S = Math.PI * Math.pow(p.r_hose, 2);
+            const Sc = Math.PI * Math.pow(p.r_container_avg, 2);
+            const ratio = S / Sc;
+            const W = ratio * p.h + p.L;
+            const X = 0.5 * (Math.pow(ratio, 2) - 1);
+            const Y = -(8 * Math.PI * PHYS.MU) / (PHYS.RHO * S) * (Math.pow(ratio, 2) * p.h + p.L);
+            const Z = PHYS.G * (p.h - p.H);
+            if (v <= 0 && Z < 0) return 0;
+            return (X * v * v + Y * v + Z) / W;
+        }
+
+        // ==========================================
+        // SIMULATION
+        // ==========================================
+        class FlaskSimulation {
+            constructor() {
+                this.container = document.getElementById('scene-container');
+                this.readout = document.getElementById('status-readout');
+
+                this.params = {
+                    L_m: 0.8,
+                    r_hose_mm: 3.5,
+                    h_water_cm: 12.0,
+                    H_outlet_cm: 15.0,
+                    v0: 1.5,
+                    r_funnel_top_cm: 6.0,
+                    r_funnel_bot_cm: 1.0,
+                    funnel_height_cm: 18.0,
+                    scale: 25,
+                    reset: () => this.reset(),
+                    playPause: () => this.togglePlay()
+                };
+
+                this.state = { v: 0, t: 0, running: false };
+                this.clock = new THREE.Clock();
+
+                this.initThree();
+                this.initGUI();
+                this.setupTheme();
+                this.reset();
+                this.animate();
+            }
+
+            initThree() {
+                this.scene = new THREE.Scene();
+                this.updateThemeColors();
+
+                const aspect = window.innerWidth / window.innerHeight;
+                this.camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 100);
+                this.camera.position.set(0, 8, 25);
+
+                this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                this.container.appendChild(this.renderer.domElement);
+
+                this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.target.set(0, 4, 0);
+                this.controls.enableDamping = true;
+
+                // Lighting for Glass/Water
+                const ambient = new THREE.AmbientLight(0xffffff, 0.8);
+                const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+                dirLight.position.set(5, 10, 7);
+                const backLight = new THREE.DirectionalLight(0xffffff, 0.5);
+                backLight.position.set(-5, 5, -5);
+                this.scene.add(ambient, dirLight, backLight);
+
+                window.addEventListener('resize', () => {
+                    this.camera.aspect = window.innerWidth / window.innerHeight;
+                    this.camera.updateProjectionMatrix();
+                    this.renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+
+            buildScene() {
+                if (this.modelGroup) this.scene.remove(this.modelGroup);
+                this.modelGroup = new THREE.Group();
+                const s = this.params.scale;
+
+                // --- MATERIALS (Based on Heron Fountain Reference) ---
+
+                // Glass: High transmission, clear
+                const glassMat = new THREE.MeshPhysicalMaterial({
+                    color: 0xffffff,
+                    transmission: 0.98,
+                    opacity: 0.3,
+                    metalness: 0,
+                    roughness: 0.05,
+                    ior: 1.5,
+                    thickness: 0.5,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    depthWrite: false, // Glass walls often render better without depth write to show content
+                });
+
+                // Water: Blue tint, refraction
+                const waterMat = new THREE.MeshPhysicalMaterial({
+                    color: 0x00aaff,
+                    transmission: 0.9,
+                    opacity: 0.8,
+                    metalness: 0.1,
+                    roughness: 0.05,
+                    ior: 1.33,
+                    thickness: 1.5 * s,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    depthWrite: true,
+                });
+
+                // Tube: Slightly distinct glass
+                const tubeMat = new THREE.MeshPhysicalMaterial({
+                    color: 0xeeeeee,
+                    transmission: 0.9,
+                    opacity: 0.5,
+                    metalness: 0.2,
+                    roughness: 0.2,
+                    transparent: true,
+                    side: THREE.DoubleSide
+                });
+
+                // --- 1. FUNNEL ---
+                const r_top = (this.params.r_funnel_top_cm / 100) * s;
+                const r_bot = (this.params.r_funnel_bot_cm / 100) * s;
+                const h_funnel = (this.params.funnel_height_cm / 100) * s;
+
+                const funnelGeo = new THREE.CylinderGeometry(r_top, r_bot, h_funnel, 64, 1, true);
+                const funnel = new THREE.Mesh(funnelGeo, glassMat);
+                funnel.position.y = h_funnel / 2;
+                funnel.renderOrder = 1; // Render glass after opaque
+                this.modelGroup.add(funnel);
+
+                // --- 2. WATER VOLUME ---
+                const h_w_val = (this.params.h_water_cm / 100);
+                const h_w_vis = h_w_val * s;
+                const ratio = h_w_val / (this.params.funnel_height_cm / 100);
+                const r_water_surf = r_bot + (r_top - r_bot) * ratio;
+
+                // Slightly smaller radius to prevent z-fighting with glass
+                const waterGeo = new THREE.CylinderGeometry(r_water_surf * 0.99, r_bot * 0.99, h_w_vis, 32);
+                const water = new THREE.Mesh(waterGeo, waterMat);
+                water.position.y = h_w_vis / 2;
+                water.renderOrder = 2; // Render water
+                this.modelGroup.add(water);
+
+                // --- 3. TUBE GEOMETRY ---
+                const r_hose_vis = (this.params.r_hose_mm / 1000) * s;
+                const H_vis = (this.params.H_outlet_cm / 100) * s;
+                const loopRadius = r_top * 1.5;
+                const funnelRimY = h_funnel;
+
+                // Tight arc over the top
+                const loopPeakY = funnelRimY + 0.15 * s;
+
+                const points = [];
+                // Start exactly at bottom (0,0,0) touching the tip
+                points.push(new THREE.Vector3(0, 0, 0));
+
+                // Curve outwards and slightly up/down
+                points.push(new THREE.Vector3(0, -r_hose_vis * 2, 0)); // Initial fitting drop
+                points.push(new THREE.Vector3(loopRadius * 0.5, -r_hose_vis * 4, 0)); // Curve out
+                points.push(new THREE.Vector3(loopRadius, 0, 0)); // Bottom of loop align with base
+
+                // Vertical run
+                points.push(new THREE.Vector3(loopRadius, funnelRimY * 0.5, 0));
+
+                // Top Arc
+                points.push(new THREE.Vector3(loopRadius, loopPeakY * 0.9, 0));
+                points.push(new THREE.Vector3(loopRadius * 0.2, loopPeakY, 0)); // Peak closer to center
+
+                // Outlet
+                points.push(new THREE.Vector3(0, H_vis, 0));
+
+                const path = new THREE.CatmullRomCurve3(points);
+                path.curveType = 'centripetal';
+                path.tension = 0.5;
+
+                const hoseGeo = new THREE.TubeGeometry(path, 128, r_hose_vis, 16, false);
+                const hose = new THREE.Mesh(hoseGeo, tubeMat);
+                hose.renderOrder = 1;
+                this.modelGroup.add(hose);
+
+                this.outletPos = new THREE.Vector3(0, H_vis, 0);
+                this.waterSurfaceY = h_w_vis;
+
+                this.scene.add(this.modelGroup);
+                this.initParticles();
+            }
+
+            initParticles() {
+                if (this.particleSystem) {
+                    this.scene.remove(this.particleSystem);
+                    this.pData = [];
+                }
+                const count = 1000;
+                const geo = new THREE.BufferGeometry();
+                const pos = new Float32Array(count * 3);
+                for (let i = 0; i < pos.length; i++) pos[i] = 1000;
+                geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+
+                // Particles match the water material color
+                const mat = new THREE.PointsMaterial({
+                    color: 0x00aaff,
+                    size: 0.2,
+                    transparent: true,
+                    opacity: 0.6
+                });
+
+                this.particleSystem = new THREE.Points(geo, mat);
+                this.scene.add(this.particleSystem);
+                this.pData = Array(count).fill().map(() => ({ active: false, vy: 0 }));
+                this.pIdx = 0;
+            }
+
+            updateParticles(dt) {
+                if (!this.particleSystem) return;
+                const pos = this.particleSystem.geometry.attributes.position.array;
+                const s = this.params.scale;
+
+                if (this.state.v > 0.01) {
+                    const spawnRate = Math.ceil(this.state.v * 8);
+                    for (let k = 0; k < spawnRate; k++) {
+                        const i = this.pIdx;
+                        // Slight scatter
+                        const theta = Math.random() * Math.PI * 2;
+                        const r = Math.sqrt(Math.random()) * 0.05 * s;
+
+                        pos[i * 3] = this.outletPos.x + r * Math.cos(theta);
+                        pos[i * 3 + 1] = this.outletPos.y;
+                        pos[i * 3 + 2] = this.outletPos.z + r * Math.sin(theta);
+
+                        this.pData[i].active = true;
+                        this.pData[i].vy = -this.state.v * s;
+                        this.pIdx = (this.pIdx + 1) % this.pData.length;
+                    }
+                }
+
+                for (let i = 0; i < this.pData.length; i++) {
+                    if (!this.pData[i].active) continue;
+                    this.pData[i].vy -= 9.81 * s * dt;
+                    pos[i * 3 + 1] += this.pData[i].vy * dt;
+
+                    if (pos[i * 3 + 1] <= this.waterSurfaceY) {
+                        this.pData[i].active = false;
+                        pos[i * 3 + 1] = 1000;
+                    }
+                }
+                this.particleSystem.geometry.attributes.position.needsUpdate = true;
+            }
+
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                this.controls.update();
+
+                if (this.state.running) {
+                    let dt = Math.min(this.clock.getDelta(), 0.05);
+
+                    const p = {
+                        r_hose: this.params.r_hose_mm / 1000,
+                        r_container_avg: (this.params.r_funnel_top_cm + this.params.r_funnel_bot_cm) / 200,
+                        h: this.params.h_water_cm / 100,
+                        H: this.params.H_outlet_cm / 100,
+                        L: this.params.L_m
+                    };
+
+                    const dv = calculateDerivative(this.state.v, p);
+                    this.state.v += dv * dt;
+                    this.state.t += dt;
+
+                    if (this.state.v <= 0) {
+                        this.state.v = 0;
+                        this.state.running = false;
+                    }
+
+                    this.updateParticles(dt);
+                    this.updateReadout();
+                }
+
+                this.renderer.render(this.scene, this.camera);
+            }
+
+            reset() {
+                this.state.v = this.params.v0;
+                this.state.t = 0;
+                this.state.running = false;
+                this.buildScene();
+                this.updateReadout();
+            }
+
+            togglePlay() {
+                this.state.running = !this.state.running;
+                this.clock.start();
+            }
+
+            updateReadout() {
+                const isFlowing = this.state.v > 0.001;
+                const status = this.state.running
+                    ? (isFlowing ? "FLOWING" : "STOPPED")
+                    : "PAUSED";
+                const color = isFlowing ? "#00aa00" : "#aa0000";
+
+                this.readout.innerHTML = `
+<strong style="color:${color}">${status}</strong>
+Time:     ${this.state.t.toFixed(2)} s
+Velocity: ${this.state.v.toFixed(3)} m/s
+`;
+            }
+
+            initGUI() {
+                const gui = new GUI({ title: "Configuration" });
+                gui.add(this.params, "playPause").name("▶ Play / ⏸ Pause");
+                gui.add(this.params, "reset").name("🔄 Reset");
+
+                const f1 = gui.addFolder("Variables");
+                f1.add(this.params, "v0", 0.5, 5.0).name("Initial Push (m/s)");
+                f1.add(this.params, "h_water_cm", 5, 15).name("Water Level (cm)").onChange(() => this.reset());
+                f1.add(this.params, "H_outlet_cm", 5, 20).name("Outlet Height (cm)").onChange(() => this.reset());
+                f1.open();
+            }
+
+            setupTheme() {
+                const btn = document.getElementById("theme-btn");
+                btn.addEventListener("click", () => {
+                    const cur = document.documentElement.getAttribute("data-theme");
+                    const next = cur === "dark" ? "light" : "dark";
+                    document.documentElement.setAttribute("data-theme", next);
+                    this.updateThemeColors();
+                });
+            }
+
+            updateThemeColors() {
+                const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+                this.scene.background = new THREE.Color(isDark ? 0x1a1a1a : 0xf0f0f0);
+            }
+        }
+
+        new FlaskSimulation();
+    </script>
+</body>
+
+</html>

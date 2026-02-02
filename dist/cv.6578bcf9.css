@@ -1,0 +1,39 @@
+#cv-content {
+  background-color: var(--card-bg);
+  width: 100%;
+  max-width: 900px;
+  box-shadow: var(--shadow);
+  box-sizing: border-box;
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 1.5rem;
+  overflow-x: hidden;
+}
+
+#cv-content p, #cv-content li, #cv-content strong {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+#cv-content h2 {
+  color: var(--text);
+  border-bottom: 2px solid #f90;
+  margin-top: 1.5rem;
+  padding-bottom: .5rem;
+}
+
+#cv-content ul {
+  padding-left: 20px;
+}
+
+#cv-content li {
+  margin-bottom: .5rem;
+}
+
+@media (width <= 600px) {
+  #cv-content {
+    margin: 10px auto;
+  }
+}
+/*# sourceMappingURL=cv.6578bcf9.css.map */

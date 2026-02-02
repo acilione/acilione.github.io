@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Heron's Fountain Simulation</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
-    <script type="module" src="scripts/set_theme.js"></script>
 
-    <link rel="stylesheet" href="styles/styles.css" />
-    <link rel="stylesheet" href="styles/navbar.css" />
-    <link rel="stylesheet" href="styles/heron_fountain_simulation.css" />
-    <script type="module" src="scripts/navbar.js" defer></script>
-  </head>
-  <body>
-    <div id="navbar-container"></div>
-    <div id="info-panel" class="info-panel"></div>
-    <div id="scene-container"></div>
-  </body>
-  <script type="module" src="scripts/heron_fountain_simulation.js"></script>
+<head>
+  <title>Heron's Fountain Simulation</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <script src="scripts/set_theme.js"></script>
+
+  <link rel="stylesheet" href="styles/styles.css" />
+  <link rel="stylesheet" href="styles/navbar.css" />
+  <link rel="stylesheet" href="styles/heron_fountain_simulation.css" />
+  <script type="module" src="scripts/navbar.js" defer></script>
+</head>
+
+<body>
+  <!-- Navbar injected by website - not part of simulation -->
+  <div id="navbar-container"></div>
+
+  <div id="info-panel" class="info-panel"></div>
+  <div id="scene-container"></div>
+
+  <!-- Import and initialize the standalone simulation module -->
+  <script type="module">
+    import { init } from './simulations/heron-fountain/heron.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        init('scene-container');
+      } catch (e) {
+        console.error('Failed to initialize HeronFountainScene:', e);
+      }
+    });
+  </script>
+</body>
+
 </html>
