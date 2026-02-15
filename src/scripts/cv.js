@@ -60,12 +60,19 @@ Big Data Engineer with extensive experience in designing scalable ETL pipelines 
     * *Boyle's Perpetual Movement Flask:* (In Progress) A simulation of the classic hydrostatic paradox.
 
 **Videogames & Interactive Media**
+* **Quantum Dungeon Crawler:** Designed a dungeon crawler where real quantum computing algorithms (Grover, Shor, Bernstein-Vazirani, VQE, QAOA) become core gameplay mechanics. Features an in-game circuit composer, temperature-driven decoherence system, and progressive level design teaching quantum concepts. (In Progress)
 * **Greta's Adventures:** Developed a full platform video game using **Unity** and **C#** (Awarded First Prize at University of Catania's Game Jam).
 * **Interactive Physics Lab:** Developing a fully interactive virtual physics laboratory using **React**, **TypeScript**, and **Three.js** (In Progress).
 
 **Other Engineering Projects**
 * **Computer Vision App:** Created an Android application enabling 3D model manipulation via computer vision using hand gestures.
 * **C Standard Library:** Re-implemented portions of the C Standard Library to deepen understanding of low-level memory management.
+
+---
+
+### Competitions
+
+* **MALLORN Astronomical Classification Challenge** (Kaggle): Classified astronomical transients to detect Tidal Disruption Events (stars torn apart by black holes). Ranked **58th out of 894** participants.
 
 ---
 
