@@ -23,6 +23,7 @@ Big Data Engineer with extensive experience in designing scalable ETL pipelines 
 * **Automation:** Authored **Python scripts** for advanced S3 Parquet file operations (merge, deduplicate, backup, restore) and **Bash scripts** for automated Kafka/S3 status checks.
 * **Performance Tuning:** Integrated **Redis cache** (Redisson) within Spark jobs to reduce latency.
 * **Codebase Evolution:** Developed complex SQL procedures for data analysis and executed significant codebase refactoring.
+* **Desktop Tooling:** Developed a user-friendly desktop application in **Go** using the **Fyne** framework for task automation involving Excel manipulation, data filtering pipelines, and automated report generation.
 * *Tech Stack:* Kubernetes, Docker, Git, Dremio.
 
 **Android Developer** | **Iriscube Reply** | *Feb 2022 – Jul 2022*
