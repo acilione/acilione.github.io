@@ -61,6 +61,7 @@ Big Data Engineer with extensive experience in designing scalable ETL pipelines 
 
 **Videogames & Interactive Media**
 * **Quantum Dungeon Crawler:** Designed a dungeon crawler where real quantum computing algorithms (Grover, Shor, Bernstein-Vazirani, VQE, QAOA) become core gameplay mechanics. Features an in-game circuit composer, temperature-driven decoherence system, and progressive level design teaching quantum concepts. (In Progress)
+* **Kamisado:** A full-featured real-time multiplayer Kamisado board game with sumo push mechanics, chess-style timers, and spectator mode. Built with **TypeScript**, **Node.js**, **Express**, and **Socket.IO**.
 * **Greta's Adventures:** Developed a full platform video game using **Unity** and **C#** (Awarded First Prize at University of Catania's Game Jam).
 * **Interactive Physics Lab:** Developing a fully interactive virtual physics laboratory using **React**, **TypeScript**, and **Three.js** (In Progress).
 
