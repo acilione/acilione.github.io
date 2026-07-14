@@ -6,25 +6,25 @@ Reggio Calabria, Italy | (+39) 347-252-7757
 antoninocilione96@gmail.com | linkedin.com/in/antonino-cilione-1258291a6 | github.com/acilione | acilione.github.io
 
 ### Professional Summary
-Big Data Engineer with extensive experience in designing scalable ETL pipelines and microservices. Proven track record in migrating legacy frameworks to modern cloud architectures and optimizing database performance. Specializes in the ingestion and processing of critical energy grid data, utilizing the Hadoop ecosystem (Spark, Kafka) and Cloud technologies.
+Big Data Engineer with 4+ years of experience building and optimizing distributed data platforms for the energy sector. Specialized in Apache Spark, Kafka, Cloudera CDP, MongoDB and cloud-based data pipelines. Experienced in platform migrations, high-volume grid-data ingestion, ETL performance tuning and Java/Kotlin microservices.
 
 ---
 
 ### Work History
 
 **Big Data Engineer** | **Enel** | *Jul 2022 – Present*
-* **Primary Responsibility:** Engineered and maintained high-throughput data pipelines specifically for the **ingestion of medium and low voltage measurements**, ensuring data accuracy and real-time availability for grid analysis.
-* **Framework Migration:** Led the complex framework migration from Cloudera Distribution Hadoop (CDH) to **Cloudera Data Platform (CDP)**, modernizing the data infrastructure.
-* **ETL Development:** Developed and maintained high-performance ETL pipelines using **Apache Spark** and **Kafka**.
-* **R&D & Optimization:** Researched and benchmarked **Apache Iceberg** functionalities using Spark and Flink; successfully implemented a custom "equality delete files" commit feature on Apache Spark.
-* **Data Ingestion:** Designed and implemented robust data ingestion flows using **Apache NiFi**.
-* **Database Management:** Optimized **MongoDB Atlas** clusters by tuning indexes, memory, and configuring auto-scaling to balance cost and performance.
-* **Microservices:** Developed **Java/Kotlin microservices** (Spring Boot) to expose NoSQL data stored on MongoDB to downstream applications.
-* **Automation:** Authored **Python scripts** for advanced S3 Parquet file operations (merge, deduplicate, backup, restore) and **Bash scripts** for automated Kafka/S3 status checks.
-* **Performance Tuning:** Integrated **Redis cache** (Redisson) within Spark jobs to reduce latency.
-* **Codebase Evolution:** Developed complex SQL procedures for data analysis and executed significant codebase refactoring.
-* **Desktop Tooling:** Developed a user-friendly desktop application in **Go** using the **Fyne** framework for task automation involving Excel manipulation, data filtering pipelines, and automated report generation.
-* *Tech Stack:* Kubernetes, Docker, Git, Dremio.
+* Engineered and maintained high-throughput pipelines for the **ingestion of medium- and low-voltage measurements**, ensuring data accuracy and real-time availability for grid analysis.
+* Led the migration from Cloudera Distribution Hadoop (CDH) to **Cloudera Data Platform (CDP)**, modernizing the data infrastructure.
+* Developed and maintained high-performance ETL workloads using **Apache Spark** and **Kafka**.
+* Researched and benchmarked **Apache Iceberg** with Spark and Flink, and implemented a custom equality-delete file commit feature in Apache Spark.
+* Designed and implemented robust data ingestion flows using **Apache NiFi**.
+* Optimized **MongoDB Atlas** clusters by tuning indexes and memory usage and configuring auto-scaling to balance cost and performance.
+* Developed **Java/Kotlin microservices** with Spring Boot to expose NoSQL data stored in MongoDB to downstream applications.
+* Automated advanced S3 Parquet operations—including merge, deduplication, backup and restore—with **Python**, and created **Bash** scripts for Kafka and S3 status checks.
+* Integrated a **Redis cache** through Redisson into Spark jobs to reduce latency.
+* Developed complex SQL procedures for data analysis and performed significant codebase refactoring.
+* Built a desktop application in **Go** with the **Fyne** framework to automate Excel manipulation, data-filtering pipelines and report generation.
+* *Environment:* Spark, Kafka, CDP, Iceberg, Flink, NiFi, MongoDB Atlas, Redis, Java, Kotlin, Python, AWS S3, Kubernetes, Docker, Git and Dremio.
 
 **Android Developer** | **Iriscube Reply** | *Feb 2022 – Jul 2022*
 * Developed and maintained a corporate Android banking application.
@@ -42,11 +42,12 @@ Big Data Engineer with extensive experience in designing scalable ETL pipelines 
 
 ### Skills
 
-* **Data Technologies:** Apache Spark, Kafka, MongoDB Atlas, Apache NiFi, Redis, Dremio.
-* **Programming:** Java, Go, Kotlin, Python, Scala, C, SQL, Bash, TypeScript, C#.
-* **Frontend & Graphics:** React, Three.js, Unity.
-* **Frameworks and Libraries:** Spring Boot, React, TensorFlow Lite (TFLite).
-* **Cloud & DevOps:** Kubernetes, Docker, AWS (S3), Git.
+* **Data Engineering:** Apache Spark, Kafka, Apache Flink, Apache Iceberg, Apache NiFi, Dremio, Parquet.
+* **Databases & Caching:** MongoDB Atlas, Redis, SQL.
+* **Programming:** Java, Kotlin, Python, Scala, SQL, Bash.
+* **Cloud & Platform:** Cloudera CDH/CDP, AWS S3, Kubernetes, Docker, Git.
+* **Backend:** Spring Boot, REST APIs, Microservices.
+* **Additional Technologies:** Go, C, C#, React, TypeScript, Three.js, Unity, TensorFlow Lite (TFLite).
 * **Languages:** English (Proficient), Italian (Native).
 
 ---
@@ -62,7 +63,7 @@ Big Data Engineer with extensive experience in designing scalable ETL pipelines 
 
 **Videogames & Interactive Media**
 * **Quantum Dungeon Crawler:** Designed a dungeon crawler where real quantum computing algorithms (Grover, Shor, Bernstein-Vazirani, VQE, QAOA) become core gameplay mechanics. Features an in-game circuit composer, temperature-driven decoherence system, and progressive level design teaching quantum concepts. (In Progress)
-* **Kamisado:** A full-featured real-time multiplayer Kamisado board game with sumo push mechanics, chess-style timers, and spectator mode. Built with **TypeScript**, **Node.js**, **Express**, and **Socket.IO**.
+* **Kamisado:** Built a real-time multiplayer Kamisado board game with Socket.IO-based communication, synchronized game state using **TypeScript**, **Node.js**, **Express**, and **Socket.IO**.
 * **Greta's Adventures:** Developed a full platform video game using **Unity** and **C#** (Awarded First Prize at University of Catania's Game Jam).
 * **Interactive Physics Lab:** Developing a fully interactive virtual physics laboratory using **React**, **TypeScript**, and **Three.js** (In Progress).
 
