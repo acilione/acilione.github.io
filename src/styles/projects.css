@@ -1,239 +1,85 @@
-/* Global/base styles (body, content container, headings) were
-   moved into `styles.css` to create a single source of truth for
-   the site's base typography and layout. Page-specific styles
-   follow below. */
-
-/* --- H2: Category Heading --- */
+#projects-content {
+  padding-bottom: 70px;
+}
 .category-heading {
-  font-size: 1.6em;
-  font-weight: 500;
-  color: var(--text);
-  margin-top: 40px;
-  margin-bottom: 20px;
-  padding-bottom: 5px;
-  border-bottom: 2px solid var(--muted-border); /* Subtle separator */
-}
-
-/* Projects content container — mirror CV content layout for consistency */
-#projects-content {
-  max-width: 900px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1rem 1.5rem;
-  background-color: var(--card-bg);
-  box-shadow: var(--shadow);
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
-
-/* Keep modest vertical spacing between the hero area and the content.
-   Reduce top padding so the white cards sit closer to the heading. */
-#projects-content {
-  margin-top: 6px;
-  padding-top: 0.5rem;
-}
-
-/* Make the hero area on the projects page slightly closer to the navbar
-   while still vertically centering the title within a capped vertical space */
-.content.hero-page .hero {
-  /* Reduced vertical band so the title sits closer to the navbar */
-  height: calc(48vh - var(--site-header-height));
-  padding-top: 6px;
-}
-
-/* Mobile adjustments: bring the title much closer to the navbar and
-   reduce the gap before the projects content so things feel tighter
-   on small screens. */
-@media (max-width: 600px) {
-  .content.hero-page .hero {
-    /* smaller vertical band on phones */
-    height: calc(30vh - var(--site-header-height));
-    padding-top: 4px;
-  }
-
-  #projects-content {
-    margin-top: 4px;
-    padding-top: 0.5rem;
-  }
-}
-
-/* --- Project Item Container --- */
-.project-item {
-      border: 1px solid var(--muted-border); /* Subtle border */
-  padding: 20px;
-  margin-bottom: 25px;
-      background-color: var(--card-bg); /* Card background uses theme */
-  border-radius: 8px; /* Soft, modern corners */
-  box-shadow: var(--shadow); /* Subtle shadow for lift */
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.project-item:hover {
-  transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
-}
-
-/* --- Project Title --- */
-.project-title {
-  font-size: 1.5em; /* Larger, more prominent title */
-  font-weight: 600;
-  color: var(--accent); /* Use the accent color for titles */
-  margin-bottom: 10px;
-  line-height: 1.2;
-}
-
-/* --- Project Actions (Links) --- */
-.project-actions {
-  margin-bottom: 15px;
-}
-
-.action-link {
-  display: inline-flex; /* Align icon and text */
-  align-items: center;
-  font-size: 0.9em;
-  font-weight: 600;
-      color: var(--text); /* Use theme text color */
-  text-decoration: none;
-  padding: 5px 10px;
-  margin-right: 15px;
-  border: 1px solid var(--muted-border);
-  border-radius: 4px;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-}
-
-.action-link:hover {
-      background-color: rgba(77,163,255,0.06);
-      color: var(--accent); /* Hover effect with accent color */
-      border-color: var(--accent);
-}
-
-.action-link i {
-  margin-right: 6px; /* Space between icon and text */
-}
-
-/* --- Project Description --- */
-.project-description {
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 1.05em;
-  color: var(--muted);
-  line-height: 1.4;
-}
-
-/* --- Project Details (Tags) --- */
-.project-details {
-  margin-top: 10px;
-  border-top: 1px dashed var(--muted-border);
-  padding-top: 10px;
-}
-
-.detail-tag {
-  display: inline-block;
-  margin-right: 12px;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-weight: 500;
-  font-size: 0.85em;
-  text-transform: uppercase;
-  background-color: rgba(0,0,0,0.03);
-  color: var(--muted);
-  border: 1px solid transparent;
-}
-
-.language-tag {
-  background-color: rgba(77,163,255,0.06);
+  margin: 55px 0 12px;
   color: var(--accent);
 }
-
-.library-tag {
-  background-color: rgba(40,167,69,0.05);
-  color: #28a745;
+.project-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 28px;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
 }
-
-.paper-ref {
-  background-color: rgba(253,126,20,0.06);
-  color: #fd7e14;
+.project-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 23px;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
 }
-
-/* --- Work In Progress Note --- */
-.wip-note {
-  font-style: normal; /* Non-italic for a cleaner look */
-  color: var(--accent); /* Use accent for visibility */
-  background-color: rgba(255,255,255,0.03);
-  padding: 3px 6px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 0.8em;
-  margin-left: 8px;
-  vertical-align: middle;
+.project-description {
+  grid-column: 1;
+  max-width: 740px;
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 12px;
 }
-
-/* --- References Section --- */
+.project-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  grid-column: 1/-1;
+  margin-top: 18px;
+}
+.detail-tag {
+  font-size: 9px;
+  color: var(--muted);
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+}
+.action-link {
+  font-size: 12px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.action-link::after {
+  content: " ↗";
+}
 .project-references {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: var(--card-bg); /* uses themed card bg */
-  border-radius: 8px;
-  border-left: 5px solid var(--accent);
+  padding: 20px 0;
+  font-size: 12px;
+  border-bottom: 1px solid var(--line);
 }
-
 .project-references h4 {
-  color: var(--text); /* Removed duplicate hard-coded color */
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-weight: 600;
+  margin: 0;
 }
-
 .project-references p {
-  margin-bottom: 5px;
-  color: var(--muted); /* Ensured p uses var(--muted) */
+  margin: 5px 0;
 }
-
-.project-group {
-  border: 1px solid var(--muted-border);
-  padding: 20px;
-  background-color: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
+.project-references a {
+  color: var(--accent);
+  overflow-wrap: anywhere;
 }
-
-/* Remove margins and shadows from individual items when inside the group */
-.project-group .project-item {
-    border: none;
-    padding: 0;
-    margin-bottom: 20px; /* Space between the two projects */
-    background-color: transparent;
-    box-shadow: none;
-    transition: none;
+.wip-note {
+  font: 10px monospace;
+  color: var(--muted);
 }
-
-/* Add a subtle separator between the grouped projects */
-.project-group .project-item:first-child {
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px dashed var(--muted-border);
-}
-
-/* Remove the hover effect for individual items inside the group to keep the group intact */
-.project-group .project-item:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-/* Adjustments for the References block inside the group */
-.project-references.grouped-reference {
-  margin-top: 20px; /* Space above the reference block */
-  padding: 15px; /* Slightly smaller padding inside the group */
-  background-color: var(--bg); /* Slightly different bg inside the group */
-  border-left: 4px solid var(--accent); /* Maintain the accent line */
-  border-radius: 6px;
-  box-shadow: none;
-}
-/* Ensure the original project-references margin is overridden for the grouped version */
-.project-references.grouped-reference {
+@media (max-width: 600px) {
+  .project-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .project-actions {
+    grid-row: 3;
+  }
+  .project-description {
     margin-top: 0;
-    margin-bottom: 0;
+  }
+  .project-title {
+    font-size: 21px;
+  }
 }
-
-

@@ -1,77 +1,107 @@
-/* --- General and Mobile-First CV Content Styling (styles/styles.css) --- */
-
-/* Main CV Content Container */
-
+.cv-page {
+  width: min(1000px, calc(100% - 40px));
+  margin: 48px auto 80px;
+}
+.cv-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.cv-toolbar p {
+  margin: 8px 0 0;
+  font-size: 14px;
+}
+.cv-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.cv-downloads .button {
+  white-space: nowrap;
+  gap: 18px;
+}
 #cv-content {
-  /*
-   * 1. Defines a maximum width for readability on large screens.
-   * 2. 'width: 100%' ensures it fills the entire viewport width on small screens.
-   * (This is crucial for mobile responsiveness.)
-   */
-  max-width: 900px; 
-  width: 100%;
-
-  /* Center the content on the page */
-  margin-top: 60px;
-  margin-left: auto;
-  margin-right: auto;
-
-  /*
-   * Add padding to prevent content from touching the screen edges.
-   * 1.5rem horizontal padding is good for mobile readability.
-   */
-  padding: 1rem 1.5rem; 
-  background-color: var(--card-bg);
-  box-shadow: var(--shadow);
-
-  /*
-   * CRITICAL FOR MOBILE OVERFLOW:
-   * Ensures padding and borders are included within the specified width,
-   * preventing the element from exceeding 'width: 100%'.
-   */
-  box-sizing: border-box; 
-  
-  /* Hides any residual horizontal scrollbar if elements are slightly miscalculated */
-  overflow-x: hidden; 
+  max-width: 850px;
+  margin: 42px auto 0;
+  overflow-wrap: anywhere;
 }
-
-/* --- TEXT WRAPPING FIX FOR MOBILE OVERFLOW --- */
-
-/*
- * This is the ultimate fix for long words, email addresses, or unbreakable
- * text strings that cause horizontal scrolling on mobile devices.
- * It forces the text to break onto the next line.
- */
-#cv-content p,
-#cv-content li,
-#cv-content strong {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+#cv-content h1 {
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  margin-bottom: 20px;
 }
-
-/* --- General Content Structure Styling --- */
-
 #cv-content h2 {
-  color: var(--text);
-  border-bottom: 2px solid #ff9900; 
-  padding-bottom: 0.5rem;
-  margin-top: 1.5rem;
+  margin: 38px 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  color: var(--accent);
 }
-
+#cv-content h3 {
+  margin: 25px 0 8px;
+  font-size: 17px;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+#cv-content p,
+#cv-content li {
+  color: var(--muted);
+  font-size: 14px;
+}
+#cv-content li {
+  margin-bottom: 10px;
+}
+#cv-content strong {
+  color: var(--text);
+  font-weight: 600;
+}
 #cv-content ul {
   padding-left: 20px;
 }
-
-#cv-content li {
-  margin-bottom: 0.5rem;
+#cv-content a {
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
 }
-
-/* Optional: Adjust margins/paddings on smaller screens if needed, 
-   though the mobile-first approach above usually handles it well. */
-@media (max-width: 600px) {
+#cv-content a:hover {
+  text-decoration-color: var(--accent);
+}
+#cv-content .resume-contact p:first-of-type {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 20px;
+  color: var(--text);
+}
+@media (max-width: 760px) {
+  .cv-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .cv-page {
+    margin-top: 30px;
+  }
+}
+@media print {
+  #navbar-container,
+  .cv-toolbar,
+  .skip-link {
+    display: none;
+  }
+  :root {
+    --text: #111;
+    --muted: #333;
+    --bg: #fff;
+    --accent: #174e37;
+    --line: #aaa;
+  }
+  .cv-page,
   #cv-content {
-    /* Slightly less margin on the top/bottom on very small screens */
-    margin: 10px auto; 
-    /* The 1.5rem padding is already good, no change needed here typically */
+    width: 100%;
+    margin: 0;
+  }
+  #cv-content h1 {
+    font-size: 28px;
   }
 }

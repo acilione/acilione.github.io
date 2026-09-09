@@ -14,156 +14,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 // PHYSICS IMPLEMENTATION (Revised)
 // =============================================================================
 
-class HeronPhysics {
-  constructor() {
-    // --- Costanti del Modello Fisico (Constants of the Physical Model) ---
-    this.alpha = 1 / 1024; // Unitless ratio
-    this.beta = 1 / 502; // Unitless ratio
-    this.gamma = 1 / 502; // Unitless ratio
-
-    // Costanti Fisiche (Physical Constants)
-    this.rho = 1000.0; // Density of water [kg/m³]
-    this.g = 9.8; // Acceleration due to gravity [m/s²]
-    this.p_atm = 101325.0; // Atmospheric pressure [Pa]
-
-    this.wallThickness = 0.2; // Thickness of basin walls [m]
-    // Parametri Geometrici del Sistema (Geometric Parameters of the System)
-    this.S_B = 0.0142; // Cross-sectional area of water surface in Basin B [m²]
-    this.S_C = 0.0142; // Cross-sectional area of water surface in Basin C [m²]
-
-    // *** BUG 2 FIX ***
-    // The area of A is the sum of B and C
-    this.S_A = this.S_B + this.S_C;
-
-    this.V_D0 = 0.00355; // Initial volume of air in the air chamber (connecting B and C) [m³]
-
-    // Livelli di Riferimento Iniziali (Initial Reference Levels)
-    this.h_B0_ref = 0.04; // Initial water height in Basin B [m]
-    this.h_C0_ref = 0.21; // Initial water height in Basin C [m]
-
-    // Altezze Verticali Fisse (Fixed Vertical Heights)
-    this.h_6 = 0.33; // Height of the nozzle above the bottom reference [m]
-    this.H = 0.25; // Height difference between the surface of Basin A and the top surface of B/C volume [m]
-
-    // Perdite viscose (Poiseuille) (Viscous Losses)
-    this.eta = 0.001; // Dynamic viscosity of water [Pa·s] or [kg/(m·s)]
-    this.S = 0.0000285; // Cross-sectional area of the narrow internal pipes [m²]
-    this.L1 = 0.22; // Length of the pipe segment (related to flow Q_AB/v2) [m]
-    this.L2 = 0.31; // Length of the pipe segment (related to flow Q_C4/v4) [m]
-
-    // Viscous resistance coefficient [kg/(m·s)]
-    this.B1 = (8 * Math.PI * this.eta * this.L1) / this.S;
-    this.B2 = (8 * Math.PI * this.eta * this.L2) / this.S;
-
-    // Initial heights (h_A, h_B, h_C) [m]
-    this.y0 = [0.06, 0.04, 0.2];
-
-    // Tolerance and Guard Parameters
-    this.EPS_DHB = 1e-4; // Epsilon for checking if dhB/dt is near zero [m/s]
-    this.H_EPSILON = 1e-5; // Small tolerance for height check [m]
-    this.T_GUARD = 10.0; // Time guard for stability check [s]
-
-    // State Variables (Initialised in reset)
-    this.t = 0.0; // Elapsed time [s]
-    this.h_A = 0.0; // Water height in Basin A [m]
-    this.h_B = 0.0; // Water height in Basin B [m]
-    this.h_C = 0.0; // Water height in Basin C [m]
-    this.v2 = 0.0; // Velocity in pipe (A->B) [m/s]
-    this.v4 = 0.0; // Velocity of the water jet (at nozzle 4) [m/s]
-    this.isStable = false; // System stability flag (unitless)
-
-    // *** NEW ***: Expose p_D for visualizer
-    this.p_D = this.p_atm; // Initial air pressure
-
-    this.reset();
-  }
-
-  reset() {
-    [this.h_A, this.h_B, this.h_C] = this.y0;
-    this.t = 0.0;
-    this.v2 = 0.0;
-    this.v4 = 0.0;
-    this.isStable = false;
-
-    // *** NEW ***: Calculate initial p_D for the visualizer
-    const delta_V_reset =
-      (this.h_B0_ref - this.y0[1]) * this.S_B +
-      (this.h_C0_ref - this.y0[2]) * this.S_C;
-    const V_D = this.V_D0 + delta_V_reset;
-    this.p_D = (this.p_atm * this.V_D0) / V_D;
-  }
-
-  system(h_A, h_B, h_C) {
-    // Change in total air/water volume in B and C relative to initial state [m³]
-    const delta_V =
-      (this.h_B0_ref - h_B) * this.S_B + (this.h_C0_ref - h_C) * this.S_C;
-    // Current volume of air in the air chamber D [m³]
-    const V_D = this.V_D0 + delta_V;
-    // Current pressure in the air chamber D (Boyle's Law: P*V = constant) [Pa]
-
-    // *** MODIFIED ***: Update class property
-    this.p_D = (this.p_atm * this.V_D0) / V_D;
-
-    // Total pressure head driving flow v2 (A to B) [Pa]
-    const deltaP_AB =
-      this.p_atm - this.p_D + this.rho * this.g * (h_A + this.H - h_B);
-    // Total pressure head driving flow v4 (C to jet) [Pa]
-    const deltaP_C4 =
-      this.p_D - this.p_atm + this.rho * this.g * (h_C - this.h_6);
-
-    // Velocity v2 (from A to B) - derived from modified Bernoulli/Torricelli with viscous term B1 [m/s]
-    const v2 =
-      (-this.B1 +
-        Math.sqrt(this.B1 ** 2 + 2 * this.rho * Math.max(deltaP_AB, 0.0))) /
-      this.rho;
-    // Velocity v4 (of the jet) - derived from modified Bernoulli/Torricelli with viscous term B2 [m/s]
-    const v4 =
-      (-this.B2 +
-        Math.sqrt(this.B2 ** 2 + 2 * this.rho * Math.max(deltaP_C4, 0.0))) /
-      this.rho;
-
-    this.v2 = v2;
-    this.v4 = v4;
-
-    // Change in height over time (Flow rate / Area) [m/s]
-    const dhA_dt = -this.alpha * v2 + this.alpha * v4; // Change in h_A [m/s]
-    const dhB_dt = this.beta * v2; // Change in h_B [m/s]
-    const dhC_dt = -this.gamma * v4; // Change in h_C [m/s]
-
-    return [dhA_dt, dhB_dt, dhC_dt];
-  }
-
-  step(dt) {
-    if (this.isStable) return;
-
-    // Check if Basin B is empty
-    if (this.h_B < this.H_EPSILON) {
-      this.h_B = 0; // Snap to zero
-      this.isStable = true;
-      this.v2 = 0;
-      this.v4 = 0;
-      return;
-    }
-
-    const [dhA_dt, dhB_dt, dhC_dt] = this.system(this.h_A, this.h_B, this.h_C);
-
-    // Check for stability (e.g., flow is near zero)
-    if (this.t > this.T_GUARD && Math.abs(dhB_dt) < this.EPS_DHB) {
-      this.isStable = true;
-      this.v2 = 0;
-      this.v4 = 0;
-      return;
-    }
-
-    this.h_A += dhA_dt * dt;
-    this.h_B = Math.max(0, this.h_B + dhB_dt * dt);
-    this.h_C += dhC_dt * dt;
-    this.t += dt;
-
-    this.h_A = Math.max(0, this.h_A);
-    this.h_C = Math.max(0, this.h_C);
-  }
-}
+import { HeronPhysics } from "./physics.js";
 
 // =============================================================================
 // THREE.JS SCENE IMPLEMENTATION (MODIFIED)
@@ -273,7 +124,7 @@ class HeronFountainScene {
     const theme = this.getCurrentTheme();
     if (this.scene) {
       this.scene.background = new THREE.Color(
-        theme === "dark" ? 0x202020 : 0xffffff
+        theme === "dark" ? 0x0d1211 : 0xf3f5f2,
       );
     }
   }
@@ -303,14 +154,14 @@ class HeronFountainScene {
 
     this.renderer.setSize(
       this.container.clientWidth,
-      this.container.clientHeight
+      this.container.clientHeight,
     );
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.shadowMap.enabled = true;
     this.container.appendChild(this.renderer.domElement);
 
     const aspect = this.container.clientWidth / this.container.clientHeight;
-    const viewSize = 15;
+    const viewSize = 8;
 
     this.camera2D = new THREE.OrthographicCamera(
       -viewSize * aspect,
@@ -318,13 +169,13 @@ class HeronFountainScene {
       viewSize,
       -viewSize,
       0.1,
-      100
+      100,
     );
-    this.camera2D.position.set(0, 0, 50);
+    this.camera2D.position.set(0, this.H_scaled, 50);
     this.camera2D.lookAt(0, this.H_scaled, 0);
 
     this.camera3D = new THREE.PerspectiveCamera(50, aspect, 0.1, 200);
-    this.camera3D.position.set(15, 12, 25);
+    this.camera3D.position.set(8, 9, 13);
     this.camera3D.lookAt(0, this.H_scaled, 0);
 
     this.camera = this.camera3D;
@@ -343,7 +194,8 @@ class HeronFountainScene {
     directionalLight.castShadow = true;
     this.scene.add(directionalLight);
 
-    window.addEventListener("resize", this.onWindowResize.bind(this));
+    this.resizeObserver = new ResizeObserver(() => this.onWindowResize());
+    this.resizeObserver.observe(this.container);
 
     // --- Auto-pause to prevent "time bomb" ---
     window.addEventListener("blur", () => {
@@ -357,43 +209,31 @@ class HeronFountainScene {
   }
 
   setupSceneGeometry() {
-    const waterMaterial = new THREE.MeshPhysicalMaterial({
-      transmission: 1.0,
-      roughness: 0.05,    // Low roughness
-      metalness: 0.0,     // Explicitly non-metallic
-      ior: 1.33,          // Index of Refraction for water
-      thickness: 1.5 * this.scale,
-      clearcoat: 1.0,     // Adds a glossy surface layer
-      clearcoatRoughness: 0.0, // Ensures the surface is highly reflective/smooth
-      transparent: true,
-      opacity: 0.7,
-      side: THREE.DoubleSide,
-      depthWrite: true,
-    });
-
-    const glassMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff,
-      transmission: 0.95,
-      thickness: 0.5,
-      roughness: 0.05,
-      ior: 1.52,
+    const waterMaterial = new THREE.MeshBasicMaterial({
       transparent: true,
       opacity: 0.6,
+      depthWrite: false,
       side: THREE.DoubleSide,
+    });
+    const glassMaterial = new THREE.MeshBasicMaterial({
+      color: 0xabcbbb,
+      transparent: true,
+      opacity: 0.055,
       depthWrite: false,
     });
-
-    const pipeGlassMaterial = new THREE.MeshPhysicalMaterial({
-      ...glassMaterial,
-      color: 0xffa500,
+    const pipeGlassMaterial = new THREE.MeshBasicMaterial({
+      color: 0xa3e6bf,
+      transparent: true,
+      opacity: 0.35,
+      depthWrite: false,
     });
 
     const basinWidth = this.worldWidth / 2;
     const basinDepth = this.worldDepth;
 
-    const waterAMaterial = new THREE.MeshPhysicalMaterial({ ...waterMaterial });
-    const waterBMaterial = new THREE.MeshPhysicalMaterial({ ...waterMaterial });
-    const waterCMaterial = new THREE.MeshPhysicalMaterial({ ...waterMaterial });
+    const waterAMaterial = waterMaterial.clone();
+    const waterBMaterial = waterMaterial.clone();
+    const waterCMaterial = waterMaterial.clone();
 
     // Water boxes
     const waterGeom = new THREE.BoxGeometry(1, 1, 1);
@@ -419,7 +259,7 @@ class HeronFountainScene {
     this.scene.add(this.waterC);
 
     // Walls (glass)
-    const wallThickness = this.physics.wallThickness;
+    const wallThickness = 0.0045 * this.scale; // 4.5 mm plexiglass, paper Sec. IV B
     const createWall = (w, h, d, x, y, z) => {
       const geom = new THREE.BoxGeometry(w, h, d);
       const mesh = new THREE.Mesh(geom, glassMaterial.clone()); // Use clone
@@ -428,7 +268,17 @@ class HeronFountainScene {
       mesh.renderOrder = 1;
 
       this.scene.add(mesh);
-
+      const edges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(geom),
+        new THREE.LineBasicMaterial({
+          color: 0x719786,
+          transparent: true,
+          opacity: 0.45,
+        }),
+      );
+      edges.position.copy(mesh.position);
+      edges.rotation.copy(mesh.rotation);
+      this.scene.add(edges);
       return mesh;
     };
 
@@ -438,7 +288,7 @@ class HeronFountainScene {
       basinDepth + wallThickness * 2,
       0,
       -wallThickness / 2,
-      0
+      0,
     );
     createWall(
       this.worldWidth + wallThickness * 2,
@@ -446,7 +296,7 @@ class HeronFountainScene {
       basinDepth + wallThickness * 2,
       0,
       this.H_scaled,
-      0
+      0,
     );
     createWall(
       this.worldWidth + wallThickness * 2,
@@ -454,7 +304,7 @@ class HeronFountainScene {
       basinDepth + wallThickness * 2,
       0,
       this.topBasinY + this.topBasinHeight,
-      0
+      0,
     );
 
     const totalHeight = this.topBasinY + this.topBasinHeight;
@@ -464,7 +314,7 @@ class HeronFountainScene {
       basinDepth + wallThickness,
       -this.worldWidth / 2 - wallThickness / 2,
       totalHeight / 2 - wallThickness / 2,
-      0
+      0,
     );
     createWall(
       wallThickness,
@@ -472,7 +322,7 @@ class HeronFountainScene {
       basinDepth + wallThickness,
       this.worldWidth / 2 + wallThickness / 2,
       totalHeight / 2 - wallThickness / 2,
-      0
+      0,
     );
     createWall(
       this.worldWidth + wallThickness * 2,
@@ -480,7 +330,7 @@ class HeronFountainScene {
       wallThickness,
       0,
       totalHeight / 2 - wallThickness / 2,
-      -basinDepth / 2 - wallThickness / 2
+      -basinDepth / 2 - wallThickness / 2,
     );
     createWall(
       this.worldWidth + wallThickness * 2,
@@ -488,7 +338,7 @@ class HeronFountainScene {
       wallThickness,
       0,
       totalHeight / 2 - wallThickness / 2,
-      basinDepth / 2 + wallThickness / 2
+      basinDepth / 2 + wallThickness / 2,
     );
 
     // Internal divider
@@ -498,7 +348,7 @@ class HeronFountainScene {
       basinDepth,
       0,
       this.internalWallBCH / 2,
-      0
+      0,
     );
 
     // Pipes (MODIFIED for hollow appearance)
@@ -541,7 +391,17 @@ class HeronFountainScene {
 
       mesh.renderOrder = 1;
       this.scene.add(mesh);
-
+      const edges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(geom),
+        new THREE.LineBasicMaterial({
+          color: 0x719786,
+          transparent: true,
+          opacity: 0.45,
+        }),
+      );
+      edges.position.copy(mesh.position);
+      edges.rotation.copy(mesh.rotation);
+      this.scene.add(edges);
       return mesh;
     };
 
@@ -552,7 +412,7 @@ class HeronFountainScene {
       this.H_scaled, // height
       -basinWidth / 2, // x
       this.H_scaled / 2, // y_center
-      0 // z
+      0, // z
     );
 
     // Tubo 5-6 (C -> A -> Jet)
@@ -562,7 +422,7 @@ class HeronFountainScene {
       this.h6_scaled, // height
       basinWidth / 2, // x
       this.h6_scaled / 2, // y_center
-      0 // z
+      0, // z
     );
 
     // --- Water inside the pipes ---
@@ -572,7 +432,7 @@ class HeronFountainScene {
       innerR_scaled,
       innerR_scaled,
       this.H_scaled, // NOTE: This is the *original* height
-      16
+      16,
     );
     this.waterPipe14 = new THREE.Mesh(waterPipeGeom1, waterMaterial.clone());
     this.waterPipe14.position.set(-basinWidth / 2, this.H_scaled / 2, 0);
@@ -586,7 +446,7 @@ class HeronFountainScene {
       innerR_scaled,
       innerR_scaled,
       this.h6_scaled, // NOTE: This is the *original* height
-      16
+      16,
     );
     this.waterPipe56 = new THREE.Mesh(waterPipeGeom2, waterMaterial.clone());
     this.waterPipe56.position.set(basinWidth / 2, this.h6_scaled / 2, 0);
@@ -596,15 +456,10 @@ class HeronFountainScene {
     this.scene.add(this.waterPipe56);
 
     // --- Curved water jet using TubeGeometry ---
-    const cascadeMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x40a0ff,
-      transmission: 0.7,
-      thickness: 0.1 * this.scale,
-      roughness: 0.3,
-      ior: 1.33,
+    const cascadeMaterial = new THREE.MeshBasicMaterial({
+      color: 0x80c9e8,
       transparent: true,
-      opacity: 1,
-      side: THREE.DoubleSide,
+      opacity: 0.8,
       depthWrite: false,
     });
 
@@ -612,14 +467,14 @@ class HeronFountainScene {
     // this.jetRadius is now unscaled inner radius. We scale it for the geometry.
     const path = new THREE.LineCurve3(
       new THREE.Vector3(0, 0, 0),
-      new THREE.Vector3(1, 1, 1)
+      new THREE.Vector3(1, 1, 1),
     );
     const tubeGeometry = new THREE.TubeGeometry(
       path,
       20,
       this.jetRadius * s,
       8,
-      false
+      false,
     );
 
     this.waterCascade = new THREE.Mesh(tubeGeometry, cascadeMaterial);
@@ -632,7 +487,7 @@ class HeronFountainScene {
   setupGUI() {
     let gui;
     try {
-      gui = new GUI({ autoPlace: true, title: "Heron's Fountain Controls" });
+      gui = new GUI({ autoPlace: false, title: "Heron's Fountain Controls" });
     } catch (e) {
       gui = {
         domElement: document.createElement("div"),
@@ -644,19 +499,22 @@ class HeronFountainScene {
       };
     }
     this.gui = gui;
-    this.container.appendChild(gui.domElement);
-    gui.domElement.style.position = "fixed";
-    gui.domElement.style.zIndex = "19";
-    gui.domElement.style.top = "10%";
-    gui.domElement.style.right = "10%";
+    const controlsHost = document.getElementById("simulation-controls");
+    (controlsHost || this.container).appendChild(gui.domElement);
+    if (!controlsHost)
+      Object.assign(gui.domElement.style, {
+        position: "absolute",
+        top: "16px",
+        right: "16px",
+      });
 
     // const guiContainer = document.getElementById("info-panel");
     // if (guiContainer) {
     //   guiContainer.appendChild(gui.domElement);
     // }
 
-    gui.add(this.guiParams, "playPause").name("▶️ / ⏸️ Start/Pause");
-    gui.add(this.guiParams, "reset").name("🔄 Reset All");
+    gui.add(this.guiParams, "playPause").name("Play / Pause");
+    gui.add(this.guiParams, "reset").name("Reset experiment");
     gui.add(this.guiParams, "timeScale", 0.1, 5.0, 0.1).name("Time Scale");
     gui
       .add(this.guiParams, "viewMode", ["2D", "3D"])
@@ -694,10 +552,10 @@ class HeronFountainScene {
 
     // Apply the initial visual colors (for frame 0)
     // We use a subtractive (pigment) model: 1.0 - (other colors)
-    if (this.waterA) this.waterA.material.color.setRGB(1, 0, 0); // Red
-    if (this.waterB) this.waterB.material.color.setRGB(0, 1, 0); // Green
-    if (this.waterC) this.waterC.material.color.setRGB(0, 0, 1); // Blue
-    if (this.waterCascade) this.waterCascade.material.color.setRGB(0, 0, 1);
+    if (this.waterA) this.waterA.material.color.set("#d99885");
+    if (this.waterB) this.waterB.material.color.set("#96c59a");
+    if (this.waterC) this.waterC.material.color.set("#78b9d1");
+    if (this.waterCascade) this.waterCascade.material.color.set("#78b9d1");
   }
 
   // --- *** REVERTED ***: resetAll
@@ -772,7 +630,8 @@ class HeronFountainScene {
     const v4 = Math.max(0, this.physics.v4);
 
     // Set a minimum threshold for visibility
-    if (v4 < 0.1 || !this.guiParams.isRunning) {
+    if (v4 < 0.001) {
+      this.h_jet = 0;
       this.waterCascade.visible = false;
       return;
     }
@@ -830,26 +689,22 @@ class HeronFountainScene {
     const p0 = new THREE.Vector3(nozzleX, nozzleY, nozzleZ);
     const p3 = new THREE.Vector3(endX, endY, endZ);
 
-    // 1. Calculate Apex Position (Scaled)
-    const t_apex = v_y0 / G; // Time to reach max height (unscaled)
-    const apexY = nozzleY + v_y0 * t_apex * s - 0.5 * G * t_apex * t_apex * s;
-    const apexX = nozzleX + horizontalOffset / 2.0;
-
-    const actualApexY = Math.max(apexY, nozzleY);
-
-    // 2. Control Point 1 (P1):
-    const p1 = new THREE.Vector3(
-      p0.x + (p3.x - p0.x) * (1 / 3),
-      actualApexY, // Force control point to height of apex
-      p0.z
-    );
-
-    // 3. Control Point 2 (P2):
-    const p2 = new THREE.Vector3(
-      p0.x + (p3.x - p0.x) * (2 / 3),
-      actualApexY, // Force control point to height of apex
-      p3.z
-    );
+    const p1 = p0
+      .clone()
+      .add(
+        new THREE.Vector3(-v_x0 * s, v_y0 * s, 0).multiplyScalar(
+          timeToFall / 3,
+        ),
+      );
+    const p2 = p3
+      .clone()
+      .sub(
+        new THREE.Vector3(
+          -v_x0 * s,
+          (v_y0 - G * timeToFall) * s,
+          0,
+        ).multiplyScalar(timeToFall / 3),
+      );
 
     // Create the new curve
     this.cascadeCurve = new THREE.CubicBezierCurve3(p0, p1, p2, p3);
@@ -867,7 +722,7 @@ class HeronFountainScene {
       segments,
       this.jetRadius * s, // Use scaled inner radius
       8,
-      false
+      false,
     );
 
     // Update h_jet for the display
@@ -878,104 +733,37 @@ class HeronFountainScene {
   updateWaterColors(dt) {
     if (dt <= 0) return; // Do not run if time is not advancing
 
-    const epsilon = 1e-6; // Prevent division by zero
+    const epsilon = 1e-15;
+    const volA = Math.max(epsilon, this.physics.h_A * this.physics.S_A);
+    const volB = Math.max(epsilon, this.physics.h_B * this.physics.S_B);
+    const volC = Math.max(epsilon, this.physics.h_C * this.physics.S_C);
+    const ca = this.physics.transferredCA,
+      ab = this.physics.transferredAB;
+    const transfer = (source, target, fraction) => {
+      for (const key of ["r", "g", "b"]) {
+        const mass = source[key] * Math.min(1, Math.max(0, fraction));
+        source[key] -= mass;
+        target[key] += mass;
+      }
+    };
+    transfer(this.dyeMassC, this.dyeMassA, ca / Math.max(epsilon, volC + ca));
+    transfer(this.dyeMassA, this.dyeMassB, ab / Math.max(epsilon, volA + ab));
 
-    // --- 1. Get current volumes from physics ---
-    const volA = this.physics.h_A * this.physics.S_A + epsilon;
-    const volB = this.physics.h_B * this.physics.S_B + epsilon;
-    const volC = this.physics.h_C * this.physics.S_C + epsilon;
-
-    // --- 2. Get volumetric flow rates (m³/s) and flow volumes (m³) ---
-    // Q_C4 = (dhC/dt) * S_C = (gamma * v4) * S_C
-    const flowVolume_CA =
-      this.physics.gamma * this.physics.v4 * this.physics.S_C * dt;
-    // Q_AB = (dhB/dt) * S_B = (beta * v2) * S_B
-    const flowVolume_AB =
-      this.physics.beta * this.physics.v2 * this.physics.S_B * dt;
-
-    // --- 3. Mass Transfer: C -> A (Jet) ---
-    if (flowVolume_CA > 0 && this.physics.v4 > 0.01) {
-      // Find concentration (mass/volume) in C
-      const concR_C = this.dyeMassC.r / volC;
-      const concG_C = this.dyeMassC.g / volC;
-      const concB_C = this.dyeMassC.b / volC;
-
-      // Find mass transferred (concentration * flow_volume)
-      const massR_flow = concR_C * flowVolume_CA;
-      const massG_flow = concG_C * flowVolume_CA;
-      const massB_flow = concB_C * flowVolume_CA;
-
-      // Update masses in A and C
-      this.dyeMassA.r += massR_flow;
-      this.dyeMassA.g += massG_flow;
-      this.dyeMassA.b += massB_flow;
-
-      this.dyeMassC.r = Math.max(0, this.dyeMassC.r - massR_flow);
-      this.dyeMassC.g = Math.max(0, this.dyeMassC.g - massG_flow);
-      this.dyeMassC.b = Math.max(0, this.dyeMassC.b - massB_flow);
-    }
-
-    // --- 4. Mass Transfer: A -> B (Pipe) ---
-    if (flowVolume_AB > 0 && this.physics.v2 > 0.01) {
-      // Find concentration (mass/volume) in A
-      const concR_A = this.dyeMassA.r / volA;
-      const concG_A = this.dyeMassA.g / volA;
-      const concB_A = this.dyeMassA.b / volA;
-
-      // Find mass transferred (concentration * flow_volume)
-      const massR_flow = concR_A * flowVolume_AB;
-      const massG_flow = concG_A * flowVolume_AB;
-      const massB_flow = concB_A * flowVolume_AB;
-
-      // Update masses in B and A
-      this.dyeMassB.r += massR_flow;
-      this.dyeMassB.g += massG_flow;
-      this.dyeMassB.b += massB_flow;
-
-      this.dyeMassA.r = Math.max(0, this.dyeMassA.r - massR_flow);
-      this.dyeMassA.g = Math.max(0, this.dyeMassA.g - massG_flow);
-      this.dyeMassA.b = Math.max(0, this.dyeMassA.b - massB_flow);
-    }
-
-    // --- 5. Apply Visual Colors (Subtractive Pigment Model) ---
-    // This model correctly mixes R+B=Purple and R+G+B=Brown/Black.
-
-    // Clamp concentration (0.0 to 1.0) for the color model
-    const clamp = (val) => Math.max(0, Math.min(val, 1.0));
-
-    // Calculate concentrations in A
-    const cR_A = clamp(this.dyeMassA.r / volA / this.initialConcentration);
-    const cG_A = clamp(this.dyeMassA.g / volA / this.initialConcentration);
-    const cB_A = clamp(this.dyeMassA.b / volA / this.initialConcentration);
-
-    // Calculate concentrations in B
-    const cR_B = clamp(this.dyeMassB.r / volB / this.initialConcentration);
-    const cG_B = clamp(this.dyeMassB.g / volB / this.initialConcentration);
-    const cB_B = clamp(this.dyeMassB.b / volB / this.initialConcentration);
-
-    // Calculate concentrations in C
-    const cR_C = clamp(this.dyeMassC.r / volC / this.initialConcentration);
-    const cG_C = clamp(this.dyeMassC.g / volC / this.initialConcentration);
-    const cB_C = clamp(this.dyeMassC.b / volC / this.initialConcentration);
-
-    // Apply subtractive mixing: Color = 1.0 - (other pigments)
-    this.waterA.material.color.setRGB(
-      clamp(1.0 - cG_A - cB_A),
-      clamp(1.0 - cR_A - cB_A),
-      clamp(1.0 - cR_A - cG_A)
+    // Illustrative tracer colors; dye mass transfer is conservative, optics is schematic.
+    const palette = ["#d99885", "#96c59a", "#78b9d1"].map(
+      (hex) => new THREE.Color(hex),
     );
-
-    this.waterB.material.color.setRGB(
-      clamp(1.0 - cG_B - cB_B),
-      clamp(1.0 - cR_B - cB_B),
-      clamp(1.0 - cR_B - cG_B)
-    );
-
-    this.waterC.material.color.setRGB(
-      clamp(1.0 - cG_C - cB_C),
-      clamp(1.0 - cR_C - cB_C),
-      clamp(1.0 - cR_C - cG_C)
-    );
+    const color = (mesh, mass, volume) => {
+      mesh.material.color.setRGB(0, 0, 0);
+      ["r", "g", "b"].forEach((key, i) => {
+        mesh.material.color.add(
+          palette[i].clone().multiplyScalar(Math.min(1, mass[key] / volume)),
+        );
+      });
+    };
+    color(this.waterA, this.dyeMassA, volA);
+    color(this.waterB, this.dyeMassB, volB);
+    color(this.waterC, this.dyeMassC, volC);
 
     // Jet, Pipe 1-4, and Pipe 5-6 take the color of their source basin
     this.waterCascade.material.color.copy(this.waterC.material.color);
@@ -1029,7 +817,7 @@ class HeronFountainScene {
       // (new_height / original_height)
       this.waterPipe14.scale.y = Math.max(
         0.001,
-        waterHeight_scaled / this.H_scaled
+        waterHeight_scaled / this.H_scaled,
       );
 
       // We must also move its position to the new center.
@@ -1062,7 +850,7 @@ class HeronFountainScene {
       // We must scale its Y-axis to match the new calculated height
       this.waterPipe56.scale.y = Math.max(
         0.001,
-        h_pipe_scaled / this.h6_scaled
+        h_pipe_scaled / this.h6_scaled,
       );
 
       // We must also move its position, as the center of the
@@ -1103,7 +891,11 @@ class HeronFountainScene {
     const vector = vector3.clone().project(camera);
     vector.x = ((vector.x + 1) / 2) * width;
     vector.y = (-(vector.y - 1) / 2) * height;
-    return { x: vector.x, y: vector.y };
+    // Keep the readouts inside the viewport when orbiting or using a phone.
+    return {
+      x: Math.max(50, Math.min(width - 50, vector.x)),
+      y: Math.max(60, Math.min(height - 65, vector.y)),
+    };
   }
 
   updateTextLabels() {
@@ -1115,14 +907,14 @@ class HeronFountainScene {
     const posA = new THREE.Vector3(
       0,
       this.H_scaled + this.topBasinHeight - 1,
-      0
+      0,
     );
-    const posB = new THREE.Vector3(-this.worldWidth / 4, this.H_scaled - 1, 0);
-    const posC = new THREE.Vector3(this.worldWidth / 4, this.H_scaled - 1, 0);
+    const posB = new THREE.Vector3(-this.worldWidth * 0.65, 2, 0);
+    const posC = new THREE.Vector3(this.worldWidth * 0.65, 2, 0);
     const posJet = new THREE.Vector3(
-      this.worldWidth / 8,
+      this.worldWidth * 0.85,
       this.h6_scaled + 2,
-      0
+      0,
     );
 
     const screenPosA = this.toScreenPosition(posA, this.camera, canvas);
@@ -1159,10 +951,10 @@ class HeronFountainScene {
                 `;
 
     this.textGroups.Time.style.left = `50%`;
-    this.textGroups.Time.style.top = `100px`;
+    this.textGroups.Time.style.top = `16px`;
 
     const status = this.physics.isStable
-      ? "STABLE (B empty)"
+      ? this.physics.stopReason
       : this.guiParams.isRunning
         ? "RUNNING"
         : "PAUSED";
@@ -1187,7 +979,7 @@ class HeronFountainScene {
 
     this.renderer.setSize(
       this.container.clientWidth,
-      this.container.clientHeight
+      this.container.clientHeight,
     );
   }
 
@@ -1201,7 +993,8 @@ class HeronFountainScene {
 
     if (this.guiParams.isRunning) {
       // Get the real time delta, uncapped
-      const delta = this.clock.getDelta() * this.guiParams.timeScale;
+      const delta =
+        Math.min(this.clock.getDelta(), 0.05) * this.guiParams.timeScale;
 
       this.elapsedTime += delta;
 
@@ -1244,4 +1037,3 @@ export function init(containerId = "scene-container") {
 
 export { HeronFountainScene, HeronPhysics };
 export default HeronFountainScene;
-

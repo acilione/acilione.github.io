@@ -14,9 +14,15 @@
   "author": "Antonino Cilione",
   "type": "module",
   "scripts": {
-    "start": "parcel src/index.html --port 1234",
-    "build": "parcel build src/index.html src/cv.html src/bubble_simulation.html --dist-dir docs --public-url ./",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel src/index.html src/projects.html src/cv.html src/heron_fountain_simulation.html src/bubble_simulation.html src/boyles_flask.html --port 1234",
+    "build": "parcel build src/index.html src/projects.html src/cv.html src/heron_fountain_simulation.html src/bubble_simulation.html src/boyles_flask.html --dist-dir docs --public-url ./",
+    "test": "node --test tests/*.test.js",
+    "cv:setup": "playwright install chromium",
+    "cv:build": "node scripts/build-cv.mjs",
+    "cv:check": "node scripts/check-cv.mjs",
+    "site:check": "node scripts/check-site.mjs",
+    "prebuild": "npm run cv:build",
+    "prestart": "npm run cv:build"
   },
   "dependencies": {
     "lil-gui": "^0.21.0",
@@ -24,6 +30,16 @@
     "three": "^0.180.0"
   },
   "devDependencies": {
-    "parcel": "^2.16.0"
+    "parcel": "^2.16.0",
+    "pdfjs-dist": "6.3.289",
+    "playwright": "1.63.0"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "targets": {
+    "default": {
+      "context": "browser"
+    }
   }
 }

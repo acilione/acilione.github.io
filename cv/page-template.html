@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Antonino Cilione: data engineering, backend development, and full-stack projects. Download the CV as PDF or Markdown."
+    />
+    <title>CV - Antonino Cilione</title>
+    <script type="module" src="scripts/set_theme.js"></script>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+    <link rel="stylesheet" href="styles/cv.css" />
+    <script type="module" src="scripts/navbar.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#cv-content">Skip to CV</a>
+    <div id="navbar-container"></div>
+    <main class="cv-page">
+      <div class="cv-toolbar" aria-label="CV downloads">
+        <div>
+          <span class="eyebrow">Experience &amp; selected work</span>
+          <p>A background in data. A broader view of software.</p>
+        </div>
+        <div class="cv-downloads">
+          <a
+            class="button primary"
+            href="url:downloads/Antonino_Cilione_CV.pdf"
+            download="Antonino_Cilione_CV.pdf"
+            >Download PDF <span aria-hidden="true">↓</span></a
+          >
+          <a
+            class="button"
+            href="url:downloads/Antonino_Cilione_CV.md"
+            download="Antonino_Cilione_CV.md"
+            >Download Markdown <span aria-hidden="true">↓</span></a
+          >
+        </div>
+      </div>
+      <article id="cv-content" aria-label="Antonino Cilione CV">
+        {{CV_CONTENT}}
+      </article>
+    </main>
+  </body>
+</html>

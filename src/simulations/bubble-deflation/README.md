@@ -1,63 +1,22 @@
-# Soap Bubble Deflation Simulation
+# Soap bubble deflation
 
-A physics simulation of soap bubble deflation through a straw, based on the academic paper:
+Based on Provenzano & Stefanini, *Unblowing bubbles: Understanding the physics of bubble deflation through a straw*, American Journal of Physics 93 (2025), DOI [10.1119/5.0254263](https://doi.org/10.1119/5.0254263).
 
-> **"Unblowing bubbles: Understanding the physics of bubble deflation through a straw"**  
-> Provenzano & Stefanini, Am. J. Phys. 93, 797–805 (2025)  
-> DOI: [10.1119/5.0254263](https://doi.org/10.1119/5.0254263)
-
-## Features
-
-- **Accurate physics**: Implements the generalized model from the paper (Eq. 23)
-- **Three.js visualization**: Real-time 3D bubble rendering
-- **Soap effect**: Optional iridescent thin-film interference shader
-- **Interactive controls**: Adjust initial radius, straw lengths, 2D/3D view
+The generalized time-radius model follows Eq. (23), with A = 16.19 mm² (Table I), σ = 0.0248 N/m, μ = 1.84 × 10⁻⁵ Pa·s, and ρ = 1.22 kg/m³ (Eq. 30). Numerical integration builds a cached monotone time table. Each rendered frame only needs a binary search and interpolation.
 
 ## Usage
 
-### Standalone (copy this folder)
+```js
+import { init } from './bubble.js';
+const simulation = init('scene-container');
 
-```html
-<div id="my-simulation" class="bubble-simulation-container"></div>
-<script type="module">
-  import { init } from './bubble.js';
-  init('my-simulation');
-</script>
+// Headless calculation:
+import { createBubbleTimeline } from './physics.js';
+const timeline = createBubbleTimeline(0.1, 0.04); // L and R0 in metres
+console.log(timeline.duration); // seconds
+console.log(timeline.radiusAt(1)); // metres
 ```
 
-### As ES Module
+Provide a container with a nonzero width and height. Install `three` and `lil-gui` and serve through an ES-module bundler such as Parcel. The local demo is `index.html`; the website page is `../../bubble_simulation.html`.
 
-```javascript
-import { DeflatingBubbleScene } from './bubble.js';
-const sim = new DeflatingBubbleScene('container-id');
-```
-
-## Dependencies
-
-- [Three.js](https://threejs.org/) - 3D rendering
-- [lil-gui](https://lil-gui.georgealways.com/) - GUI controls
-
-Install via npm:
-```bash
-npm install three lil-gui
-```
-
-## Files
-
-| File | Description |
-|------|-------------|
-| `bubble.js` | Main simulation module (physics + visualization) |
-| `bubble.css` | Standalone styles |
-| `index.html` | Demo page |
-
-## Physics Constants
-
-From paper Eq. 30:
-- Surface tension σ = 2.48 × 10⁻² N/m
-- Air viscosity μ = 1.84 × 10⁻⁵ Pa·s
-- Air density ρ = 1.22 kg/m³
-- Straw area A = 16.19 mm²
-
-## License
-
-Based on open-access research (CC BY-NC 4.0).
+The spherical approximation fails when radius approaches straw radius; zero radius is an extrapolated model endpoint. The film shader is illustrative. See [the review](../../../SIMULATION_REVIEW.md) for corrections and validation; run `npm test` from the repository root.

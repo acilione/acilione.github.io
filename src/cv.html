@@ -1,19 +1,146 @@
-<!DOCTYPE html>
+<!-- Generated from cv/Antonino_Cilione_CV.md and cv/page-template.html. -->
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="module" src="scripts/set_theme.js"></script>
-  <title>CV</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/styles.css">
-  <link rel="stylesheet" href="styles/navbar.css">
-  <link rel="stylesheet" href="styles/cv.css">
-  <script type="module" src="scripts/navbar.js" defer></script>
-  <script type="module" src="scripts/cv.js" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Antonino Cilione: data engineering, backend development, and full-stack projects. Download the CV as PDF or Markdown."
+    />
+    <title>CV - Antonino Cilione</title>
+    <script type="module" src="scripts/set_theme.js"></script>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+    <link rel="stylesheet" href="styles/cv.css" />
+    <script type="module" src="scripts/navbar.js"></script>
   </head>
-<body>
+  <body>
+    <a class="skip-link" href="#cv-content">Skip to CV</a>
     <div id="navbar-container"></div>
-    <div id="cv-content"></div>
-</body>
+    <main class="cv-page">
+      <div class="cv-toolbar" aria-label="CV downloads">
+        <div>
+          <span class="eyebrow">Experience &amp; selected work</span>
+          <p>A background in data. A broader view of software.</p>
+        </div>
+        <div class="cv-downloads">
+          <a
+            class="button primary"
+            href="url:downloads/Antonino_Cilione_CV.pdf"
+            download="Antonino_Cilione_CV.pdf"
+            >Download PDF <span aria-hidden="true">↓</span></a
+          >
+          <a
+            class="button"
+            href="url:downloads/Antonino_Cilione_CV.md"
+            download="Antonino_Cilione_CV.md"
+            >Download Markdown <span aria-hidden="true">↓</span></a
+          >
+        </div>
+      </div>
+      <article id="cv-content" aria-label="Antonino Cilione CV">
+        <section class="resume-contact" data-section="contact">
+<h1>Antonino Cilione</h1>
+<p>Data Engineer | Software Engineer</p>
+<p>Reggio Calabria, Italy | +39 347 252 7757 | <a href="mailto:antoninocilione96@gmail.com">antoninocilione96@gmail.com</a></p>
+<p><a href="https://github.com/acilione">github.com/acilione</a> | <a href="https://acilione.github.io">acilione.github.io</a><br><a href="https://www.linkedin.com/in/antonino-cilione-1258291a6/">linkedin.com/in/antonino-cilione-1258291a6</a></p>
+
+</section>
+<section class="resume-section" data-section="summary">
+<h2>Summary</h2>
+<p>Data engineer with 4+ years of experience building distributed data platforms for the energy sector. Develops data pipelines, optimizes Spark workloads, and builds Java/Kotlin backend services. Combines production data engineering with full-stack projects using Python, SQL, TypeScript, and Node.js, including analytical platforms and real-time applications.</p>
+
+</section>
+<section class="resume-section" data-section="technical-skills">
+<h2>Technical Skills</h2>
+<ul>
+<li><strong>Data engineering:</strong> Apache Spark, Kafka, Flink, Iceberg, NiFi, dbt, Airflow, Trino; ETL, stream processing, data quality, data modeling.</li>
+<li><strong>Programming and backend:</strong> Python, Java, Kotlin, Scala, SQL, TypeScript, JavaScript, C, Bash; Spring Boot, Node.js, Express, React, REST APIs, Socket.IO.</li>
+<li><strong>Storage and platforms:</strong> PostgreSQL, ClickHouse, MongoDB Atlas, Redis, Parquet, AWS S3, MinIO, Cloudera CDP, Docker, Kubernetes, Git.</li>
+<li><strong>Software delivery:</strong> Unit and integration testing, GitHub Actions, CI/CD; Prometheus and Grafana in personal projects.</li>
+</ul>
+
+</section>
+<section class="resume-section" data-section="work-experience">
+<h2>Work Experience</h2>
+<h3>Big Data Engineer - Enel</h3>
+<p>Jul 2022 - Present</p>
+<ul>
+<li>Build and maintain pipelines for medium- and low-voltage grid measurements using Apache Spark and Kafka, supporting downstream energy-grid analysis.</li>
+<li>Led a migration from Cloudera Distribution Hadoop (CDH) to Cloudera Data Platform (CDP), modernizing the distributed data infrastructure.</li>
+<li>Develop and tune Spark ETL workloads and Apache NiFi ingestion flows; benchmark Apache Iceberg with Spark and Flink.</li>
+<li>Implemented custom equality-delete file commits in Spark workloads using Apache Iceberg.</li>
+<li>Optimize MongoDB Atlas indexes, memory usage, and autoscaling; integrate Redis caching through Redisson in Spark jobs.</li>
+<li>Build Java/Kotlin microservices with Spring Boot to expose MongoDB data through APIs.</li>
+<li>Automate S3 Parquet merge, deduplication, backup, and restore operations with Python, and Kafka/S3 checks with Bash.</li>
+<li>Built a Go desktop tool with Fyne to automate Excel processing, data filtering, and report generation.</li>
+</ul>
+<h3>Android Developer - Iriscube Reply</h3>
+<p>Feb 2022 - Jul 2022</p>
+<ul>
+<li>Developed features and fixed defects in a corporate Android banking application.</li>
+<li>Migrated application code from Java to Kotlin and maintained existing functionality.</li>
+</ul>
+
+</section>
+<section class="resume-section" data-section="education">
+<h2>Education</h2>
+<h3>Bachelor of Engineering in Software Engineering - University of Catania</h3>
+<p>Oct 2018 - Mar 2022</p>
+<p>Thesis: Implementation of learning algorithms on microcontrollers. Developed a Human Activity Recognition (HAR) model on an STM microcontroller using TensorFlow Lite.</p>
+
+</section>
+<section class="resume-section" data-section="projects">
+<h2>Projects</h2>
+<h3><a href="https://github.com/acilione/payment-risk">Payment Risk / Pulse</a></h3>
+<ul>
+<li>Built a Java/Flink reference pipeline for synthetic Kafka payments with event-time ordering, deduplication, stateful risk rules, and transactional output; added ClickHouse analytics and a React/TypeScript dashboard for explainable decisions and pipeline health.</li>
+</ul>
+<h3><a href="https://github.com/acilione/marketplace_lakehouse">Marketplace Lakehouse</a></h3>
+<ul>
+<li>Built a local Kafka/Spark Structured Streaming lakehouse with Iceberg, Trino, SCD Type 2, and data-quality gates; added a TypeScript dashboard, Airflow orchestration, and Prometheus/Grafana monitoring.</li>
+</ul>
+<h3><a href="https://github.com/acilione/milano_mobility">Milano Mobility</a></h3>
+<ul>
+<li>Built a Python/PostgreSQL/dbt/MinIO transport-data pipeline with versioned archives, validation, and tested historical models; added a TypeScript/MapLibre commute explorer and timetable-aware routing API.</li>
+</ul>
+<h3><a href="https://github.com/acilione/kamisado">Kamisado</a></h3>
+<ul>
+<li>Built a TypeScript/Node.js/Socket.IO multiplayer game and Electron host with server-authoritative rules, synchronized timers, reconnection, and automated game-rule and socket integration tests.</li>
+</ul>
+<h3><a href="https://github.com/acilione/b-l475e-iot01a-audio-recording-example">STM32 Microphone Recorder</a></h3>
+<ul>
+<li>Developed C firmware for MEMS microphone capture using DFSDM/DMA and a Python receiver saving 16 kHz WAV audio over ST-LINK USB; implemented button controls, buffering, checksums, and host tests.</li>
+</ul>
+<h3><a href="https://acilione.github.io/projects.html">Interactive Physics Simulations</a></h3>
+<ul>
+<li>Implemented research-based Three.js fluid simulations and Python/Manim animations, with numerical tests for conservation laws, analytical limits, and stopping behavior.</li>
+</ul>
+
+</section>
+<section class="resume-section" data-section="achievements">
+<h2>Achievements</h2>
+<ul>
+<li><strong>MALLORN Astronomical Classification Challenge, Kaggle:</strong> Ranked 58th of 894 participants, classifying astronomical transients to identify tidal disruption events.</li>
+<li><strong>University of Catania Game Jam:</strong> First prize for Greta&#39;s Adventures, an environmental platformer developed with Unity and C#.</li>
+</ul>
+
+</section>
+<section class="resume-section" data-section="certifications-and-training">
+<h2>Certifications and Training</h2>
+<ul>
+<li>Improving Deep Neural Networks - DeepLearning.AI, Coursera.</li>
+<li>Algorithm Toolbox - UC San Diego, Coursera.</li>
+</ul>
+
+</section>
+<section class="resume-section" data-section="languages">
+<h2>Languages</h2>
+<p>Italian: Native. English: Proficient; Cambridge English: First (FCE).</p>
+
+</section>
+      </article>
+    </main>
+  </body>
 </html>

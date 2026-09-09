@@ -1,243 +1,93 @@
-/* ===== isolation / override section =====
-   Prevent other stylesheets (e.g. projects.css) from leaking
-   into the navbar. Rules are scoped to #main-navbar and use
-   explicit reset values so the navbar looks the same across pages.
-*/
-#main-navbar,
-#main-navbar * {
-    box-sizing: border-box;
+#navbar-container {
+  position: relative;
+  z-index: 30;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
 }
-
-/* Reset/normalise elements inside the navbar so external rules
-   (fonts, margins, list styles, link decorations) cannot leak in */
-#main-navbar ul {
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
-}
-
-#main-navbar li {
-    /* keep padding reset but allow margin-based spacing to be applied
-         via more specific rules (we avoid forcing margin:0 !important on li) */
-    padding: 0 !important;
-}
-
-#main-navbar a {
-    text-decoration: none !important;
-    color: inherit !important;
-    background: none !important;
-    border: none !important;
-    font: inherit !important;
-    line-height: normal !important;
-}
-
 #main-navbar {
-    background-color: var(--card-bg);
+  max-width: 1276px;
+  margin: auto;
+  height: 88px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  gap: 38px;
+}
+.logo {
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-mark {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  font: 12px monospace;
+  transform: rotate(-6deg);
+}
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+.nav-links a {
+  color: var(--muted);
+  padding: 10px 0;
+}
+.nav-links a.active,
+.nav-links a:hover {
+  color: var(--text);
+}
+.nav-links a.active {
+  border-bottom: 1px solid var(--accent);
+}
+.theme-toggle,
+.menu-toggle {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 7px 11px;
+  font-size: 11px;
+}
+.menu-toggle,
+.mobile-nav {
+  display: none;
+}
+@media (max-width: 760px) {
+  #main-navbar {
+    height: 72px;
     padding: 0 20px;
-    box-shadow: var(--shadow);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 20;
-}
-
-/* Logo and links: use the same font so logo and navigation
-   items look consistent. Spacing tuned for balance. */
-#main-navbar .logo {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--text);
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-    margin-right: 20px;
-    letter-spacing: 0.04em;
-}
-
-/* Navigation Links */
-#main-navbar .nav-links {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
     gap: 14px;
-    /* tighter spacing so links sit adjacent to the theme toggle */
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* remove extra left margin on list items so nav can be pushed to the right */
-#main-navbar .nav-links li {
-    margin-left: 0;
-}
-
-/* push the desktop navigation to the right (next to .nav-actions) */
-#main-navbar .desktop-nav {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-}
-
-#main-navbar .nav-links a {
-    text-decoration: none;
-    color: var(--muted);
-    font-weight: 400;
-    padding: 18px 0;
+  }
+  .desktop-nav {
+    display: none;
+  }
+  .menu-toggle {
     display: block;
-    position: relative;
-    /* for the pseudo-element underline */
-    transition: color 0.2s ease, font-weight 0.2s ease;
-    text-transform: uppercase;
-    font-size: 0.95em;
-    letter-spacing: 0.03em;
-}
-
-/* Underline indicator implemented with ::after so it doesn't shift layout */
-#main-navbar .nav-links a::after {
-    content: '';
+  }
+  .mobile-nav.open {
+    display: block;
     position: absolute;
     left: 0;
     right: 0;
-    height: 3px;
-    background-color: transparent;
-    bottom: 8px;
-    /* place the underline slightly above the bottom of the nav link area */
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    transform: scaleX(0);
-    transform-origin: left center;
-}
-
-/* Active and Hover States */
-#main-navbar .nav-links a.active {
-    color: var(--accent);
-    font-weight: 600;
-}
-
-#main-navbar .nav-links a.active::after {
-    background-color: var(--accent);
-    transform: scaleX(1);
-}
-
-#main-navbar .nav-links a:hover {
-    color: var(--accent);
-}
-
-/* Menu toggle */
-#main-navbar .menu-toggle {
-    display: none;
+    top: 72px;
+    background: var(--surface);
+    padding: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-nav .nav-links {
     flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 20;
-}
-
-#main-navbar .menu-toggle .line {
-    width: 100%;
-    height: 3px;
-    background-color: var(--text);
-    transition: all 0.3s linear;
-    transform-origin: left center;
-}
-
-#main-navbar .menu-toggle.open .line:nth-child(1) {
-    transform: rotate(45deg);
-    width: 120%;
-}
-
-#main-navbar .menu-toggle.open .line:nth-child(2) {
-    opacity: 0;
-    transform: translateX(20px);
-}
-
-#main-navbar .menu-toggle.open .line:nth-child(3) {
-    transform: rotate(-45deg);
-    width: 120%;
-}
-
-/* Mobile Navigation Menu */
-#main-navbar .mobile-nav {
-    display: block;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background-color: var(--card-bg);
-    box-shadow: var(--shadow);
-    height: 0;
-    overflow: hidden;
-    transition: height 0.3s ease-in-out;
-    z-index: 10;
-}
-
-#main-navbar .mobile-nav.open {
-    height: auto;
-}
-
-#main-navbar .mobile-nav .nav-links {
-    flex-direction: column;
-    text-align: center;
-    padding: 10px 0;
-    gap: 8px;
-}
-
-#main-navbar .mobile-nav .nav-links li {
-    margin: 0;
-}
-
-#main-navbar .mobile-nav .nav-links a {
-    padding: 15px;
-    border-bottom: 1px solid var(--muted-border);
-}
-
-#main-navbar .mobile-nav .nav-links a:last-child {
-    border-bottom: none;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    #main-navbar .desktop-nav {
-        display: none;
-    }
-
-    #main-navbar .menu-toggle {
-        display: flex;
-    }
-}
-
-/* Theme toggle button in navbar */
-#main-navbar .theme-toggle {
-    background: transparent;
-    border: 1px solid var(--muted-border);
-    color: inherit;
-    padding: 6px 8px;
-    border-radius: 6px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-left: 3vw;
-    font-size: 0.9rem;
-}
-
-#main-navbar .theme-toggle .theme-icon {
-    width: 16px;
-    height: 16px;
-    display: inline-block
-}
-
-/* mobile placement: full-width button inside mobile menu */
-#main-navbar .mobile-nav .theme-toggle {
-    width: calc(100% - 2rem);
-    margin: 0.5rem 1rem;
-}
-
-#main-navbar {
-    z-index: 9999;
+    gap: 18px;
+  }
 }

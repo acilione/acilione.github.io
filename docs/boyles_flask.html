@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang=en><script type=module src=bubble_simulation.a8c57dc3.js></script><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1"><title>Boyle’s self-flowing flask — Antonino Cilione</title><script type=module src=acilione.github.io.82430209.js></script><link rel=stylesheet href=acilione.github.io.0860d162.css><link rel=stylesheet href=acilione.github.io.df0af4c6.css><link rel=stylesheet href=heron_fountain_simulation.bc378db3.css><script type=module src=acilione.github.io.238d4610.js></script><body class=simulation-page>
+    <div id=navbar-container></div>
+    <main class=content>
+      <header class=simulation-heading>
+        <div>
+          <a class=section-index href=projects.html>← Experiments / 03 / Unsteady flow</a>
+          <h1>Boyle’s self-flowing flask</h1>
+        </div>
+        <p>
+          Give the water an initial push. Watch gravity and viscosity bring its
+          motion to a halt.
+        </p>
+      </header>
+      <div class=lab-layout>
+        <div id=scene-container role=img aria-label="Interactive self-flowing flask visualization"></div>
+        <aside class=lab-sidebar>
+          <p class=controls-heading>Experiment controls</p>
+          <div id=simulation-controls></div>
+          <div id=status-readout></div>
+          <details class=model-note open>
+            <summary>The model</summary>
+            <p>
+              An initial push sends water through a hose and back into the
+              vessel. With the outlet above the water surface, gravity and
+              viscous resistance gradually reduce the flow until it stops.
+              The model follows this loss of momentum over time.
+            </p>
+            <p>
+              The vessel has a constant cross section, and returning water is
+              assumed to keep its level constant. Pipe flow is treated as
+              laminar, with a rounded inlet. The hose drawing is schematic,
+              and the jet’s return delay is neglected.
+            </p>
+            <a href=https://doi.org/10.1088/1361-6404/ae280c>Read the paper ↗</a>
+          </details>
+        </aside>
+      </div>
+      <div class=lab-caption>
+        <span>Drag to orbit · Scroll to zoom</span><span>W dv/dt = Xv² + Yv + Z</span>
+      </div>
+    </main>
+    <script type=module src=boyles_flask.c3953218.js></script>

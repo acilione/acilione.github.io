@@ -1,279 +1,373 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="scripts/set_theme.js"></script>
     <title>Projects</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/navbar.css" />
     <link rel="stylesheet" href="styles/projects.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script type="module" src="scripts/navbar.js" defer></script>
   </head>
   <body>
     <div id="navbar-container"></div>
     <main class="content hero-page">
       <!-- Subtitle directly under the navbar, same font as the index hero -->
-      <div class="hero">
-        <h1>Personal projects</h1>
-      </div>
+      <header class="page-header">
+        <div class="eyebrow">Selected work / Ongoing explorations</div>
+        <h1>Built out of curiosity.</h1>
+        <p>
+          Experiments in physics, software, and play. A collection of things
+          I’ve made and ideas I’m still exploring.
+        </p>
+      </header>
 
       <div id="projects-content">
-      <h2 class="category-heading">Physics</h2>
-      
-      <div class="project-group">
-        
-        <div class="project-item grouped-item">
-          <div class="project-title">
-            Deflating Bubble Animation (Three.js)
-          </div>
+        <h2 class="category-heading">Data Engineering</h2>
+        <div class="project-item">
+          <div class="project-title">Payment Risk / Pulse</div>
           <div class="project-actions">
-            <a href="bubble_simulation.html" class="action-link live-app" title="Try the live application">
-              <i class="fas fa-external-link-alt"></i> Try It
+            <a
+              href="https://acilione.github.io/payment-risk/"
+              class="action-link live-app"
+              >Try the demo</a
+            >
+            <a
+              href="https://github.com/acilione/payment-risk"
+              class="action-link source-code"
+              >Source code</a
+            >
+          </div>
+          <div class="project-description">
+            A Java and Apache Flink reference application that turns synthetic
+            Kafka payments into explainable risk decisions. Combines event-time
+            processing, deduplication, stateful rules, and transactional output
+            with ClickHouse analytics. Pulse, its React dashboard, makes
+            decisions and pipeline health explorable. The hosted demo uses
+            synthetic data.
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">Java, TypeScript</small>
+            <small class="detail-tag library-tag"
+              >Flink, Kafka, ClickHouse, React</small
+            >
+          </div>
+        </div>
+
+        <h2 class="category-heading">Physics</h2>
+
+        <div class="project-group">
+          <div class="project-item grouped-item">
+            <div class="project-title">
+              Deflating Bubble Animation (Three.js)
+            </div>
+            <div class="project-actions">
+              <a
+                href="bubble_simulation.html"
+                class="action-link live-app"
+                title="Try the live application"
+              >
+                Try It
+              </a>
+            </div>
+            <div class="project-description">
+              A Three.js interactable simulation and implementation of physics
+              paper about Unblowing bubbles.
+            </div>
+            <div class="project-details">
+              <small class="detail-tag language-tag">JavaScript</small>
+              <small class="detail-tag library-tag">Three.js</small>
+              <small class="detail-tag paper-ref">Paper Reference: [1]</small>
+            </div>
+          </div>
+
+          <div class="project-item grouped-item">
+            <div class="project-title">Deflating Bubble Animation (Manim)</div>
+            <div class="project-actions">
+              <a
+                href="https://github.com/acilione/Soap-Bubble-Deflation-Simulation/tree/main"
+                class="action-link source-code"
+                title="View Source Code"
+              >
+                Source code
+              </a>
+            </div>
+            <div class="project-description">
+              A Manim animation of a physics paper about Unblowing bubbles.
+            </div>
+            <div class="project-details">
+              <small class="detail-tag language-tag">Python</small>
+              <small class="detail-tag library-tag">Manim, Scipy</small>
+              <small class="detail-tag paper-ref">Paper Reference: [1]</small>
+            </div>
+          </div>
+
+          <div class="project-references grouped-reference">
+            <h4>References</h4>
+            <p>
+              [1] Unblowing bubbles: understanding the physics of bubble
+              deflation through a straw
+            </p>
+            <p>
+              <a
+                href="https://pubs.aip.org/aapt/ajp/article/93/10/797/3363838/Unblowing-bubbles-Understanding-the-physics-of"
+                target="_blank"
+                >pubs.aip.org/.../Unblowing-bubbles</a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-title">Heron's Fountain Simulation</div>
+          <div class="project-actions">
+            <a
+              href="heron_fountain_simulation.html"
+              class="action-link live-app"
+              title="Try the live application"
+            >
+              Try It
             </a>
           </div>
           <div class="project-description">
-            A Three.js interactable simulation and implementation of physics paper about Unblowing bubbles.
+            A model of gravity, air compression, and viscous flow, based on the
+            accompanying research paper.
           </div>
           <div class="project-details">
             <small class="detail-tag language-tag">JavaScript</small>
             <small class="detail-tag library-tag">Three.js</small>
-            <small class="detail-tag paper-ref">Paper Reference: [1]</small>
           </div>
         </div>
 
-        <div class="project-item grouped-item">
+        <div class="project-item">
           <div class="project-title">
-            Deflating Bubble Animation (Manim)
+            Danny and Tony's physics lab <span class="wip-note">(WIP)</span>
           </div>
+          <div class="project-description">
+            A full-featured lab with interactable experiments and other funny
+            stuff.
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">JavaScript</small>
+            <small class="detail-tag library-tag">Three.js</small>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-title">Boyle’s self-flowing flask</div>
+          <div class="project-actions">
+            <a href="boyles_flask.html" class="action-link">Try It</a>
+          </div>
+          <div class="project-description">
+            An initial push, a recirculating stream, and the inevitable loss of
+            momentum. Explore the unsteady viscous model.
+          </div>
+          <div class="project-details">
+            <small class="detail-tag">JavaScript</small
+            ><small class="detail-tag">Three.js</small>
+          </div>
+        </div>
+        <h2 class="category-heading">Android</h2>
+        <div class="project-item">
+          <div class="project-title">OpenCV - OpenGL object manipulation</div>
+          <div class="project-description">
+            Project involving object manipulation using OpenCV and OpenGL.
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">Java/Kotlin/C++</small>
+            <small class="detail-tag library-tag">OpenCV, OpenGL</small>
+          </div>
+        </div>
+
+        <h2 class="category-heading">Games</h2>
+        <div class="project-item">
+          <div class="project-title">
+            Quantum Dungeon Crawler <span class="wip-note">(WIP)</span>
+          </div>
+          <div class="project-description">
+            A dungeon crawler where real quantum algorithms (Grover, Shor, VQE,
+            QAOA) become core gameplay mechanics. Features an in-game circuit
+            composer, temperature-driven decoherence, and progressive level
+            design teaching quantum computing.
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">Game Design</small>
+            <small class="detail-tag library-tag">Quantum Computing</small>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-title">Kamisado</div>
           <div class="project-actions">
             <a
-              href="https://github.com/acilione/Soap-Bubble-Deflation-Simulation/tree/main"
+              href="https://github.com/acilione/kamisado"
               class="action-link source-code"
               title="View Source Code"
             >
-              <i class="fas fa-code"></i> Source code
+              Github
             </a>
           </div>
           <div class="project-description">
-            A Manim animation of a physics paper about Unblowing bubbles.
+            A full-featured real-time multiplayer Kamisado board game with sumo
+            push mechanics, chess-style timers, reconnection support, and
+            spectator mode.
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">TypeScript</small>
+            <small class="detail-tag library-tag"
+              >Node.js, Express, Socket.IO</small
+            >
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-title">Greta's adventures</div>
+          <div class="project-actions">
+            <a
+              href="https://github.com/acilione/Greta-s-Adventures"
+              class="action-link source-code"
+              title="View Source Code"
+            >
+              Github
+            </a>
+          </div>
+          <div class="project-description">
+            A platformer with an environmental theme. Developed in less than 48h
+            and University Game Jam winner. NB: Full featured game WIP!
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">C#</small>
+            <small class="detail-tag library-tag">Unity</small>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-title">Find My Dog</div>
+          <div class="project-actions">
+            <a
+              href="https://github.com/acilione/ParisSimplePointAndClick"
+              class="action-link source-code"
+              title="View Source Code"
+            >
+              Source code
+            </a>
+          </div>
+          <div class="project-description">
+            A "Find Waldo" style videogame developed for a friend of mine.
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">C</small>
+            <small class="detail-tag library-tag">Raylib</small>
+          </div>
+        </div>
+
+        <h2 class="category-heading">Data Science / ML</h2>
+        <div class="project-item">
+          <div class="project-title">
+            MALLORN Astronomical Classification Challenge
+          </div>
+          <div class="project-actions">
+            <a
+              href="https://www.kaggle.com/competitions/mallorn-astronomical-classification-challenge/"
+              class="action-link source-code"
+              title="View Competition"
+            >
+              Kaggle
+            </a>
+          </div>
+          <div class="project-description">
+            Classified astronomical transients to detect Tidal Disruption Events
+            (stars torn apart by black holes). Ranked
+            <strong>58th out of 894</strong> participants.
           </div>
           <div class="project-details">
             <small class="detail-tag language-tag">Python</small>
-            <small class="detail-tag library-tag">Manim, Scipy</small>
-            <small class="detail-tag paper-ref">Paper Reference: [1]</small>
+            <small class="detail-tag library-tag"
+              >Machine Learning, Astrophysics</small
+            >
           </div>
         </div>
-        
-        <div class="project-references grouped-reference">
-          <h4>References</h4>
-          <p>
-            [1] Unblowing bubbles: understanding the physics of bubble deflation
-            through a straw
-          </p>
-          <p>
+
+        <h2 class="category-heading">Web</h2>
+        <div class="project-item">
+          <div class="project-title">School website</div>
+          <div class="project-actions">
             <a
-              href="https://pubs.aip.org/aapt/ajp/article/93/10/797/3363838/Unblowing-bubbles-Understanding-the-physics-of"
-              target="_blank"
-              >pubs.aip.org/.../Unblowing-bubbles</a
+              href="https://github.com/acilione/School-Website"
+              class="action-link source-code"
+              title="View Source Code"
             >
-          </p>
-        </div>
-      </div>
-      <div class="project-item">
-        <div class="project-title">
-          Heron's Fountain Simulation
-        </div>
-        <div class="project-actions">
-            <a href="heron_fountain_simulation.html" class="action-link live-app" title="Try the live application">
-              <i class="fas fa-external-link-alt"></i> Try It
+              Source code
             </a>
+          </div>
+          <div class="project-description">
+            A school website built with Laravel and JS Vanilla.
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">JS, PHP, MySQL</small>
+            <small class="detail-tag library-tag">Laravel</small>
+          </div>
         </div>
-        <div class="project-description">A simulation of Heron's Fountain.</div>
-        <div class="project-details">
-          <small class="detail-tag language-tag"
-            >JavaScript</small
-          >
-          <small class="detail-tag library-tag">Three.js</small>
-        </div>
-      </div>
 
-      <div class="project-item">
-        <div class="project-title">
-          Danny and Tony's physics lab <span class="wip-note">(WIP)</span>
+        <h2 class="category-heading">Microcontrollers</h2>
+        <div class="project-item">
+          <div class="project-title">STM32 Microphone Recorder</div>
+          <div class="project-actions">
+            <a
+              href="https://github.com/acilione/b-l475e-iot01a-audio-recording-example"
+              class="action-link source-code"
+              >Source code</a
+            >
+          </div>
+          <div class="project-description">
+            Button-controlled audio capture on the B-L475E-IOT01A Discovery
+            board. C firmware records its onboard MEMS microphone through DFSDM
+            and DMA, then transfers audio over ST-LINK USB to a Python receiver
+            that saves 16 kHz WAV files. Includes buffered capture, packet
+            checksums, lost-data detection, and host tests.
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">C, Python</small>
+            <small class="detail-tag library-tag"
+              >STM32, DFSDM, DMA, CMake</small
+            >
+          </div>
         </div>
-        <div class="project-description">
-          A full-featured lab with interactable experiments and other funny stuff.
-        </div>
-        <div class="project-details">
-          <small class="detail-tag language-tag"
-            >JavaScript</small
-          >
-          <small class="detail-tag library-tag">Three.js</small>
-        </div>
-      </div>
 
-      <h2 class="category-heading">Android</h2>
-      <div class="project-item">
-        <div class="project-title">OpenCV - OpenGL object manipulation</div>
-        <div class="project-description">
-          Project involving object manipulation using OpenCV and OpenGL.
-        </div>
-        <div class="project-details">
-          <small class="detail-tag language-tag"
-            >Java/Kotlin/C++</small
-          >
-          <small class="detail-tag library-tag"
-            >OpenCV, OpenGL</small
-          >
-        </div>
-      </div>
-
-      <h2 class="category-heading">Games</h2>
-      <div class="project-item">
-        <div class="project-title">
-          Quantum Dungeon Crawler <span class="wip-note">(WIP)</span>
-        </div>
-        <div class="project-description">
-          A dungeon crawler where real quantum algorithms (Grover, Shor, VQE, QAOA) become core gameplay mechanics. Features an in-game circuit composer, temperature-driven decoherence, and progressive level design teaching quantum computing.
-        </div>
-        <div class="project-details">
-          <small class="detail-tag language-tag">Game Design</small>
-          <small class="detail-tag library-tag">Quantum Computing</small>
-        </div>
-      </div>
-      <div class="project-item">
-        <div class="project-title">
-          Kamisado
-        </div>
-        <div class="project-actions">
-            <a href="https://github.com/acilione/kamisado" class="action-link source-code" title="View Source Code">
-                <i class="fas fa-code"></i> Github
+        <div class="project-item">
+          <div class="project-title">
+            Bulb enlightment on motion + temperature
+          </div>
+          <div class="project-actions">
+            <a
+              href="https://github.com/acilione/Motion-Sensor-Light-Bulb-and-Temperature"
+              class="action-link source-code"
+              title="View Source Code"
+            >
+              Source code
             </a>
+          </div>
+          <div class="project-description">
+            A system for light bulb enlightenment triggered by motion, with
+            added temperature monitoring.
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">C++</small>
+            <small class="detail-tag library-tag">Arduino</small>
+          </div>
         </div>
-        <div class="project-description">
-          A full-featured real-time multiplayer Kamisado board game with sumo push mechanics, chess-style timers, reconnection support, and spectator mode.
-        </div>
-        <div class="project-details">
-          <small class="detail-tag language-tag">TypeScript</small>
-          <small class="detail-tag library-tag">Node.js, Express, Socket.IO</small>
-        </div>
-      </div>
-      <div class="project-item">
-        <div class="project-title">
-          Greta's adventures
-        </div>
-        <div class="project-actions">
-            <a href="https://github.com/acilione/Greta-s-Adventures" class="action-link source-code" title="View Source Code">
-                <i class="fas fa-code"></i> Github
-            </a>
-        </div>
-        <div class="project-description">
-          A platformer with an environmental theme. Developed in less than 48h and University Game Jam winner. NB: Full featured game WIP!
-        </div>
-        <div class="project-details">
-          <small class="detail-tag language-tag">C#</small>
-          <small class="detail-tag library-tag">Unity</small>
-        </div>
-      </div>
-      <div class="project-item">
-        <div class="project-title">
-          Find My Dog
-        </div>
-        <div class="project-actions">
-          <a href="https://github.com/acilione/ParisSimplePointAndClick" class="action-link source-code" title="View Source Code">
-            <i class="fas fa-code"></i> Source code
-          </a>
-        </div>
-        <div class="project-description">
-          A "Find Waldo" style videogame developed for a friend of mine.
-        </div>
-        <div class="project-details">
-          <small class="detail-tag language-tag">C</small>
-          <small class="detail-tag library-tag">Raylib</small>
-        </div>
-      </div>
 
-      <h2 class="category-heading">Data Science / ML</h2>
-      <div class="project-item">
-        <div class="project-title">
-          MALLORN Astronomical Classification Challenge
-        </div>
-        <div class="project-actions">
-            <a href="https://www.kaggle.com/competitions/mallorn-astronomical-classification-challenge/" class="action-link source-code" title="View Competition">
-                <i class="fas fa-external-link-alt"></i> Kaggle
-            </a>
-        </div>
-        <div class="project-description">
-          Classified astronomical transients to detect Tidal Disruption Events (stars torn apart by black holes). Ranked <strong>58th out of 894</strong> participants.
-        </div>
-        <div class="project-details">
-          <small class="detail-tag language-tag">Python</small>
-          <small class="detail-tag library-tag">Machine Learning, Astrophysics</small>
-        </div>
-      </div>
-
-      <h2 class="category-heading">Web</h2>
-      <div class="project-item">
-        <div class="project-title">
-          School website
-        </div>
-        <div class="project-actions">
-          <a href="https://github.com/acilione/School-Website" class="action-link source-code" title="View Source Code">
-            <i class="fas fa-code"></i> Source code
-          </a>
-        </div>
-        <div class="project-description">
-          A school website built with Laravel and JS Vanilla.
-        </div>
-        <div class="project-details">
-          <small class="detail-tag language-tag">JS, PHP, MySQL</small>
-          <small class="detail-tag library-tag"
-            >Laravel</small
-          >
-        </div>
-      </div>
-
-      <h2 class="category-heading">Microcontrollers</h2>
-      <div class="project-item">
-        <div class="project-title">
-          Bulb enlightment on motion + temperature
-        </div>
-        <div class="project-actions">
-          <a
-            href="https://github.com/acilione/Motion-Sensor-Light-Bulb-and-Temperature"
-            class="action-link source-code"
-            title="View Source Code"
-          >
-            <i class="fas fa-code"></i> Source code
-          </a>
-        </div>
-        <div class="project-description">
-          A system for light bulb enlightenment triggered by motion, with added temperature monitoring.
-        </div>
-        <div class="project-details">
-          <small class="detail-tag language-tag">C++</small>
-          <small class="detail-tag library-tag"
-            >Arduino</small
-          >
-        </div>
-      </div>
-
-      <h2 class="category-heading">Bachelor's Thesis</h2>
-      <div class="project-item">
-        <div class="project-title">HAR model on STM32 microcontroller</div>
-        <div class="project-description">
-          Human Activity Recognition (HAR) model implemented on an STM32 microcontroller using TFLite and a no-code solution, EdgeImpulse (2022).
-        </div>
-        <div class="project-details">
-          <small class="detail-tag language-tag"
-            >Python, C, C++</small
-          >
-          <small class="detail-tag library-tag"
-            >STM32, TFLite, STM32Cube, EdgeImpulse</small
-          >
+        <h2 class="category-heading">Bachelor's Thesis</h2>
+        <div class="project-item">
+          <div class="project-title">HAR model on STM32 microcontroller</div>
+          <div class="project-description">
+            Human Activity Recognition (HAR) model implemented on an STM32
+            microcontroller using TFLite and a no-code solution, EdgeImpulse
+            (2022).
+          </div>
+          <div class="project-details">
+            <small class="detail-tag language-tag">Python, C, C++</small>
+            <small class="detail-tag library-tag"
+              >STM32, TFLite, STM32Cube, EdgeImpulse</small
+            >
+          </div>
         </div>
       </div>
     </main>

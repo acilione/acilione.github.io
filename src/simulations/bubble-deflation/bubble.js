@@ -15,127 +15,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 // NUMERICAL UTILITY FUNCTIONS
 // =============================================================================
 
-const PI = Math.PI;
-// Area of the straw end in m² (calibrated to match paper Table I)
-const A = 16.0 * Math.pow(10, -6);
-// Surface tension of soap solution in N/m (approximated)
-const sig = 2.48 * Math.pow(10, -2);
-// Viscosity of air in Pa·s
-const mu = 1.84 * Math.pow(10, -5);
-// Density of air in kg/m³
-const ro = 1.22;
-// Radius of the straw (calculated from A)
-const r_straw = Math.sqrt(A / PI);
-
-function integrateQuad(func, a, b, n = 2000) {
-  if (a === b) return 0;
-  const h = (b - a) / n;
-  let sum = 0.5 * (func(a) + func(b));
-  for (let i = 1; i < n; i++) sum += func(a + i * h);
-  return sum * h;
-}
-
-function brent(
-  f,
-  lowerBound,
-  upperBound,
-  tolerance = 1e-6,
-  maxIterations = 100
-) {
-  let a = lowerBound;
-  let b = upperBound;
-  let fa = f(a);
-  let fb = f(b);
-  if (fa * fb > 0) return 0;
-  if (Math.abs(fa) < Math.abs(fb)) {
-    [a, b] = [b, a];
-    [fa, fb] = [fb, fa];
-  }
-  let c = a,
-    fc = fa,
-    s = 0,
-    d = 0;
-  let mflag = true;
-  for (let i = 0; i < maxIterations; i++) {
-    if (fb === 0 || Math.abs(b - a) <= tolerance) return b;
-    if (fa !== fc && fb !== fc) {
-      s =
-        (a * fb * fc) / ((fa - fb) * (fa - fc)) +
-        (b * fa * fc) / ((fb - fa) * (fb - fc)) +
-        (c * fa * fb) / ((fc - fa) * (fc - fb));
-    } else {
-      s = b - fb * ((b - a) / (fb - fa));
-    }
-    if (
-      (s - (3 * a + b) / 4) * (s - b) >= 0 ||
-      (mflag && Math.abs(s - b) >= Math.abs(b - c) / 2) ||
-      (!mflag && Math.abs(s - b) >= Math.abs(c - d) / 2) ||
-      (mflag && Math.abs(b - c) < Math.abs(tolerance)) ||
-      (!mflag && Math.abs(c - d) < Math.abs(tolerance))
-    ) {
-      s = (a + b) / 2;
-      mflag = true;
-    } else {
-      mflag = false;
-    }
-
-    d = c;
-    c = b;
-    fc = fb;
-    const fs = f(s);
-    if (fa * fs < 0) {
-      b = s;
-      fb = fs;
-    } else {
-      a = s;
-      fa = fs;
-    }
-    if (Math.abs(fa) < Math.abs(fb)) {
-      [a, b] = [b, a];
-      [fa, fb] = [fb, fa];
-    }
-  }
-  return b;
-}
-
-function integrand(R, L) {
-  return (
-    Math.pow(R, 2.5) *
-    Math.sqrt(1 + (8 / (ro * sig)) * Math.pow((PI * mu * L) / A, 2) * R)
-  );
-}
-
-function calc_t_gen(L, R_0, R) {
-  try {
-    const integralRes = integrateQuad((r) => integrand(r, L), R, R_0);
-    const term1 =
-      ((Math.pow(PI, 2) * mu * L) / (sig * Math.pow(A, 2))) *
-      (Math.pow(R_0, 4) - Math.pow(R, 4));
-    const term2 = (PI / A) * Math.sqrt((2 * ro) / sig) * integralRes;
-    return term1 + term2;
-  } catch (e) {
-    console.error("Error in calc_t_gen:", e);
-    return 0;
-  }
-}
-
-function calc_rt_gen(L, R_0, t) {
-  const rootFunc = (R) => calc_t_gen(L, R_0, R) - t;
-  return brent(rootFunc, 0.0, R_0, 1e-6, 100);
-}
-
-function calculate_duration_gen(L, R_0) {
-  try {
-    const integralRes = integrateQuad((r) => integrand(r, L), 0.0, R_0);
-    const term1 =
-      ((Math.pow(PI, 2) * mu * L) / (sig * Math.pow(A, 2))) * Math.pow(R_0, 4);
-    const term2 = (PI / A) * Math.sqrt((2 * ro) / sig) * integralRes;
-    return term1 + term2;
-  } catch (e) {
-    console.error("Error in calculate_duration_gen:", e);
-    return 0;
-  }
-}
+import { r_straw, createBubbleTimeline } from "./physics.js";
 
 // =============================================================================
 // THREE.JS SCENE IMPLEMENTATION
@@ -198,7 +78,7 @@ class DeflatingBubbleScene {
     const theme = this.getCurrentTheme();
     if (this.scene) {
       this.scene.background = new THREE.Color(
-        theme === "dark" ? 0x0d1117 : 0xffffff // Originale dark, bianco per light
+        theme === "dark" ? 0x0d1211 : 0xf3f5f2, // Originale dark, bianco per light
       );
     }
   }
@@ -224,12 +104,12 @@ class DeflatingBubbleScene {
 
   initThree() {
     this.scene = new THREE.Scene();
-    this.updateSceneTheme()
+    this.updateSceneTheme();
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setSize(
       this.container.clientWidth,
-      this.container.clientHeight
+      this.container.clientHeight,
     );
     this.container.appendChild(this.renderer.domElement);
 
@@ -250,13 +130,13 @@ class DeflatingBubbleScene {
       verticalHalfHeight,
       -verticalHalfHeight,
       0.1,
-      100
+      100,
     );
     this.camera2D.position.z = 5;
 
     // 3D Camera (Perspective, rotatable)
     this.camera3D = new THREE.PerspectiveCamera(45, aspect, 0.1, 100);
-    this.camera3D.position.set(0, 5, 15);
+    this.camera3D.position.set(0, 4, 36);
     this.camera3D.lookAt(0, 0, 0);
 
     this.camera = this.camera2D;
@@ -270,7 +150,12 @@ class DeflatingBubbleScene {
     const light = new THREE.AmbientLight(0x404040, 10);
     this.scene.add(light);
 
-    window.addEventListener("resize", this.onWindowResize.bind(this));
+    this.resizeObserver = new ResizeObserver(() => this.onWindowResize());
+    this.resizeObserver.observe(this.container);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && this.guiParams.isRunning)
+        this.guiParams.playPause();
+    });
 
     this.straws = [];
     this.staticCircles = [];
@@ -280,12 +165,14 @@ class DeflatingBubbleScene {
 
   onWindowResize() {
     const aspect = this.container.clientWidth / this.container.clientHeight;
-    let horizontalHalfWidth = 0;
-    if (this.container.clientWidth > 1280) {
-      horizontalHalfWidth = 28;
-    } else {
-      horizontalHalfWidth = 14;
-    }
+    const verticalNeeded = Math.max(
+      6,
+      this.guiParams.R_0 * this.guiParams.scale_factor * 2 + 1,
+      Math.max(this.guiParams.L1, this.guiParams.L2, this.guiParams.L3) *
+        this.guiParams.scale_factor +
+        1,
+    );
+    const horizontalHalfWidth = Math.max(14, verticalNeeded * aspect);
     const verticalHalfHeight = horizontalHalfWidth / aspect;
     this.camera2D.left = -horizontalHalfWidth;
     this.camera2D.right = horizontalHalfWidth;
@@ -295,26 +182,32 @@ class DeflatingBubbleScene {
 
     // Update 3D Camera
     this.camera3D.aspect = aspect;
+    this.camera3D.zoom = Math.min(1, aspect);
     this.camera3D.updateProjectionMatrix();
 
     this.renderer.setSize(
       this.container.clientWidth,
-      this.container.clientHeight
+      this.container.clientHeight,
     );
 
     this.camera =
       this.guiParams.viewMode === "2D" ? this.camera2D : this.camera3D;
 
-    // Re-position text on resize, as screen dimensions changed
-    // The animate loop will handle the precise positioning
-    this.animate();
+    // The existing animation loop will reposition labels on its next frame.
   }
 
   handlePlayPause() {
     if (this.guiParams.isRunning) {
       this.bubble_active = this.bubble_durations.map(
-        (d, i) => this.bubble_times[i] < d
+        (d, i) => this.bubble_times[i] < d,
       );
+      if (this.bubble_active.every((active) => !active)) {
+        this.bubble_times = [0, 0, 0];
+        this.bubble_active = [true, true, true];
+        this.textGroups.forEach((label) => {
+          label.group.style.opacity = 1;
+        });
+      }
       this.clock.start();
     } else {
       this.clock.stop();
@@ -326,7 +219,8 @@ class DeflatingBubbleScene {
     const L = this.guiParams[L_key];
     const R_0 = this.guiParams.R_0;
 
-    this.bubble_durations[index] = calculate_duration_gen(L, R_0);
+    this.timelines[index] = createBubbleTimeline(L, R_0);
+    this.bubble_durations[index] = this.timelines[index].duration;
     this.max_duration = Math.max(...this.bubble_durations);
 
     this.bubble_times[index] = 0;
@@ -360,7 +254,7 @@ class DeflatingBubbleScene {
     if (this.textGroups && this.textGroups[index]) {
       this.textGroups[index].L.textContent = `L: ${(L * 100).toFixed(2)} cm`;
       this.textGroups[index].R.textContent = `R(t): ${(R_0 * 100).toFixed(
-        2
+        2,
       )} cm`;
       this.textGroups[index].time.textContent = `t: 0.0 s`;
       this.textGroups[index].group.style.opacity = 1;
@@ -373,26 +267,31 @@ class DeflatingBubbleScene {
       const static_circle_pos = new THREE.Vector3(
         pos.x,
         initialBubbleCenterY,
-        pos.z
+        pos.z,
       );
       const static_circle = this.createDashedCircle(
         scaledR0,
-        static_circle_pos
+        static_circle_pos,
       );
       static_circle.visible = this.guiParams.showDashedLines;
+      static_circle.userData.isBubbleComponent = true;
       this.scene.add(static_circle);
       this.staticCircles[index] = static_circle;
     }
 
-    this.addTextLabels();
-
+    this.onWindowResize();
     this.renderer.render(this.scene, this.camera);
   }
 
   setupPhysicsAndAnimation() {
-    this.scene.children
-      .filter((obj) => obj.userData && obj.userData.isBubbleComponent)
-      .forEach((obj) => this.scene.remove(obj));
+    const components = this.scene.children.filter(
+      (obj) => obj.userData?.isBubbleComponent,
+    );
+    const geometries = new Set(components.map((obj) => obj.geometry));
+    const materials = new Set(components.map((obj) => obj.material));
+    components.forEach((obj) => this.scene.remove(obj));
+    geometries.forEach((geometry) => geometry?.dispose());
+    materials.forEach((material) => material?.dispose());
 
     this.straws = [];
     this.circles = [];
@@ -401,7 +300,8 @@ class DeflatingBubbleScene {
     const { L1, L2, L3, R_0, scale_factor } = this.guiParams;
     this._lastR0 = R_0;
     this.Ls = [L1, L2, L3];
-    this.bubble_durations = this.Ls.map((L) => calculate_duration_gen(L, R_0));
+    this.timelines = this.Ls.map((L) => createBubbleTimeline(L, R_0));
+    this.bubble_durations = this.timelines.map((t) => t.duration);
     this.max_duration = Math.max(...this.bubble_durations);
 
     this.positions = [
@@ -422,11 +322,11 @@ class DeflatingBubbleScene {
       strawRadius,
       strawRadius,
       1,
-      32
+      32,
     );
 
     const strawMaterial = new THREE.MeshBasicMaterial({
-      color: 0x00ff00,
+      color: 0x80bfa0,
       transparent: true,
       opacity: 0.5,
       side: THREE.DoubleSide,
@@ -447,11 +347,11 @@ class DeflatingBubbleScene {
       const static_circle_pos = new THREE.Vector3(
         pos.x,
         initialBubbleCenterY,
-        pos.z
+        pos.z,
       );
       const static_circle = this.createDashedCircle(
         scaledR0,
-        static_circle_pos
+        static_circle_pos,
       );
       static_circle.userData.isBubbleComponent = true;
       static_circle.visible = this.guiParams.showDashedLines; // initial visibility
@@ -462,11 +362,11 @@ class DeflatingBubbleScene {
       const circleMaterial = this.guiParams.soapEffect
         ? this.createSoapBubbleMaterial()
         : new THREE.MeshBasicMaterial({
-          color: 0x00bfff,
-          transparent: true,
-          opacity: 0.5,
-          side: THREE.DoubleSide,
-        });
+            color: 0x00bfff,
+            transparent: true,
+            opacity: 0.5,
+            side: THREE.DoubleSide,
+          });
       const circle = new THREE.Mesh(circleGeometry, circleMaterial);
       circle.position.set(pos.x, initialBubbleCenterY, pos.z);
       circle.scale.setScalar(scaledR0);
@@ -482,6 +382,7 @@ class DeflatingBubbleScene {
       this.straws.push(straw);
       this.scene.add(straw);
     });
+    this.onWindowResize();
   }
 
   createDashedCircle(radius, position) {
@@ -490,12 +391,16 @@ class DeflatingBubbleScene {
     for (let j = 0; j <= segments; j++) {
       const angle = (j / segments) * Math.PI * 2;
       points.push(
-        new THREE.Vector3(radius * Math.cos(angle), radius * Math.sin(angle), 0)
+        new THREE.Vector3(
+          radius * Math.cos(angle),
+          radius * Math.sin(angle),
+          0,
+        ),
       );
     }
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
     const material = new THREE.LineDashedMaterial({
-      color: 0xffffff,
+      color: 0x789888,
       linewidth: 1,
       scale: 1,
       dashSize: 0.1,
@@ -522,7 +427,7 @@ class DeflatingBubbleScene {
       void main() {
         vNormal = normalize(normalMatrix * normal);
         vPosition = position;
-        vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
+        vWorldPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
         vUv = uv;
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
       }
@@ -556,16 +461,16 @@ class DeflatingBubbleScene {
         
         // Interference pattern (constructive/destructive)
         vec3 color;
-        color.r = 0.5 + 0.5 * cos(phaseR * 3.14159 * 2.0);
-        color.g = 0.5 + 0.5 * cos(phaseG * 3.14159 * 2.0);
-        color.b = 0.5 + 0.5 * cos(phaseB * 3.14159 * 2.0);
+        color.r = 0.5 - 0.5 * cos(phaseR * 3.14159 * 2.0);
+        color.g = 0.5 - 0.5 * cos(phaseG * 3.14159 * 2.0);
+        color.b = 0.5 - 0.5 * cos(phaseB * 3.14159 * 2.0);
         
         return color;
       }
       
       void main() {
         // Calculate view direction
-        vec3 viewDir = normalize(uCameraPosition - vWorldPosition);
+        vec3 viewDir = normalize(-vWorldPosition);
         
         // Fresnel effect - stronger reflection at grazing angles
         float fresnel = 1.0 - max(dot(viewDir, vNormal), 0.0);
@@ -577,7 +482,7 @@ class DeflatingBubbleScene {
                                               + 0.08 * sin(vPosition.x * 3.0 + vPosition.y * 2.0 + uTime * 0.15));
         
         // Thin-film interference color
-        float cosAngle = abs(dot(viewDir, vNormal));
+        float cosAngle = sqrt(1.0 - (1.0 - pow(abs(dot(viewDir, normalize(vNormal))), 2.0)) / (1.33 * 1.33));
         vec3 interferenceColor = thinFilmInterference(thickness, cosAngle);
         
         // Base soap color (soft, slightly iridescent white-blue)
@@ -614,7 +519,7 @@ class DeflatingBubbleScene {
         uCameraPosition: { value: new THREE.Vector3() },
       },
       transparent: true,
-      side: THREE.DoubleSide,
+      side: THREE.FrontSide,
       depthWrite: false,
     });
 
@@ -671,7 +576,7 @@ class DeflatingBubbleScene {
   setupGUI() {
     let gui;
     try {
-      gui = new GUI({ autoPlace: true, title: "Bubble Controls" });
+      gui = new GUI({ autoPlace: false, title: "Bubble Controls" });
     } catch (e) {
       gui = {
         domElement: document.createElement("div"),
@@ -684,17 +589,18 @@ class DeflatingBubbleScene {
     }
 
     this.gui = gui;
-    this.container.appendChild(gui.domElement);
-    gui.domElement.style.position = "fixed";
-    gui.domElement.style.zIndex = "19";
-    gui.domElement.style.top = "10%";
-    gui.domElement.style.right = "10%";
+    const controlsHost = document.getElementById("simulation-controls");
+    (controlsHost || this.container).appendChild(gui.domElement);
+    if (!controlsHost)
+      Object.assign(gui.domElement.style, {
+        position: "absolute",
+        top: "16px",
+        right: "16px",
+      });
 
     this.guiControllers = [];
 
-    const playCtrl = gui
-      .add(this.guiParams, "playPause")
-      .name("▶️ / ⏸️ Start/Pause");
+    const playCtrl = gui.add(this.guiParams, "playPause").name("Play / Pause");
     this.guiControllers.push(playCtrl);
 
     const viewModeController = gui
@@ -721,8 +627,10 @@ class DeflatingBubbleScene {
     // Soap effect toggle (iridescent visual effect)
     const soapCtrl = gui
       .add(this.guiParams, "soapEffect")
-      .name("🫧 Soap Effect")
+      .name("Iridescent film")
       .onChange(() => {
+        this.guiParams.isRunning = false;
+        this.clock.stop();
         // Rebuild the scene with new materials
         this.setupPhysicsAndAnimation();
         this.addTextLabels();
@@ -730,7 +638,7 @@ class DeflatingBubbleScene {
       });
     this.guiControllers.push(soapCtrl);
 
-    const R0_MIN = 0.1 * 1e-2;
+    const R0_MIN = 1.0 * 1e-2;
     const R0_MAX = 10.0 * 1e-2;
     const R0_STEP = 0.1 * 1e-2;
 
@@ -741,6 +649,7 @@ class DeflatingBubbleScene {
       .name("R₀ (Initial Radius, m)")
       .onChange(() => {
         this.guiParams.isRunning = false;
+        this.clock.stop();
         this.setupPhysicsAndAnimation();
         this.addTextLabels();
         for (let i = 0; i < 3; i++) this.resetAnimation(i);
@@ -785,7 +694,7 @@ class DeflatingBubbleScene {
     const resetObj = { reset: () => this.resetAll() };
     const resetCtrl = gui.add(resetObj, "reset");
     this.guiControllers.push(resetCtrl);
-    resetCtrl.name("🔄 Reset All");
+    resetCtrl.name("Reset experiment");
   }
 
   resetAll() {
@@ -837,7 +746,7 @@ class DeflatingBubbleScene {
         const textScreenPos = this.toScreenPosition(
           worldPosition,
           this.camera,
-          this.renderer.domElement
+          this.renderer.domElement,
         );
 
         const groupDiv = this.textGroups[i].group;
@@ -855,7 +764,7 @@ class DeflatingBubbleScene {
         if (circle.material.uniforms) {
           circle.material.uniforms.uTime.value = elapsedTime;
           circle.material.uniforms.uCameraPosition.value.copy(
-            this.camera.position
+            this.camera.position,
           );
         }
       });
@@ -867,7 +776,7 @@ class DeflatingBubbleScene {
       return;
     }
 
-    const delta = this.clock.getDelta();
+    const delta = Math.min(this.clock.getDelta(), 0.05);
 
     for (let i = 0; i < 3; i++) {
       if (!this.bubble_active[i]) continue;
@@ -884,7 +793,7 @@ class DeflatingBubbleScene {
 
       const L = this.guiParams[`L${i + 1}`];
       const R_0 = this.guiParams.R_0;
-      const R_t = calc_rt_gen(L, R_0, newTime);
+      const R_t = this.timelines[i].radiusAt(newTime);
 
       const scaledR = Math.max(0, R_t) * this.guiParams.scale_factor;
 
@@ -927,4 +836,3 @@ export function init(containerId = "scene-container") {
 
 export { DeflatingBubbleScene };
 export default DeflatingBubbleScene;
-

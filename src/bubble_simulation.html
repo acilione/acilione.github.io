@@ -1,37 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="scripts/set_theme.js"></script>
-  <title>Deflating Bubble Simulation (Three.js)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/styles.css" />
-  <link rel="stylesheet" href="styles/navbar.css" />
-  <link rel="stylesheet" href="styles/bubble_simulation.css" />
-  <script type="module" src="scripts/navbar.js" defer></script>
-</head>
-
-<body>
-  <!-- Navbar injected by website - not part of simulation -->
-  <div id="navbar-container"></div>
-
-  <div id="info-panel" class="info-panel"></div>
-  <div id="scene-container"></div>
-
-  <!-- Import and initialize the standalone simulation module -->
-  <script type="module">
-    import { init } from './simulations/bubble-deflation/bubble.js';
-
-    document.addEventListener('DOMContentLoaded', () => {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Unblowing bubbles — Antonino Cilione</title>
+    <meta
+      name="description"
+      content="Compare how straw length changes the lifetime of a soap bubble."
+    />
+    <script type="module" src="scripts/set_theme.js"></script>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+    <link rel="stylesheet" href="styles/simulation.css" />
+    <script type="module" src="scripts/navbar.js"></script>
+  </head>
+  <body class="simulation-page">
+    <a class="skip-link" href="#main">Skip to experiment</a>
+    <div id="navbar-container"></div>
+    <main id="main" class="content">
+      <header class="simulation-heading">
+        <div>
+          <a class="section-index" href="projects.html"
+            >← Experiments / 02 / Surface tension</a
+          >
+          <h1>Unblowing bubbles</h1>
+        </div>
+        <p>Compare how straw length changes the lifetime of a soap bubble.</p>
+      </header>
+      <div class="lab-layout">
+        <div
+          id="scene-container"
+          role="img"
+          aria-label="Interactive Unblowing bubbles visualization"
+        ></div>
+        <aside class="lab-sidebar" aria-label="Experiment controls and notes">
+          <p class="controls-heading">Experiment controls</p>
+          <div id="simulation-controls"></div>
+          <details class="model-note" open>
+            <summary>The model</summary>
+            <p>
+              Surface tension squeezes air out of a soap bubble through a straw.
+              The model combines air inertia and viscous resistance to predict
+              how the bubble shrinks. Changing the straw length lets you compare
+              how resistance affects its lifetime.
+            </p>
+            <p>
+              The bubble is treated as spherical, with flow adjusting as it
+              shrinks. This approximation breaks down when the bubble becomes
+              comparable in size to the straw opening, so the final collapse is
+              a theoretical extrapolation. Film colors are illustrative.
+            </p>
+            <a href="https://doi.org/10.1119/5.0254263">Read the paper ↗</a>
+          </details>
+        </aside>
+      </div>
+      <div class="lab-caption">
+        <span>Switch to 3D to orbit · Dimensions in metres</span
+        ><span>Δp = 4σ/R · Inertia + viscosity</span>
+      </div>
+    </main>
+    <script type="module">
+      import { init } from "./simulations/bubble-deflation/bubble.js";
       try {
-        init('scene-container');
-      } catch (e) {
-        console.error('Failed to initialize DeflatingBubbleScene:', e);
+        init("scene-container");
+      } catch (error) {
+        document.getElementById("scene-container").textContent =
+          "The 3D view could not start. Please use a browser with WebGL enabled.";
+        console.error(error);
       }
-    });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

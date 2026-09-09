@@ -1,21 +1,51 @@
-<!DOCTYPE html><html lang=en><script type=module src=bubble_simulation.8d2f6bb2.js></script><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><script src=bubble_simulation.87d56c8a.js></script><title>Deflating Bubble Simulation (Three.js)</title><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel=stylesheet><link rel=stylesheet href=acilione.github.io.bfe15b8c.css><link rel=stylesheet href=acilione.github.io.3704757d.css><link rel=stylesheet href=bubble_simulation.2b6334f5.css><script type=module src=acilione.github.io.b021bd08.js defer></script><body>
-  
-  <div id=navbar-container></div>
-
-  <div id=info-panel class=info-panel></div>
-  <div id=scene-container></div>
-
-  
-  <script type=module>import"./bubble_simulation.8d2f6bb2.js";var e=globalThis,t={},i={},s=e.parcelRequire0087;null==s&&((s=function(e){if(e in t)return t[e].exports;if(e in i){var s=i[e];delete i[e];var a={id:e,exports:{}};return t[e]=a,s.call(a.exports,a,a.exports),a.exports}var r=Error("Cannot find module '"+e+"'");throw r.code="MODULE_NOT_FOUND",r}).register=function(e,t){i[e]=t},e.parcelRequire0087=s),s.register;var a=s("ilwiq"),r=s("9sWXr"),n=s("5Rd1x");let o=Math.PI,h=1.84*1e-5,l=Math.sqrt(16e-6/o);function c(e,t,i,s=2e3){if(t===i)return 0;let a=(i-t)/s,r=.5*(e(t)+e(i));for(let i=1;i<s;i++)r+=e(t+i*a);return r*a}function u(e,t){return Math.pow(e,2.5)*Math.sqrt(1+264.41036488630357*Math.pow(o*h*t/16e-6,2)*e)}function m(e,t){try{let i=c(t=>u(t,e),0,t),s=Math.pow(o,2)*h*e/63488e-16*Math.pow(t,4),a=o/16e-6*Math.sqrt(98.38709677419355)*i;return s+a}catch(e){return console.error("Error in calculate_duration_gen:",e),0}}class d{constructor(e="scene-container"){if(void 0===a)throw Error("THREE.js is not loaded.");if(this.container=document.getElementById(e),!this.container)throw Error(`Container element with id '${e}' not found.`);this.guiParams={R_0:.04,L1:.01,L2:.05,L3:.1,isRunning:!1,scale_factor:40,viewMode:"2D",showDashedLines:!0,soapEffect:!0,playPause:()=>{this.guiParams.isRunning=!this.guiParams.isRunning,this.handlePlayPause()}},this.clock=new a.Clock(!1),this.guiControllers=[],this.controls=null,this.camera2D=null,this.camera3D=null,this.initThree(),this.setupPhysicsAndAnimation(),this.setupGUI(),this.addTextLabels(),this.animate=this.animate.bind(this),this.animate()}getCurrentTheme(){return"dark"===document.documentElement.getAttribute("data-theme")?"dark":"light"}updateSceneTheme(){let e=this.getCurrentTheme();this.scene&&(this.scene.background=new a.Color("dark"===e?856343:0xffffff))}setupThemeObserver(){this.themeObserver=new MutationObserver(e=>{for(let t of e)"attributes"===t.type&&"data-theme"===t.attributeName&&this.updateSceneTheme()}),this.themeObserver.observe(document.documentElement,{attributes:!0})}initThree(){this.scene=new a.Scene,this.updateSceneTheme(),this.renderer=new a.WebGLRenderer({antialias:!0}),this.renderer.setSize(this.container.clientWidth,this.container.clientHeight),this.container.appendChild(this.renderer.domElement);let e=this.container.clientWidth/this.container.clientHeight,t=0,i=(t=this.container.clientWidth>1280?28:14)/e;this.camera2D=new a.OrthographicCamera(-t,t,i,-i,.1,100),this.camera2D.position.z=5,this.camera3D=new a.PerspectiveCamera(45,e,.1,100),this.camera3D.position.set(0,5,15),this.camera3D.lookAt(0,0,0),this.camera=this.camera2D,this.controls=new(0,n.OrbitControls)(this.camera3D,this.renderer.domElement),this.controls.enableDamping=!0,this.controls.dampingFactor=.05,this.controls.enabled=!1;let s=new a.AmbientLight(4210752,10);this.scene.add(s),window.addEventListener("resize",this.onWindowResize.bind(this)),this.straws=[],this.staticCircles=[],this.setupThemeObserver()}onWindowResize(){let e=this.container.clientWidth/this.container.clientHeight,t=0,i=(t=this.container.clientWidth>1280?28:14)/e;this.camera2D.left=-t,this.camera2D.right=t,this.camera2D.top=i,this.camera2D.bottom=-i,this.camera2D.updateProjectionMatrix(),this.camera3D.aspect=e,this.camera3D.updateProjectionMatrix(),this.renderer.setSize(this.container.clientWidth,this.container.clientHeight),this.camera="2D"===this.guiParams.viewMode?this.camera2D:this.camera3D,this.animate()}handlePlayPause(){this.guiParams.isRunning?(this.bubble_active=this.bubble_durations.map((e,t)=>this.bubble_times[t]<e),this.clock.start()):this.clock.stop()}resetAnimation(e){let t=`L${e+1}`,i=this.guiParams[t],s=this.guiParams.R_0;this.bubble_durations[e]=m(i,s),this.max_duration=Math.max(...this.bubble_durations),this.bubble_times[e]=0,this.bubble_active[e]=!0;let r=this.positions[e],n=s*this.guiParams.scale_factor,o=i*this.guiParams.scale_factor,h=r.y,l=h-n,c=this.straws[e];c&&(c.scale.set(1,o,1),c.position.set(r.x,h+o/2,0));let u=this.circles[e];if(u&&(u.scale.setScalar(n),u.position.y=l),this.textGroups&&this.textGroups[e]&&(this.textGroups[e].L.textContent=`L: ${(100*i).toFixed(2)} cm`,this.textGroups[e].R.textContent=`R(t): ${(100*s).toFixed(2)} cm`,this.textGroups[e].time.textContent="t: 0.0 s",this.textGroups[e].group.style.opacity=1),s!==this._lastR0||!this.staticCircles[e]){this.staticCircles[e]&&this.scene.remove(this.staticCircles[e]);let t=new a.Vector3(r.x,l,r.z),i=this.createDashedCircle(n,t);i.visible=this.guiParams.showDashedLines,this.scene.add(i),this.staticCircles[e]=i}this.addTextLabels(),this.renderer.render(this.scene,this.camera)}setupPhysicsAndAnimation(){this.scene.children.filter(e=>e.userData&&e.userData.isBubbleComponent).forEach(e=>this.scene.remove(e)),this.straws=[],this.circles=[],this.staticCircles=[];let{L1:e,L2:t,L3:i,R_0:s,scale_factor:r}=this.guiParams;this._lastR0=s,this.Ls=[e,t,i],this.bubble_durations=this.Ls.map(e=>m(e,s)),this.max_duration=Math.max(...this.bubble_durations),this.positions=[new a.Vector3(-8,0,0),new a.Vector3(0,0,0),new a.Vector3(8,0,0)],this.bubble_times=[0,0,0],this.bubble_active=[!0,!0,!0];let n=new a.SphereGeometry(1,32,32),o=l*r,h=new a.CylinderGeometry(o,o,1,32),c=new a.MeshBasicMaterial({color:65280,transparent:!0,opacity:.5,side:a.DoubleSide}),u=s*r;this.Ls.forEach((e,t)=>{let i=this.positions[t],s=e*r,o=i.y,l=o-u,m=new a.Vector3(i.x,l,i.z),d=this.createDashedCircle(u,m);d.userData.isBubbleComponent=!0,d.visible=this.guiParams.showDashedLines,this.scene.add(d),this.staticCircles.push(d);let p=this.guiParams.soapEffect?this.createSoapBubbleMaterial():new a.MeshBasicMaterial({color:49151,transparent:!0,opacity:.5,side:a.DoubleSide}),f=new a.Mesh(n,p);f.position.set(i.x,l,i.z),f.scale.setScalar(u),f.userData.isBubbleComponent=!0,this.circles.push(f),this.scene.add(f);let g=new a.Mesh(h,c);g.scale.set(1,s,1),g.position.set(i.x,o+s/2,0),g.userData.isBubbleComponent=!0,this.straws.push(g),this.scene.add(g)})}createDashedCircle(e,t){let i=[];for(let t=0;t<=64;t++){let s=t/64*Math.PI*2;i.push(new a.Vector3(e*Math.cos(s),e*Math.sin(s),0))}let s=new a.BufferGeometry().setFromPoints(i),r=new a.LineDashedMaterial({color:0xffffff,linewidth:1,scale:1,dashSize:.1,gapSize:.1}),n=new a.Line(s,r);return n.computeLineDistances(),n.position.copy(t),n}createSoapBubbleMaterial(){let e=`
+<!DOCTYPE html><html lang=en><script type=module src=bubble_simulation.a8c57dc3.js></script><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1"><title>Unblowing bubbles — Antonino Cilione</title><meta name=description content="Compare how straw length changes the lifetime of a soap bubble."><script type=module src=acilione.github.io.82430209.js></script><link rel=stylesheet href=acilione.github.io.0860d162.css><link rel=stylesheet href=acilione.github.io.df0af4c6.css><link rel=stylesheet href=heron_fountain_simulation.bc378db3.css><script type=module src=acilione.github.io.238d4610.js></script><body class=simulation-page>
+    <a class=skip-link href=#main>Skip to experiment</a>
+    <div id=navbar-container></div>
+    <main id=main class=content>
+      <header class=simulation-heading>
+        <div>
+          <a class=section-index href=projects.html>← Experiments / 02 / Surface tension</a>
+          <h1>Unblowing bubbles</h1>
+        </div>
+        <p>Compare how straw length changes the lifetime of a soap bubble.</p>
+      </header>
+      <div class=lab-layout>
+        <div id=scene-container role=img aria-label="Interactive Unblowing bubbles visualization"></div>
+        <aside class=lab-sidebar aria-label="Experiment controls and notes">
+          <p class=controls-heading>Experiment controls</p>
+          <div id=simulation-controls></div>
+          <details class=model-note open>
+            <summary>The model</summary>
+            <p>
+              Surface tension squeezes air out of a soap bubble through a straw.
+              The model combines air inertia and viscous resistance to predict
+              how the bubble shrinks. Changing the straw length lets you compare
+              how resistance affects its lifetime.
+            </p>
+            <p>
+              The bubble is treated as spherical, with flow adjusting as it
+              shrinks. This approximation breaks down when the bubble becomes
+              comparable in size to the straw opening, so the final collapse is
+              a theoretical extrapolation. Film colors are illustrative.
+            </p>
+            <a href=https://doi.org/10.1119/5.0254263>Read the paper ↗</a>
+          </details>
+        </aside>
+      </div>
+      <div class=lab-caption>
+        <span>Switch to 3D to orbit · Dimensions in metres</span><span>Δp = 4σ/R · Inertia + viscosity</span>
+      </div>
+    </main>
+    <script type=module>import"./bubble_simulation.a8c57dc3.js";var e=globalThis,t={},i={},s=e.parcelRequire0087;null==s&&((s=function(e){if(e in t)return t[e].exports;if(e in i){var s=i[e];delete i[e];var a={id:e,exports:{}};return t[e]=a,s.call(a.exports,a,a.exports),a.exports}var r=Error("Cannot find module '"+e+"'");throw r.code="MODULE_NOT_FOUND",r}).register=function(e,t){i[e]=t},e.parcelRequire0087=s),s.register;var a=s("FL6xz"),r=s("ln7c9"),n=s("lniiV");let o=Math.sqrt(1619e-8/Math.PI);function h(e,t){if(0===e)return 0;let i=8*Math.PI*184e-7*t/1619e-8;return Math.PI/8030239999999999e-22*(i*e**3+e**2.5*Math.sqrt(i*i*e+.24204799999999999))}function l(e,t,i=8192){if(!Number.isFinite(e)||e<0||!Number.isFinite(t)||t<=0)throw RangeError("Use L >= 0 and R0 > 0 in metres.");if(!Number.isInteger(i)||i<16)throw RangeError("At least 16 segments are required.");let s=new Float64Array(i+1),a=t/i;for(let t=1;t<=i;t++){let i=(t-1)*a,r=t*a;s[t]=s[t-1]+a/6*(h(i,e)+4*h((i+r)/2,e)+h(r,e))}let r=s[i];return{duration:r,radiusAt(e){if(!Number.isFinite(e))throw RangeError("Time must be finite.");if(e<=0)return t;if(e>=r)return 0;let n=r-e,o=0,h=i;for(;h-o>1;){let e=o+h>>1;s[e]<n?o=e:h=e}return a*(o+(n-s[o])/(s[h]-s[o]))}}}class c{constructor(e="scene-container"){if(void 0===a)throw Error("THREE.js is not loaded.");if(this.container=document.getElementById(e),!this.container)throw Error(`Container element with id '${e}' not found.`);this.guiParams={R_0:.04,L1:.01,L2:.05,L3:.1,isRunning:!1,scale_factor:40,viewMode:"2D",showDashedLines:!0,soapEffect:!0,playPause:()=>{this.guiParams.isRunning=!this.guiParams.isRunning,this.handlePlayPause()}},this.clock=new a.Clock(!1),this.guiControllers=[],this.controls=null,this.camera2D=null,this.camera3D=null,this.initThree(),this.setupPhysicsAndAnimation(),this.setupGUI(),this.addTextLabels(),this.animate=this.animate.bind(this),this.animate()}getCurrentTheme(){return"dark"===document.documentElement.getAttribute("data-theme")?"dark":"light"}updateSceneTheme(){let e=this.getCurrentTheme();this.scene&&(this.scene.background=new a.Color("dark"===e?856593:0xf3f5f2))}setupThemeObserver(){this.themeObserver=new MutationObserver(e=>{for(let t of e)"attributes"===t.type&&"data-theme"===t.attributeName&&this.updateSceneTheme()}),this.themeObserver.observe(document.documentElement,{attributes:!0})}initThree(){this.scene=new a.Scene,this.updateSceneTheme(),this.renderer=new a.WebGLRenderer({antialias:!0}),this.renderer.setSize(this.container.clientWidth,this.container.clientHeight),this.container.appendChild(this.renderer.domElement);let e=this.container.clientWidth/this.container.clientHeight,t=0,i=(t=this.container.clientWidth>1280?28:14)/e;this.camera2D=new a.OrthographicCamera(-t,t,i,-i,.1,100),this.camera2D.position.z=5,this.camera3D=new a.PerspectiveCamera(45,e,.1,100),this.camera3D.position.set(0,4,36),this.camera3D.lookAt(0,0,0),this.camera=this.camera2D,this.controls=new(0,n.OrbitControls)(this.camera3D,this.renderer.domElement),this.controls.enableDamping=!0,this.controls.dampingFactor=.05,this.controls.enabled=!1;let s=new a.AmbientLight(4210752,10);this.scene.add(s),this.resizeObserver=new ResizeObserver(()=>this.onWindowResize()),this.resizeObserver.observe(this.container),document.addEventListener("visibilitychange",()=>{document.hidden&&this.guiParams.isRunning&&this.guiParams.playPause()}),this.straws=[],this.staticCircles=[],this.setupThemeObserver()}onWindowResize(){let e=this.container.clientWidth/this.container.clientHeight,t=Math.max(14,Math.max(6,this.guiParams.R_0*this.guiParams.scale_factor*2+1,Math.max(this.guiParams.L1,this.guiParams.L2,this.guiParams.L3)*this.guiParams.scale_factor+1)*e),i=t/e;this.camera2D.left=-t,this.camera2D.right=t,this.camera2D.top=i,this.camera2D.bottom=-i,this.camera2D.updateProjectionMatrix(),this.camera3D.aspect=e,this.camera3D.zoom=Math.min(1,e),this.camera3D.updateProjectionMatrix(),this.renderer.setSize(this.container.clientWidth,this.container.clientHeight),this.camera="2D"===this.guiParams.viewMode?this.camera2D:this.camera3D}handlePlayPause(){this.guiParams.isRunning?(this.bubble_active=this.bubble_durations.map((e,t)=>this.bubble_times[t]<e),this.bubble_active.every(e=>!e)&&(this.bubble_times=[0,0,0],this.bubble_active=[!0,!0,!0],this.textGroups.forEach(e=>{e.group.style.opacity=1})),this.clock.start()):this.clock.stop()}resetAnimation(e){let t=`L${e+1}`,i=this.guiParams[t],s=this.guiParams.R_0;this.timelines[e]=l(i,s),this.bubble_durations[e]=this.timelines[e].duration,this.max_duration=Math.max(...this.bubble_durations),this.bubble_times[e]=0,this.bubble_active[e]=!0;let r=this.positions[e],n=s*this.guiParams.scale_factor,o=i*this.guiParams.scale_factor,h=r.y,c=h-n,u=this.straws[e];u&&(u.scale.set(1,o,1),u.position.set(r.x,h+o/2,0));let m=this.circles[e];if(m&&(m.scale.setScalar(n),m.position.y=c),this.textGroups&&this.textGroups[e]&&(this.textGroups[e].L.textContent=`L: ${(100*i).toFixed(2)} cm`,this.textGroups[e].R.textContent=`R(t): ${(100*s).toFixed(2)} cm`,this.textGroups[e].time.textContent="t: 0.0 s",this.textGroups[e].group.style.opacity=1),s!==this._lastR0||!this.staticCircles[e]){this.staticCircles[e]&&this.scene.remove(this.staticCircles[e]);let t=new a.Vector3(r.x,c,r.z),i=this.createDashedCircle(n,t);i.visible=this.guiParams.showDashedLines,i.userData.isBubbleComponent=!0,this.scene.add(i),this.staticCircles[e]=i}this.onWindowResize(),this.renderer.render(this.scene,this.camera)}setupPhysicsAndAnimation(){let e=this.scene.children.filter(e=>e.userData?.isBubbleComponent),t=new Set(e.map(e=>e.geometry)),i=new Set(e.map(e=>e.material));e.forEach(e=>this.scene.remove(e)),t.forEach(e=>e?.dispose()),i.forEach(e=>e?.dispose()),this.straws=[],this.circles=[],this.staticCircles=[];let{L1:s,L2:r,L3:n,R_0:h,scale_factor:c}=this.guiParams;this._lastR0=h,this.Ls=[s,r,n],this.timelines=this.Ls.map(e=>l(e,h)),this.bubble_durations=this.timelines.map(e=>e.duration),this.max_duration=Math.max(...this.bubble_durations),this.positions=[new a.Vector3(-8,0,0),new a.Vector3(0,0,0),new a.Vector3(8,0,0)],this.bubble_times=[0,0,0],this.bubble_active=[!0,!0,!0];let u=new a.SphereGeometry(1,32,32),m=o*c,d=new a.CylinderGeometry(m,m,1,32),p=new a.MeshBasicMaterial({color:8437664,transparent:!0,opacity:.5,side:a.DoubleSide}),g=h*c;this.Ls.forEach((e,t)=>{let i=this.positions[t],s=e*c,r=i.y,n=r-g,o=new a.Vector3(i.x,n,i.z),h=this.createDashedCircle(g,o);h.userData.isBubbleComponent=!0,h.visible=this.guiParams.showDashedLines,this.scene.add(h),this.staticCircles.push(h);let l=this.guiParams.soapEffect?this.createSoapBubbleMaterial():new a.MeshBasicMaterial({color:49151,transparent:!0,opacity:.5,side:a.DoubleSide}),m=new a.Mesh(u,l);m.position.set(i.x,n,i.z),m.scale.setScalar(g),m.userData.isBubbleComponent=!0,this.circles.push(m),this.scene.add(m);let b=new a.Mesh(d,p);b.scale.set(1,s,1),b.position.set(i.x,r+s/2,0),b.userData.isBubbleComponent=!0,this.straws.push(b),this.scene.add(b)}),this.onWindowResize()}createDashedCircle(e,t){let i=[];for(let t=0;t<=64;t++){let s=t/64*Math.PI*2;i.push(new a.Vector3(e*Math.cos(s),e*Math.sin(s),0))}let s=new a.BufferGeometry().setFromPoints(i),r=new a.LineDashedMaterial({color:7903368,linewidth:1,scale:1,dashSize:.1,gapSize:.1}),n=new a.Line(s,r);return n.computeLineDistances(),n.position.copy(t),n}createSoapBubbleMaterial(){let e=`
       varying vec3 vNormal;
       varying vec3 vPosition;
       varying vec3 vWorldPosition;
       varying vec2 vUv;
-      
+
       void main() {
         vNormal = normalize(normalMatrix * normal);
         vPosition = position;
-        vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
+        vWorldPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
         vUv = uv;
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
       }
@@ -23,60 +53,60 @@
       uniform float uTime;
       uniform float uThickness;
       uniform vec3 uCameraPosition;
-      
+
       varying vec3 vNormal;
       varying vec3 vPosition;
       varying vec3 vWorldPosition;
       varying vec2 vUv;
-      
+
       // Attempt to simulate thin-film interference colors
       // Based on wavelength-dependent phase shift in thin films
       vec3 thinFilmInterference(float thickness, float cosAngle) {
         // Refractive index of soap film (approximately 1.33 like water)
         float n = 1.33;
-        
+
         // Optical path difference for different wavelengths (nm)
         // Red: 700nm, Green: 530nm, Blue: 470nm
         float pathDiff = 2.0 * n * thickness * cosAngle;
-        
+
         // Calculate phase for each color channel
         // Higher frequencies (shorter wavelengths) shift faster
         float phaseR = pathDiff / 700.0;
         float phaseG = pathDiff / 530.0;
         float phaseB = pathDiff / 470.0;
-        
+
         // Interference pattern (constructive/destructive)
         vec3 color;
-        color.r = 0.5 + 0.5 * cos(phaseR * 3.14159 * 2.0);
-        color.g = 0.5 + 0.5 * cos(phaseG * 3.14159 * 2.0);
-        color.b = 0.5 + 0.5 * cos(phaseB * 3.14159 * 2.0);
-        
+        color.r = 0.5 - 0.5 * cos(phaseR * 3.14159 * 2.0);
+        color.g = 0.5 - 0.5 * cos(phaseG * 3.14159 * 2.0);
+        color.b = 0.5 - 0.5 * cos(phaseB * 3.14159 * 2.0);
+
         return color;
       }
-      
+
       void main() {
         // Calculate view direction
-        vec3 viewDir = normalize(uCameraPosition - vWorldPosition);
-        
+        vec3 viewDir = normalize(-vWorldPosition);
+
         // Fresnel effect - stronger reflection at grazing angles
         float fresnel = 1.0 - max(dot(viewDir, vNormal), 0.0);
         fresnel = pow(fresnel, 3.0); // Higher power = more subtle edge effect
-        
+
         // Film thickness varies based on position and time (slower, subtler flow)
-        float thickness = uThickness * (1.0 + 0.15 * sin(vUv.x * 6.0 + uTime * 0.3) 
+        float thickness = uThickness * (1.0 + 0.15 * sin(vUv.x * 6.0 + uTime * 0.3)
                                               + 0.1 * sin(vUv.y * 5.0 - uTime * 0.2)
                                               + 0.08 * sin(vPosition.x * 3.0 + vPosition.y * 2.0 + uTime * 0.15));
-        
+
         // Thin-film interference color
-        float cosAngle = abs(dot(viewDir, vNormal));
+        float cosAngle = sqrt(1.0 - (1.0 - pow(abs(dot(viewDir, normalize(vNormal))), 2.0)) / (1.33 * 1.33));
         vec3 interferenceColor = thinFilmInterference(thickness, cosAngle);
-        
+
         // Base soap color (soft, slightly iridescent white-blue)
         vec3 baseColor = vec3(0.92, 0.95, 1.0);
-        
+
         // Mix interference with base color - much more subtle blend
         vec3 finalColor = mix(baseColor, interferenceColor, 0.25 + 0.15 * fresnel);
-        
+
         // Subtle rainbow tint at edges only
         vec3 rainbowEdge = vec3(
           0.5 + 0.5 * sin(fresnel * 4.0 + 0.0),
@@ -84,16 +114,14 @@
           0.5 + 0.5 * sin(fresnel * 4.0 + 4.18)
         );
         finalColor = mix(finalColor, rainbowEdge, fresnel * 0.15); // Much subtler edge rainbow
-        
+
         // Add soft highlight for reflection simulation
         float highlight = pow(max(dot(reflect(-viewDir, vNormal), vec3(0.5, 1.0, 0.5)), 0.0), 48.0);
         finalColor += vec3(1.0) * highlight * 0.4;
-        
+
         // Transparency: more transparent overall, subtle edge opacity
         float alpha = 0.2 + fresnel * 0.35;
-        
+
         gl_FragColor = vec4(finalColor, alpha);
       }
-    `;return new a.ShaderMaterial({vertexShader:e,fragmentShader:t,uniforms:{uTime:{value:0},uThickness:{value:400},uCameraPosition:{value:new a.Vector3}},transparent:!0,side:a.DoubleSide,depthWrite:!1})}addTextLabels(){this.textOverlay&&this.textOverlay.remove(),this.textOverlay=document.createElement("div"),this.textOverlay.className="text-label-overlay",this.container.appendChild(this.textOverlay),this.textGroups=[],this.Ls=[this.guiParams.L1,this.guiParams.L2,this.guiParams.L3],this.Ls.forEach((e,t)=>{let i=document.createElement("div");i.className="label-group";let s=document.createElement("div");s.textContent=`L: ${(100*e).toFixed(2)} cm`;let a=document.createElement("div");a.textContent="t: 0.0 s";let r=document.createElement("div");r.textContent=`R(t): ${(100*this.guiParams.R_0).toFixed(2)} cm`,i.appendChild(s),i.appendChild(a),i.appendChild(r),this.textOverlay.appendChild(i),this.textGroups.push({group:i,L:s,time:a,R:r})})}toScreenPosition(e,t,i){let s=i.clientWidth,a=i.clientHeight,r=e.clone().project(t);return r.x=(r.x+1)/2*s,r.y=-(r.y-1)/2*a,{x:r.x,y:r.y}}setupGUI(){let e;try{e=new(0,r.default)({autoPlace:!0,title:"Bubble Controls"})}catch(t){e={domElement:document.createElement("div"),add:()=>({step:()=>({onChange:()=>({name:()=>null})}),name:()=>null,onChange:()=>null})}}this.gui=e,this.container.appendChild(e.domElement),e.domElement.style.position="fixed",e.domElement.style.zIndex="19",e.domElement.style.top="10%",e.domElement.style.right="10%",this.guiControllers=[];let t=e.add(this.guiParams,"playPause").name("▶️ / ⏸️ Start/Pause");this.guiControllers.push(t);let i=e.add(this.guiParams,"viewMode",["2D","3D"]).name("View Mode").onChange(e=>{this.camera="2D"===e?this.camera2D:this.camera3D,this.controls.enabled="3D"===e,this.onWindowResize()});this.guiControllers.push(i);let s=e.add(this.guiParams,"showDashedLines").name("Show Initial Radius").onChange(e=>{this.staticCircles.forEach(t=>{t.visible=e})});this.guiControllers.push(s);let a=e.add(this.guiParams,"soapEffect").name("\uD83E\uDEE7 Soap Effect").onChange(()=>{this.setupPhysicsAndAnimation(),this.addTextLabels();for(let e=0;e<3;e++)this.resetAnimation(e)});this.guiControllers.push(a);let n=e.add(this.guiParams,"R_0",.001,.1);this.guiControllers.push(n),n.step(.001).name("R₀ (Initial Radius, m)").onChange(()=>{this.guiParams.isRunning=!1,this.setupPhysicsAndAnimation(),this.addTextLabels();for(let e=0;e<3;e++)this.resetAnimation(e)});let o=e=>{this.guiParams.isRunning=!1,this.resetAnimation(e),this.bubble_times=[0,0,0],this.bubble_active=[!0,!0,!0];for(let t=0;t<3;t++)t!==e&&(this.Ls[t]=this.guiParams[`L${t+1}`],this.resetAnimation(t));this.addTextLabels()},h=e.add(this.guiParams,"L1",.001,.2);this.guiControllers.push(h),h.step(.001).name("L₁ (Length 1, m)").onChange(()=>o(0));let l=e.add(this.guiParams,"L2",.001,.2);this.guiControllers.push(l),l.step(.001).name("L₂ (Length 2, m)").onChange(()=>o(1));let c=e.add(this.guiParams,"L3",.001,.2);this.guiControllers.push(c),c.step(.001).name("L₃ (Length 3, m)").onChange(()=>o(2));let u=e.add({reset:()=>this.resetAll()},"reset");this.guiControllers.push(u),u.name("\uD83D\uDD04 Reset All")}resetAll(){this.guiParams.R_0=.04,this.guiParams.L1=.01,this.guiParams.L2=.05,this.guiParams.L3=.1,this.guiParams.isRunning=!1,this.guiParams.showDashedLines=!0,this.setupPhysicsAndAnimation(),this.addTextLabels();for(let e=0;e<3;e++)this.resetAnimation(e);for(let e of this.guiControllers)try{e&&"function"==typeof e.updateDisplay&&e.updateDisplay()}catch(e){}this.renderer.render(this.scene,this.camera)}animate(){if(requestAnimationFrame(this.animate),"3D"===this.guiParams.viewMode&&this.controls.update(),this.textGroups&&this.circles.length>0){let e=this.guiParams.R_0*this.guiParams.scale_factor*2+.5,t=this.positions[0].y-e;this.Ls.forEach((e,i)=>{let s=this.positions[i],r=new a.Vector3(s.x,t,s.z),n=this.toScreenPosition(r,this.camera,this.renderer.domElement),o=this.textGroups[i].group;o.style.left=`${n.x}px`,o.style.top=`${n.y}px`})}if(this.guiParams.soapEffect&&this.circles){let e=.001*performance.now();this.circles.forEach(t=>{t.material.uniforms&&(t.material.uniforms.uTime.value=e,t.material.uniforms.uCameraPosition.value.copy(this.camera.position))})}if(this.renderer.render(this.scene,this.camera),!this.guiParams.isRunning)return;let e=this.clock.getDelta();for(let t=0;t<3;t++){if(!this.bubble_active[t])continue;let i=this.bubble_durations[t],s=this.bubble_times[t]+e;s>=i&&(s=i,this.bubble_active[t]=!1,this.textGroups[t].group.style.opacity=.5),this.bubble_times[t]=s;let a=function(e,t,i){return function(e,t,i,s=1e-6,a=100){let r=0,n=i,o=e(0),h=e(n);if(o*h>0)return 0;Math.abs(o)<Math.abs(h)&&([r,n]=[n,r],[o,h]=[h,o]);let l=r,c=o,u=0,m=0,d=!0;for(let t=0;t<a&&!(0===h||Math.abs(n-r)<=s);t++){((u=o!==c&&h!==c?r*h*c/((o-h)*(o-c))+n*o*c/((h-o)*(h-c))+l*o*h/((c-o)*(c-h)):n-(n-r)/(h-o)*h)-(3*r+n)/4)*(u-n)>=0||d&&Math.abs(u-n)>=Math.abs(n-l)/2||!d&&Math.abs(u-n)>=Math.abs(l-m)/2||d&&Math.abs(n-l)<Math.abs(s)||!d&&Math.abs(l-m)<Math.abs(s)?(u=(r+n)/2,d=!0):d=!1,m=l,l=n,c=h;let t=e(u);o*t<0?(n=u,h=t):(r=u,o=t),Math.abs(o)<Math.abs(h)&&([r,n]=[n,r],[o,h]=[h,o])}return n}(s=>(function(e,t,i){try{let s=c(t=>u(t,e),i,t),a=Math.pow(o,2)*h*e/63488e-16*(Math.pow(t,4)-Math.pow(i,4)),r=o/16e-6*Math.sqrt(98.38709677419355)*s;return a+r}catch(e){return console.error("Error in calc_t_gen:",e),0}})(e,t,s)-i,0,t,1e-6,100)}(this.guiParams[`L${t+1}`],this.guiParams.R_0,s),r=Math.max(0,a)*this.guiParams.scale_factor;this.circles[t]&&this.circles[t].scale.setScalar(r);let n=this.positions[t].y-r;this.circles[t]&&(this.circles[t].position.y=n),this.textGroups&&this.textGroups[t]&&(this.textGroups[t].time.textContent=`t: ${s.toFixed(3)} s`,this.textGroups[t].R.textContent=`R(t): ${(100*a).toFixed(2)} cm`)}this.bubble_active.every(e=>!e)&&(this.guiParams.isRunning=!1,this.clock.stop())}}document.addEventListener("DOMContentLoaded",()=>{try{!function(e="scene-container"){new d(e)}("scene-container")}catch(e){console.error("Failed to initialize DeflatingBubbleScene:",e)}});</script>
-
-
+    `;return new a.ShaderMaterial({vertexShader:e,fragmentShader:t,uniforms:{uTime:{value:0},uThickness:{value:400},uCameraPosition:{value:new a.Vector3}},transparent:!0,side:a.FrontSide,depthWrite:!1})}addTextLabels(){this.textOverlay&&this.textOverlay.remove(),this.textOverlay=document.createElement("div"),this.textOverlay.className="text-label-overlay",this.container.appendChild(this.textOverlay),this.textGroups=[],this.Ls=[this.guiParams.L1,this.guiParams.L2,this.guiParams.L3],this.Ls.forEach((e,t)=>{let i=document.createElement("div");i.className="label-group";let s=document.createElement("div");s.textContent=`L: ${(100*e).toFixed(2)} cm`;let a=document.createElement("div");a.textContent="t: 0.0 s";let r=document.createElement("div");r.textContent=`R(t): ${(100*this.guiParams.R_0).toFixed(2)} cm`,i.appendChild(s),i.appendChild(a),i.appendChild(r),this.textOverlay.appendChild(i),this.textGroups.push({group:i,L:s,time:a,R:r})})}toScreenPosition(e,t,i){let s=i.clientWidth,a=i.clientHeight,r=e.clone().project(t);return r.x=(r.x+1)/2*s,r.y=-(r.y-1)/2*a,{x:r.x,y:r.y}}setupGUI(){let e;try{e=new(0,r.default)({autoPlace:!1,title:"Bubble Controls"})}catch(t){e={domElement:document.createElement("div"),add:()=>({step:()=>({onChange:()=>({name:()=>null})}),name:()=>null,onChange:()=>null})}}this.gui=e;let t=document.getElementById("simulation-controls");(t||this.container).appendChild(e.domElement),t||Object.assign(e.domElement.style,{position:"absolute",top:"16px",right:"16px"}),this.guiControllers=[];let i=e.add(this.guiParams,"playPause").name("Play / Pause");this.guiControllers.push(i);let s=e.add(this.guiParams,"viewMode",["2D","3D"]).name("View Mode").onChange(e=>{this.camera="2D"===e?this.camera2D:this.camera3D,this.controls.enabled="3D"===e,this.onWindowResize()});this.guiControllers.push(s);let a=e.add(this.guiParams,"showDashedLines").name("Show Initial Radius").onChange(e=>{this.staticCircles.forEach(t=>{t.visible=e})});this.guiControllers.push(a);let n=e.add(this.guiParams,"soapEffect").name("Iridescent film").onChange(()=>{this.guiParams.isRunning=!1,this.clock.stop(),this.setupPhysicsAndAnimation(),this.addTextLabels();for(let e=0;e<3;e++)this.resetAnimation(e)});this.guiControllers.push(n);let o=e.add(this.guiParams,"R_0",.01,.1);this.guiControllers.push(o),o.step(.001).name("R₀ (Initial Radius, m)").onChange(()=>{this.guiParams.isRunning=!1,this.clock.stop(),this.setupPhysicsAndAnimation(),this.addTextLabels();for(let e=0;e<3;e++)this.resetAnimation(e)});let h=e=>{this.guiParams.isRunning=!1,this.resetAnimation(e),this.bubble_times=[0,0,0],this.bubble_active=[!0,!0,!0];for(let t=0;t<3;t++)t!==e&&(this.Ls[t]=this.guiParams[`L${t+1}`],this.resetAnimation(t));this.addTextLabels()},l=e.add(this.guiParams,"L1",.001,.2);this.guiControllers.push(l),l.step(.001).name("L₁ (Length 1, m)").onChange(()=>h(0));let c=e.add(this.guiParams,"L2",.001,.2);this.guiControllers.push(c),c.step(.001).name("L₂ (Length 2, m)").onChange(()=>h(1));let u=e.add(this.guiParams,"L3",.001,.2);this.guiControllers.push(u),u.step(.001).name("L₃ (Length 3, m)").onChange(()=>h(2));let m=e.add({reset:()=>this.resetAll()},"reset");this.guiControllers.push(m),m.name("Reset experiment")}resetAll(){this.guiParams.R_0=.04,this.guiParams.L1=.01,this.guiParams.L2=.05,this.guiParams.L3=.1,this.guiParams.isRunning=!1,this.guiParams.showDashedLines=!0,this.setupPhysicsAndAnimation(),this.addTextLabels();for(let e=0;e<3;e++)this.resetAnimation(e);for(let e of this.guiControllers)try{e&&"function"==typeof e.updateDisplay&&e.updateDisplay()}catch(e){}this.renderer.render(this.scene,this.camera)}animate(){if(requestAnimationFrame(this.animate),"3D"===this.guiParams.viewMode&&this.controls.update(),this.textGroups&&this.circles.length>0){let e=this.guiParams.R_0*this.guiParams.scale_factor*2+.5,t=this.positions[0].y-e;this.Ls.forEach((e,i)=>{let s=this.positions[i],r=new a.Vector3(s.x,t,s.z),n=this.toScreenPosition(r,this.camera,this.renderer.domElement),o=this.textGroups[i].group;o.style.left=`${n.x}px`,o.style.top=`${n.y}px`})}if(this.guiParams.soapEffect&&this.circles){let e=.001*performance.now();this.circles.forEach(t=>{t.material.uniforms&&(t.material.uniforms.uTime.value=e,t.material.uniforms.uCameraPosition.value.copy(this.camera.position))})}if(this.renderer.render(this.scene,this.camera),!this.guiParams.isRunning)return;let e=Math.min(this.clock.getDelta(),.05);for(let t=0;t<3;t++){if(!this.bubble_active[t])continue;let i=this.bubble_durations[t],s=this.bubble_times[t]+e;s>=i&&(s=i,this.bubble_active[t]=!1,this.textGroups[t].group.style.opacity=.5),this.bubble_times[t]=s,this.guiParams[`L${t+1}`],this.guiParams.R_0;let a=this.timelines[t].radiusAt(s),r=Math.max(0,a)*this.guiParams.scale_factor;this.circles[t]&&this.circles[t].scale.setScalar(r);let n=this.positions[t].y-r;this.circles[t]&&(this.circles[t].position.y=n),this.textGroups&&this.textGroups[t]&&(this.textGroups[t].time.textContent=`t: ${s.toFixed(3)} s`,this.textGroups[t].R.textContent=`R(t): ${(100*a).toFixed(2)} cm`)}this.bubble_active.every(e=>!e)&&(this.guiParams.isRunning=!1,this.clock.stop())}}try{!function(e="scene-container"){new c(e)}("scene-container")}catch(e){document.getElementById("scene-container").textContent="The 3D view could not start. Please use a browser with WebGL enabled.",console.error(e)}</script>
