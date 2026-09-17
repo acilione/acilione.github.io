@@ -27,47 +27,28 @@
         </div>
         <p>Compare how straw length changes the lifetime of a soap bubble.</p>
       </header>
-      <div class="lab-layout">
-        <div
-          id="scene-container"
-          role="img"
-          aria-label="Interactive Unblowing bubbles visualization"
-        ></div>
-        <aside class="lab-sidebar" aria-label="Experiment controls and notes">
-          <p class="controls-heading">Experiment controls</p>
-          <div id="simulation-controls"></div>
-          <details class="model-note" open>
-            <summary>The model</summary>
-            <p>
-              Surface tension squeezes air out of a soap bubble through a straw.
-              The model combines air inertia and viscous resistance to predict
-              how the bubble shrinks. Changing the straw length lets you compare
-              how resistance affects its lifetime.
-            </p>
-            <p>
-              The bubble is treated as spherical, with flow adjusting as it
-              shrinks. This approximation breaks down when the bubble becomes
-              comparable in size to the straw opening, so the final collapse is
-              a theoretical extrapolation. Film colors are illustrative.
-            </p>
-            <a href="https://doi.org/10.1119/5.0254263">Read the paper ↗</a>
-          </details>
-        </aside>
-      </div>
-      <div class="lab-caption">
-        <span>Switch to 3D to orbit · Dimensions in metres</span
-        ><span>Δp = 4σ/R · Inertia + viscosity</span>
-      </div>
+
+      <p id="simulation-status" class="embed-status" role="status">
+        Loading the experiment…
+      </p>
+      <iframe
+        class="simulation-frame"
+        data-simulation="bubble-deflation"
+        src="https://acilione.github.io/bubble-deflation/?embed=1"
+        title="Unblowing bubbles — interactive experiment"
+        aria-describedby="simulation-status"
+        referrerpolicy="strict-origin"
+        allow="fullscreen"
+      ></iframe>
+      <nav class="simulation-links" aria-label="Experiment links">
+        <a href="https://acilione.github.io/bubble-deflation/"
+          >Open standalone ↗</a
+        >
+        <a href="https://github.com/acilione/bubble-deflation"
+          >Source code ↗</a
+        >
+      </nav>
     </main>
-    <script type="module">
-      import { init } from "./simulations/bubble-deflation/bubble.js";
-      try {
-        init("scene-container");
-      } catch (error) {
-        document.getElementById("scene-container").textContent =
-          "The 3D view could not start. Please use a browser with WebGL enabled.";
-        console.error(error);
-      }
-    </script>
+    <script type="module" src="scripts/simulation-embed.js"></script>
   </body>
 </html>
