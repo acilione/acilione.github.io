@@ -7,3 +7,5 @@ blog.html
 assets
 quantum_deep_game_design_v2.md
 /cv/generated/
+/.standalone/
+/dist/

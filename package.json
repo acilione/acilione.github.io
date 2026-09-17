@@ -25,9 +25,7 @@
     "prestart": "npm run cv:build"
   },
   "dependencies": {
-    "lil-gui": "^0.21.0",
-    "marked": "^16.4.1",
-    "three": "^0.180.0"
+    "marked": "^16.4.1"
   },
   "devDependencies": {
     "parcel": "^2.16.0",

@@ -1,5 +1,7 @@
 # Simulation review
 
+This is the historical audit of the implementation before extraction. Current code and numerical tests live in [heron-fountain](https://github.com/acilione/heron-fountain), [bubble-deflation](https://github.com/acilione/bubble-deflation), and [boyles-flask](https://github.com/acilione/boyles-flask). Run npm test in each standalone repository; the website tests the integration only.
+
 Reviewed against the supplied PDFs in `assets` on 2026-09-06. These assets are ignored by the repository; they were read locally and have not been copied into the public build.
 
 ## Heron’s fountain

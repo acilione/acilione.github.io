@@ -27,50 +27,26 @@
         </div>
         <p>An ancient invention, explained by gravity and compressed air.</p>
       </header>
-      <div class="lab-layout">
-        <div
-          id="scene-container"
-          role="img"
-          aria-label="Interactive Heron’s fountain visualization"
-        ></div>
-        <aside class="lab-sidebar" aria-label="Experiment controls and notes">
-          <p class="controls-heading">Experiment controls</p>
-          <div id="simulation-controls"></div>
-          <details class="model-note" open>
-            <summary>The model</summary>
-            <p>
-              Water draining from the upper basin compresses trapped air, which
-              pushes water from the other reservoir up through the fountain’s
-              nozzle. The model follows the changing water levels and air
-              pressure, accounting for gravity and resistance in the pipes.
-            </p>
-            <p>
-              Air compression is treated as isothermal and pipe flow as laminar.
-              Turbulence can slow real water flow. Water stored in the pipes,
-              the jet’s return delay, and surface effects are neglected.
-              Colors illustrate mixing; the drawing is schematic.
-            </p>
-            <a
-              href="https://pubs.aip.org/aapt/ajp/article/94/7/530/3395784/The-physics-behind-Heron-s-fountain"
-              >Read the paper ↗</a
-            >
-          </details>
-        </aside>
-      </div>
-      <div class="lab-caption">
-        <span>Drag to orbit · Scroll to zoom</span
-        ><span>pV = constant · Q = Sv</span>
-      </div>
+
+      <p id="simulation-status" class="embed-status" role="status">
+        Loading the experiment…
+      </p>
+      <iframe
+        class="simulation-frame"
+        data-simulation="heron-fountain"
+        src="https://acilione.github.io/heron-fountain/?embed=1"
+        title="Heron’s fountain — interactive experiment"
+        aria-describedby="simulation-status"
+        referrerpolicy="strict-origin"
+        allow="fullscreen"
+      ></iframe>
+      <nav class="simulation-links" aria-label="Experiment links">
+        <a href="https://acilione.github.io/heron-fountain/"
+          >Open standalone ↗</a
+        >
+        <a href="https://github.com/acilione/heron-fountain">Source code ↗</a>
+      </nav>
     </main>
-    <script type="module">
-      import { init } from "./simulations/heron-fountain/heron.js";
-      try {
-        init("scene-container");
-      } catch (error) {
-        document.getElementById("scene-container").textContent =
-          "The 3D view could not start. Please use a browser with WebGL enabled.";
-        console.error(error);
-      }
-    </script>
+    <script type="module" src="scripts/simulation-embed.js"></script>
   </body>
 </html>
