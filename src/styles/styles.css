@@ -95,26 +95,11 @@ p {
   align-items: center;
   gap: 12px;
 }
-.status-dot {
-  height: 6px;
-  width: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 16px #a3e6bf55;
-}
 .home-hero {
-  min-height: 630px;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  align-items: center;
-  gap: 40px;
-  padding: 80px 0;
-}
-.hero-copy h1 span {
-  color: var(--accent);
+  padding: 64px 0;
 }
 .hero-copy > p {
-  max-width: 420px;
+  max-width: 620px;
   font-size: 17px;
 }
 .button-container {
@@ -147,45 +132,11 @@ p {
   border-color: var(--accent);
 }
 .text-link {
+  white-space: nowrap;
+  flex-shrink: 0;
   font-size: 13px;
   border-bottom: 1px solid var(--line);
   padding: 8px 0;
-}
-.orbital {
-  position: relative;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(ellipse at center, #79c6970e, transparent 65%);
-}
-.orbital svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-.orbit-line {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 0.65;
-  opacity: 0.35;
-}
-.orbit-guide {
-  stroke: var(--line);
-  fill: none;
-  stroke-width: 0.7;
-}
-.orbit-core {
-  fill: var(--accent);
-}
-.orbital-label {
-  position: absolute;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  color: var(--muted);
-  font: 10px monospace;
-  letter-spacing: 0.14em;
 }
 .work-section {
   padding: 46px 0 72px;
@@ -298,14 +249,7 @@ p {
     width: calc(100% - 40px);
   }
   .home-hero {
-    grid-template-columns: 1fr;
-    padding: 55px 0 35px;
-    gap: 0;
-  }
-  .orbital {
-    width: 75%;
-    max-width: 350px;
-    margin: auto;
+    padding: 40px 0;
   }
   .experiment-grid {
     grid-template-columns: 1fr;
