@@ -60,15 +60,19 @@ Thesis: Implementation of learning algorithms on microcontrollers. Developed a H
 
 ### [Milano Mobility](https://github.com/acilione/milano_mobility)
 
-- Built a Python/PostgreSQL/dbt/MinIO transport-data pipeline with versioned archives, validation, and tested historical models; added a TypeScript/MapLibre commute explorer and timetable-aware routing API.
+- Built a Python/PostgreSQL/dbt/MinIO pipeline with versioned archives and tested historical models; added a TypeScript/MapLibre commute explorer and timetable-aware routing API.
+
+### [Universe Visualizer](https://github.com/acilione/universe_visualizer)
+
+- Built a JavaScript/Three.js atlas integrating NASA and Gaia DR3 catalogues, with WebXR virtual and mixed reality, automated tests, and GitHub Actions deployment.
 
 ### [Kamisado](https://github.com/acilione/kamisado)
 
-- Built a TypeScript/Node.js/Socket.IO multiplayer game and Electron host with server-authoritative rules, synchronized timers, reconnection, and automated game-rule and socket integration tests.
+- Built a TypeScript/Node.js/Socket.IO multiplayer game and Electron host with server-authoritative rules, reconnection, and automated rule and socket integration tests.
 
 ### [STM32 Microphone Recorder](https://github.com/acilione/b-l475e-iot01a-audio-recording-example)
 
-- Developed C firmware for MEMS microphone capture using DFSDM/DMA and a Python receiver saving 16 kHz WAV audio over ST-LINK USB; implemented button controls, buffering, checksums, and host tests.
+- Built C firmware for MEMS microphone capture using DFSDM/DMA and a Python receiver for 16 kHz WAV audio over ST-LINK USB, with buffering, checksums, and host tests.
 
 ### [Interactive Physics Simulations](https://acilione.github.io/projects.html)
 

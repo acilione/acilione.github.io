@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Universe visualizer — Antonino Cilione</title>
+    <meta
+      name="description"
+      content="An interactive astronomical atlas with planets, stars, constellations, and WebXR."
+    />
+    <script type="module" src="scripts/set_theme.js"></script>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+    <link rel="stylesheet" href="styles/simulation.css" />
+    <script type="module" src="scripts/navbar.js"></script>
+  </head>
+  <body class="simulation-page">
+    <a class="skip-link" href="#main">Skip to atlas</a>
+    <div id="navbar-container"></div>
+    <main id="main" class="content">
+      <header class="simulation-heading">
+        <div>
+          <a class="section-index" href="projects.html"
+            >← Projects / Astronomy</a
+          >
+          <h1>Universe visualizer</h1>
+        </div>
+        <p>An interactive astronomical atlas with planets, stars, constellations, and WebXR.</p>
+      </header>
+
+      <p id="simulation-status" class="embed-status" role="status">
+        Loading the atlas…
+      </p>
+      <iframe
+        class="simulation-frame universe-frame"
+        data-simulation="universe_visualizer"
+        src="https://acilione.github.io/universe_visualizer/?embed=1"
+        title="Universe visualizer — interactive astronomical atlas"
+        aria-describedby="simulation-status"
+        referrerpolicy="strict-origin"
+        allow="fullscreen; xr-spatial-tracking"
+      ></iframe>
+      <nav class="simulation-links" aria-label="Atlas links">
+        <a href="https://acilione.github.io/universe_visualizer/"
+          >Open standalone ↗</a
+        >
+        <a href="https://github.com/acilione/universe_visualizer">Source code ↗</a>
+      </nav>
+    </main>
+    <script type="module" src="scripts/simulation-embed.js"></script>
+  </body>
+</html>
