@@ -54,3 +54,9 @@
     height: 1300px;
   }
 }
+
+/* The atlas manages its own viewport and panels. */
+.simulation-frame.universe-frame {
+  height: clamp(640px, 85vh, 1000px);
+  background: #080b0e;
+}

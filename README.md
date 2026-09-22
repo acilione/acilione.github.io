@@ -10,7 +10,7 @@ npm run cv:setup
 npm start
 ```
 
-Open the URL printed by Parcel. All six public HTML entry points are included.
+Open the URL printed by Parcel. All seven public HTML entry points are included.
 
 ## Checks and production build
 
@@ -23,7 +23,7 @@ npm run site:check
 
 The build writes the GitHub Pages site to `docs/`. Deployment is not performed by the build command.
 
-The browser check opens all six built pages, checks simulation initialization and local assets, exercises both CV downloads, and checks the mobile CV layout. Parcel explicitly targets browsers; the Node.js engine requirement applies to development tools.
+The browser check opens all seven built pages, checks simulation initialization and local assets, exercises both CV downloads, and checks the mobile CV layout. Parcel explicitly targets browsers; the Node.js engine requirement applies to development tools.
 
 ## CV
 

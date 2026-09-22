@@ -29,12 +29,12 @@ const server = createServer(async (req, res) => {
 });
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const base = `http://127.0.0.1:${server.address().port}`;
-const browser = await chromium.launch();
+const browser = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
 try {
   const page = await browser.newPage({
     viewport: { width: 1440, height: 1000 },
   });
-  const simulations = ["heron-fountain", "bubble-deflation", "boyles-flask"];
+  const simulations = ["heron-fountain", "bubble-deflation", "boyles-flask", "universe_visualizer"];
   if (process.env.SIMULATION_CHECKOUTS) {
     await page.route("https://acilione.github.io/**", async (route) => {
       const url = new URL(route.request().url());
@@ -75,10 +75,46 @@ try {
     "heron_fountain_simulation",
     "bubble_simulation",
     "boyles_flask",
+    "universe_visualizer",
     "cv",
   ]) {
     await page.goto(`${base}/${name}.html`, { waitUntil: "networkidle" });
     assert.equal(await page.locator("h1").count(), 1, name);
+    if (name === "projects") {
+      assert.equal(await page.locator('a[href="universe_visualizer.html"]').count(), 1);
+    }
+    if (name === "universe_visualizer") {
+      await page.locator('iframe[data-ready="true"]').waitFor();
+      await page.locator("#simulation-status").waitFor({ state: "hidden" });
+      const frame = page.frameLocator('iframe[data-simulation="universe_visualizer"]');
+      await frame.locator("#universe").waitFor();
+      assert.equal(await frame.locator(".webgl-error").count(), 0);
+      await frame.locator('[data-action="planets"]').first().click();
+      await frame.locator('.solar-shortcuts [data-object="earth"]').click();
+      await frame.locator('#object-card h2:text-is("Earth")').waitFor();
+      await frame.locator('[data-action="constellations"]').first().click();
+      await frame.locator("#modal").waitFor();
+      await frame.locator('[data-constellation="Ori"]').waitFor({ timeout: 30000 });
+      await page.keyboard.press("Escape");
+      await frame.locator("#modal").waitFor({ state: "hidden" });
+      await page.screenshot({ path: "cv/generated/universe-desktop.png", fullPage: true });
+      const embeddedPage = page.frames().find(child => child.url().includes("/universe_visualizer/"));
+      const canvas = frame.locator("#universe");
+      const before = await canvas.boundingBox();
+      await page.setViewportSize({ width: 390, height: 844 });
+      await embeddedPage.waitForFunction(width => document.querySelector("#universe").getBoundingClientRect().width < width, before.width);
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, "Atlas parent overflow");
+      assert.equal(await embeddedPage.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, "Atlas frame overflow");
+      await frame.locator('[data-action="planets"]').first().click();
+      await frame.locator('.solar-shortcuts [data-object="saturn"]').click();
+      await frame.locator('.view-controls [data-action="object"]').click();
+      await frame.locator('#modal-body h2:text-is("Saturn")').waitFor();
+      await page.keyboard.press("Escape");
+      await frame.locator("#modal").waitFor({ state: "hidden" });
+      await page.screenshot({ path: "cv/generated/universe-mobile.png", fullPage: true });
+      await page.setViewportSize({ width: 1440, height: 1000 });
+    }
+
     if (
       [
         "heron_fountain_simulation",
@@ -176,7 +212,7 @@ try {
   );
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: six pages, standalone embeds, play/pause, theme/height synchronization, sender validation, downloads, and mobile layout.",
+    "PASS: seven pages, atlas catalogues and mobile controls, standalone embeds, play/pause, theme/height synchronization, sender validation, downloads, and mobile layout.",
   );
 } finally {
   await browser.close();
