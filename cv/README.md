@@ -73,3 +73,9 @@ Project additions reviewed on 2026-09-09:
 - [STM32 Microphone Recorder](https://github.com/acilione/b-l475e-iot01a-audio-recording-example): C firmware capturing MEMS audio through DFSDM/DMA, ST-LINK USB transfer, a Python WAV receiver, and host tests.
 
 Condensed existing project descriptions and linked each project title directly to its repository or portfolio page to retain all six projects at readable type size within two pages. Employment content is unchanged.
+
+Project addition reviewed on 2026-09-22:
+
+- [Universe Visualizer](https://github.com/acilione/universe_visualizer): JavaScript/Three.js astronomical atlas using NASA and Gaia DR3 catalogues, WebXR, automated tests, and GitHub Actions deployment.
+- Kept the data engineering projects first and used a plain project title and technology keywords. Condensed project bullets to retain all seven entries in two pages at the existing 10.5 pt body size.
+- Rechecked the Greenhouse parsing guidance linked above. The Markdown, single-column layout, standard headings, and text-based PDF export remain unchanged in structure; PDF extraction and link checks include the new entry.
