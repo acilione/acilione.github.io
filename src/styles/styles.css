@@ -96,7 +96,7 @@ p {
   gap: 12px;
 }
 .home-hero {
-  padding: 64px 0;
+  padding: 52px 0 44px;
 }
 .hero-copy > p {
   max-width: 620px;
@@ -139,14 +139,14 @@ p {
   padding: 8px 0;
 }
 .work-section {
-  padding: 46px 0 72px;
+  padding: 36px 0 56px;
   border-top: 1px solid var(--line);
 }
 .section-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   gap: 20px;
 }
 .section-heading h2 {
@@ -155,52 +155,86 @@ p {
 .section-index {
   color: var(--muted);
 }
-.experiment-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+.github-button {
+  gap: 10px;
+  font-weight: 600;
 }
-.experiment-card {
+.github-mark {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+.button-handle {
+  font-family: monospace;
+  font-weight: 400;
+  opacity: 0.8;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.project-card {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: var(--surface);
   overflow: hidden;
   transition: border-color 0.2s;
 }
-.experiment-card:hover {
+.project-card:hover {
   border-color: var(--accent);
 }
-.experiment-art {
-  height: 200px;
+.project-art {
+  height: 96px;
   display: grid;
   place-items: center;
   background: linear-gradient(135deg, var(--surface), var(--soft));
   border-bottom: 1px solid var(--line);
-}
-.experiment-art svg {
-  width: 80%;
-  height: 80%;
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 1;
-}
-.card-copy {
-  padding: 24px 28px;
-}
-.card-top {
-  display: flex;
-  justify-content: space-between;
   color: var(--accent);
 }
-.experiment-card h3 {
-  font-size: 24px;
-  letter-spacing: -0.04em;
-  margin: 16px 0 12px;
+.project-art svg {
+  width: 78%;
+  height: 84%;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.2;
 }
-.experiment-card p {
-  font-size: 14px;
-  margin: 0;
-  max-width: 380px;
+.card-copy {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 14px 18px 16px;
+}
+.project-card .section-index {
+  color: var(--accent);
+  font-size: 10px;
+}
+.project-card h3 {
+  font-size: 18px;
+  letter-spacing: -0.03em;
+  margin: 6px 0 6px;
+}
+.project-card p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 14px;
+}
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: auto;
+  font-size: 12px;
+}
+.card-links a {
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+}
+.card-links a:hover {
+  border-bottom-color: var(--accent);
 }
 .about-strip {
   padding: 50px 0;
@@ -243,6 +277,11 @@ p {
 .skip-link:focus {
   top: 10px;
 }
+@media (max-width: 1000px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 @media (max-width: 760px) {
   .content,
   .site-footer {
@@ -251,7 +290,7 @@ p {
   .home-hero {
     padding: 40px 0;
   }
-  .experiment-grid {
+  .project-grid {
     grid-template-columns: 1fr;
   }
   .about-strip {

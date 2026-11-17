@@ -79,3 +79,9 @@ Project addition reviewed on 2026-09-22:
 - [Universe Visualizer](https://github.com/acilione/universe_visualizer): JavaScript/Three.js astronomical atlas using NASA and Gaia DR3 catalogues, WebXR, automated tests, and GitHub Actions deployment.
 - Kept the data engineering projects first and used a plain project title and technology keywords. Condensed project bullets to retain all seven entries in two pages at the existing 10.5 pt body size.
 - Rechecked the Greenhouse parsing guidance linked above. The Markdown, single-column layout, standard headings, and text-based PDF export remain unchanged in structure; PDF extraction and link checks include the new entry.
+
+Project addition reviewed on 2026-11-17:
+
+- [Stillwave](https://github.com/acilione/stillwave): native Android app (Kotlin, Jetpack Compose, Media3, Room) to record audio, cut sections, apply reverse and speed effects, and layer recordings into tracks; edits are saved as new files. Description taken from the repository README; no download counts or store-listing claims added.
+- Placed after the data engineering and Universe Visualizer entries.
+- To keep eight projects within two pages at 10.5 pt, condensed the Stillwave bullet to one line, removed the dangling third line of Marketplace Lakehouse, shortened Universe Visualizer to one line (WebXR, tests, CI), and shortened the Game Jam achievement to the prize, game, and tools. No facts were added or changed.
