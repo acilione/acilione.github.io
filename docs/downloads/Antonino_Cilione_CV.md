@@ -56,7 +56,7 @@ Thesis: Implementation of learning algorithms on microcontrollers. Developed a H
 
 ### [Marketplace Lakehouse](https://github.com/acilione/marketplace_lakehouse)
 
-- Built a local Kafka/Spark Structured Streaming lakehouse with Iceberg, Trino, SCD Type 2, and data-quality gates; added a TypeScript dashboard, Airflow orchestration, and Prometheus/Grafana monitoring.
+- Built a local Kafka/Spark Structured Streaming lakehouse with Iceberg, Trino, SCD Type 2, and data-quality gates; added Airflow, Prometheus/Grafana, and a TypeScript dashboard.
 
 ### [Milano Mobility](https://github.com/acilione/milano_mobility)
 
@@ -64,7 +64,11 @@ Thesis: Implementation of learning algorithms on microcontrollers. Developed a H
 
 ### [Universe Visualizer](https://github.com/acilione/universe_visualizer)
 
-- Built a JavaScript/Three.js atlas integrating NASA and Gaia DR3 catalogues, with WebXR virtual and mixed reality, automated tests, and GitHub Actions deployment.
+- Built a Three.js atlas of NASA and Gaia DR3 catalogues with WebXR, tests, and CI.
+
+### [Stillwave](https://github.com/acilione/stillwave)
+
+- Built a Kotlin/Jetpack Compose Android app to record, cut, and layer audio tracks.
 
 ### [Kamisado](https://github.com/acilione/kamisado)
 
@@ -81,7 +85,7 @@ Thesis: Implementation of learning algorithms on microcontrollers. Developed a H
 ## Achievements
 
 - **MALLORN Astronomical Classification Challenge, Kaggle:** Ranked 58th of 894 participants, classifying astronomical transients to identify tidal disruption events.
-- **University of Catania Game Jam:** First prize for Greta's Adventures, an environmental platformer developed with Unity and C#.
+- **University of Catania Game Jam:** First prize for Greta's Adventures (Unity, C#).
 
 ## Certifications and Training
 
