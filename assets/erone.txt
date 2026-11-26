@@ -1,0 +1,841 @@
+               The Incredible Amount of Physics Behind the Heron’s Fountain
+                                                            (Dated:)
+               Heron’s fountain looks like a simple trick: water spurts upward as if the device could run forever.
+             In reality, it is a showcase of physics at work—gravity, air compression, viscosity, turbulence, and
+             energy dissipation all intertwined. Surprisingly, this classic demonstration has rarely been treated
+             beyond a qualitative level. In this work we build a consistent theoretical framework, extending
+             Bernoulli’s equation to include viscous effects and clarifying the limits of its applicability within the
+             system. We complement the model with carefully designed experiments, achieving direct comparison
+             between predictions and data. The result is a new perspective on a two-thousand-year-old invention,
+             where a classroom curiosity becomes a precise tool to explore fundamental fluid physics.
+
+
+                 I.   INTRODUCTION
+
+
+  Heron’s fountain,1 invented by the Greek engineer
+Heron of Alexandria in the 1st century AD, is a classic
+demonstration of hydraulics and pneumatics. It oper-
+ates using gravity and air pressure—without any exter-
+nal pump—to make water spout from a basin. Figure 1
+shows a schematic representation of such a device. The
+upper reservoir is open to the atmosphere and communi-
+cates with the lower airtight chamber through two thin
+vertical pipes, hereafter referred to as the left and right
+pipes, respectively. The regions labeled A, B, and C con-
+tain water, while region D contains air and is sealed from
+the external environment. As a result, the air pressure
+in region D generally differs from atmospheric pressure.
+When the plug (the black triangle in the figure) seal-
+ing the hole at the bottom of region A is removed, the
+fountain begins to operate. The mechanism is as follows:
+water flows from region A to region B through the left
+pipe, increasing the pressure in region D until it becomes
+sufficient to push water upward through the right pipe,
+producing the upper jet, which falls back into region A.
+   Because the upper container appears to be continu-
+ously refilled by the fountain’s own jet, the system is
+sometimes mistakenly associated with the concept of a              FIG. 1. Schematic representation of the Heron’s fountain an-
+perpetual motion machine. In reality, this is impossible:          alyzed in this work.
+part of the initial mechanical energy is dissipated through
+a combination of turbulence,2, 3 viscous effects, and colli-
+sions with the container walls, while in terms of thermal              II.   PRELIMINARIES, DEFINITIONS, AND
+energy, part of the work done by air in region D is con-                            ASSUMPTIONS
+verted into heat and transferred both to the water and
+to the external environment through the container walls.
+                                                                      For reasons that will be explained later, we shall carry
+Such effects are unavoidable and ensure that the fountain
+                                                                   out experiments with two fountains of different sizes, one
+eventually stops. Nevertheless, its seemingly endless op-
+                                                                   operating with water and the other with cooking oil.
+eration over short timescales continues to spark curiosity,
+                                                                   Throughout the theoretical analysis, therefore, the term
+contributing to its popularity in educational demonstra-
+                                                                   liquid will be used to denote both cases.
+tions, science blogs, and many YouTube videos.4
+                                                                      Since, as we shall see, our mathematical model is based
+  To date, studies on this device have largely remained            on a generalized form of Bernoulli’s equation, we must
+at a qualitative or popular-science level. In contrast,            establish a set of reasonable assumptions that justify its
+in this work we present a fully quantitative analysis,             use. Throughout this work, we shall regard the liquid as
+supported by mathematical modeling, calculations, and              an incompressible fluid and assume a steady flow. The
+experimental demonstrations, revealing that an extraor-            latter assumption is justified by the long duration of the
+dinary amount of physics underlies this deceptively                process, which is valid provided that the cross section
+simple apparatus.                                                  of the pipes is much smaller than that of each of the
+                                                                   three regions A, B, and C—a condition imposed from the
+                                                                                                                                                2
+
+outset. The liquid will be treated as a viscous fluid, and                     • h4 , h5 , and h6 are the fixed elevations of the point
+we shall see that the flow inevitably becomes turbulent in                       just below the left pipe, the point just below the
+certain parts of the system; hence, it is not meaningful                         right pipe, and the point just above the same pipe,
+to assume laminar flow throughout. Obviously, it only                            respectively;
+makes sense to apply Bernoulli’s equation, in any of its
+forms, outside the turbulent regions.∗                                         • vL and vR are the velocities of the liquid in the left
+   For the air contained in region D, we assume it                               and right pipes, respectively. Given the presence of
+behaves as an ideal gas and that its transformation                              non-negligible viscous effects, these quantities will
+during fountain operation is isothermal at ambient tem-                          represent, throughout this paper, the average ve-
+perature. This is justified by the fact that the process is                      locities over the cross section of the corresponding
+slow—owing to the aforementioned assumption on cross                             pipe;
+sections—allowing the air to reach thermal equilibrium                         • Vin and pin denote, respectively, the volume and
+with its surroundings through heat exchange across the                           pressure of the air contained in region D, with ini-
+container walls and with the liquid in regions B and C.                          tial values Vin0 and patm (atmospheric pressure).‡
+   In reference to Fig. 1, the configuration considered here                 The paper is organized as follows:
+is characterized by the following parameters:
+                                                                               • Section III is devoted to the theoretical model-
+    • SA , SB , and SC denote the top-view cross-sectional                       ing, including all the required mathematics as well
+      areas of the respective compartments;                                      as a didactically useful digression about the phe-
+                                                                                 nomenon of streamline breakdown and some en-
+    • S is the cross-sectional area common to both pipes,                        ergetic considerations, showing how the system’s
+      subject to the condition†                                                  initial energy is redistributed into other forms and
+                                                                                 partially dissipated;
+                        S ≪ SA , SB , SC ;                          (1)
+                                                                               • Section IV focuses on the experimental part, de-
+    • lL and lR are the lengths of the left and right pipes,                     scribing the construction of the fountain used, the
+      respectively;                                                              measurements performed, and the comparison with
+                                                                                 the theoretical model.
+    • ρ is the density of the liquid;
+                                                                              Before delving into the core of the analysis, one final
+    • µ is the dynamic viscosity of the liquid.                            clarification is in order. Throughout the article, reference
+                                                                           will occasionally be made to the inviscid limit µ → 0 in
+  Considering the six points indicated in Fig. 1—relevant                  order to check the consistency of more general equations.
+for the analysis to follow—the elevations of points 1, 2,                  This procedure is, in general, not legitimate in fluid dy-
+and 3 vary with time, while those of points 4, 5, and 6                    namics: while the case µ = 0 is conventionally associated
+remain fixed. To avoid confusion, we shall use the letter z                with ideal fluid dynamics, described by regular solutions
+to denote variable elevations and h to denote fixed ones.                  of the incompressible Euler equations, the limit µ → 0 of
+Thus, the set of quantities and parameters is completed                    solutions to the incompressible Navier–Stokes equations
+as follows:                                                                does not generally converge to regular Euler solutions.
+                                                                           Indeed, as µ → 0 the Reynolds number5 Re ≡ U Lρ/µ di-
+    • z1 , z2 , and z3 represent the instantaneous heights
+                                                                           verges, so the flow becomes fully turbulent, and is there-
+      of the liquid free surfaces in the corresponding com-
+                                                                           fore described by weak (or irregular ) solutions.§ In our
+      partments, with initial values ζ1 , ζ2 , and ζ3 , respec-
+                                                                           case, however, we rely solely on Bernoulli’s equation (in
+      tively;
+                                                                           its various forms), which presupposes smooth streamlines
+                                                                           and a regular velocity field for any value of µ, including
+                                                                           µ = 0. Since it applies only outside turbulent regions,
+∗ As for the assumption of an irrotational velocity field, it is clearly
+
+  not valid in this case. Fortunately, this is not required, since we
+  will consider individual streamlines rather than the flow field as
+  a whole. Bernoulli’s equation will be applied only between points        ‡ We note that, in principle, a sufficiently high value of p
+                                                                                                                                          in would
+  lying on the same streamline, and not between arbitrary points             cause the liquid to rise in the left pipe as well, thereby disrupting
+  in the flow.                                                               the operation of the fountain. In the present analysis, we remain
+† This assumption serves two purposes. First, it allows us to ne-            far from this scenario: we assume that the initial value of pin is
+  glect unsteady effects, as already mentioned. Without it, all              patm , which is sufficient to ensure the correct operation of the
+  Bernoulli-like equations would acquire an additional term ac-              device.
+  counting for the temporal variation of the velocity field. If the        § The issue of weak solutions and of the limit Re → ∞ is still the
+
+  liquid transfer process is slow, this additional term makes a neg-         subject of cutting-edge research in Mathematics, Physics, and
+  ligible contribution. Furthermore, the assumption allows us to             Engineering. A complete theoretical framework is lacking—one
+  neglect the kinetic term in v 2 at the liquid free surfaces in the         need only recall that one of the Millennium Prize Problems is
+  Bernoulli-like equations.                                                  devoted precisely to the Navier–Stokes equations.6
+                                                                                                                                           3
+
+the limit µ → 0 of the solutions naturally reproduces the             a generalization of the RBE that accounts for both ef-
+ideal case. Therefore, our analysis is consistent from a              fects simultaneously, known as the Viscous Bernoulli’s
+mathematical standpoint.                                              Equation (VBE):∗∗
+
+                                                                                                  8µQ s ds′
+                                                                                                     Z
+                                                                                1 2
+                                                                        p(⃗r ) + ρv (⃗r ) + ρgz +         4 ′
+                                                                                                                = const., (5)
+            III.    THEORETICAL MODEL                                           2                  π  s0 r (s )
+
+             A.    Mathematical Foundations                           which holds for steady, laminar flows of incompressible,
+                                                                      viscous fluids in axially symmetric ducts (i.e., ducts with
+   Referring to the configuration shown in Fig. 1, the con-           rotational symmetry about their axis).†† Here, Q is the
+tinuity equations — that is, the expressions of volumetric            volumetric flow rate, uniform throughout the ducts since
+flow rate conservation for the three containers — can be              the fluid is incompressible, s is the curvilinear coordinate
+written as                                                            along a generic streamline, s0 denotes a reference point
+                                                                      on the streamline, and r(s) is the local cross-sectional ra-
+                      dz1                                             dius of the duct at position s. Since the cross section of
+                   SA     = −SvL + SvR ,
+                      dt                                              the ducts (containers and pipes) in our setup is not uni-
+                      dz2                                             form, it might appear that Eq. (5) would be cumbersome
+                   SB     = +SvL ,                             (2)    to apply. In reality, the dominant contribution to the vis-
+                      dt
+                      dz3                                             cous integral arises from the portions of the streamline
+                   SC     = −SvR ,                                    passing through the narrowest ducts, namely the pipes.
+                      dt
+                                                                      Indeed, the viscous term has a functional dependence of
+which constitute a system of nonlinear first-order ODEs,              the form
+subject to the initial conditions z1 (0) = ζ1 , z2 (0) = ζ2 ,                               Z s
+and z3 (0) = ζ3 . The task now is to determine vL and vR                                          ds′      Q
+                                                                                         Q        4   ′)
+                                                                                                         ∼ 4 ∆s,               (6)
+as functions of the other quantities characterizing the sys-                                 s0 r   (s    r
+tem. In problems of this kind, two alternative approaches
+are generally employed: the Restricted Bernoulli’s Equa-              where ∆s is the length of a streamline segment. Since ∆s
+tion (RBE),                                                           is of the same order of magnitude in both the contain-
+                                                                      ers and the pipes, the contribution from the containers
+                      1                                               is much smaller because it scales as the inverse second
+              p(⃗r ) + ρv 2 (⃗r ) + ρgz = const.,              (3)
+                      2                                               power of the cross section. Physically, as expected, vis-
+                                                                      cous dissipation effects are dominant in narrow ducts.
+which, however, can be used only when dealing with                       Consequently, if one considers a streamline crossing an
+steady, laminar flows of incompressible and inviscid flu-             entire pipe and neglects the contributions from the con-
+ids, or Poiseuille’s equation ¶                                       tainers, Eq. (5) differs from Eq. (3) only by the additional
+                                     8πµ l                            term
+                    ∆p + ρg∆z =            v,                  (4)
+                                      S
+                                                                                             Z
+                                                                                  8πµ                  8πµ
+                                                                                       vL/R       ds =      vL/R lL/R ,        (7)
+where ∆p and ∆z are the pressure and eleva-                                        S           pipe     S
+tion differences between two points, and v is the
+cross–section–averaged velocity, which is valid for steady,           which is exactly the RHS of Eq. (4) and must be added to
+laminar flows of incompressible and viscous fluids flowing            the side of the equation corresponding to the arrival point
+through cylindrical ducts. In the case where Eq. (4) is               of the streamline, i.e., the point located downstream of
+used, however, the operating time of the fountain would               the pipe in question. From a physical standpoint, this
+be underestimated: the mechanism preventing the in-                   means that part of the fluid energy of a liquid parcel
+stantaneous liquid transfer results from a combination                before entering the pipe is dissipated by viscous effects.
+of inertia and viscous effects, whereas the Poiseuille ap-            We stress again that the kinetic terms associated with the
+proach relies solely on viscosity. There exists, however,             fluid points in the containers, such as those at the free
+                                                                      surfaces, will be neglected because of the assumption in
+                                                                      Eq. (1).
+
+¶ Poiseuille’s equation is often written without the gravitational
+
+  term because the pipe is assumed to be horizontal. More gen-
+                                                                      ∗∗ For a more detailed discussion, see Ref.     7, specifically Section
+  erally, this term must be included, since it ensures that no flow
+  occurs when the entire space is filled with the same (homoge-          F. Also, notice that if µ → 0, the VBE reduces to the RBE.
+  neous) fluid. Consider the more familiar case of a pipe in air         Conversely, when the kinetic term 12 ρv 2 , representing inertia, is
+  with arbitrary inclination: no air flows through it despite the        negligible, it reduces to Poiseuille’s law.
+  pressure difference between the upper and lower ends given by       †† For ducts of other shapes, the functional form of the viscous term
+
+  the hydrostatic law. This pressure difference is exactly balanced      remains the same, with only a dimensionless multiplicative factor
+  by the gravitational term, so that ∆p = −ρg∆z and v = 0.               changing.
+                                                                                                                                   4
+
+
+                           (a)                             (b)                                    (c)
+
+
+
+
+                                                                                         TURBULENCE
+       FIG. 2. Schematization of the flow between two containers. The pipe diameter has been exaggerated for clarity.
+
+
+  As for the thermodynamic transformation of the air in         the RBE along this streamline:
+region D, as already mentioned in Section II, it will be
+                                                                             1                  1
+modeled as isothermal. That is, at any instant in time                   pα + ρvα2 + ρgzα = pβ + ρvβ2 + ρgzβ .                   (9)
+one has                                                                      2                  2
+                                                                Since pα = pβ = patm and vα = vβ by conservation of vol-
+     pin Vin (t)   = patm Vin0                                  umetric flow rate, Eq. (9) implies zα = zβ , which is ab-
+                                                        (8)     surd. Thus, the initial assumption must be incorrect:
+                               patm Vin0                        such a streamline cannot exist.‡‡ In fact, what happens
+       ⇒ pin (t) = 0                                ,           is that the streamlines are smooth only in the upper
+                  Vin + (ζ2 − z2 )SB + (ζ3 − z3 )SC
+                                                                container and inside the pipe, while at the lower out-
+                                                                let of the pipe they break: the liquid exiting the pipe
+This functional form will come into play only in Sec-
+                                                                collides with the nearly stationary liquid in the lower
+tion IV C, where experimental results will be compared
+                                                                container, causing the molecules to redistribute in a dis-
+with the theory; until then, the discussion will remain
+                                                                ordered way and generating turbulence, as schematically
+general and will not depend on the specific thermody-
+                                                                shown in Fig. 2(b). Turbulent flows are intrinsically un-
+namic transformation undergone by the air.
+                                                                steady (and rotational) at all scales, so no generalization
+   Before moving on to the actual fluid model of the foun-      of Bernoulli’s equation can be applied. This is a classic
+tain, it is worth making a short but essential and instruc-     example of a jet entering a large reservoir,8, 9 also known
+tive preliminary digression.                                    as submerged jet, that is ultimately torn to shreds and
+                                                                destroyed by viscous effects. The same occurs when di-
+                                                                recting a water jet from a garden hose into a bucket of
+    B.    Digression: flow between two containers               water: turbulence is generated inside the bucket, which,
+                                                                together with viscous effects, reduces the kinetic energy
+   Consider two containers with the same top-view cross         of the water to zero.
+section ΣA , open at the top and placed one above the              Therefore, the RBE can at most be applied be-
+other, as shown in Fig. 2(a). A vertical pipe with cross        tween point α and point γ, located just below the pipe
+section Σ ≪ ΣA connects the two containers, allowing            outlet, where the pressure is given by Stevin’s law,§§
+the liquid to flow from the upper one, which is being
+emptied, to the lower one, which is being filled. We are
+therefore in a regime where the flow can be approximated       ‡‡ The same result holds even if the cross sections of the two con-
+as steady, and we assume the liquid to be incompressible          tainers differ, provided that the cross section of the pipe is much
+and inviscid.                                                     smaller than both, so as to ensure the steadiness assumption and
+                                                                  to neglect the v 2 terms.
+   Suppose there exists at least one smooth stream-            §§ This can be explained as follows. The stationary fluid inside the
+line—corresponding to laminar flow—connecting two                 lower container, above the level of the pipe outlet, behaves like a
+generic points α and β located on the respective free             piston of mass ρΣA (zβ − zγ ). The pressure associated with this
+surfaces of the the liquid, as schematically shown in             fictitious piston is its weight per unit area, namely ρg(zβ − zγ ),
+Fig. 2(c). Under this assumption, we attempt to apply             to which the atmospheric pressure contribution must be added.
+                                                                                                                                5
+
+pγ = patm + ρg(zβ − zγ ). It follows that
+              1                1
+        pα + ρvα2 + ρgzα = pγ + ρvγ2 + ρgzγ ,           (10)
+              2                2
+which implies
+                      q
+                 vγ = 2g(zα − zβ ),                     (11)
+
+a result that reduces to the correct limits for zα = zβ and                                            vR
+zβ = 0, and which does not depend on the elevation of
+                                                                         vL
+the lower end of the pipe.
+   One might think that the contradiction found in
+Eq. (9) arises from the assumption of an inviscid fluid.
+This, however, is not the case. Indeed, assuming that the
+liquid is viscous and that a streamline exists as depicted
+in Fig. 2(b), Eq. (5) would apply:
+        1                     1                8πµ l
+  pα + ρvα2 + ρgzα = pβ + ρvβ2 + ρgzβ +              v, (12)
+        2                     2                  Σ              FIG. 3. Another schematic representation of the Heron’s
+where l is the length of the pipe and v is the cross-section-   fountain under study, where the pipes diameter has been ex-
+                                                                aggerated for clarity. The jagged red regions indicate portions
+averaged velocity inside the pipe. With the same simpli-
+                                                                of streamlines that break, generating a turbulent flow region.
+fications as before, one obtains                                In these zones, all the kinetic energy of the liquid is dissipated
+                         ρgΣ(zα − zβ )                          due to the combined effect of viscous and turbulent phenom-
+                    v=                 ,                (13)    ena.
+                            8πµ l
+which exhibits singular behaviors in the limiting cases
+µ → 0 or l → 0. Therefore, this shows that the issues                            C.   Back to the fountain
+remain even when using the VBE.
+  Instead, the generalization of Eq. (10)—that is, the            Since the flow in the left branch fills region B in ex-
+one corresponding to streamlines that break near point          actly the same way as in the example of Section III B,
+γ—to viscous fluids is                                          the streamlines break near point 4. Therefore, it is not
+       1                    1                 8πµ l             possible to apply the VBE between two points located
+ pα + ρvα2 + ρgzα = pγ + ρvγ2 + ρgzγ +              v, (14)     on the free surfaces of A and B, such as points 1 and 2.
+       2                    2                   Σ
+                                                                Following the reasoning used in that example, however,
+which, simplified using Stevin’s law for pγ , yields            we are allowed to apply the VBE between point 1 and
+                    s        2                                point 4 in Fig. 3:
+           8πµ l        8πµ l
+     v=−          +               + 2g(zα − zβ ),      (15)
+            ρΣ           ρΣ                                                 1
+                                                                    patm + ρv12 + ρgz1 =
+a result that recovers the correct limits for                               2                                     (17)
+µ, l → 0—namely, Eq. (11)—and for µ, l → ∞, where it                                    1 2           8πµ lL
+                                                                    pin + ρg(z2 − h4 ) + ρvL + ρgh4 +        vL .
+becomes                                                                                 2               S
+                         ρgΣ(zα − zβ )                            On the other hand, in the right branch, region C is
+                    v=                 ,                (16)
+                            8πµ l                               being emptied; therefore, smooth streamlines exist con-
+which is the proper form of Poiseuille’s law. By coin-          necting the free surface of the liquid in C with the upper
+cidence, it is identical to Eq. (13), but now the limits        end of the pipe, namely point 6. Bernoulli’s equation
+µ, l → 0 are meaningless, as Eq. (16) already represents        between points 3 and 6 gives
+the opposite limiting case.
+   The insights gained from studying this minimal exam-                             1
+                                                                              pin + ρv32 + ρgz3 =
+ple are of fundamental importance for building the math-                            2                                        (18)
+ematical model that describes the operation of Heron’s                                1 2          8πµ lR
+fountain. Generally, one must be extremely careful to                         patm + ρvR  + ρgh6 +        vR .
+                                                                                      2              S
+apply Bernoulli’s equation, in any of its forms, only in
+regions where the flow is laminar; otherwise, serious er-       At this point, it is natural to ask: why is the dynamics in
+rors and apparent paradoxes may arise. This is precisely        region B, which is filling, so different from that in region
+what will be done in Section III C, where, referring to         C, which is emptying? In other words, why do filling and
+Fig. 1, the VBE will be applied between points 1 and 4,         emptying—processes that might at first sight appear as
+and between points 3 and 6, respectively.                       time-reversals of each other—behave so differently? In
+                                                                                                                                            6
+
+ fact, filling and emptying are not time-reversal phenom-           This behavior will also become apparent in the numeri-
+ ena. So far, we have stated that when the cross sec-               cal simulations discussed later. Consequently, there will
+ tion of the duct widens, the streamlines break, whereas            inevitably be a time tf at which the equality
+ when it narrows they remain smooth. In Ref. 10, the au-
+ thor shows that this fundamental difference can be traced          patm +ρg(h6 −z3 (tf )) = pin (tf ) = patm +ρg(z1 (tf )−z2 (tf )),
+ back to the sign of the pressure gradient and can be refor-                                                                  (24)
+ mulated as follows: when the flow moves along positive             holds, that   is, when
+ pressure gradients, i.e., when it decelerates (as in point                          z1 (tf ) − z2 (tf ) + z3 (tf ) = h6 .    (25)
+ 4), turbulence is generated; by contrast, this does not
+ occur when the fluid passes from regions of high pressure          When this condition is met, the fountain stops operating.
+ to regions of low pressure, i.e., when it accelerates (as in       In Section IV, we will analyze experiments to verify such
+ point 5).                                                          condition.
+    Neglecting the v 2 terms at the free surfaces of the liquid        Finally, it is worth noting that using models based on
+ (points 1 and 3), in accordance with the assumption in             Eq. (3) and Eq. (4) would lead to exactly the same oper-
+ Eq. (1), Eqs. (17) and (18) reduce to                              ating condition in Eq. (25). What changes between the
+        s                                                          three models is the operating time tf , which, for the same
+                                                          8πµ lL parameter values and initial conditions, is larger for the
+                     2
+             8πµ lL      2(patm − pin )
+ vL =                  +                + 2g(z1 − z2 ) −         , model based on the VBE.
+               ρS               ρ                            ρS
+                                                            (19)
+        s           2                                                               D. Energy considerations
+             8πµ lR      2(pin − patm )                    8πµ lR
+ vR =                  +                + 2g(z3 − h6 ) −          ,
+               ρS               ρ                            ρS
+                                                                       We now focus on examining the temporal evolution
+                                                            (20)    of the system from an energetic perspective. Given the
+ We note that, as in the example of Section III B, these            presence of dissipative effects, we expect the total energy
+ results do not depend on the elevations of the lower ends          of the system, i.e., the sum of the mechanical energy of
+ of the two pipes.                                                  the liquid and the thermal energy of the air contained in
+    At this point, the system of ODEs in Eq. (2), sub-              region D, to decrease over time. We seek a relation of the
+ ject to the initial conditions z1 (0) = ζ1 , z2 (0) = ζ2 , and     form Wext = ∆E that accounts for losses, where Wext is
+ z3 (0) = ζ3 , can be solved numerically using Eqs. (8), (19)       the work done by external forces and ∆E is the change
+ and (20). We defer such analysis to Section IV, where a            in the system’s energy. We will assume that no turbulent
+ comparison with data collected from experiments will be            phenomena occur inside the two pipes. This aspect will
+ presented.                                                         be discussed in more detail in Appendix A.
+    For the moment, let us determine the instantaneous                 The energy lost to viscous effects exclusively within the
+ geometric conditions required for the fountain to oper-            two  pipes is∗ ∗ ∗
+ ate—namely, for the liquid to emerge from the top of the                             Z tf
+                                                                                                                    ′
+                                                                                                        2       2
+ right-hand pipe. For correct operation, both vL and vR                                      8πµ lL vL    + lR vR    dt ,     (26)
+ must be nonzero and positive. From the expressions in                                  0
+ Eqs. (19) and (20), this occurs only if                            while the energy lost outside the pipes due to turbulence
+                                                                    and viscous effects is† † †
+                2(patm − pin )
+                               + 2g(z1 − z2 ) > 0,          (21)        Z tf 
+                                                                               1            1
+                                                                                                                           
+                      ρ                                                          ρSvL + ρSvR + ρg(h6 − z1 )SvR dt′ , (27)
+                                                                                      3            3
+                2(pin − patm )                                           0     2            2
+                               + 2g(z3 − h6 ) > 0,          (22)
+                      ρ
+ which, when compared, imply the following chain of in-                 in Eq. (2), and it is therefore not reported here in full detail.
+ equalities:                                                            However, the underlying idea can be outlined. First, one shows
+                                                                        that at t = 0 the time derivative of z1 − z2 is negative. Then, by
+    patm + ρg(h6 − z3 ) < pin < patm + ρg(z1 − z2 ).       (23)         invoking Nagumo’s criterion11 and using proper hypotheses such
+                                                                        as the fact that pin (z2 , z3 ) is a monotonically increasing function
+    Since region C is emptying, the LHS of Eq. (23) in-                 of both variables, as in Eq. (8), it is established that z1 − z2
+ creases monotonically over time. Regarding the RHS,                    remains decreasing for all times.
+                                                                  ∗ ∗ ∗ Equation (26) represents the time integral of the power dissi-
+ since B is filling but the behavior of A is not known a pri-
+                                                                        pated in the pipes. In a single pipe of length l, such power is
+ ori, it might seem that no prediction can be made. How-                P = 8πµlv 2 , where v is, as usual, the average velocity over the
+ ever, it can be shown, through lengthy calculations, that              cross section. Such result can be easily found from the theory in
+ z1 − z2 is a monotonically decreasing function of time.¶¶              Refs. 12 and 13.
+                                                                  † † † In regions where the streamlines break and intertwine continu-
+
+                                                                        ously—i.e., the two jagged red areas in Fig. 3—turbulence and
+                                                                        viscous effects dissipate all the kinetic energy of the fluid. Thus,
+¶¶ The proof relies on advanced theorems applied to the system          the dissipated power is generally given by 21 ρv 2 × Q.
+                                                                                                                                         7
+
+where the first term accounts for the energy dissipated in                                 IV.   EXPERIMENTS
+region B, while the second and third terms correspond
+to the energy dissipated immediately after the liquid falls                                    A.   Main issues
+back into region A. At this point, summing Eqs. (26)
+and (27) and grouping the terms associated with the                       So far, we have analyzed an idealized version of our
+same branch (L and R) gives                                             system, but reality always hides complications. Unfortu-
+              Z tf                                                    nately, there are at least two major issues that were not
+                           1 2   8πµ lL vL
+  ∆EVT = S                  ρv +            vL dt′                      included in the mathematical model, as they are difficult
+                  0        2 L      S                                   to treat analytically.
+         Z tf                                  
+               1 2     8πµ lR vR
+     +S         ρv +              + ρg(h6 − z1 ) vR dt′ .                  1. The first arises from the contraction of the liquid
+          0    2 R        S                                                   flow as it passes from the containers into the pipes:
+                                                     (28)                     the geometry of the junction affects the loss of ki-
+By substituting the quantities inside the square brackets                     netic energy. This effect, known as head loss, is
+using Eqs. (17) and (18) and Eq. (2), we obtain                               discussed in Appendix A.
+           Z tf                                         
+                         dz1            dz2          dz3                   2. The second, and more severe, is related to the
+∆EVT = − ρg      SA z1         + SB z2      + SC z3       dt′
+             0            dt            dt           dt                       Reynolds number inside either pipe. For water, it
+           Z tf                                                             is given by
+                                 dz1
+       +S        (pin − patm )         dt′
+                                 dt                                                        2rvρ
+            0                                                                        Re ≈         ≈ (2 × 106 m2 /s) r v,       (32)
+                                                                                             µ
+        
+    = ρg SA [ζ12 − z12 (tf )] + SB [ζ22 − z22 (tf )]     (29)                              p
+                                                                             where r ≡ S/π is the pipe radius and v is the
+       + SC [ζ32 − z32 (tf )] + patm SA [ζ1 − z1 (tf )]                       average water velocity within the pipe. For reason-
+                                                                              able parameter values, in our case Re will exceed
+                  Z z2 (tf )             Z z3 (tf )                           3000 inside the pipes, implying that the flow is tur-
+          − SB              pin dz2 − SC           pin dz3 .                  bulent.‡ ‡ ‡ Such turbulence invalidates the theo-
+                      ζ2                   ζ3                                 retical analysis, since Bernoulli’s equation cannot
+                                                                              be applied: we have assumed smooth streamlines
+Here, the term ρg[. . . ] on the RHS represents the work                      within the pipes.§§§
+Wg done by gravity, or equivalently the opposite of the
+change in the system’s gravitational potential energy                    Fortunately, both problems can be addressed experi-
+−∆Epot . The second term is the work Watm done by the                   mentally:
+external air on the system, while the two integrals rep-
+resent the work Win < 0 performed by the air contained                     1. Head loss at the pipe inlets can be reduced by us-
+in region D. Thus, the energy balance for the fountain                        ing junctions that ensure the duct cross section de-
+system reads                                                                  creases smoothly. For this reason, we placed grom-
+                                                                              mets at the points where the liquid passes from
+              Watm + Wg = −Win + ∆EVT .                        (30)           the containers into the pipes, namely, at the top of
+                                                                              the left pipe and at the bottom of the right pipe.
+If the transformation of the air inside the fountain is adi-                  The motivation for this choice is explained in Ap-
+abatic, then −Win = ∆Uin . In reality, however, the liquid                    pendix A.
+and the container walls conduct heat. In the present case,
+                                                                           2. The simplest way to address turbulence inside the
+for example, we have assumed the transformation to be
+                                                                              pipes is to use sunflower oil instead of water, as
+isothermal; in this scenario, part of the work done by the
+                                                                              will be done later. In fact, as we shall see later for
+air is converted into thermal energy and part is released
+                                                                              sunflower oil the Reynolds number in the pipes is
+as heat −Q > 0 to the surroundings, thereby contribut-
+                                                                              at most Re ≈ 5.
+ing to the useful energy lost by the system. In fact, in the
+isothermal case, all the work done by the air is released
+as heat. We can therefore also write
+                                                                      ‡ ‡ ‡ As we shall see shortly, we used pipes with an internal radius
+              Watm + Wg = ∆Uin + ∆Eloss ,                      (31)       of 3 mm, where typical velocities are of order 1 m/s for tens of
+                                                                          seconds. It is not possible to use pipes with much smaller radii,
+where ∆Eloss = ∆EVT − Q. Recalling that Q < 0, we                         since capillarity effects would appear.
+                                                                      §§§ In this case, one can experimentally show that the actual pro-
+deduce that the greater the amount of heat transferred
+                                                                          cess lasts longer then the ideal theoretical prediction, but the
+from the air to the liquid and to the environment, the                    final state is the same as in the laminar case: being static, it
+smaller the energy losses due to viscosity and turbu-                     depends only on water masses and air pressures, not on veloc-
+lence. In any case—whether due to one mechanism or                        ities. Turbulence simply prolongs the duration of the fountain
+the other—the system inevitably loses energy.                             but lowers the jet height.
+                                                                                                                              8
+
+   With these considerations in mind, we anticipate that
+we built two different fountains: a smaller one operating
+with sunflower oil and a larger one operating with wa-
+ter. The first is used for a quantitative analysis to test
+the reliability of the theoretical model, while the second
+is used to observe how turbulence in the pipes leads to
+deviations from theory and, at the same time, makes the
+time evolution more spectacular.
+
+
+              B.   Fountain construction
+
+  The items used for the construction of the fountains
+are listed below:                                              FIG. 4. Pictures of the two fountains built for the experi-
+   • Rectangular transparent plexiglass slabs, with            ments, one operating with sunflower oil and the other with
+     thicknesses of 3.5 mm and 4.5 mm, cut to size;            colored water, taken before activation. The fountain on the
+                                                               left measures 11 cm × 18 cm × 6 cm, while the one on the right
+   • Transparent plexiglass pipes, with an inner diame-        measures 31 cm × 36 cm × 11 cm. For the first fountain, the
+     ter of 6 mm and an outer diameter of 8 mm;                pipe lengths are lL = 8.0 cm and lR = 13.7 cm, while for the
+                                                               second they are lL = 22 cm and lR = 30.5 cm. In both foun-
+   • Acrylic glue, essential for bonding the plexiglass        tains, the left pipe was sealed at the top with a yellow earplug.
+     components together;                                      In the oil fountain, the two grommets—one at the top of the
+                                                               left pipe and the other at the bottom of the right pipe—are
+   • Two metallic grommets per fountain, with an inner         clearly visible, whereas in the water fountain they are present
+     diameter of 6 mm;                                         but less noticeable. The grommets were inserted into the
+   • Measuring tape;                                           pipes after slightly heating their ends with a lighter.
+
+   • A lighter, used to heat the ends of the pipes in order
+     to insert the grommets;                                       C.    Measurements and comparison with the
+                                                                                theoretical model
+   • A drill, used to bore holes in the plexiglass to insert
+     the pipes;
+                                                                  The experiments were recorded with a smartphone,
+   Transparent materials were chosen to make it possible       and the resulting videos are provided in the supplemen-
+to observe and measure the water levels over time, while       tary materials, both for the oil fountain and for the water
+a minimal geometry was adopted to keep the numerical           fountain. In both cases, the videos were analyzed using
+model dependent on as few parameters as possible. The          Tracker,14 a video analysis tool capable of measuring in-
+two fountains that were built are shown in Fig. 4.             stantaneous distances in video frames. The same soft-
+   To ensure the proper functioning of the fountains           ware can extract the experimental functions zi (t): here
+and to carry out measurements, the following additional        we are only interested in z2 (t) and z3 (t), since, as can
+items were required:                                           be seen in the videos and as anticipated at the end of
+   • Graph paper;                                              Section III C, z1 (t) decreases only slightly and does not
+                                                               allow for meaningful comparisons.
+   • Smartphone or video camera;                                  For the theoretical model, the predicted curves were
+   • Transparent tape;                                         obtained by solving Eqs. (2), (8), (19) and (20) using the
+                                                               initial conditions z1 (0) = ζ1 , z2 (0) = ζ2 , and z3 (0) = ζ3 ,
+   • A soft plastic stopper, or any other suitable item        and with the parameters corresponding to each experi-
+     to seal the plexiglass pipe;                              mental configuration. In the case of sunflower oil, the
+                                                               viscosity was measured through a draining experiment,
+   • Food coloring for the water fountain (optional).
+                                                               as described in Appendix B.
+   The fountains are recharged by refilling the upper ves-        For the oil fountain, Fig. 5(a) shows the comparison
+sel and transferring liquid between the two lower vessels      between theory and experiment, corresponding to the
+by simply tilting the setup. A small circular hole on the      configuration presented in one of the videos provided in
+side surface of the fountain (not visible in the pictures)     the supplementary materials. The experimental and the-
+allows the initial pressure in region D to be set equal        oretical time evolutions are very similar, differing only
+to the atmospheric pressure. Before removing the plug          by about 2 − 3 mm—the same holds for the validity of
+at the top of the left pipe—which triggers the fountain’s      Eq. (25). Two main factors explain these small discrep-
+operation—this hole is sealed with transparent tape. In        ancies:
+addition, the same hole is used to completely empty the
+lower vessel once the experiment is finished.                      • Experimental uncertainties in measuring all the ge-
+                                                                                                                                                               9
+
+                   10                                                                           0.20
+                            (a)              z1 − H (theo)    z2 (exp)                                     (b)                                 vL (t)
+
+
+
+
+                                                                               v(t) [m s −1 ]
+                    9                        z2 (theo)        z3 (exp)                          0.15
+                                                                                                                                               vR (t)
+                                             z3 (theo)                                          0.10
+                    8
+                                                                                                0.05
+                    7
+       z(t) [cm]
+
+                                                                                                0.00 1
+                                                                                                   10                 100        101          102
+                    6                                                                            100
+                                                                                                           (c)
+
+
+
+
+                                                                                 ∆EVT (t) [mJ]
+                    5                                                                            75
+                    4                                                                            50
+                                                                                                 25
+                    3
+                                                                                                   0
+                        0         50   100      150     200   250        300                           0         50    100   150       200   250        300
+                                               t [s]                                                                         t [s]
+FIG. 5. (a) Comparison between experimental measurements and the theoretical model for the oil fountain, performed
+using µ = 0.0609 Pa · s, ρ = 920 kg/m3 (nominal density reported on the oil bottle label), Vin0 = 220 cm3 , SA = 49.6 cm2 ,
+SB = SC = 23.8 cm2 , h6 = 15.7 cm, H = 11.4 cm, ζ1 = 14.7 cm, ζ2 = 3.0 cm, ζ3 = 9.3 cm. Here, H is defined as the height
+of the bottom of region A with respect to the ground. Uncertainties in the length measurements affect only the last significant
+digit. The values of the areas and the volume were determined using graph paper, while the initial heights were extracted from
+the experimental video using Tracker. It can also be noted that z1 (t) remains essentially constant after a brief initial drop.
+Oil was held at room temperature (19 ◦ C). (b) Theoretical time evolution of the flow velocities in the two pipes. (c) Energy
+dissipated by the fountain as a function of time, which, as expected, is a monotonically increasing function.
+
+
+                                                                                                       millimeters. A video in the supplementary mate-
+                                                                                                       rials demonstrates the removal of such a meniscus
+                                                                                                       (in the water case) and its immediate reformation
+                                                                                                       due to the upward push from below, confirming this
+                                                                                                       effective increase in h6 .
+                                                                                             Aside from these minor effects, experiment and theory
+                                                                                          are in reasonably good agreement. Figure 5(b) reports
+                                                                                          the theoretical evolution of the flow velocities in the two
+                                                                                          pipes: after a very short initial transient, they converge
+                                                                                          to the same curve.¶¶¶ For this reason, after a short time
+                                                                                          the liquid level in the upper compartment remains essen-
+FIG. 6. Photograph of the final configuration of the oil foun-                            tially constant until the end. Since the velocities remain
+tain, corresponding to the initial setup shown in the left                                below 0.05 m/s (except for the brief initial transient), the
+panel of Fig. 4. The presence of a meniscus at the top of
+                                                                                          associated Reynolds number is always less than Re = 5,
+the right pipe, due to surface tension, is clearly visible. The
+meniscus height, indicated by the cyan line, is approximately
+                                                                                          ensuring that the flow is laminar.
+1.5 − 2 mm.                                                                                  Figure 5(c) shows the energy dissipated by the fountain
+                                                                                          over time due to viscous and turbulent effects. It was
+                                                                                          obtained from Eq. (28), with the time integration carried
+      ometric dimensions of the system. These affect not                                  out from 0 to a generic instant t.
+      only the measured values of zi (t) but also the the-                                   For the water fountain, Fig. 7(a) presents the com-
+      oretical model, which relies on the precise geome-                                  parison between theoretical predictions and experimental
+      try of the setup. For instance, as shown in Figs. 4                                 data. Unlike the oil fountain, here non-negligible differ-
+      and 6, the rise of the liquid along the container walls                             ences can be seen between theory and experiment. As
+      due to surface tension contributes to increasing the
+      uncertainty in the measurements of the zi ;
+                                                                                  ¶¶¶ The system’s evolution during the first second of operation is
+    • Surface tension leads to the formation of a menis-                                         highly unsteady and, strictly speaking, should be studied using
+      cus at the top of the right pipe when the fountain                                         a more general version of the VBE. However, such an analysis
+      stops operating, as shown in Fig. 6. The presence                                          would be redundant, since beyond this initial transient the tem-
+      of this meniscus effectively increases h6 by a few                                         poral evolution of the velocities shows negligible differences.
+                                                                                                                                                      10
+
+
+                             (a)            z1 − H (theo)         z2 (exp)                    2 (b)                                         vL (t)
+                  20.0
+
+
+
+
+                                                                             v(t) [m s −1 ]
+                                            z2 (theo)             z3 (exp)                                                                  vR (t)
+                                            z3 (theo)
+                  17.5                                                                        1
+                  15.0
+      z(t) [cm]
+
+                                                                                              0
+                  12.5                                                                        10 1                100           101             102
+
+                  10.0                                                                        4
+                                                                                                      (c)
+
+
+
+
+                                                                             ∆EVT (t) [J]
+                   7.5
+                                                                                              2
+                   5.0
+                                                                                              0
+                         0        20   40   60       80     100      120                          0         20    40    60      80    100    120
+                                             t [s]                                                                      t [s]
+FIG. 7. (a) Comparison between experimental measurements and theoretical predictions for the water fountain, performed using
+µ = 1 × 10−3 Pa · s, Vin0 = 3550 cm3 , SA = 290 cm2 , SB = SC = 142 cm2 , h6 = 33.2 cm, H = 25.4 cm, ζ1 = 31.7 cm, ζ2 = 4.1 cm,
+ζ3 = 20.8 cm. Measurements were carried out with plain tap water at 17 ◦ C. For demonstration videos and photographs,
+food coloring was added to enhance visual contrast; however, this was not used in the actual measurements to avoid altering
+viscosity. (b) Theoretical time evolution of the flow velocities in the two pipes, computed under the laminar-flow assumption.
+(c) Dissipated energy of the water fountain as a function of time, also estimated under the laminar-flow assumption.
+
+
+anticipated, the experimental curves evolve more slowly
+than the theoretical ones due to the initial turbulence oc-
+curring inside the pipes.∗ At equal ordinate values, the
+temporal difference reaches up to 15 s. As in the case
+of the oil fountain, apart from the effects of experimen-
+tal uncertainties and surface tension, the experimental
+curves converge toward values consistent with Eq. (25).
+   Figure 8 shows two photographs, one taken immedi-
+ately after the mechanism was triggered and one near
+the end of the operation. The video corresponding to
+this experiment is provided in the supplementary mate-
+rials.
+                                                                               FIG. 8. Comparison between two photographs of the water
+                                                                               fountain during operation: initial stage (left) and final stage
+                             V.    CONCLUSIONS                                 (right). The changes in the water levels in the lower compart-
+                                                                               ments can be observed, as well as the color variation due to
+                                                                               mixing of the water in A and B.
+   In this work we revisited Heron’s fountain from a quan-
+titative perspective. We built a theoretical framework
+that treated the liquid with a viscous Bernoulli approach,                     dynamic and thermodynamic processes, turning a class-
+clarified the role of streamline breakdown, and accounted                      room curiosity into a compact laboratory for fundamen-
+for the thermodynamics of the trapped air. We then                             tal physics—and into a source of genuine wonder for stu-
+tested the model with custom-built fountains, one oper-                        dents.
+ating in the laminar regime with oil and the other in the
+turbulent regime with water. The comparison showed
+excellent agreement in the laminar case and highlighted
+predictable deviations due to turbulence in the pipes.                                                           ACKNOWLEDGMENTS
+Overall, the study demonstrated that this ancient de-
+vice concealed a surprisingly rich combination of fluid                           The author gratefully acknowledges Prof. Raffaele Ro-
+                                                                               mano for proposing a problem on Heron’s fountain for the
+                                                                               Gara a Squadre di Fisica (Team Physics Competition) at
+                                                                               the end of 2024, and Antonio Matteri for pointing out an
+∗ As already mentioned,   velocities of about 1 m/s, as shown in               issue in the original solution. That problem sparked the
+  Fig. 7(b), correspond to Re ≈ 6000.                                          author’s interest in fluid dynamics and opened up a wide
+                                                                                                                           11
+
+range of ideas for future publications.                        corresponding to the maximum loss factor of 1. For this
+   Special thanks go to Nico Kleijne, who assisted in          reason, as discussed in more detail in Section IV B, we
+assembling the plexiglass slabs on the terrace of Colle-       employed two grommets: one at the hole at the bottom
+gio Timpano, together with Giacomo Calogero, and who           of region A, and another at the lower end of the right-
+took care of photographing and filming the two fountains       hand pipe, where the physical situation would otherwise
+in action.                                                     be analogous to that illustrated in Fig. 9(b). Indeed,
+   Finally, the author also wishes to thank his lifelong       previous experiments have shown that head losses are
+friend, Antonino Cilione, for creating a compelling simu-      minimized when such fittings are used.19
+lation that illustrates the time evolution of Heron’s foun-
+tain, and the YouTuber Steve Mould, for producing nu-
+merous insightful videos on fluid systems, including one       Appendix B: Measurement of sunflower oil viscosity
+specifically dedicated to Heron’s fountain.
+                                                                  One way to estimate the viscosity of sunflower oil is to
+                                                               use the setup shown in Fig. 10, where a bucket filled with
+     CONFLICT OF INTEREST STATEMENT                            oil is drained through a vertical pipe: a linear fit of the
+                                                               (h(t), t) data provides the desired estimate. Of course,
+                                                               as previously mentioned, a grommet must be placed at
+  The author has no conflicts of interest to disclose.
+                                                               the hole at the bottom of the bucket in order to minimize
+                                                               head loss.
+                                                                  The VBE associated with this configuration reads
+               Appendix A: Head losses
+                                                                    1 2              1 2          8πµL
+                                                                p⊕ + ρv⊕ +ρgz⊕ = p⊖ + ρv⊖ +ρgz⊖ +      v⊖ , (B1)
+   In Section III, we discussed the turbulence that can             2                2              Σ
+arise when a conduit widens, or when a fluid jet en-
+                                                               where Σ is the pipe cross-sectional area, much smaller
+ters a reservoir containing fluid that is either station-
+                                                               than that of the bucket ΣA . From Eq. (B1) one obtains
+ary or moving at a different velocity. As we have seen,
+such situations can be addressed by applying Bernoulli’s                    s       2
+equation (in one of its forms) only in regions where the                        8πµL                   8πµL
+                                                                   v⊖ (h) =             + 2g(h + L) −       ,    (B2)
+streamlines remain smooth. In the configuration under                            ρΣ                      ρΣ
+study, however, there may be a few additional regions
+where turbulence occurs—specifically, near the pipe in-        which, in the case of oil—given its relatively high viscos-
+lets. Consider, for instance, the upper end of the left pipe   ity—can be approximated by Poiseuille’s law:
+in Fig. 3, which can be modeled with sharp 90◦ edges,
+as in Fig. 9(a). With this geometry, the liquid in the                                       gρΣ
+                                                                                v⊖ (h) =            (h + L).            (B3)
+container approaching horizontally cannot turn sharply                                     8πµoil L
+through a right angle in such a short distance. This pro-
+                                                               The error introduced by this approximation is entirely
+duces the so-called vena contracta effect,15–18 in which
+                                                               negligible. Invoking flow conservation, v⊖ Σ = − dh
+                                                                                                                dt ΣA ,
+the effective cross section of the flow is reduced, giving
+                                                               we then obtain at any time t:
+the flow a funnel shape. This in turn generates turbu-
+lence, causing the Bernoulli constant to drop and mak-                         
+                                                                                  h0 + L
+                                                                                          
+                                                                                                gρΣ2
+ing it impossible to reliably evaluate the average velocity                 ln              =            t,       (B4)
+                                                                                 h(t) + L     8πµoil LΣA
+across the pipe’s cross section.
+   The problem is even more severe if, as shown in             where h0 ≡ h(t = 0). Equation Eq. (B4) has the form
+Fig. 9(b), part of the pipe extends into the container,        y = Kt, so a linear fit of the pairs (yi , ti ) makes it possi-
+because more liquid approaches the opening from the            ble to determine µoil , contained in K. The experimental
+sides. By contrast, if the edges are properly rounded,         measurements yield the fit shown in Fig. 11.
+as in Fig. 9(c), the vena contracta effect is eliminated,        Since ρoil = 920 kg/m3 , L = 8 cm, Σ = 0.285 cm2 , and
+and head loss is avoided.17                                    ΣA = 50.0 cm2 , we obtain
+   As discussed in Chapter 10 of Ref. 8, each inlet type
+shown in Fig. 9 has an associated entrance loss coeffi-                        gρoil Σ2
+cient, defined as the ratio of dissipated kinetic energy,            µoil =             = 6.09(1) × 10−2 Pa · s,        (B5)
+                                                                              8πLΣA K
+that depends on its geometry. For the inlet in Fig. 9(c),
+this coefficient is minimal and approaches zero. In con-       which is consistent with several literature values at tem-
+trast, the shape of an outlet—whether sharp-edged or           peratures around 20 ◦ C (see, for instance, Ref. 20), and
+rounded—does not affect its loss factor: being a sub-          is the value adopted in Section IV C for the theoretical
+merged jet, the flow dissipates all of its kinetic energy,     curves.
+                                                                                                                               12
+
+
+
+
+FIG. 9. Schematics of the outlet types discussed in Appendix A. In cases (a) and (b), due to the system geometry, the
+streamlines cannot abruptly change direction to follow the pipe walls, generating turbulence in the shaded regions. In contrast,
+in case (c) these effects do not occur because the cross section narrows smoothly, giving fluid parcels enough space and time to
+curve properly.
+
+
+
+
+                                   ⊕
+                                                 h(t)
+
+
+
+     L
+
+                               ⊖
+FIG. 10. Schematic representation of the draining configura-
+tion used to determine the viscosity of sunflower oil.
+
+
+
+
+ [1] See       https://en.wikipedia.org/wiki/Heron%27s_                chanics, 7th Ed., (Pearson, 2015), Chapter 10.
+     fountain for a brief review on Heron’s fountain.              [9] Ronald L. Panton, Incompressible Flow (Wiley, 2013), p.
+ [2] Mark Nelkin, “Turbulence in fluids,” Am. J. Phys. 68              135-136.
+     (4), p. 310–318 (2000).                                      [10] Alejandro Jenkins, “Irreversibility in an ideal fluid,” Am.
+ [3] James M. McDonough, Introductory Lectures on Turbu-               J. Phys. 82 (11), 1040–1046 (2014)
+     lence: Physics, Mathematics and Modeling, Mechanical         [11] Franco Blanchini and Stefano Miani, Set-Theoretic Meth-
+     Engineering Textbook Gallery, (2007).                             ods in Control, 2nd Ed., (Birkhäuser, 2015), Chapter 4.
+ [4] See www.youtube.com/watch?v=D07aJB0Blzw and www.             [12] D. J. Acheson, Elementary Fluid Dynamics (Clarendon
+     youtube.com/watch?v=K49QOM_B8dA for two noteworthy                Press, 1990), p. 216-217.
+     examples.                                                    [13] Lev D. Landau and E. M. Lifshitz, Fluid Mechanics: Vol-
+ [5] M. Saldana et al., “The Reynolds Number: A Journey                ume 6 (Pergamon, 2013), p. 54-55.
+     from Its Origin to Modern Applications,” Fluids 9(12),       [14] See https://physlets.org/tracker/ for “Tracker”.
+     299, p. 1-34 (2024).                                         [15] Richard Fitzpatrick, Theoretical Fluid Mechanics (IOP
+ [6] See https://en.wikipedia.org/wiki/Navier%E2%80%                   Publishing, 2017), p. 100-101.
+     93Stokes_existence_and_smoothness.                           [16] George K. Batchelor, An Introduction to Fluid Dynamics
+ [7] Costas Synolakis and Henry Badeer, “On combining the              (Cambridge University Press, 1967), p. 387-391.
+     Bernoulli and Poiseuille equation-A plea to authors of       [17] Alejandro Jenkins, “Sprinkler head revisited: momen-
+     college physics texts” Am. J. Phys. 57, 1013-1019 (1989).         tum, forces, and flows in Machian propulsion,” Eur. J.
+ [8] Robert L. Mott, Joseph A. Untener, Applied Fluid Me-              Phys. 32, 1213–1226 (2011).
+                                                                                                                                                           13
+
+                                                                                             [18] D. Alvaro-Berlanga, R. Planet, A. Fernandez-Nieves,
+                                           Fitting curve y = Kt                                   “Torricelli’s experiment and conservation of momentum,”
+                                0.08       Exp. data
+  y = ln[(h0 + L)/(h(t) + L)]
+                                                                                                  Am. J. Phys. 92 (7), 493–497 (2024).
+                                                                                             [19] Ashley Hicks, William Slaton, “Determining the Coef-
+                                0.06                                                              ficient of Discharge for a Draining Container,” Phys.
+                                                                                                  Teach. 52 (1), 43–47 (2014).
+                                                                                             [20] S. Calligaris, G. Mirolo, S. Da Pieve et al., “Effect of Oil
+                                0.04                                                              Type on Formation, Structure and Thermal Properties
+                                                                                                  of γ-oryzanol and β-sitosterol-Based Organogels,” Food
+                                0.02                                                              Biophysics 9, 69–75 (2014).
+
+
+                                0.00                              K = 0.0118 ± 0.0001 s −1
+                                       0   1      2      3        4      5     6      7
+                                                             t [s]
+FIG. 11. Linear fit of the experimental data used to estimate
+the viscosity of sunflower oil.
+

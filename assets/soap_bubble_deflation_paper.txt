@@ -1,0 +1,776 @@
+PAPERS | OCTOBER 01 2025
+
+Unblowing bubbles: Understanding the physics of bubble
+deflation through a straw
+Daniele Battesimo Provenzano        ; Andrea Stefanini
+
+
+
+Am. J. Phys. 93, 797–805 (2025)
+https://doi.org/10.1119/5.0254263
+
+
+
+
+                                                                                      
+                                                                                      View     Export
+                                                                                      Online   Citation
+
+
+  Articles You May Be Interested In
+
+   Analysis of a deflating soap bubble
+   Am. J. Phys. (October 2010)
+
+   Of balls, bladders, and balloons: The time required to deflate an elastic sphere
+   Am. J. Phys. (January 2021)
+
+   In this issue: October 2025
+   Am. J. Phys. (October 2025)
+
+
+
+
+                                                                                                          02 February 2026 08:18:26
+Unblowing bubbles: Understanding the physics of bubble deflation
+through a straw
+         Daniele Battesimo Provenzano1,a) and Andrea Stefanini2,b)
+         1
+             Scuola Normale Superiore, Pisa, Italia
+         2
+             I.T.I.S. “Galileo Galilei,” Livorno, Italia
+         (Received 21 December 2024; accepted 23 July 2025)
+         A formal description of the deflation process of a soap bubble attached to a cylindrical tube is
+         provided, with emphasis on quantifying viscous and unsteady effects. Differing from prior studies,
+         the proposed theoretical framework maintains its validity across a wide spectrum of parameter
+         values that define the system. The model is validated through experimental results that can be
+         reproduced at home using liquid soap and a straw, emphasizing its educational aspects. # 2025
+         Author(s). All article content, except where otherwise noted, is licensed under a Creative Commons Attribution-
+         NonCommercial 4.0 International (CC BY-NC) license (https://creativecommons.org/licenses/by-nc/4.0/).
+         https://doi.org/10.1119/5.0254263
+
+
+
+I. INTRODUCTION                                                          quantities just outside the straw—point 4. The correct appli-
+                                                                         cation of Bernoulli’s equation dictates some of this model’s
+   Soap bubbles have been used for centuries to entertain and            assumptions. Bernoulli’s equation will appear in three differ-
+enchant children. They are held together by surface tension,             ent versions in the analysis, and distinct names will be
+which causes the pressure of the air inside to be larger than            assigned to each form in order to avoid confusion. The least
+the atmospheric pressure. This difference in pressure causes             general form of the equation—that is, the one requiring the
+bubbles to deflate when a hole is made on their surface, simi-           most assumptions—will be referred to as the Restricted
+lar to unknotted party balloons. This phenomenon can be                  Bernoulli’s Equation (RBE) and is written as
+observed when trying to blow soap bubbles using an ordinary
+straw: if the inflated bubble does not detach from the straw,                           1
+                                                                                   r Þ þ qv2 ð~
+                                                                                 pð~          r Þ þ qgz ¼ const;                                       (1)
+
+
+
+
+                                                                                                                                                              02 February 2026 08:18:26
+it will start deflating as soon as lips are removed from the                            2
+other end.
+   The problem of a bubble deflating through a thin cylindri-            which holds under the assumptions of irrotational, steady,
+cal tube was first introduced in Ref. 1 and was further                  and laminar flow in an inviscid and incompressible fluid.
+explored in Ref. 2. In both works, the authors find that the             The generalization of Eq. (1) to viscous fluids will be
+deflation time is proportional to the fourth power of the initial        referred to as the Viscous Bernoulli’s Equation (VBE).
+radius of the bubble and to the length L of the tube. This               Finally, when unsteady effects will be incorporated into the
+result implies that the deflation time for a bubble attached to          VBE in Sec. IV, it will be referred to as the Unsteady
+an infinitely short tube is null. This issue is not just a mere          Viscous Bernoulli’s Equation (UVBE).
+abstract fact, but also has experimental implications: a fairly             Air will be assumed to be incompressible throughout the
+thin ring constitutes precisely the limit L ! 0 of a tube. In            work. This assumption is justified by the fact that the highest
+this case, the results of Refs. 1 and 2 are not so useful, as will       velocity in the system is two orders of magnitude smaller
+be shown in this work. On the other hand, they may constitute            than the speed of sound. Hence, the continuity equation
+a good approximation if L is large enough. In this work, the             reads
+limit case L ! 0 will be part of a broader class of cases,
+                                                                                               dR
+which will be referred to as the inviscid case and distin-                       4pR2 ðtÞ        ¼ A vS ðtÞ;                                          (2)
+guished from the viscous one. The main purpose of this anal-                                   dt
+ysis is to derive and validate a more general model that works
+                                                                         where vS ðtÞ ¼ v3 ¼ v4 is the homogeneous velocity of air
+regardless of the value of L, as well as all other parameters.
+                                                                         inside the straw. It is important to note that vS ðtÞ is homoge-
+   The configuration under consideration is characterized by
+                                                                         neous throughout the cross section of the straw only if
+the following parameters:
+                                                                         l ! 0. Hence, when viscous effects cannot be neglected,
+• R0 , the initial radius of the bubble;                                 vS ðtÞ will represent the average velocity on the cross section.
+• L, the length of the straw;                                            As for the velocity inside the bubble, it will be assumed to
+• rstraw , the cross-sectional radius of the straw;                      be negligibly small. The validity of this assumption will be
+• A ¼ pr 2                                                               analyzed in Sec. IV.
+            straw , the cross section of the straw;
+• q, the density of air;                                                    The last fundamental assumption of this model concerns
+• l, the viscosity of air;                                               the shape of the bubble, which will be assumed to be spheri-
+• r, the surface tension of soap.                                        cal. Of course, this assumption is broken when the radius of
+                                                                         the bubble becomes comparable to the radius of the straw.2
+   For the remaining physical quantities, RðtÞ is the instanta-
+neous radius of the bubble, while vi and pi are the velocity
+and pressure of air at some point i in space.
+   Referring to Fig. 1, Bernoulli’s equation will be used to              
+                                                                              If the assumption of irrotationality alone does not hold, the validity of Eq.
+link quantities inside the bubble—points 1 or 3—to                            (1) is restricted to a single streamline rather than the entire flow.
+
+
+797          Am. J. Phys. 93 (10), October 2025               http://aapt.org/ajp                          V
+                                                                                                           C Author(s) 2025.                           797
+                                                                                   II. THEORETICAL MODELS
+                                                                                      Before delving into analytical calculations, it is worth say-
+                                                                                   ing something about the relationship between quantities that
+                                                                                   characterize the system. Through the use of dimensional
+                                                                                   analysis, specifically the Buckingham p theorem and the
+                                                                                   principle of similitude,4,5 it is possible to find how the defla-
+                                                                                   tion time depends on the other quantities. In the case where
+                                                                                   viscous effects are negligible, it is reasonable to assume that
+                                                                                   the deflation time only depends on R0 , A, r, and q. Using the
+                                                                                   tools aforementioned, the functional relation one finds is
+                                                                                             rﬃﬃﬃ         
+                                                                                               q 3=2      R2
+                                                                                        tI ¼      R0 F 0 ;                                       (7)
+                                                                                               r           A
+
+                                                                                   where the subscript I refers to the inviscid case and F ðxÞ is a
+                                                                                   generic real-valued function.
+                                                                                      In contrast, if viscous effects are not negligible, it is rea-
+             Fig. 1. Schematization of the bubble–straw system.                    sonable to assume that the deflation time depends on R0 , A,
+                                                                                   r, L, and l. It does not depend on the density q because, in
+However, the correction to the total deflation time is negligi-                    the viscous regime, most of the energy stored on the surface
+ble, as will be shown in Sec. III.                                                 of the bubble is dissipated in the straw by viscous forces,
+   Finally, it should be noted that the result depends neither                     which do not carry any information about the density. Under
+on the acceleration of gravity g nor on the inclination of the                     such assumptions, one gets
+straw. This feature can be explained by means of                                                       2     
+                                                                                             l         R0 L
+Archimedes’s law: no work needs to be done to move up a                                 tV ¼ R 0 G         ;    ;                                (8)
+volume of fluid inside a larger volume of the same fluid.y For                               r          A R0
+the same reason, the deflation time is the same for vertical
+and horizontal straws, assuming that all other quantities are                      where the subscript V refers to the viscous case and Gðx; yÞ is
+kept fixed. The same holds true when viscous and unsteady                          a generic real-valued function. The results of the upcoming
+
+
+
+
+                                                                                                                                                        02 February 2026 08:18:26
+effects are taken into account. Thus, referring to Fig. 1, the                     analysis must respect Eqs. (7) and (8).
+RBE, relating quantities in points 1 and 4, simply reads                              The inviscid case is determined by the solution of Eqs. (2)
+                                                                                   and (5). Assuming the air velocity inside the bubble is negli-
+      4r   1      1                                                                gible, as it is in the initial moments of deflation, the system
+          þ qv21 ¼ qv24 ;                                                   (5)    of equations reduces to
+      RðtÞ 2      2
+                                                                                                            sﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+where                                                                                            dR              8r
+                                                                                        4pR2 ðtÞ     ¼ A                :                      (9)
+                                                                                                  dt           qRðtÞ
+      4r
+           ¼ p1  p2                                                        (6)
+      RðtÞ                                                                         Separating variables and integrating leads to
+is the pressure difference due to the Young–Laplace                                                      pﬃﬃﬃ rﬃﬃﬃ !2=7
+equation.3                                                                                        7=2   7 2A r
+                                                                                       RðtÞ ¼ R0                  t     ;                       (10)
+                                                                                                          4p     q
+
+                                                                                   which implies the following expression for the deflation time:
+y
+The mathematical justification proceeds as follows. Referring to Fig. 1, the
+                                                                                                 7=2 rﬃﬃﬃ
+RBE is applied between points 1 and 4, under the assumption of inviscid                    4pR         q
+air:                                                                                   tI ¼ pﬃﬃ0ﬃ        :                                       (11)
+         1                1                                                                7 2A        r
+     p1 þ qv21 þqgz1 ¼p4 þ qv24 þqgz4 ;                                  (3)
+         2                2
+                                                                                   It can bepﬃﬃseen
+                                                                                               ﬃ     that Eq. (11) respects Eq. (7) with F ðxÞ
+where zi denotes the vertical coordinate. Given that z4  z1  L, and using        ¼ 4px=7 2.
+the Young–Laplace law p1 ¼ p2 þ RðtÞ     4r
+                                            , along with Stevin’s law                 If viscous effects are not negligible, the RBE can no lon-
+p2 ¼ p4 þ qgðz4  z2 Þ  p4 þ qgL, the equation reduces to                         ger be applied. In this case, a suitable replacement is
+                                                                                   Poiseuille’s law,6 which in this context reads
+      4r 1 2 1 2
+          þ qv ¼ qv ;                                                       (4)
+      RðtÞ 2 1 2 4                                                                                           8plLQðtÞ
+                                                                                       p3  p4  qgL ¼                ;                          (12)
+which shows that the dependence on g cancels out. This outcome is consis-                                       A2
+tent with physical intuition: in the absence of the bubble, no airflow would       where QðtÞ ¼ A vS ðtÞ is the volumetric flow rate of air in the
+occur, i.e., v1 ¼ v4 ¼ 0. Indeed, even in a very long vertical tube in open air,
+                                                                                   straw. Equation (12) reduces to
+no flow is observed despite the presence of a pressure difference between
+the top and bottom ends, due to Stevin’s law. The same result holds when                4r    8plL
+viscous and unsteady effects are taken into account, because the terms pð~   rÞ             ¼      vS ðtÞ:                                       (13)
+and qgz remain unchanged.                                                              RðtÞ    A
+
+798          Am. J. Phys., Vol. 93, No. 10, October 2025                                                     D. B. Provenzano and A. Stefanini    798
+   As stated previously, in this case vS ðtÞ represents the aver-                  addresses a more general case than the one considered here.
+age velocity of air over the entire cross section. Solving Eq.                     Equation (16) reads
+(2) and (13), one finds
+                                                                                        4r 1 2 8plL
+                              !1=4                                                        ¼ q vS þ   vS ;                                            (17)
+                      rA2                                                               R  2       A
+     RðtÞ ¼ R0  2
+                4
+                            t      :                         (14)
+                     2p l L                                                        whose only physical solution is
+                                                                                               sﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+                                                                                                               
+Hence, the deflation time is                                                                        8plL 2 8r 8plL
+                                                                                      vS ðRÞ ¼                       þ               :              (18)
+                                                                                                       qA                 qR       qA
+           2p2 l LR40
+      tV ¼            ;                                                   (15)
+             rA2                                                                   Inspection of Eq. (18) suggests factoring out a common term
+which respects Eq. (8) with Gðx; yÞ ¼ 2p x y. The viscous
+                                                       2 2                         and introducing the dimensionless coefficient
+model described by Eqs. (14) and (15) was used in Refs. 1                                        rqA2   rq r 4
+and 2.                                                                                  c¼             ¼ 2 straw ;                                   (19)
+    In summary, the deflation time is proportional to R0 in
+                                                           7=2                                 8p l L R 8l L2 R
+                                                                                                 2 2 2
+
+                                                    4
+the inviscid model, while it is proportional to R0 in the vis-                     which can also be expressed as the ratio of two characteristic
+cous one. A difference in the functional dependencies sug-                         lengths of the system: a purely geometric one, K  rstraw
+                                                                                                                                           4
+                                                                                                                                                =
+gests that a more general expression for the deflation time                        L2 R, and a material-dependent one, k  8l2 =rq, which in
+should exist.                                                                      the present case is on the order of 100 nm. Note that both K
+    The fundamental difference between the previous models                         and c increase monotonically with time, as the bubble pro-
+lies in the mechanism that prevents air from escaping the bub-                     gressively shrinks. Hence, Eq. (18) can be written as
+ble instantaneously. The inviscid model accounts only for
+                                                                                                                
+inertia, whereas the viscous model considers only viscosity.‡                                8plL pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+                                                                                        vS ¼           1þc1 :                               (20)
+As a result, the inviscid model remains unaffected by the                                     qA
+length of the straw, while the viscous model does depend on
+it. Specifically, as L ! 0, while keeping the other parameters                     As will be evident shortly, it is convenient to rewrite Eqs.
+fixed, the viscous model predicts tV ! 0, whereas the inviscid                     (11) and (15) by making use of the definition provided in Eq.
+model always yields a constant deflation time. This is consis-                     (19). A simple substitution yields
+tent with expectations, as air inertia ensures a nonzero defla-
+
+
+
+
+                                                                                                                                                             02 February 2026 08:18:26
+tion time even when a small hole is punctured in the bubble.§                                  qR30 1=2
+                                                                                        tI ¼       c     ;                                           (21)
+    A third, more comprehensive model should incorporate                                       7lL 0
+both inertia and viscosity, correctly converging to the expected
+                                                                                               qR30 1
+limiting behavior for both long, thin straws and short, wide                            tV ¼       c ;                                               (22)
+straws. The aim of the final part of this section is to find a                                 4lL 0
+more general approach to the problem, which unifies the RBE
+                                                                                   where c0  cðR ¼ R0 Þ  cðt ¼ 0Þ. Substituting Eq. (18) in
+and the concept of viscosity. The most natural way of doing so
+                                                                                   Eq. (2), one obtains
+is to generalize Bernoulli’s equation to viscous fluids, thus
+                                                                                                                                 rﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+writing the Viscous Bernoulli’s Equation (VBE) as done in                                   p2 lL  4        4p2 lL ð R0 03                   R0
+Ref. 8.¶ By applying it between points 1 and 4, one obtains                             t¼          R0  R þ
+                                                                                                          4
+                                                                                                                               R  1 þ c0 0 dR0
+                                                                                             rA 2                    rA2
+                                                                                                                            R                  R
+      4r 1 2                                                                                                !3 ð pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+        ¼ q vS þ Dpvisc ;                                                 (16)                q      qrA2           c
+                                                                                                                        1 þ c0 þ 1 0
+      R  2                                                                               ¼                                        dc
+                                                                                            2lL 8p l L2 2 2
+                                                                                                                    c0     c05
+where Dpvisc is the pressure drop due to viscosity, given by                                        ð pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+                                                                                            qR30 3 c 1 þ c0 þ 1 0
+Eq. (12). A qualitative justification for the presence of this                           ¼        c                     dc :                          (23)
+term lies in the fact that the pressure difference between the                              2lL 0 c0         c05
+two ends—namely, the quantity on the left-hand side—is
+partially converted into kinetic energy density and partially                      Thus, the deflation time becomes
+into energy density dissipated due to viscosity. For a more                                                      ð        rﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+                                                                                             p2 lL 4 4p2 lL R0 03                       R0
+detailed discussion, see Ref. 8, specifically Sec. F, which                            tG ¼         R0 þ               R     1 þ c0 0 dR0
+                                                                                              rA 2        rA 2
+                                                                                                                     0                  R
+                                                                                                     ð pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+‡
+  Indeed, in the inviscid model, the outflow velocity is inversely propor-                   qR30 3 1 1 þ c0 þ 1 0
+  tional to the square root of the air density, which represents its inertia. In           ¼       c                     dc ;                        (24)
+                                                                                             2lL 0 c0         c05
+  contrast, the purely viscous model predicts an outflow velocity that is
+  inversely proportional to the air viscosity.
+§
+  A slight variation of this scenario was analyzed in Ref. 7.                      where the subscript G refers to the generalized case. For
+¶
+  In Ref. 8, the authors highlight a common misconception in fluid dynam-          clarity, both expressions—with and without c—have been
+  ics: Bernoulli’s equation and Poiseuille’s law are often regarded as mutu-       retained in the equations. As can be seen by inspecting the
+  ally exclusive. However, this view depends on which form of Bernoulli’s          integral in c in Eq. (24), if c0  1 the integrand behaves
+  equation is being considered. While the statement holds true for the RBE,        asymptotically as c4:5 and, consequently, Eq. (II) reduces to
+  it does not apply to its more general forms. In fact, the RBE and
+  Poiseuille’s law can be seen as two limiting cases of a more general rela-
+                                                                                   Eq. (21). In contrast, if c0  1, the dominant contribution to
+  tion, which is the Viscous Bernoulli’s Equation (VBE). When the viscosity        the integral comes from the asymptotic limit 2c5 , which
+  l ! 0, the general equation reduces to the RBE. Conversely, when the             leads tG to coincide with Eq. (22). This could already be
+  kinetic term qv2 =2 is negligible, it reduces to Poiseuille’s law.               inferred from Eq. (20): for c  1, it reduces to the outflow
+
+799         Am. J. Phys., Vol. 93, No. 10, October 2025                                                         D. B. Provenzano and A. Stefanini     799
+Fig. 2. Experimental setup used for the validation of the theoretical models. The straw was attached to a plastic ruler using ordinary tape. Before each measure-
+ment, the lower end of the straw was moistened with the soap solution contained in a plastic cap. Bubbles were inflated by blowing into the upper end of the
+straw by mouth. The initial radius of each bubble was set by comparing the bubble’s shadow—illuminated using an LED—with the reference length drawn on
+the paper screen. Once the desired value of R0 was reached, the lips were lifted. From that moment, the deflation time was recorded. Proportions between dis-
+tances drawn in panel (a) are different in the real configuration, shown in panel (b): they were exaggerated for clarity reasons.
+
+velocity in the inviscid regime, whereas for c  1, it corre-                       were collected at 19  C under dry weather conditions, so it
+sponds to the velocity in the viscous regime. Referring back                        was reasonable to assume q ¼ 1:22ð1Þ kg=m3 . The remain-
+to the scenario discussed in Sec. I, and assuming all other                         ing quantities, r and l, were treated as free parameters in the
+parameters remain constant, these two regimes correspond,                           numerical fits, as their values cannot be precisely determined
+respectively, to extremely short and extremely long straws.                         a priori without appropriate measurement tools, such as a
+   The expressions in Eqs. (21), (22), and (24) can be rewrit-                      surface tensiometer and a viscometer.
+ten in the following form:                                                            Referring to Figs. 2(a) and 2(b), the initial radius of each
+                                                                                    bubble was set by observing the shadow cast on the paper
+       lL
+            tdeflation ¼ Hðc0 Þ;                                            (25)    screen, ensuring that the outermost edges matched the refer-
+       qR30                                                                         ence length h ¼ 25:0 cm. The relationship between R0 and
+                                                                                    the width of the shadow h is given by
+
+
+
+
+                                                                                                                                                                        02 February 2026 08:18:26
+where
+               8                                                                                         d1 h
+               >   1                                                                     R0 ¼ qﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ :                              (27)
+               >
+               >   pﬃﬃﬃﬃﬃ ;                 ðIÞ;
+               >
+               > 7 c0                                                                          h2 þ 4ðd1 þ d2 Þ2
+               >
+               >
+               > 1
+               >
+               <      ;                     ðVÞ;                                       Due to the propagation of errors, the uncertainty relative
+       Hðc0 Þ ¼ 4c0                                                         (26)
+               >
+               >      ð pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ0
+                      1                                                             to R0 is
+               >
+               >            1þc þ1 0
+               >
+               > 1 3
+                   c0                  dc ; ðGÞ
+               >
+               >                                                                                       4d1 ðd1 þ d2 Þ2 Dh              h Dd1=2
+               >
+               : 2            c05                                                        DR0 ¼                         3=2 þ qﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ;
+                      c      0
+                                                                                                      h2 þ 4ðd1 þ d2 Þ2         h2 þ 4ðd1 þ d2 Þ2
+is a dimensionless-valued function. This means that the                                                                                                         (28)
+deflation times predicted by the three models can be com-
+pared on the same plot without assigning any specific values                        where Dh and Dd1=2  Dd1 ¼ Dd2 are the errors on the
+to the physical parameters l, r, and q. This analysis will be                       respective lengths. Dd1=2 ¼ 1 mm due to the scale of the
+carried out in the Sec. III.                                                        measuring tape, while it is reasonable to assume Dh  2 mm
+                                                                                    due to the thickness of the dark edge of the shadow cast
+III. EXPERIMENTAL AND NUMERICAL                                                     on the paper screen. In all experiments, the distances
+                                                                                    d2 ¼ 50:0 cm and h ¼ 25:0 cm were kept fixed, while mea-
+VALIDATIONS                                                                         surements were taken on bubbles with an initial radius rang-
+A. Experimental setup and measurements                                              ing from 2:0 to 4:0 cm. As a result, the distance d1 between
+                                                                                    the LED and the bubble varied from approximately 10 to
+   In order to determine which of the previous models best                          24 cm. Consequently, the uncertainty in R0 ranged between
+describes the deflation process, experimental tests were car-                       one-third and one-half of a millimeter as given by Eq. (28).
+ried out using the experimental setup shown in Fig. 2.                                 Two types of measurements were conducted. The first
+Drinking straws with a cross-sectional area of 16:19 mm2                            involved recording the deflation time with a stopwatch, per-
+and varying lengths were used, along with empty plastic pen                         forming ten measurements for each configuration, and calcu-
+refills of 3:14 mm2 cross-sectional area and 11.2 cm length.                        lating the average times, which are reported in Table I. The
+A commercially available children’s soap solution (97%                              second consisted of filming the deflation of bubble with an
+water and 3% of an unspecified surfactant mixture) produced                         initial radius of 4:0 cm, attached to a 10:0 cm straw, allowing
+by the company Dulcop International was employed. Data                             the experimental function RðtÞ to be reconstructed using
+                                                                                    video analysis software. This approach, despite requiring sig-
+                                                                                   nificantly more effort, provided more precise data, enabling
+    If the assumption of irrotationality alone does not hold, the validity of Eq.
+    (1) is restricted to a single streamline rather than the entire flow.           the extraction of l and r through numerical fits.
+
+800            Am. J. Phys., Vol. 93, No. 10, October 2025                                                            D. B. Provenzano and A. Stefanini           800
+Table I. Data collected from the experiments. Each value in the time column
+is the average of ten different measurements, with the uncertainty corre-
+sponding to the sample standard deviation. The uncertainty in the R0 values
+ranges from one-third to half a millimeter, as mentioned in the discussion
+following Eq. (28).
+
+A (mm2 )      L (cm)       R0 (cm)       c0 (no dim.)      Deflation time (s)
+
+                             4.0               0.74            17.51(25)
+                             3.5               0.85            10.69(14)
+               10.0          3.0               0.99            6.28(10)
+                             2.5               1.19             3.15(6)
+                             2.0               1.48             1.36(3)
+
+                             4.0               0.21            28.59(28)
+                             3.5               0.24            16.74(18)
+               18.9          3.0               0.28            9.26(12)
+                             2.5               0.33             4.44(8)
+16.19                        2.0               0.42             1.93(3)
+
+                             3.0               2.02            5.32(8)
+                7.0          2.5               2.42            2.56(17)
+                                                                                Fig. 4. Experimental curve and numerical fit based on Eq. (II). The initial
+                             2.0               3.03            1.18(8)
+                                                                                irregularities of the experimental curve are due to the inevitable oscillations
+                                                                                of the bubbles caused by air displaced by the movement of arms.
+                             3.0               3.52            4.73(11)
+                5.3          2.5               4.22            2.40(13)         result justifies performing a numerical fit of the experimental
+                                                                                data based on the generalized model described in Eq. (23), in
+               28.4          4.0               0.09            42.25(44)
+                                                                                order to determine the values of the parameters l and r. For
+               37.8          4.0               0.05            55.54(52)        the same reason, there is no point in performing fits based on
+                                                                                the two simpler models.
+                4.0          4.0               4.64            11.73(24)
+                                                                                B. Numerical fit
+
+
+
+
+                                                                                                                                                                  02 February 2026 08:18:26
+                             2.5         3:6     106          65.71(67)
+3.14           11.2          2.0         4:5     106          26.39(41)          Six different videos of deflating bubbles with R0 ¼ 4:0
+                                                                                and L ¼ 10:0 cm were analyzed using Tracker,9 a video anal-
+                                                                                ysis tool that, among other features, can measure instanta-
+   Figure 3 shows the comparison among the three models                         neous values of distances in video frames. The yellow star
+introduced at the end of Sec. II, as a function of the parame-                  curve in Fig. 4 was obtained by averaging the six sets of
+ter c0 , together with the experimental data points reported in                 data, each consisting of about 55 couples of values ðti ; Rðti ÞÞ.
+Table I. It is clearly visible that the experimental points fol-                A numerical fit was performed based on these experimental
+low the curve corresponding to the generalized model. This
+
+
+
+
+                                                                                Fig. 5. Percentage difference between measurements and model predictions,
+                                                                                as a function of c0 . The two leftmost data points for the inviscid model error
+Fig. 3. Comparison of the three models. The experimental data points are        are not shown in the plot, as their values exceed 100. It was not possible to
+taken from the configurations described in Table I. The two measurements        explore values beyond c0 ¼ 5 because the corresponding deflation times
+related to the empty pen refills are not reported because they are associated   drop below one second, making it difficult to perform measurements with an
+with c0 values on the order of 106 .                                           acceptable degree of precision.
+
+
+801          Am. J. Phys., Vol. 93, No. 10, October 2025                                                     D. B. Provenzano and A. Stefanini             801
+Fig. 6. Comparison between the three models introduced in Sec. II, evaluated for three representative values of c0 —a small, an intermediate and a large one.
+(c0  0:05) R0 ¼ 2 cm, L ¼ 11 cm, rstraw ¼ 1 mm; (c0  1) R0 ¼ 4 cm, L ¼ 10 cm, rstraw ¼ 2:45 mm; (c0  100) R0 ¼ 3 cm, L ¼ 1 cm, rstraw ¼ 2:27 mm.
+
+data, using the least squares method and the generalized                         denominator approaches zero—this also leads to a divergence
+model described by Eq. (23), which includes two free param-                      in the Reynolds number.yy However, in the final moments of
+eters, i.e., r and l. The fitted parameters are                                  the process, the bubble can no longer be approximated as a
+                                                                                 whole sphere. In fact, by examining the final frames in slow
+      rG ¼ 0:0248ð5Þkg=s2 ; lG ¼ 1:841ð3Þ 105 Pas:                   (29)       motion, it becomes evident that the bubble transforms into an
+   The values in Eq. (29) are compatible with those com-                         ellipsoidal cap, with its curvature radii never reaching zero.‡‡
+monly known for soapy water and air at room temperature:                         Nevertheless, according to the present modeling, the time
+the surface tension of typical soapy water is approximately                      spent in the final transient is very short: Eq. (2) implies
+0:025 kg=s2 ,10 while the viscosity of air lies in the range
+ð1:78–1:85Þ 105 Pas. From now on, the set of experimen-                                        4pR2 ðtÞ
+                                                                                       dt ¼             dR  f ðtÞ jdRj;                                 (31)
+tal and fitted parameters                                                                       A vS ðtÞ
+      R0 ¼ 4:0 cm; L ¼ 10:0 cm; A ¼ 16:19 mm2 ;                                  where the function f ðtÞ exhibits a sharp decrease in the final
+
+
+
+
+                                                                                                                                                                   02 February 2026 08:18:26
+       r ¼ 2:48       102 kg=s2 ; l ¼ 1:84          105 Pas;                   stages of the deflation process, due to its numerator
+                                                                                 approaching zero and its denominator becoming large. In
+       q ¼ 1:22 kg=m3 ;                                               (30)       fact, both numerical simulations and experimental results
+corresponding to k  9 108 m and c0  0:74, will be                             show that the radius goes from R ¼ 1 cm to R ¼ 0 in
+referred to as the reference configuration.                                      approximately one-tenth of a second for the reference con-
+                                                                                 figuration described in Fig. 4. Thus, the bubble spends only
+C. Comparison between the models                                                 a negligible portion of the total deflation time in the tran-
+                                                                                 sient phase where R rstraw . As a result, the phenomena
+   Using the parameters extracted from the numerical fit in                      that cause deviations from the whole-sphere approximation
+Eq. (29), the theoretical predictions of the three models were                   have little impact.
+compared with the experimental measurements for each con-
+figuration listed in Table I. The results of this analysis are                   IV. UNSTEADY EFFECTS
+shown in Fig. 5, where the percentage differences are plotted
+as a function of the parameter c0 . As already seen in Fig. 6,                     So far, steady fluid dynamics equations have been used.
+the predictions of the generalized model are noticeably more                     Experimental evidence has shown that some models generally
+accurate than those of the simpler models. Moreover, the vis-
+                                                                                  yy
+cous model provides a very good description of the evolution                        The Reynolds number associated with the airflow inside the straw/refill is
+for c0  1, but fails outside this regime. In contrast, the                         given by Re ¼ 2 vS rstraw q=l. When the radius of the bubble becomes
+                                                                                    very small, Re can exceed 2000, indicating a transition to turbulent flow.
+inviscid model performs poorly for small values of c0 , but                         The main issue with this phenomenon is that it cannot be studied using
+the relative error decreases as c0 increases. However, in all                       Bernoulli’s equation, not even in its most general form. This is because
+cases, the generalized model consistently outperforms both.                         Bernoulli’s theorem relies on the assumption of laminar flow, meaning
+   Figure 7 presents a numerical comparison of the inviscid, vis-                   that streamlines remain smooth and non-intersecting. Turbulence, how-
+cous, and generalized model predictions across three regimes,                       ever, causes streamlines to continuously intertwine and break down over
+classified according to the value of c0 . It is evident that for very               time, making the system inherently unsteady. However, in the configura-
+                                                                                    tions analyzed in this work, turbulence is expected to arise when the
+low values of c0 , the viscous model offers a good approximation,                   radius of the bubble reaches a few millimeters, making it even shorter-
+whereas it fails at higher values—contrary to the inviscid model.                   lived than the unsteady effects that will be discussed in Sec. IV.
+In the intermediate regime, however, neither model succeeds in                      Consequently, it is not experimentally detectable and does not compro-
+accurately capturing the dynamics of the system. This provides                      mise the overall discussion.
+                                                                                  ‡‡
+further evidence confirming the superior effectiveness of the gen-                   A similar feature is observed in Ref. 2, where bubbles are approximated
+eralized model presented in this work.                                               as spherical caps in the final moments of the process: as they deflate, the
+                                                                                     radius reaches a minimum before starting to grow again. They do not
+   Finally, a few remarks should be made about the airflow                           deform into ellipsoidal caps since they rest on a tube rather than hanging
+velocity. Since the radius of the bubble tends to zero in the                        from it, as in the present case. The authors also emphasize the necessity
+final stages of the process, the theoretical outflow velocity                        of setting a final radius value to prevent the deflation time from
+diverges due to the form of the Young–Laplace law, whose                             diverging.
+
+
+802         Am. J. Phys., Vol. 93, No. 10, October 2025                                                       D. B. Provenzano and A. Stefanini             802
+                                                                                            1 2         4r     8plL              dvS
+                                                                                              qvS ðtÞ       þ      vS ðtÞ ¼ qL     :                                   (34)
+                                                                                            2           RðtÞ    A                 dt
+
+                                                                                      A more general version of Eq. (34) can be obtained by tak-
+                                                                                    ing into account nonzero values of the air velocity inside the
+                                                                                    bubble. In this case, the evolution of the system is ruled by
+
+                                                                                               qA dvS       qA2 v2S ðtÞ       dvS
+                                                                                                        þ               þ qL
+                                                                                             12pRðtÞ dt 96p2 R4 ðtÞ            dt
+                                                                                                 1           4r       8plL
+                                                                                               þ qv2S ðtÞ        þ        vS ðtÞ ¼ 0;                                   (35)
+                                                                                                 2          RðtÞ        A
+
+                                                                                    which is derived in Appendix A using energy considerations.
+                                                                                    However, for the reference configuration in Eq. (30), numerical
+                                                                                    calculations show that neglecting the air velocity inside the bub-
+                                                                                    ble, i.e., ignoring the first two terms in Eq. (35), yields a differ-
+                                                                                    ence in the deflation time on the order of one-tenth of a
+                                                                                    millisecond. This was to be expected, since the ratio between the
+                                                                                    mean kinetic energy densities in the bubble and in the straw is
+                                                                                                                 2
+                                                                                            1 2               dR
+                                                                                              qv                                            4
+                                                                                            2 CM ¼            dt       Eq ð2Þ       rstraw
+                                                                                                                         ¼                        ;                      (36)
+                                                                                             1 2               v2S                   2R
+                                                                                               qv
+                                                                                             2 S
+Fig. 7. Comparison between the solution of Eq. (17) (generalized) and the solu-
+tion of Eq. (34) (unsteady), in the case of the reference configuration described   which is on the order of 105 for most of the duration of the
+by Eq. (30). Panels (c) and (d) are zooms of, respectively, panel (a) and (b). As   process. Therefore, the assumption of null velocity within
+it can be noticed in (d), the outflow velocity in the unsteady case rapidly grows   the bubble, made in the Sec. III, is legitimate. So, it is possi-
+from zero to the value described by Eq. (18), as predicted by Eq. (38).             ble to study the evolution of the system by numerically solv-
+
+
+
+
+                                                                                                                                                                                   02 February 2026 08:18:26
+                                                                                    ing the continuity equation and Eq. (34), with the initial
+fail to describe the phenomenon correctly, such as those based                      conditions Rð0Þ ¼ R0 and vS ð0Þ ¼ 0.
+on Eqs. (10) and (14), while the model based on Eq. (17) has                           The solution of Eqs. (2) and (34) corresponds to the green
+succeeded despite the fact that airflow is not strictly steady,                     dotted curves in Fig. 7. As shown in Fig. 7(c), the deflation
+either at the beginning or at the end of the deflation process. It                  times of the generalized and unsteady cases differ by approx-
+is not steady during the first moments because the air outflow                      imately 0:07 s, equivalent to a 0.4% variation. This differ-
+velocity goes from zero to a nonzero value given by Eq. (18).                       ence is mainly due to the difference in velocity during the
+As for the final moments, the velocity changes very rapidly                         initial transient, which is shown in Fig. 7(d). As a result,
+because the bubble deflates faster and faster. One might be                         regardless of the parameter values describing the problem,
+happy to say that all the approximations made so far are legiti-                    the steady approximation always underestimates the defla-
+mate because the experimental results agree with the model                          tion time compared to the unsteady solution. To better under-
+based on the equation, but this is not the case: this section is                    stand such connection, it is possible to obtain an analytical
+devoted to mathematically and numerically understanding why                         expression for the outflow velocity vS ðtÞ in the initial tran-
+the previous approximations are reasonable or not.                                  sient by replacing RðtÞ ! R0 in Eq. (34).§§ This leads to
+   When dealing with unsteady flows, Bernoulli’s equation                                          s ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+must be generalized as described in Refs. 8 and 11–16. In                                                           
+                                                                                                          8plL 2 8r
+the current case, the Unsteady Viscous Bernoulli’s Equation                               vS ðtÞ ¼                        þ
+(UVBE) connecting quantities inside the bubble to quantities                                                Aq                qR0
+                                                                                                              "                              pﬃﬃﬃ                         !
+just above the straw reads                                                                                                                 2 2 plL
+                                                                                                                         1
+                                                                                                     tanh tanh                   pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+          ð~s 4                                                                                                                        A2 qr=R0 þ 8p2 l2 L2
+                v ~ 1  2 2  4r 8plL
+               @~                                                                                                                            3
+      q           ds þ q v4  v1       þ   vS ¼ 0;                        (32)                            sﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+                                                                                                                            2
+           s 1 @t
+           ~          2            RðtÞ   A                                                           t            8plL                 8r 5 8plL
+                                                                                                   þ                               þ                          ;            (37)
+where subscripts are relative to the schematization shown in                                         2L              Aq                 qR0           Aq
+Fig. 1. Assuming that the air velocity inside the bubble is
+negligible compared to that in the straw, the previous equa-                        which corresponds to the dotted green curve in Fig. 7(d). As
+tion becomes                                                                        expected, Eq. (37) tends to Eq. (18) after the unsteady initial
+                                   ð                                                transient, whose duration is of the order of the characteristic time
+     1 2     4r    8plL                   @vS
+      qv        þ        vS  q             ds;       (33)
+     2 S RðtÞ        A               straw @t
+                                                                                     §§
+                                                                                          Such choice is justified by the following argument. In the first moments
+where the last approximation is justified by the fact that the                            of the process, the outflow velocity is really small and the surface of the
+largest contribution in the integral is given by the path inside                          bubble is the largest. As a consequence, the time derivative of RðtÞ in Eq.
+the straw. Since vS is homogeneous in the straw, one gets                                 (2) is really small, hence RðtÞ R0 if t  1.
+
+
+803               Am. J. Phys., Vol. 93, No. 10, October 2025                                                          D. B. Provenzano and A. Stefanini                   803
+                   2L                     Aq                               APPENDIX A: UNSTEADY EVOLUTION
+           ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+      s ¼ r         2             ﬃ¼    pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ  0:06 s   (38)
+                                       4pl 1 þ c0
+              8plL
+                           þ qR  8r                                           When some of the hypotheses of Bernoulli’s theorem are
+                Aq                  0
+                                                                           missing, it is necessary to use one of its generalizations, which
+                                                                           has already been discussed in Refs. 11 and 12. For an unsteady,
+for the reference configuration in Eq. (30). Further argument              non-turbulent, irrotational flow in an incompressible and viscous
+for the duration of the initial unsteady transient is given in             fluid, as observed from an inertial frame of reference, it reads
+Appendix B.                                                                     ð~s 2             
+   Ultimately, unsteady effects can be neglected for all the exper-                     @~
+                                                                                         v l 2          ~ þ p þ 1 v2 þ / ¼ 0;
+                                                                                                                             2
+                                                                                            r~   v ds                                   (A1)
+imental configurations analyzed in Sec. III, as the initial value of              s 1 @t
+                                                                                  ~         q                 q 2            1
+the radius is such that R  rstraw for most of the duration of the
+process. If this were not the case, the green and violet curves in         where 1 and 2 are two generic points of the fluid. Integrating
+Figs. 7(a) and 7(b) would detach, hence unsteady effects should            this equation is a bit messy due to the viscous term. An alter-
+be taken into account. For example, if R0 ¼ 1 cm, L ¼ 10 cm,               native method to find the equation that describes the evolu-
+                                                                           tion of the system involves energy considerations. The
+and A ¼ 16:2 mm2 , corresponding to c0  2:9, numerical simu-
+                                                                           balance of energy can be written as
+lations show that the deflation time of the unsteady solution is
+about 30% longer than the value obtained using the steady                      dWST  d
+approximation, which yields a duration of approximately 0:1 s.                      ¼ ðKB þ KS Þ þ K_ out þ P;                          (A2)
+                                                                                dt   dt
+Experimental checks were not performed for such short-duration
+phenomena, as capturing a sufficient number of frames would                where WST is the work done by the surface tension, KB and
+require a high-performance camera.                                         KS are the kinetic energies of the air inside the bubble and in
+                                                                           the straw, K_ out is the rate at which kinetic energy exits the
+                                                                           straw and P is the power dissipated by viscous forces.
+V. CONCLUSION                                                              Physically speaking, Eq. (A2) means that part of the energy
+                                                                           stored on the surface of the bubble becomes kinetic energy,
+   In conclusion, the new mathematical model proposed                      while the remaining part is lost due to viscosity. As the
+based on Eq. (17) proved to be excellent for describing the                radius of the bubble decreases by a negative amount dR, the
+phenomenon of bubble deflation. This is not true for the sim-              work done by the surface tension is
+pler models proposed in the literature, which, all parameters
+                                                                               dWST ¼ 2r dS ¼ 16prR dR:                               (A3)
+being equal, predict shorter deflation times. This difference
+
+
+
+
+                                                                                                                                                02 February 2026 08:18:26
+is far from negligible when, for example, one wants to deter-                 As for the kinetic energy of air inside the bubble, it has
+mine the surface tension of soap with a deflation experiment,              been neglected until now. To establish whether such an
+as done in Ref. 17. Furthermore, unsteady effects were                     assumption is reasonable, KB must be compared to the other
+shown to be irrelevant for bubbles whose initial radius is                 terms in Eq. (A2). Given that the airflow in the bubble is not
+much larger than the cross-sectional radius of the straw, as               symmetric with respect to its center, it is extremely difficult
+for the analyzed experimental configurations.                              to exactly evaluate KB . However, it can be estimated by
+                                                                           focusing on the motion of the center of mass. If M is the
+ACKNOWLEDGMENTS                                                            mass of the air enclosed in the bubble, then
+                                                                                                          2
+   The authors thank Nico Kleijne for his suggestions about                           1          2         dR       qA2 v2S
+                                                                               KB ¼ Mv2CM ¼ pqR3                 ¼          ;        (A4)
+the numerical fits and all three referees for their helpful                           2          3         dt       24p R
+comments. Their contribution was very important in
+improving the quality of this article. D.B.P. expresses                    where Eq. (2) was used. It should be mentioned that Eq.
+gratitude to his lifelong friend Antonino Cilione for producing            (A4) loses its validity when R rstraw . However, as shown
+some nice video simulations of deflating bubbles. This work                in Sec. III, if R0  rstraw then the amount of time spent in
+served as the theoretical foundation for the final experimental            this stage is negligible compared to the deflation time. The
+examination of the 2025 Italian Physics Olympiad, annually                 kinetic energy of the air flowing in the straw is
+organized by the Associazione per l’Insegnamento della                                1
+                                                                                KS ¼ qv2S AL;                                      (A5)
+Fisica (AIF), of which both authors are members. The authors                          2
+gratefully acknowledge the Scuola Normale Superiore for
+                                                                           whereas the rate at which kinetic energy exits the straw is
+supporting the open-access publication of this article.
+                                                                                        1 dm 2 1
+AUTHOR DECLARATIONS                                                            K_ out ¼      v ¼ qAv3S :                                (A6)
+                                                                                        2 dt S 2
+Conflict of Interest
+                                                                              Finally, the expression for the power dissipated by viscous
+  The authors have no conflicts to disclose.                               forces in a laminar flow was derived in Ref. 18. In the con-
+                                                                           figuration under exam, it reads
+Author Contributions                                                                   ð
+  D.B.P. wrote the drafts and handled the analytical and                        P ¼ l jrv j2 dV;                                     (A7)
+numerical aspects. The experimental part and data analysis
+were conducted by A.S.                                                     where the integration is performed over the entire volume of
+  The core idea of the article was independently conceived                 air enclosed in the straw. The velocity of air inside the straw
+by A.S. in 2001 and by D.B.P. in 2024.                                     is given by
+
+804          Am. J. Phys., Vol. 93, No. 10, October 2025                                            D. B. Provenzano and A. Stefanini    804
+            Dp  2                                                               a)
+                                                                                      Electronic mail: daniele.provenzano@sns.it, ORCID: 0000-0002-6975-
+        vðrÞ ¼   rstraw  r 2 ;                          (A8)                          157X.
+            4lL                                                                    b)
+                                                                                      Electronic mail: andrea.stefanini@aif-fisica.org, ORCID: 0009-0005-
+where r represents the radial coordinate. Performing the inte-                        2932-648X.
+gration and exploiting Poiseuille’s law, one finds                                 1
+                                                                                     L. Sibaya, “Time of collapse of a soap bubble,” Nature 149, 527 (1942).
+                                                                                   2
+                                                                                     David P. Jackson and Sarah Sleyman, “Analysis of a deflating soap
+        P ¼ 8plLv2S :                                                    (A9)        bubble,” Am. J. Phys. 78(10), 990–994 (2010).
+                                                                                   3
+                                                                                     Richard Fitzpatrick, Theoretical Fluid Mechanics (IOP Publishing, 2017),
+   After performing the time derivatives in Eq. (A2), substitut-                     pp. 74–76.
+                                                                                   4
+ing Eq. (2) and dividing the entire equation by AvS , one gets                       Edgar Buckingham, “On physically similar systems; Illustrations of the
+                                                                                   use of dimensional equations,” Phys. Rev. 4(4), 345–376 (1914).
+       qA dvS         Av2S         dvS                                             5
+                                                                                     Lord Rayleigh, “The principle of similitude,” Nature 95, 66–68
+                  þ           þ qL                                                   (1915).
+      12pR dt 8pR3                  dt                                             6
+                                                                                     Don S. Lemons, Trevor C. Lipsombe, and Rickey J. Faehl, “Vertical qua-
+        1 2 4r 8plL
+      þ qvS  þ                vS ¼ 0:                    (A10)                      sistatic Poiseuille flow: Theory and experiment,” Am. J. Phys. 90(1), 59–
+        2         R        A                                                         63 (2022).
+                                                                                   7
+                                                                                     Matteo Clerget, Alexandre Delvert, Laurent Courbin, and Pascal Panizza,
+   This equation is coupled with Eq. (2): they should be                             “Different scenarios of shrinking surface soap bubbles,” Am. J. Phys.
+solved simultaneously with appropriate initial conditions to                         89(3), 244–252 (2021).
+find RðtÞ and vS ðtÞ.                                                              8
+                                                                                     Costas Synolakis and Henry Badeer, “On combining the Bernoulli and
+                                                                                     Poiseuille equation-A plea to authors of college physics texts,” Am. J.
+APPENDIX B: DURATION OF THE INITIAL                                                  Phys. 57(11), 1013–1019 (1989).
+                                                                                   9
+                                                                                     See https://physlets.org/tracker/ for “Tracker.”
+TRANSIENT                                                                         10
+                                                                                     R. Francisco et al., “A simple experiment for measuring the surface ten-
+   Apart from the reasons given in Sec. IV, the steadiness                           sion of soap solutions,” Am. J. Phys. 69, 920–921 (2001).
+                                                                                  11
+                                                                                     James B. Kelley, “The extended Bernoulli equation,” Am. J. Phys. 18(4),
+assumption for the initial transient in the viscous case can be
+                                                                                     202–204 (1950).
+justified by the following argument. As shown in Ref. 19, the                     12
+                                                                                     Steven B. Segletes and William P. Walters, “A note on the application of
+velocity profile inside the straw at some time t after air starts                    the extended Bernoulli equation,” Int. J. Impact Eng. 27(5), 561–576
+flowing is
+                                                                                   (2002).
+                  Dp A
+                                                                                  13
+                                                                                     M. Blasone, F. Dell’Anno, R. De Luca, O. Faella, O. Fiore, and A.
+      vS ðr; tÞ ¼        r 2
+                                                                                     Saggese, “Discharge time of a cylindrical leaking bucket,” Eur. J. Phys.
+                  4lL p
+                                    pﬃﬃﬃﬃﬃﬃﬃﬃﬃ                                  14
+                                                                                     36(3), 035017 (2015).
+                                                                                     Johann Otto and Carl E. Mungan, “Flow of water out of a funnel,” Eur. J.
+                         X    1 0 kn r p=A k2n plt=qA
+
+
+
+
+                                                                                                                                                                 02 February 2026 08:18:26
+                          1      J
+                    2ADp                                                             Phys. 45(5), 055007 (2024).
+                                                e       ; (B1)
+                     plL n¼1 k3n    J1 ðkn Þ
+                                                                                  15
+                                                                                     Johann Otto and Carl E. Mungan, “Filling and emptying a tank of liquid,”
+                                                                                     Eur. J. Phys. 43(5), 055003 (2022).
+where Jk are the Bessel functions of the kth order, kn are                        16
+                                                                                     Carl E. Mungan and Garth A. Sheldon-Coulson, “Liquid oscillating
+the positive roots of J0 , and, referring to Fig. 1, Dp                              in a U-tube of variable cross section,” Eur. J. Phys. 42(2), 025008
+ p3  p4  qgL (vertical straw). Since the decay time of each                    17
+                                                                                     (2021).
+                                                                                     G€oran R€amme, “Surface tension from deflating a soap bubble,” Phys.
+term within the sum is sn  qA=plk2n ,¶¶c the longest surviving
+                                                                                     Educ. 32(3), 191–194 (1997).
+contribution is due to n ¼ 1. Since k1  2:4, the longest                         18
+                                                                                     Lev D. Landau and E. M. Lifshitz, Fluid Mechanics, 2nd ed. (Pergamon,
+decay time is s1  0:06 s for the reference configuration                            2013), Vol. 6, pp. 54–55.
+described by Eq. (30), further confirming that the effects                        19
+                                                                                     George K. Batchelor, An Introduction to Fluid Dynamics (Cambridge
+due to the initial unsteadiness can be neglected.                                    U.P., 1967), pp. 193–194.
+
+
+
+
+¶¶
+     Notice that the decay time does not depend on the length of the tube. This
+     is due to the assumption of incompressible fluid, which lets the propaga-
+     tion of perturbations be instantaneous.
+
+
+805            Am. J. Phys., Vol. 93, No. 10, October 2025                                                    D. B. Provenzano and A. Stefanini           805
+

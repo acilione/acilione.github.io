@@ -1,0 +1,769 @@
+                                                                                                                        Author et al
+
+
+                European Journal of Physics
+
+                PAPER
+Crossmark
+RECEIVED
+dd Month yyyy
+                Debunking Boyle’s Self-Flowing Flask
+                Keywords: Bernoulli’s equation, perpetual motion, turbulence, viscous fluids
+REVISED
+dd Month yyyy
+                Abstract
+                    This paper investigates the widespread myth of perpetual motion devices based on the
+                so-called Boyle’s self-flowing flask, frequently popularized in online videos. A simplified
+                theoretical model is developed to describe the dynamics of the system, showing that the flow
+                inevitably decays and that the maximum operating time is only a few seconds for realistic
+                geometries. Simple original tabletop experiments with hoses of different sizes confirm this
+                picture, yielding even shorter operating times due to the additional dissipation caused by
+                turbulence. It is of course trivial to remark that perpetual motion is impossible; what is
+                perhaps less obvious, and what our analysis demonstrates, is that the fountain mechanism
+                itself cannot last more than a few seconds in practice, thereby debunking the fake videos
+                circulating on the internet. The theoretical analysis developed in this paper can serve as
+                a useful introduction to the generalization of Bernoulli’s equation to viscous and unsteady
+                flows, making it suitable for inclusion in a graduate-level fluid dynamics course. On the
+                other hand, the experimental side is accessible to anyone, requiring only simple materials
+                and thus offering an engaging way to illustrate fundamental fluid dynamics concepts.
+
+                1 Introduction
+                The concept of perpetual motion has fascinated humankind for millennia, even though it is well known
+                that such a phenomenon cannot occur because of the inevitable dissipative effects that characterize
+                the physical world [1, 2, 3]. Despite this, the internet has recently become increasingly filled with
+                click-bait videos claiming to demonstrate perpetual motion, typically involving water circulating
+                through small ducts or balls rolling endlessly along tracks, as discussed, for instance, in [4]. Among
+                these configurations, the most popular example is the one illustrated in Fig. 1, known as Boyle’s self-
+                flowing flask, which consists of a water container that supposedly refills itself continuously through a
+                uniform cross section hose. In these videos—often titled “Perpetual Motion Machine” or similar—the
+                flow appears to be never-ending and perfectly steady [5]. Needless to say, these videos are fabricated:
+                the system inevitably loses mechanical energy for various reasons, including viscous effects, turbulence
+                [6, 7], and collisions with the container walls, so this motion cannot persist indefinitely. Even the
+                sound of water falling back into the container is clear evidence of this loss.
+                    There are also almost-correct educational videos that aim to debunk these claims, but they often
+                introduce their own inaccuracies [8]. A common misconception in fluid dynamics, for example, is
+                that energy losses are purely due to viscosity. Many believe that using a superfluid—characterized
+                by zero viscosity—would enable a true perpetual motion device. Even setting aside the quantum
+                effects associated with superfluidity, this is very unlikely to be the case. From a purely theoretical
+                standpoint, a recently resolved conjecture, originally proposed by Onsager in [9], states that above a
+                certain degree of turbulence—namely, when the velocity field becomes sufficiently irregular—energy
+                is dissipated even though µ = 0, through the mechanism known as anomalous dissipation. It is
+                not useful to reproduce the precise mathematical statement here; interested readers are referred to
+                [10, 11]. In short, perpetual motion cannot exist even in ideal fluid dynamics.∗
+                    To this day, the fascination of turbulence and our limited understanding of it place the phe-
+                nomenon at the forefront of research in mathematical physics. It suffices to recall that the Navier–Stokes
+                equations are the subject of one of the Millennium Prize Problems [12]. In the case illustrated in
+                Fig. 1, turbulence is inevitably generated in the region where the water jet falls and mixes with the
+                nearly still water in the container. As we shall see later, this is an effect that cannot be neglected
+                and that prevents the application of Bernoulli’s equation–even in its most general form–because it
+                corresponds to a flow that is intrinsically and unpredictably unsteady and rotational. Therefore, we
+                    ∗ On the experimental side, only limited evidence of anomalous dissipation has been reported, since research in this
+
+                area is still underdeveloped: no dedicated experiments have yet been carried out. A naive argument usually invoked
+                is that the drag coefficient of a body moving in a fluid tends to a nonzero value for very large Reynolds numbers, but
+                this is still far from proving that reality fully matches the mathematical model. Due to the delicacy of the subject and
+                the high potential for error, the limit µ → 0 will only be briefly mentioned in this work, without further elaboration.
+                For a broader and more detailed overview of the topic, we refer the reader to [11].
+
+
+
+
+                                                                1
+                                                                                                       Author et al
+
+
+
+
+             Figure 1. Schematic illustration of the setup used to generate the fake perpetual motion.
+
+
+will apply Bernoulli’s equation only in regions where the flow can reasonably be considered laminar
+and ordered.
+    Although earlier pedagogical discussions have been largely qualitative [2, 3, 4, 13], the present
+work offers a quantitative theoretical analysis of a simplified version of the configuration shown in
+Fig. 1. We demonstrate that, for realistic parameters, the operating time of the device does not exceed
+a few seconds, thus conclusively debunking these myths. More specifically, we perform the theoretical
+calculations under the assumption that no turbulence occurs inside the hose,† thus obtaining an
+upper bound for the operating time. Experimental tests yield even shorter operating times because
+the flow within the hose is actually turbulent, since Reynolds number exceeds Re ∼ 4000. In this
+sense, the theoretical predictions should be interpreted as an upper bound corresponding to the
+least dissipative case. The difference between the two regimes, as discussed later, also provides an
+instructive example of how viscosity and turbulence influence real flows and of how a more viscous
+fluid, such as oil, would make the theoretical and experimental results converge.
+    The paper is organized as follows:
+    • Section 2 presents the theoretical model, based on the unsteady and viscous generalization of
+      Bernoulli’s equation, under the assumptions of incompressible fluid and laminar flow within
+      the hose. Some energetic considerations are also introduced, formally showing that the me-
+      chanical energy of the system decreases over time. The theoretical framework adopted here is
+      significantly more general than those used in classical draining or filling problems, which usu-
+      ally extend Bernoulli’s equation either to the unsteady case or to the viscous case [14, 15, 16],
+      but not both simultaneously. In this work, by contrast, we consider the two effects at once.
+      Moreover, by separating laminar and turbulent regions, the analysis makes explicit where and
+      why Bernoulli’s equation applies (or may fail), which students often find conceptually elusive.
+
+    • Section 3 compares the theoretical upper bound for the operating time with experiments that
+      can be easily performed at home using a bucket and a garden hose. These experiments were
+      specifically designed and carried out for this study and are based on separating two sections of
+      the same hose.
+   To avoid confusion in terminology, throughout this paper the word hose will refer exclusively to
+the curved tube shown in Fig. 2, while the term ducts will denote the entire assembly consisting of
+the container and the hose, which together form axially symmetric conduits.
+   † The assumption of laminar flow is adopted primarily for analytical tractability: it allows the governing equations
+
+to be solved in closed form without resorting to empirical friction factors or semi-empirical turbulence models. This
+simplification isolates the essential physical mechanisms—viscosity and unsteadiness—while keeping the theoretical
+description fully transparent and suitable for pedagogical purposes.
+
+
+
+
+                                                2
+                                                                                                     Author et al
+
+
+
+                                                            2
+
+
+
+
+                                                             1
+
+
+
+
+Figure 2. Schematic illustration of the streamline considered in Eq. (4). The jagged red segment indicates where
+the streamline breaks due to turbulence.
+
+
+2 Theoretical model
+We begin by making our initial assumptions explicit. We shall assume that water behaves as an
+incompressible fluid and that the only form of turbulence present is that generated when the water
+jet falls back into the container. Other forms of turbulence, such as that which may arise when
+the cross section of the ducts narrows abruptly, are not straightforward to treat and would require
+models based on empirical coefficients. Therefore, with reference to Fig. 2, we assume that the
+junction in the hole, between the bottom of the container and the end of the hose, is round-shaped,
+thus eliminating the vena contracta effect and the associated head loss [17, 18, 19, 20]. From the
+experimental standpoint, this assumption is justified by the use of grommets at the inlet, as will be
+described in Section 3. Finally, we assume that the Reynolds number associated with the flow in the
+hose is sufficiently low for the flow to remain laminar in that region.
+    The goal of this analysis is to determine how long the flow in Fig. 2 will last, assuming we manage
+to impart an initial velocity‡ v0 to the water inside the hose—for instance, by initially draining the
+container with the hose held vertically, and then quickly moving its outlet end into the position
+shown in the figure, as done in many of the aforementioned videos.
+    Let SC be the cross section of the container, S the cross section of the hose, L its length, vp (t)
+the velocity of water in the hose, h the height of the water surface in the container, and H the height
+of the upper end of the hose, both measured from the bottom of the container. Because water can
+be treated as an incompressible fluid, the conservation of the volumetric flow rate implies that h
+remains constant over time. This does not mean that the water surface velocity is zero. In fact,
+neglecting the turbulent region where the velocity field is irregular, conservation of mass gives
+
+                                                    S v2 = SC v1 ,                                               (1)
+
+where the velocities refer to the corresponding points shown in Fig. 2.
+
+2.1 Unsteady viscous Bernoulli’s equation
+Since we want to study the time evolution of the system in Fig. 2, using only the steady version
+of the governing equations is insufficient. In particular, since h and H are constant, the Restricted
+Bernoulli’s Equation (RBE),
+                                           1
+                                   p(⃗r ) + ρv 2 (⃗r ) + ρgz = const.,                              (2)
+                                           2
+namely, the form of Bernoulli’s equation that relies on the strongest set of assumptions, would predict
+the same velocity at all times while neglecting viscosity altogether. However, our aim is to show
+that the velocity decreases over time as a result of the dissipation of energy. The most general and
+   ‡ Since viscous effects are taken into account, the velocity varies over the cross section.  Throughout this work,
+whenever a velocity is mentioned, it is understood as the cross-sectional average of the velocity profile.
+
+
+
+
+                                                3
+2.1   Unsteady viscous Bernoulli’s equation                                                                               Author et al
+
+
+
+                  appropriate tool for this is the Unsteady Viscous Bernoulli’s Equation (UVBE) [21, 22]:
+
+                                                                      8µQ s ds′
+                                                                         Z           Z ⃗s
+                                                  1                                       ∂⃗v ⃗ ′
+                                          p(⃗r ) + ρv 2 (⃗r ) + ρgz +        4  ′
+                                                                                   + ρ       · ds = const.,                           (3)
+                                                  2                    π s0 r (s )     s0 ∂t
+                                                                                       ⃗
+
+                  which holds for unsteady laminar flows of incompressible, viscous fluids in axially symmetric conduits
+                  (i.e., ducts with rotational symmetry about their axis). Here, Q is the volumetric flow rate, uniform
+                  throughout the ducts since the fluid is incompressible, s is the curvilinear coordinate along a generic
+                  streamline, s0 denotes a reference point on the streamline, and r(s) is the local cross-sectional radius
+                  of the duct at position s. As already mentioned, part of the flow is affected by turbulence, which
+                  invalidates the laminar assumption required to use Eq. (3). However, we will apply this equation
+                  only in regions where the flow is laminar and the streamlines are smooth, staying well away from
+                  the turbulent zones.
+                      For simplicity, we could analyze Eq. (3) in the limit where the cross section of the container is
+                  much larger than that of the hose. However, we will treat the general case, so that notable limiting
+                  cases can be checked explicitly later.
+                      Equation (3), applied along the streamline passing through points 1 and 2 in Fig. 2,§ reads
+                                                                                  2             Z ⃗s2
+                                   1 2                    1 2          8πµ       S                        ∂⃗v ⃗
+                            patm + ρv1 + ρgh = patm + ρv2 + ρgH+                       h + L vp + ρ          · ds.     (4)
+                                   2                      2              S      SC                    s1 ∂t
+                                                                                                      ⃗
+
+                      Here we have assumed that the streamline is approximately vertical inside the container,
+                                                                                                            √        as done
+                  in Refs. [14, 15, 16]. Strictly speaking, this assumption is valid, provided that h ≫ SC , except in
+                  the region very close to the bottom. Equation (4) is essentially Newton’s second law applied to the
+                  flow, where the last term represents acceleration.
+                      Except for the region in the container close to the hole, the velocity field at a fixed t is piecewise
+                  constant:                                    (
+                                                                 S
+                                                                    vp (t) ŝ if ⃗s ∈ container,
+                                                   ⃗v (⃗s, t) ≈ SC                                                       (5)
+                                                                vp (t) ŝ     if ⃗s ∈ hose.
+                      Thus, the unsteady term becomes
+                                                          Z ⃗s2                        
+                                                                  ∂⃗v ⃗            S      dvp
+                                                                     · ds ≈          h+L      .                                       (6)
+                                                           ⃗
+                                                           s1     ∂t              SC       dt
+
+                      Recalling that v2 = vp and simplifying, Eq. (4) reduces to
+                                                           2             2      
+                                       S      dvp  1         S         8πµ     S
+                              ρ          h+L      = ρvp2          −1 −              h + L vp + ρg(h − H),                             (7)
+                                      SC       dt  2        SC          S     SC
+
+                  to be solved with the initial condition vp (0) = v0 . The solution is valid only within the time domain
+                  [0, tf ], where tf denotes the first instant when the velocity vanishes, i.e., vp (tf ) = 0. Once the velocity
+                  drops to zero, it remains zero forever. Otherwise, energy would be generated out of nothing.
+                       By defining the constant quantities
+                                                                           "     2    #
+                                                   S                     1     S
+                                           W ≡        h + L > 0, X ≡                 − 1 < 0,                                (8)
+                                                  SC                     2    SC
+                                                          "    2       #
+                                                    8πµ       S
+                                            Y ≡−                   h + L < 0, Z ≡ g(h − H) < 0,
+                                                     ρS      SC
+
+                  the Cauchy problem becomes
+                                                        dvp
+                                                    W       = X vp2 + Y vp + Z,           vp (0) = v0 .                               (9)
+                                                         dt
+                      Introducing
+                                                                        ∆ ≡ Y 2 − 4XZ,                                               (10)
+                  we can distinguish three different scenarios for the solutions, which differ according to the sign of ∆.
+                  Fortunately, exact analytical expressions for the solutions can be derived, as discussed in Appendix A.
+                     § Point 1 must be chosen sufficiently far from the turbulent region where the jet impacts the water in the container,
+
+                  so that it actually lies on a smooth streamline.
+
+
+
+                                                                    4
+2.1   Unsteady viscous Bernoulli’s equation                                                                                                                   Author et al
+
+
+
+                                  1.0                                                                           1.0
+                                                                           L = 1 m, ∆ < 0                                                                S = 0.01 cm 2 , ∆ > 0
+                                  0.8                                                                           0.8
+
+
+
+                   vp (t) [m/s]
+
+
+
+
+                                                                                                 vp (t) [m/s]
+                                                                           L = 2 m, ∆ < 0                                                                S = 0.1 cm 2 , ∆ > 0
+                                  0.6                                      L = 5 m, ∆ < 0
+                                                                           L = 10 m, ∆ > 0
+                                                                                                                0.6                                      S = 0.3 cm 2 , ∆ < 0
+                                                                                                                                                         S = 1 cm 2 , ∆ < 0
+                                  0.4                                      L = 20 m, ∆ > 0                      0.4                                      S = 10 cm 2 , ∆ < 0
+                                  0.2                                                                           0.2
+                                  0.00   1     2     3              4       5        6       7                  0.00.0   0.2         0.4           0.6          0.8          1.0
+                                                      t [s]                                                                                t [s]
+                                                                    1.0
+                                                                                                            H − h = 0.1 cm, ∆ > 0
+                                                                    0.8
+
+
+
+                                                     vp (t) [m/s]
+                                                                                                            H − h = 1 cm, ∆ < 0
+                                                                    0.6                                     H − h = 3 cm, ∆ < 0
+                                                                                                            H − h = 10 cm, ∆ < 0
+                                                                    0.4                                     H − h = 50 cm, ∆ < 0
+                                                                    0.2
+                                                                    0.00         2           4                   6       8          10
+                                                                                                 t [s]
+                  Figure 3. Flow velocity inside the hose as a function of time, for different values of the hose length L, the
+                  cross-sectional area S, and the height difference H − h.
+
+
+
+
+                                                                                                                                     g
+
+
+                                                                        Figure 4. Water hose closed onto itself.
+
+
+                      Figure 3 shows the time evolution of the solution of Eq. (9) as the parameters L, S and H − h
+                  vary. The values of the parameters common to all the graphs are v0 = 1 m/s, ρ = 103 kg/m3 ,
+                  µ = 10−3 Pa · s, and the assumption SC ≫ S is always satisfied.
+                      It can be observed that the operating time increases with L and S, since both contribute to
+                  the total momentum inside the hose, while it decreases with H − h, as, given the form of Z in
+                  Eq. (8), increasing this quantity is equivalent to increasing the gravitational acceleration. This latter
+                  dependence will be analyzed and experimentally verified in Section 3. Naturally, while keeping all
+                  other parameters fixed, the operating time is an increasing function of v0 and a decreasing function
+                  of µ.
+                      We now examine two noteworthy limiting cases.
+                          • Hose closed onto itself, forming a generic smooth closed curve Γ, as shown in Fig. 4.
+                                  In this case, SC = S and h = H, so in Eq. (9) the coefficient of the term of highest degree
+                                  vanishes. The equation must therefore be solved again from scratch to avoid singularities.
+                                  Since X = Z = 0, the differential equation becomes
+                                                                                         dvp    8πµ
+                                                                                             =−     vp ,                                                                     (11)
+                                                                                          dt     ρS
+                                  which is nothing but Newton’s second law for a body slowed down by a drag force. As expected,
+                                  since the flow forms a closed loop, gravity has no effect: the evolution of the system does not
+                                  depend on the spatial orientation of the hose, which could even lie on the ground, nor on
+                                  the curve Γ that describes its path. The solution of Eq. (11) is an exponentially decaying
+                                  function, so the operating time is formally infinite, even though the system continuously loses
+                                  energy. If, moreover, µ = 0, it might appear that a perfectly steady perpetual motion (v̇p = 0)
+                                  could be achieved. However, in this limit the Reynolds number diverges, the flow becomes
+                                  fully turbulent, and Bernoulli’s equation can no longer be applied. Instead, the considerations
+                                  outlined in Section 1 on anomalous dissipation come into play.
+                          • Absence of gravity. If gravity is switched off—for instance, by performing the experiment
+                            in free fall or on the ISS—and provided that the surrounding air pressure is not so low as to
+
+
+                                                                                 5
+2.2   Energy considerations                                                                                               Author et al
+
+
+
+                       trigger cavitation, one has Z = 0, which corresponds to the case ∆ > 0. In this situation,
+                       v− = 0, and therefore Eq. (20) yields an infinite operating time, because the velocity decreases
+                       monotonically in time as an exponential function. This behavior is analogous to that shown in
+                       Fig. 3(c), since, by definition of Z, reducing g is equivalent to reducing |H − h|.
+
+                 2.2 Energy considerations
+                 We now focus on examining the temporal evolution of the system from an energetic perspective.
+                 Given the presence of dissipation, we expect the total mechanical energy of the system to decrease
+                 over time. Since the potential energy remains constant, the correct energy balance equation should
+                 return a total variation of energy equal to the initial kinetic energy associated with the motion.
+                    The energy lost to viscous effects associated with the laminar flow in the ducts is¶
+                                                          Z tf            2           
+                                                                          S
+                                                                  8πµ h        vp2 + Lvp2 dt,                                        (12)
+                                                              0          SC
+
+                 while the energy lost in the turbulent region, i.e. where the jet touches the water in the container,
+                 is‖                       Z tf              2                     
+                                                  1           S
+                                                    ρS 1 −           vp3 + ρg(H − h)Svp dt,                       (13)
+                                             0    2          SC
+                 Summing Eqs. (12) and (13) gives
+                                     Z tf              2                           2         
+                                              1         S      2               8πµ      S
+                       ∆EVT = S                 ρ 1−          vp + ρg(H − h) +      h        vp + Lvp vp dt.                         (14)
+                                      0       2        SC                       S      SC
+
+                 By substituting the quantities inside the curly brackets using Eq. (7), we obtain
+                                                           Z tf                  
+                                                                     S          dvp
+                                            ∆EVT = − S           ρ      h+L           vp dt
+                                                            0       SC           dt
+                                                                      0
+                                                       1      S
+                                                    = ρS         h + L vp2                                                           (15)
+                                                       2     SC              tf
+                                                                     
+                                                       1      S
+                                                    = ρS         h + L v02 ,
+                                                       2     SC
+
+                 which, apart from the turbulent contributions, is the initial kinetic energy of the entire fluid, since
+                 in general
+                                                X
+                                           K=      (kinetic energy density)i × (volume)i
+                                                          i
+                                                      1 X 2
+                                                     = ρ  v × Vi                                                                     (16)
+                                                      2 i i
+                                                                           2
+                                                         1 2         1    S
+                                                     =     ρvp (SL) + ρ        vp2 (SC h).
+                                                         2           2 SC
+
+                 Thus, the energy balance yields exactly the result anticipated from the outset.∗∗
+                   ¶ Equation (12) represents the time integral of the power dissipated in the ducts. In a single pipe of length l, such
+
+                 power is
+                                                                     P = 8πµlv 2 ,
+                 where v is, as usual, the average velocity over the cross section. This result can be easily found in Refs. [23, 24].
+                    ‖ In regions where the streamlines break and intertwine continuously, turbulence and viscous effects dissipate all
+
+                 the kinetic energy of the fluid. Hence, the dissipated power is generally given by 12 ρv 2 × Q, i.e., the product of the
+                 kinetic energy density and the volumetric flow rate. The conservation of mechanical energy associated with the free-fall
+                 motion yields                                                           
+                                                         1 2           1 2
+                                                           ρv × Q =      ρvp + ρg(H − h) × S vp ,
+                                                         2             2
+                 which is still not exactly equal to Eq. (13). The reason is that one must also account for the relative motion of the jet
+                 with respect to the water moving downward in the container. For instance, if they both moved with the same velocity
+                 and in the same direction, there would be no collisions between the two flows, and thus no energy would be dissipated.
+                                                                                   Eq. (1)
+                 This explains the presence of the additional term − 12 ρSv12 × Q = − 21 ρS( SS )2 vp3 in Eq. (13), accounting for the
+                                                                                                   C
+                 motion of the water level within the container.
+                   ∗∗ The same conclusion also holds in the case µ = 0: energy is dissipated solely within the (much larger) turbulent
+
+                 region through the mechanism discussed in Section 1, until the flow eventually comes to an end.
+
+
+
+                                                                    6
+                                                                                                      Author et al
+
+
+
+                       (a)                                      (b)      vp(t)
+                                                                                     H −h
+
+
+
+
+Figure 5. Schematic of the original configuration used for the experimental measurements. Once the flow reaches
+steady state (case (a)), the two tubes are disconnected so that water begins to flow out from the upper end of the
+tube partially immersed in the container (case (b)).
+
+
+3 Experiments
+In this section, rather than providing an experimental test that validates the theoretical model,
+we offer a qualitative demonstration. As already anticipated in Section 1, the Reynolds number
+associated with the water flow in the ducts exceeds the threshold that guarantees the assumption of
+laminar flow. Indeed,
+                                       2rvρ
+                                  Re ≈        ≈ (2 × 106 m2 /s) r v,                           (17)
+                                          µ
+where r is the local radius of the duct and v is the mean velocity of water at that location. Let us
+consider the most favorable case: using a tube with an internal radius of 3 mm and letting the water
+flow at an initial velocity on the order of 1 m/s. Since the viscosity of water is µ ≈ 10−3 Pa · s, this
+would give Re ≈ 6000, well above the threshold of 2300-4000 generally associated with the transition
+from laminar to turbulent flow in cylindrical pipes [25, 26]. Consequently, the flow is turbulent even
+inside the hose, which means that the theoretical predictions made in Section 2 do not hold exactly
+but instead provide an upper bound for the operating time of the fountain. In fact, the presence of
+turbulence enhances energy dissipation, thereby reducing tf .
+     One might think that it would suffice to reduce r or v, or increase µ, to enforce Re < 2300.
+However, none of these approaches are viable. Using tubes with significantly smaller radii is unfeasible
+due to the onset of capillary effects and the drastic reduction of tf . The same reasoning applies to
+imparting much smaller initial velocities (e.g., well below 1 m/s) or to using a more viscous liquid
+such as oil: in both cases, the operating time would become too short to be appreciable. One would
+need access to an actual oil reservoir in order to remain in the laminar regime while still maintaining
+a high initial velocity.
+     It is important to clarify that the upper bound introduced in Section 2.1 should not be interpreted
+as a quantitative prediction for the experimental operating time, but rather as the least dissipative
+scenario compatible with the same geometry and initial conditions. In the theoretical model, wall
+friction inside the hose is treated as laminar, which minimizes the total energy losses. Any additional
+source of dissipation—such as turbulence, minor losses at the inlet and outlet, or bending—can only
+accelerate the decay of motion. The theoretical curve therefore represents the slowest admissible
+evolution of the flow and an upper limit for the operating time tf .
+     For the experimental measurements, the main challenge was how to impose the initial velocity v0
+inside the pipe and how to set the spatial arrangement sketched in Fig. 2. At first, we attempted to
+achieve this by quickly lifting the pipe after letting the water start flowing, in the same way as shown
+in the videos cited in Section 1. Unfortunately, this method is unsuitable for a quantitative analysis:
+it is unclear when to start measuring time and, moreover, by lifting the hose upward, one effectively
+increases (non-uniformly) the value of g, which, as explained earlier, shortens the operating time.
+After several failed attempts, we came up with the siphon configuration illustrated in Fig. 5.†† The
+procedure works as follows:
+  †† To our knowledge, this method has not been previously reported. We believe that it contains some original
+
+features, especially the one described in point 2, and we are pleased to present it here in the hope that it may serve
+as a useful tool for future experiments and demonstrations.
+
+
+
+                                               7
+                                                                                                                         Author et al
+
+
+
+           3.5                   S=28 mm2 , v0 =1.24 m/s, L=0.5 m                        70
+                                 S=28 mm2 , v0 =1.74 m/s, L=1.0 m
+           3.0                   S=28 mm2 , v0 =1.09 m/s, L=2.5 m                        60
+                                 S=154 mm2 , v0 =1.93 m/s, L=1.0 m
+                                                                                         50
+
+
+
+
+                                                                     100 · tteot−teotexp [%]
+           2.5                   S=154 mm2 , v0 =1.66 m/s, L=2.0 m
+                                 S=154 mm2 , v0 =0.79 m/s, L=6.0 m
+                                                                                         40
+texp [s]
+           2.0
+           1.5                                                                           30
+
+           1.0                                                                           20
+
+           0.5                                                                           10
+
+           0.0                                                                                 0
+                 3   5      10       15 20                     50                                  3   5    10   15 20           50
+                           H − h [cm]                                                                      H − h [cm]
+Figure 6. Comparison between experimental times (left) and percentage deviation from the theoretical model
+(right). The horizontal axis is shown on a logarithmic scale in both figures.
+
+
+      1. First, we operate the siphon mechanism shown in Fig. 5(a), consisting of two hoses of equal
+         cross section joined with duct tape, while the container is continuously overfilled from a water
+         source and allowed to overflow, thus keeping the water level constant. The initial flow velocity
+         v0 is then measured through a simple emptying experiment: knowing that the volume of water
+         emptied in a generic time interval ∆t is V = v0 S∆t, measuring V and ∆t allows us to determine
+         v0 .‡‡
+      2. Next, while the water flows through the hose, the two pipes are pulled apart by applying some
+         force with the hands, allowing for the measurement of the operating time tf of the jet shown
+         in Fig. 5(b).
+
+    Because the experimental values of tf are rather small, they were measured from the trials video
+using the software Tracker [27]. Particular care was taken to avoid excessive bending of the hose and
+to maintain a smooth curvature, in order to minimize additional losses. Another practical refinement
+was to insert a grommet, with the same internal radius as the hose, at the end of the submerged
+tube: as shown in [28], grommets mitigate the vena contracta effect by gradually reducing the cross
+section of the ducts. In particular, the authors show that the discharge coefficient—defined as the
+ratio between the actual mass flow rate and the theoretical mass flow rate—can increase from about
+0.65 to nearly 1 by using simple industrial grommets.
+    The above routine was repeated for two different types of hoses (a standard garden hose with an
+inner radius of 7 mm, and a narrower hose of 3 mm) and for various values of their lengths and H − h.
+Note that in this case, the value of L obviously refers only to the single hose in Fig. 5(b), not to the
+union of the two hoses in Fig. 5(a). Data for all analyzed configurations are reported in Table 1. The
+values of H − h were set using a partially submerged vertically oriented ruler. Measurements were
+performed at an ambient temperature of approximately 26 ◦ C, with the water temperature around
+20 ◦ C, letting µ = 10−3 Pa · s [29].
+    As can be seen in the table, the experimental times are consistently shorter than those predicted
+by theory. As already anticipated, this is due to turbulence in the water flow within the hose, which
+accelerates the dissipation of kinetic energy and shortens tf .
+    Figure 6(a) shows the experimental times for the six configurations analyzed, plotted as a function
+of H − h. Instead, Figure 6(b) reports the percentage difference between the experimental times and
+those predicted by the theoretical model, evaluated using Eq. (9), corresponding to each point in
+Fig. 6(a). Notice that the percentage differences for the 7 mm hose are clearly greater than those
+for the 3 mm hose. This can be explained by the fact that the Reynolds number associated with the
+larger hose is about twice that of the smaller one. As a result, turbulence effects are even stronger
+in the larger hose, leading to faster dissipation, and consequently to a greater percentage difference
+in operating time.
+    It is also worth noting that the theoretical model would become quantitatively more accurate
+for a more viscous liquid. If the same setup were repeated using oil instead of water, the Reynolds
+number would drop well below the transition threshold, leading to a fully laminar flow inside the
+hose. In that case, the experimental data would approach much more closely the theoretical upper
+bound. From a didactic perspective, this observation is particularly valuable: it shows how the same
+    ‡‡ As one might expect, v
+                           0 cannot be computed a priori by applying formulas to the siphon, since the Reynolds
+number would be infinite inside the hose. The only reliable way to determine is by performing experiments.
+
+
+
+                                                       8
+                                                                                                Author et al
+
+
+
+physical principles apply across regimes, and how the comparison between different fluids can be
+used as a teaching tool to visualize the transition from idealized laminar behavior to real, turbulent
+dissipation. We did not perform the experiment using oil because, in our configuration, it would have
+required a large amount of oil, most of which would be wasted, and the corresponding operating time
+tf would be too short to be measured with sufficient accuracy. One would practically need access to
+an oil reservoir and large-diameter pipes to make such an experiment feasible.
+
+4 Conclusions
+Our analysis shows that the “self-flowing flask” configuration cannot sustain motion beyond very
+short times. Theoretical predictions indicate operating times of only a few seconds for realistic ge-
+ometries. These values are optimistic upper bounds, since the model deliberately neglects turbulence
+inside the hose, thus overestimating the actual duration of the flow. Yet, even under these favorable
+assumptions, the predicted lifetimes are still much shorter than the seemingly steady, almost never-
+ending circulation displayed in fabricated online videos.
+    In conclusion, both the theoretical framework and simple experiments, decisively rule out perpet-
+ual motion in this setup. Any apparent self-refilling behavior is transient and rapidly suppressed by
+irreversible energy dissipation. Sustaining the flow would therefore require an external energy input.
+
+Conflict of Interest Statement
+The author has no conflicts of interest to disclose.
+
+A Appendix: solutions to the Cauchy problem
+We summarize here the exact solutions to the Cauchy problem in Eq. (9). The three cases are
+distinguished according to the sign of ∆.
+  1. ∆ > 0:
+                                                          v+ − v− R(t)
+                                               vp (t) =                ,                                (18)
+                                                            1 − R(t)
+     where                                              √     !                   √
+                                  v0 − v+                  ∆                  −Y ± ∆
+                           R(t) ≡         exp                t ,         v± ≡        .                  (19)
+                                  v0 − v−                 W                     2X
+     The operating time is
+                                            S
+                                           SC h + L
+                                                                                   
+                                                                   v+ v0 − v−
+                                    tf =        √         ln         ·                  .               (20)
+                                                    ∆              v− v0 − v+
+     This situation arises when viscous effects prevail over gravitational ones—such as for very long
+     and narrow tubes or highly viscous fluids, or in cases involving small height differences H − h
+     or low gravitational acceleration.
+  2. ∆ = 0:
+                                                          W                          Y
+                                  vp (t) = v∗ −        W
+                                                                     ,   v∗ ≡ −        ,                (21)
+                                                     v0 −v∗ + Xt
+                                                                                    2X
+     with operating time                         
+                                           S
+                                       2     h+L                
+                                          SC        1       1
+                                   tf =     2        −           .                                    (22)
+                                           S        v∗   v0 − v∗
+                                                −1
+                                          SC
+     This situation is extremely rare and occurs only when there is a perfect balance between viscous
+     effects and gravity-driven ones.
+  3. ∆ < 0:                                    √              √     
+                                                                 −∆
+                                                   −∆ tan ϕ0 + 2W   t −Y
+                                   vp (t) =                                                 ,           (23)
+                                                                   2X
+     where                                                                 
+                                                                2X v0 + Y
+                                        ϕ0 ≡ arctan               √             ,                       (24)
+                                                                    −∆
+
+
+
+
+                                           9
+REFERENCES                                                                                            Author et al
+
+
+
+                  with operating time
+                                                                
+                                                         S
+                                                2       SC h + L
+                                                                           
+                                                                              Y
+                                                                                            
+                                         tf =           √             arctan √      − ϕ0 + kπ ,                (25)
+                                                            −∆                 −∆
+                  where k ∈ Z is chosen so that tf > 0 is minimal. This scenario takes place when gravitational
+                  effects prevail over viscous ones—for instance, for short and wide tubes, low-viscosity fluids, or
+                  when the height difference H − h or the gravitational acceleration is large.
+
+             References
+              [1] Anthony J. M. Garrett, “Perpetual motion – a delicious delirium,” Phys. World 3 (12), p. 23-27
+                  (1990).
+              [2] Graeme Gooday, “The monster mechanical delusion: nineteenth-century controversies concern-
+                  ing perpetual motion,” J. Phys.: Conf. Ser. 2877 012097, (2024).
+              [3] M. N. Hidayat et al, “A review on how a Perpetual Motion Machine generates electrical power,”
+                  IOP Conf. Ser.: Mater. Sci. Eng. 1098 042063, (2021).
+              [4] Hollis Williams, “A “Perpetual Motion Machine” Powered by Electromagnetism,” Phys. Teach.
+                  62 (1), p. 47–49 (2024).
+              [5] See www.youtube.com/watch?v=syCDkFee1go, www.youtube.com/shorts/sNBBL4ByoSo, www.
+                  youtube.com/watch?v=QE9wHXigokc and www.youtube.com/watch?v=CJ1Ko8W7iLk as note-
+                  worthy examples.
+              [6] James M. McDonough, Introductory Lectures on Turbulence: Physics, Mathematics and Model-
+                  ing, Mechanical Engineering Textbook Gallery, (2007).
+              [7] Mark Nelkin, “Turbulence in fluids,” Am. J. Phys. 68 (4), p. 310–318 (2000).
+              [8] See, for instance, www.youtube.com/watch?v=6oNFmDzA4tY.
+              [9] Lars Onsager, “Statistical hydrodynamics,” Nuovo Cim 6 (Suppl 2), p. 279–287 (1949).
+             [10] Gregory Eyink, Katepalli R. Sreenivasan, “Onsager and the theory of hydrodynamic turbu-
+                  lence,” Rev. Mod. Phys. 78, p. 87-135 (2006).
+             [11] Gregory Eyink, “Onsager’s ‘ideal turbulence’ theory,” Journal of Fluid Mechanics, 988, (2024).
+             [12] See            https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_existence_and_
+                  smoothness.
+             [13] D. Tsaousis, “Perpetual Motion Machine,” Journal of Engineering Science and Technology Re-
+                  view. 1, p. 53-57 (2008).
+             [14] M. Blasone et al, “Discharge time of a cylindrical leaking bucket,” Eur. J. Phys. 36 035017
+                  (2015).
+             [15] Johann Otto and Carl E. Mungan, “Flow of water out of a funnel,” Eur. J. Phys. 45 055007
+                  (2024).
+             [16] Johann Otto and Kirk McDonald, “Torricelli’s Law for Large Holes,” (2018).
+             [17] Robert L. Mott, Joseph A. Untener, Applied Fluid Mechanics, 7th Ed., (Pearson, 2015), Chapter
+                  10.
+             [18] Richard Fitzpatrick, Theoretical Fluid Mechanics (IOP Publishing, 2017), p. 100-101.
+             [19] George K. Batchelor, An Introduction to Fluid Dynamics (Cambridge University Press, 1967),
+                  p. 387-391.
+             [20] D. Alvaro-Berlanga, R. Planet, A. Fernandez-Nieves, “Torricelli’s experiment and conservation
+                  of momentum,” Am. J. Phys. 92 (7), p. 493–497 (2024).
+             [21] Costas Synolakis and Henry Badeer, “On combining the Bernoulli and Poiseuille equation-A
+                  plea to authors of college physics texts” Am. J. Phys. 57, p. 1013-1019 (1989).
+
+
+                                                            10
+REFERENCES                                                                                                      Author et al
+
+
+
+             [22] Daniele B. Provenzano, Andrea Stefanini, “Unblowing bubbles: understanding the physics of
+                  bubble deflation through a straw,” Am. J. Phys. 93, p. 797–805 (2025).
+             [23] Lev D. Landau and E. M. Lifshitz, Fluid Mechanics: Volume 6 (Pergamon, 2013), p. 54-55.
+             [24] D. J. Acheson, Elementary Fluid Dynamics (Clarendon Press, 1990), p. 216-217.
+             [25] M. Saldana et al., “The Reynolds Number: A Journey from Its Origin to Modern Applications,”
+                  Fluids 9(12), 299, p. 1-34 (2024).
+             [26] Yunus Cengel and John Cimbala, Fluid Mechanics: Fundamentals and Applications (McGraw
+                  Hill, 2006), Chapter 8.
+             [27] See https://physlets.org/tracker/ for “Tracker”.
+             [28] Ashley Hicks, William Slaton, “Determining the Coefficient of Discharge for a Draining Con-
+                  tainer,” Phys. Teach. 52 (1), p. 43–47 (2014).
+             [29] George K. Batchelor, An Introduction to Fluid Dynamics (Cambridge University Press, 1967),
+                  p. 597.
+
+
+             Table 1. Data collected from the experiments. Each value in the experimental time column is the average of five
+             measurements; the uncertainty is the sample standard deviation over those five trials.
+
+                                    S                     v0        H −h         Exp.           Theo.
+                                              L (m)
+                                  (mm2 )                 (m/s)      (cm)       time (s)        time (s)
+                                                                      3.0       0.74(9)          0.95
+                                                                      5.0      0.53(10)          0.70
+                                                0.5       1.24
+                                                                     10.0      0.33(11)          0.44
+                                                                     15.0       0.24(7)          0.32
+                                                                      3.0      1.28(11)          1.70
+                                                                      5.0      0.94(14)          1.33
+                                                1.0       1.74       10.0       0.63(8)          0.91
+                                    28
+                                                                     20.0       0.37(9)          0.58
+                                                                     50.0       0.20(4)          0.29
+                                                                      3.0      1.57(14)          2.35
+                                                                      5.0      1.24(25)          1.89
+                                                2.5       1.09       10.0      0.92(12)          1.32
+                                                                     20.0      0.65(15)          0.87
+                                                                     50.0       0.31(5)          0.44
+                                                                      3.0      1.72(17)          2.70
+                                                                      5.0      1.23(10)          1.98
+                                                1.0       1.93       10.0      0.71(14)          1.25
+                                                                     20.0       0.41(6)          0.74
+                                                                     50.0       0.19(5)          0.34
+                                                                      3.0      2.51(21)          4.58
+                                                                      5.0      1.80(23)          3.40
+                                    154         2.0       1.66       10.0      1.29(24)          2.16
+                                                                     20.0      0.76(12)          1.29
+                                                                     50.0       0.32(9)          0.60
+                                                                      3.0      3.24(29)          7.28
+                                                                      5.0      2.23(56)          5.40
+                                                6.0       0.79       10.0      1.55(26)          3.38
+                                                                     20.0      0.88(21)          1.97
+                                                                     50.0       0.37(7)          0.88
+
+
+
+                                                          11
+
